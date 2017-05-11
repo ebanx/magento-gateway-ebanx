@@ -1,7 +1,27 @@
+<?xml version="1.0"?>
 <config>
     <modules>
-        <Magentotutorial_Configviewer>
+        <Ebanx_Gateway>
             <version>0.0.1</version>
-        </Magentotutorial_Configviewer>
+        </Ebanx_Gateway>
     </modules>
+    <global>
+        <helpers>
+            <gateway>
+                <class>Ebanx_Gateway_Helper</class>
+            </gateway>
+        </helpers>
+        
+        <blocks>
+            <gateway>
+                <class>Ebanx_Gateway_Block</class>
+            </gateway>
+        </blocks>
+                
+        <models>
+            <gateway>
+                <class>Ebanx_Gateway_Model</class>
+            </gateway>
+        </models>
+    </global>
 </config>

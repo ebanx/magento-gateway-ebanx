@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <gateway translate="label" module="gateway">
+                    <label>EBANX</label>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[<a href="http://ebanx.com" target="_blank"><img title="EBANX" alt="EBANX" id="logo_ebanx" width="150" /></a><br />
+                    <script type="text/javascript">
+                    document.getElementById('logo_ebanx').src = SKIN_URL + 'ebanx/images/logo.png';
+                    </script>
+                    ]]></comment>
+                    <fields>
+                        <heading_config translate="label">
+                            <label>Configuration</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </heading_config>
+                        <integration_key translate="label">
+                            <label>Integration Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </integration_key>
+                        <integration_key_public translate="label">
+                            <label>Public Integration Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </integration_key_public>
+                    </fields>
+                </gateway>
+            </groups>
+        </payment>
+    </sections>
+</config>
