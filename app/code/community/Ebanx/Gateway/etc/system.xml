@@ -11,8 +11,10 @@
                     <show_in_store>1</show_in_store>
                     <comment><![CDATA[<a href="http://ebanx.com" target="_blank"><img title="EBANX" alt="EBANX" id="logo_ebanx" width="150" /></a><br />
                     <script type="text/javascript">
-                    document.getElementById('logo_ebanx').src = SKIN_URL + 'ebanx/images/logo.png';
+                        document.getElementById('logo_ebanx').src = SKIN_URL + 'ebanx/images/logo.png';
                     </script>
+                    <br/>
+                    <p>You can obtain the integration keys in the settings section, logging in to the <a href="https://www.ebanx.com/business/en/dashboard" target="_blank">EBANX Dashboard.</a></p>
                     ]]></comment>
                     <fields>
                         <heading_config translate="label">
@@ -47,6 +49,15 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </integration_key_public>
+                        <debug_log translate="label">
+                            <label>Enable Debug Log</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </debug_log>
                     </fields>
                 </gateway>
             </groups>
