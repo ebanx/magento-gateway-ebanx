@@ -31,3 +31,41 @@ sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist
 ```
 
 Try that ;)
+
+
+## Tasks
+
+- [ ] Benjamin Integration
+- [ ] Settings Page
+- [ ] Refunds
+- [ ] Payment by link
+- [ ] Checkout Manager and Compliance Fields
+- [ ] Debug Log
+- [ ] Sandbox mode
+- [ ] Save credit card data
+- [ ] One Click Payment
+- [ ] Instalments
+- [ ] Minimum Instalment Values
+- [ ] Interest Rates
+- [ ] Days to Expiration
+- [ ] Checkout for CPF and CNPJ
+- [ ] Auto-capture payments
+- [ ] Payment Methods
+  - [ ] Brazil
+    - [ ] Boleto
+    - [ ] Credit Card
+    - [ ] TEF
+    - [ ] EBANX Wallet
+  - [ ] Mexico
+    - [ ] OXXO
+    - [ ] Debit Card
+    - [ ] Credit Card
+  - [ ] Peru
+    - [ ] Pago Efectivo
+    - [ ] SafetyPay
+  - [ ] Chile
+    - [ ] Sencillito
+    - [ ] ServiPag
+  - [ ] Colombia
+    - [ ] Baloto
+    - [ ] PSE
