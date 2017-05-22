@@ -3,12 +3,12 @@ class Ebanx_Gateway_Block_Adminhtml_System_Config_Form_Field_Interest
     extends Mage_Adminhtml_Block_System_Config_Form_Field_Array_Abstract {
     public function __construct() {
         $this->addColumn('installments', array(
-            'label' => Mage::helper('gateway')->__('Up To'),
+            'label' => Mage::helper('ebanx')->__('Up To'),
             'style' => 'width:120px',
         ));
 
         $this->addColumn('interest', array(
-            'label' => Mage::helper('gateway')->__('Interest Rate'),
+            'label' => Mage::helper('ebanx')->__('Interest Rate'),
             'style' => 'width:120px',
         ));
 
@@ -49,7 +49,7 @@ class Ebanx_Gateway_Block_Adminhtml_System_Config_Form_Field_Interest
             ->setName($name)
             ->setClass('select-installments')
             ->setExtraParams($extraParams)
-            ->setOptions(Mage::getSingleton('gateway/source_instalment')->toOptionArray());
+            ->setOptions(Mage::getSingleton('ebanx/source_instalment')->toOptionArray());
 
         return $select->getHtml();
     }

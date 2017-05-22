@@ -7,11 +7,11 @@ class Ebanx_Gateway_Model_Source_Persontype {
         return array(
             array(
                 'value' => self::CPF,
-                'label' => Mage::helper('gateway')->__('CPF - Individuals')
+                'label' => Mage::helper('ebanx')->__('CPF - Individuals')
             ),
             array(
                 'value' => self::CNPJ,
-                'label' => Mage::helper('gateway')->__('CNPJ - Companies')
+                'label' => Mage::helper('ebanx')->__('CNPJ - Companies')
             ),
         );
     }

@@ -7,11 +7,11 @@ class Ebanx_Gateway_Model_Source_MethodsColombia {
         return array(
             array(
                 'value' => self::EFT,
-                'label' => Mage::helper('gateway')->__('PSE - Pago Seguros en Líne (EFT)')
+                'label' => Mage::helper('ebanx')->__('PSE - Pago Seguros en Líne (EFT)')
             ),
             array(
                 'value' => self::BALOTO,
-                'label' => Mage::helper('gateway')->__('Baloto')
+                'label' => Mage::helper('ebanx')->__('Baloto')
             ),
         );
     }

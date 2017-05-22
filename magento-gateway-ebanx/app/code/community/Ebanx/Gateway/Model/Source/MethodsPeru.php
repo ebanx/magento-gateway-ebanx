@@ -7,11 +7,11 @@ class Ebanx_Gateway_Model_Source_MethodsPeru {
         return array(
             array(
                 'value' => self::SAFETYPAY,
-                'label' => Mage::helper('gateway')->__('SafetyPay')
+                'label' => Mage::helper('ebanx')->__('SafetyPay')
             ),
             array(
                 'value' => self::PAGOEFECTIVO,
-                'label' => Mage::helper('gateway')->__('PagoEfectivo')
+                'label' => Mage::helper('ebanx')->__('PagoEfectivo')
             ),
         );
     }

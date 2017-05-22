@@ -7,11 +7,11 @@ class Ebanx_Gateway_Model_Source_MethodsChile {
         return array(
             array(
                 'value' => self::SENCILLITO,
-                'label' => Mage::helper('gateway')->__('Sencillito')
+                'label' => Mage::helper('ebanx')->__('Sencillito')
             ),
             array(
                 'value' => self::SERVIPAG,
-                'label' => Mage::helper('gateway')->__('Servipag')
+                'label' => Mage::helper('ebanx')->__('Servipag')
             ),
         );
     }

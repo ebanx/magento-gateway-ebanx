@@ -7,21 +7,58 @@
     </modules>
     <global>
         <helpers>
-            <gateway>
+            <ebanx>
                 <class>Ebanx_Gateway_Helper</class>
-            </gateway>
+            </ebanx>
         </helpers>
         
         <blocks>
-            <gateway>
+            <ebanx>
                 <class>Ebanx_Gateway_Block</class>
-            </gateway>
+            </ebanx>
         </blocks>
                 
         <models>
-            <gateway>
+            <ebanx>
                 <class>Ebanx_Gateway_Model</class>
-            </gateway>
+            </ebanx>
         </models>
+
+        <resources>
+            <ebanx_setup>
+                <setup>
+                    <module>Ebanx_Gateway</module>
+                </setup>
+            </ebanx_setup>
+        </resources>
     </global>
+    <frontend>
+        <routers>
+            <ebanx>
+                <use>standard</use>
+                <args>
+                    <module>Ebanx_Gateway</module>
+                    <frontName>ebanx</frontName>
+                </args>
+            </ebanx>
+        </routers>
+        <!--<layout>
+            <updates>
+                <ebanx>
+                    <file>ebanx.xml</file>
+                </ebanx>
+            </updates>
+        </layout>-->
+    </frontend>
+    <default>
+        <payment>
+            <ebanx_boleto>
+                <active>1</active>
+                <model>ebanx/boleto</model>
+                <title>Boleto Bancário</title>
+                <sort_order>1</sort_order>
+                <specificcountry>BR</specificcountry>
+            </ebanx_boleto>
+        </payment>
+    </default>
 </config>

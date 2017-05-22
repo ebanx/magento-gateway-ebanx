@@ -7,11 +7,11 @@ class Ebanx_Gateway_Model_Source_Mode {
         return array(
             array(
                 'value' => self::MODE_SANDBOX,
-                'label' => Mage::helper('gateway')->__('Sandbox')
+                'label' => Mage::helper('ebanx')->__('Sandbox')
             ),
             array(
                 'value' => self::MODE_LIVE,
-                'label' => Mage::helper('gateway')->__('Live')
+                'label' => Mage::helper('ebanx')->__('Live')
             ),
         );
     }

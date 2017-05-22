@@ -8,15 +8,15 @@ class Ebanx_Gateway_Model_Source_MethodsMexico {
         return array(
             array(
                 'value' => self::CREDIT_CARD,
-                'label' => Mage::helper('gateway')->__('Credit Card')
+                'label' => Mage::helper('ebanx')->__('Credit Card')
             ),
             array(
                 'value' => self::DEBIT_CARD,
-                'label' => Mage::helper('gateway')->__('Debit Card')
+                'label' => Mage::helper('ebanx')->__('Debit Card')
             ),
             array(
                 'value' => self::OXXO,
-                'label' => Mage::helper('gateway')->__('OXXO')
+                'label' => Mage::helper('ebanx')->__('OXXO')
             ),
         );
     }

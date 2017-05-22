@@ -9,19 +9,19 @@ class Ebanx_Gateway_Model_Source_MethodsBrazil {
         return array(
             array(
                 'value' => self::CREDIT_CARD,
-                'label' => Mage::helper('gateway')->__('Credit Card')
+                'label' => Mage::helper('ebanx')->__('Credit Card')
             ),
             array(
                 'value' => self::BOLETO,
-                'label' => Mage::helper('gateway')->__('Boleto EBANX')
+                'label' => Mage::helper('ebanx')->__('Boleto EBANX')
             ),
             array(
                 'value' => self::TEF,
-                'label' => Mage::helper('gateway')->__('Online Banking (TEF)')
+                'label' => Mage::helper('ebanx')->__('Online Banking (TEF)')
             ),
             array(
                 'value' => self::WALLET,
-                'label' => Mage::helper('gateway')->__('EBANX Wallet')
+                'label' => Mage::helper('ebanx')->__('EBANX Wallet')
             ),
         );
     }
