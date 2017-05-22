@@ -14,7 +14,7 @@ class Ebanx_Gateway_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
         return $this;
     }
 
-    public function initialize() {
+    public function initialize($paymentAction, $stateObject) {
 
     //     // connect api
 
