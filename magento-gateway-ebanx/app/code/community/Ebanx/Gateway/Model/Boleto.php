@@ -16,11 +16,18 @@ class Ebanx_Gateway_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 
     public function initialize($paymentAction, $stateObject) {
 
-    //     // connect api
+        $payment = $this->getInfoInstance();
+        $order = $payment->getOrder();
 
-    //     // throw errors
+        // connect api
+        // $result = EBANX($config)->boleto()->create($ebanxPayment);
 
-    //     // set token
+        // throw errors
+        
+        // $hash = $result->hash;
+        $hash = "ABCDE12345ABCDE12345ABCDE12345";
+        $payment->setEbanxPaymentHash($hash);
+        Mage::log($hash, 'ebanx.log');
 
         return $this;
     }

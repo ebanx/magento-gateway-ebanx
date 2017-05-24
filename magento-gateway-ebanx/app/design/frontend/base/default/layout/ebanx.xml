@@ -3,7 +3,7 @@
     <!-- Succes Page -->
     <ebanx_checkout_success_handle>
         <reference name="checkout.success">
-            <block type="ebanx/checkout_success_boleto" name="ebanx.success.boleto" as="ebanx_boleto" template="ebanx/checkout/success/boleto.phtml"/>
+            <block type="ebanx/checkout_success_payment_boleto" name="ebanx.success.payment.boleto" as="ebanx_boleto" template="ebanx/checkout/success/boleto.phtml"/>
         </reference>
     </ebanx_checkout_success_handle>
 
