@@ -42,13 +42,13 @@
                 </args>
             </ebanx>
         </routers>
-        <!--<layout>
+        <layout>
             <updates>
-                <ebanx>
+                <ebanx module="Ebanx_Gateway">
                     <file>ebanx.xml</file>
                 </ebanx>
             </updates>
-        </layout>-->
+        </layout>
     </frontend>
     <default>
         <payment>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<layout>
+    <!-- Succes Page -->
+    <ebanx_checkout_success_handle>
+        <reference name="checkout.success">
+            <block type="ebanx/checkout_success_boleto" name="ebanx.success.boleto" as="ebanx_boleto" template="ebanx/checkout/success/boleto.phtml"/>
+        </reference>
+    </ebanx_checkout_success_handle>
+
+    <checkout_onepage_success>
+        <update handle="ebanx_checkout_success_handle"/>
+    </checkout_onepage_success>
+
+    <onepagecheckout_index_success>
+        <update handle="ebanx_checkout_success_handle"/>
+    </onepagecheckout_index_success>
+</layout>
