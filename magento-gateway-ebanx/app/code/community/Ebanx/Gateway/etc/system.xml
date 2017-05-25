@@ -33,22 +33,50 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </mode>
-                        <integration_key translate="label">
-                            <label>Integration Key</label>
+                        <integration_key_sandbox translate="label">
+                            <label>Integration Key Sanbox</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                        </integration_key>
-                        <integration_key_public translate="label">
-                            <label>Public Integration Key</label>
+                            <depends>
+                                <mode>sandbox</mode>
+                            </depends>
+                        </integration_key_sandbox>
+                        <integration_key_public_sandbox translate="label">
+                            <label>Public Integration Key Sandbox</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                        </integration_key_public>
+                            <depends>
+                                <mode>sandbox</mode>
+                            </depends>
+                        </integration_key_public_sandbox>
+                        <integration_key_live translate="label">
+                            <label>Integration Key Live</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <mode>live</mode>
+                            </depends>
+                        </integration_key_live>
+                        <integration_key_public_live translate="label">
+                            <label>Public Integration Key Live</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <mode>live</mode>
+                            </depends>
+                        </integration_key_public_live>
                         <debug_log translate="label">
                             <label>Enable Debug Log</label>
                             <comment>Record all errors that occur when executing a transaction.</comment>
