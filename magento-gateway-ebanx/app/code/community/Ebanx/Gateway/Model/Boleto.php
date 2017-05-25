@@ -19,15 +19,17 @@ class Ebanx_Gateway_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
         $payment = $this->getInfoInstance();
         $order = $payment->getOrder();
 
+        // create data to benjamin
+        $data = new Varien_Object();
+        $data->setMerchantPaymentCode($order->getIncrementId());
+
         // connect api
-        // $result = EBANX($config)->boleto()->create($ebanxPayment);
+        $result = Mage::getSingleton('ebanx/api')->createBoleto($data);
 
         // throw errors
         
-        // $hash = $result->hash;
-        $hash = "ABCDE12345ABCDE12345ABCDE12345";
-        $payment->setEbanxPaymentHash($hash);
-        Mage::log($hash, 'ebanx.log');
+        // save order attributes
+        $payment->setEbanxPaymentHash($result['payment']['hash']);
 
         return $this;
     }

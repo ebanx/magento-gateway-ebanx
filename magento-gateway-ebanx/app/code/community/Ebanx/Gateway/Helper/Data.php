@@ -4,6 +4,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract {
         return Mage::getStoreConfig('payment/ebanx_settings/mode');
     }
 
+    public function isModeSandbox() {
+        return $this->getMode() === Ebanx_Gateway_Model_Source_Mode::SANDBOX;
+    }
+
     public function getIntegrationKey() {
         return Mage::getStoreConfig('payment/ebanx_settings/integration_key_' . $this->getMode());
     }
