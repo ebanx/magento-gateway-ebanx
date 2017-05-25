@@ -15,8 +15,12 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract {
     public function getIntegrationKeySandbox() {
         return Mage::getStoreConfig('payment/ebanx_settings/integration_key_' . Ebanx_Gateway_Model_Source_Mode::SANDBOX);
     }
-    
+
     public function getIntegrationKeyLive() {
         return Mage::getStoreConfig('payment/ebanx_settings/integration_key_' . Ebanx_Gateway_Model_Source_Mode::LIVE);
+    }
+
+    public function getDueDate() {
+        return Mage::getStoreConfig('payment/ebanx_settings/due_date_days');
     }
 }

@@ -33,11 +33,14 @@
             </ebanx_setup>
         </resources>
         <fieldsets>
-            <sales_convert_quote>
+            <sales_convert_quote_payment>
                 <ebanx_payment_hash>
                     <to_order>*</to_order>
                 </ebanx_payment_hash>
-            </sales_convert_quote>
+                <ebanx_due_date>
+                    <to_order>*</to_order>
+                </ebanx_due_date>
+            </sales_convert_quote_payment>
         </fieldsets>
     </global>
     <frontend>
