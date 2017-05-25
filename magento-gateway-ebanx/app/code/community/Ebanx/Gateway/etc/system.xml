@@ -3,7 +3,7 @@
     <sections>
         <payment>
             <groups>
-                <ebanx_boleto translate="label" module="ebanx">
+                <ebanx_settings translate="label" module="ebanx">
                     <label>EBANX</label>
                     <sort_order>0</sort_order>
                     <show_in_default>1</show_in_default>
@@ -279,7 +279,7 @@
                             <show_in_store>0</show_in_store>
                         </due_date_days>
                     </fields>
-                </ebanx_boleto>
+                </ebanx_settings>
             </groups>
         </payment>
     </sections>

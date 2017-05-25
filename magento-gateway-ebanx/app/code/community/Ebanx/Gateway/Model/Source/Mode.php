@@ -1,16 +1,16 @@
 <?php
 class Ebanx_Gateway_Model_Source_Mode {
-    const MODE_SANDBOX = 'sandbox';
-    const MODE_LIVE = 'live';
+    const SANDBOX = 'sandbox';
+    const LIVE = 'live';
 
     public function toOptionArray() {
         return array(
             array(
-                'value' => self::MODE_SANDBOX,
+                'value' => self::SANDBOX,
                 'label' => Mage::helper('ebanx')->__('Sandbox')
             ),
             array(
-                'value' => self::MODE_LIVE,
+                'value' => self::LIVE,
                 'label' => Mage::helper('ebanx')->__('Live')
             ),
         );
