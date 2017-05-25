@@ -1,0 +1,14 @@
+{
+    "name": "ebanx/magento-gateway-ebanx",
+    "description": "",
+    "type": "project",
+    "license": "MIT",
+    "repositories": [{
+        "type": "vcs",
+        "url": "/Users/coelho/Sites/benjamin"
+    }],
+    "minimum-stability": "dev",
+    "require": {
+        "ebanx/benjamin": "dev-master"
+    }
+}
