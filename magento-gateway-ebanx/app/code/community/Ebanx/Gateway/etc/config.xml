@@ -66,6 +66,7 @@
                 <title>Boleto Bancário</title>
                 <payment_action>charge</payment_action>
                 <sort_order>1</sort_order>
+                <allowspecific>1</allowspecific>
                 <specificcountry>BR</specificcountry>
             </ebanx_boleto>
         </payment>
