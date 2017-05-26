@@ -25,9 +25,6 @@ class Ebanx_Gateway_Model_Api {
         // $this->benjamin = EBANX($config, $creditCardConfig);
 
         $this->benjamin = EBANX($config);
-        Mage::log($this->benjamin, null, 'benjamin.log', true);
-
-
     }
 
     public function createBoleto(Varien_Object $data) {
@@ -45,7 +42,7 @@ class Ebanx_Gateway_Model_Api {
             'amountTotal' => 48.63,
             'currencyCode' => 'BRL',
             // 'deviceId' => 'b2017154beac2625eec083a5d45d872f12dc2c57535e25aa149d3bdb57cbdeb9',
-            'merchantPaymentCode' => $data->getMerchantPaymentCode(),
+            'merchantPaymentCode' => $data->getMerchantPaymentCode() . time(),
             'note' => 'Example payment.',
             'person' => new Person([
                 'type' => 'personal',
@@ -83,8 +80,10 @@ class Ebanx_Gateway_Model_Api {
             //     'name' => 'Luana Aragão Mendes',
             //     'phoneNumber' => '(74) 97063-8157',
             // ]),
-            'dueDate' => new \DateTime ('2017-05-20 01:47:31 UTC')
+            'dueDate' => new \DateTime ($data->getEbanxDueDate()->get('YYYY-MM-dd HH:mm:ss'))
         ]);
+
+        Mage::log($paymentData, null, 'benjamin-boleto.log', true);
 
         return $this->benjamin->boleto()->create($paymentData);
     }

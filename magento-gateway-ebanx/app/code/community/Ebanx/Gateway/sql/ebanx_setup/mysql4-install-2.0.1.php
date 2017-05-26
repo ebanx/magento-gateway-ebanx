@@ -23,7 +23,7 @@ $installer->addAttribute('order_payment', 'ebanx_payment_hash', array(
   , 'default'         => null
 ));
 
-$installer->addAttribute('quote_payment', 'ebanx_due_date', array(
+$installer->addAttribute('order_payment', 'ebanx_due_date', array(
     'type'            => Varien_Db_Ddl_Table::TYPE_DATETIME
   , 'is_user_defined' => 0
   , 'label'           => 'Due Date'
