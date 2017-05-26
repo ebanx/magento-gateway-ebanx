@@ -46,8 +46,8 @@ class Ebanx_Gateway_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
         
         // save order attributes
         $payment->setEbanxPaymentHash($result['payment']['hash'])
-            ->setEbanxDueDate($dueDate);
-
+            ->setEbanxDueDate($dueDate)
+            ->setEbanxBarCode($result['payment']['boleto_barcode']);
 
         return $this;
     }

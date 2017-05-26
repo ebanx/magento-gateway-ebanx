@@ -10,6 +10,18 @@
 </div>
 
 <hr>
+
+<div class="banking-ticket__barcode">
+    <div class="banking-ticket__barcode-code">
+        <?php
+        $barCodeFormated = $this->getEbanxBarCodeFormated();
+        echo $barCodeFormated['boleto1']; ?>.<?php echo $barCodeFormated['boleto2']; ?> <?php echo $barCodeFormated['boleto3']; ?>.<?php echo $barCodeFormated['boleto4']; ?> <?php echo $barCodeFormated['boleto5']; ?>.<?php echo $barCodeFormated['boleto6']; ?> <?php echo $barCodeFormated['boleto7']; ?> <?php echo $barCodeFormated['boleto8']; ?>
+        ?>
+    </div>
+    <div class="banking-ticket__barcode-copy">
+        <button type="button" class="button ebanx-button--copy" data-clipboard-text="<?php echo $this->getEbanxBarCode(); ?>"><?php echo $this->__('Copiar'); ?></button>
+    </div>
+</div>
 <?php
 
 echo $this->getEbanxPaymentHash();

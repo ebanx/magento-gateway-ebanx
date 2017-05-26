@@ -2,6 +2,15 @@
 <layout>
     <!-- Succes Page -->
     <ebanx_checkout_success_handle>
+        <reference name="head">
+            <action method="addJs">
+                <script>ebanx/clipboard/clipboard.min.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/success.js</name>
+            </action>
+        </reference>
         <reference name="checkout.success">
             <block type="ebanx/checkout_success_payment_boleto" name="ebanx.success.payment.boleto" as="ebanx_boleto" template="ebanx/checkout/success/boleto.phtml"/>
         </reference>
