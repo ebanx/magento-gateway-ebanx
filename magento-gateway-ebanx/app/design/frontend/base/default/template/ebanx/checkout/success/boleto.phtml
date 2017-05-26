@@ -1,6 +1,15 @@
-<br />
-Carregar boleto
+<div class="banking-ticket__desc">
+    <br/>
+    <p class="magento-thankyou-order-received"><?php echo $this->__("Pronto, seu boleto foi gerado, %s.", $this->getOrder()->getBillingAddress()->getFirstname()) ?></p>
+    <p><?php echo $this->__("Mandamos uma cópia para o email %s.", "<strong>" . $this->getOrder()->getCustomerEmail() . "</strong>") ?></p>
+    <p>
+        <?php echo $this->__("- Não se esqueça, ele vence %s. Depois disso não é mais possível realizar o pagamento.", "<strong>" . $this->getEbanxDueDate() . "</strong>") ?></p>
+        <?php echo $this->__("- Dica: Além dos bancos e casas lotéricas você também pode pagar pelo seu internet banking, sem sair de casa."); ?>
+    </p>
+    <p><?php echo $this->__('Ficou alguma dúvida? A gente te <a href="%s" target="_blank">ajuda</a>', "https://www.ebanx.com/br/ajuda/pagamentos/boleto-bancario") ?>.</p>
+</div>
 
+<hr>
 <?php
 
 echo $this->getEbanxPaymentHash();
