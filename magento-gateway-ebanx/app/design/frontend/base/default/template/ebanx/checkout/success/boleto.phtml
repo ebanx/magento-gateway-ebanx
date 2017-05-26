@@ -31,6 +31,7 @@
         <a href="<?php echo $this->getEbanxUrlPrint() ?>" target="_blank" class="button banking-ticket__action"><?php echo $this->__('Imprimir boleto'); ?></a>
     </div>
 </div>
-<?php
 
-echo $this->getEbanxPaymentHash();
+<div>
+    <iframe id="ebanx-boleto-frame" src="<?php echo $this->getEbanxUrl(); ?>" style="width: 100%; border: 0px; height: 1000px"></iframe>
+</div>
