@@ -15,11 +15,20 @@
     <div class="banking-ticket__barcode-code">
         <?php
         $barCodeFormated = $this->getEbanxBarCodeFormated();
-        echo $barCodeFormated['boleto1']; ?>.<?php echo $barCodeFormated['boleto2']; ?> <?php echo $barCodeFormated['boleto3']; ?>.<?php echo $barCodeFormated['boleto4']; ?> <?php echo $barCodeFormated['boleto5']; ?>.<?php echo $barCodeFormated['boleto6']; ?> <?php echo $barCodeFormated['boleto7']; ?> <?php echo $barCodeFormated['boleto8']; ?>
+        echo $barCodeFormated['boleto1'] . '.' . $barCodeFormated['boleto2'] . ' ' . $barCodeFormated['boleto3'] . '.' . $barCodeFormated['boleto4'] . ' ' . $barCodeFormated['boleto5'] . '.' . $barCodeFormated['boleto6'] . ' ' . $barCodeFormated['boleto7'] . ' ' . $barCodeFormated['boleto8'];
         ?>
     </div>
     <div class="banking-ticket__barcode-copy">
         <button type="button" class="button ebanx-button--copy" data-clipboard-text="<?php echo $this->getEbanxBarCode(); ?>"><?php echo $this->__('Copiar'); ?></button>
+    </div>
+</div>
+
+<hr>
+
+<div class="banking-ticket__actions">
+    <div class="ebanx-button--group ebanx-button--group-two">
+        <a href="<?php echo $this->getEbanxUrlPdf(); ?>" target="_blank" class="button banking-ticket__action"><?php echo $this->__('Salvar em PDF'); ?></a>
+        <a href="<?php echo $this->getEbanxUrlPrint() ?>" target="_blank" class="button banking-ticket__action"><?php echo $this->__('Imprimir boleto'); ?></a>
     </div>
 </div>
 <?php

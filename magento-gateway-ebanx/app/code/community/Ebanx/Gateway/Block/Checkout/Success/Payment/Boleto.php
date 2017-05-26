@@ -30,4 +30,18 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment_Boleto extends Ebanx_Gateway_
 			'boleto8' => '<span>' . substr($code, 33, 14) . '</span>',
 		);
 	}
+
+	public function getEbanxUrl() {
+        return Mage::getSingleton('ebanx/api')->getEbanxUrl() . self::getEbanxPaymentHash();
+    }
+
+	public function getEbanxUrlPdf() {
+        return self::getEbanxUrl() . '&format=pdf';
+    }
+
+	public function getEbanxUrlPrint() {
+        return self::getEbanxUrl() . '&format=print';
+    }
+    
+    
 }

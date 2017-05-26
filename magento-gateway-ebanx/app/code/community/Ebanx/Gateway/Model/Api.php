@@ -9,6 +9,9 @@ use Ebanx\Benjamin\Models\Person;
 use Ebanx\Benjamin\Models\Item;
 
 class Ebanx_Gateway_Model_Api {
+    const URL_PRINT_LIVE = 'https://ebanx.com/print/?hash=';
+    const URL_PRINT_SANDBOX = 'https://sandbox.ebanx.com/print/?hash=';
+
     protected $benjamin;
 
     public function __construct() {
@@ -25,6 +28,10 @@ class Ebanx_Gateway_Model_Api {
         // $this->benjamin = EBANX($config, $creditCardConfig);
 
         $this->benjamin = EBANX($config);
+    }
+
+    public function getEbanxUrl() {
+        return Mage::helper('ebanx')->isModeSandbox() ? self::URL_PRINT_SANDBOX : self::URL_PRINT_LIVE;
     }
 
     public function createBoleto(Varien_Object $data) {
