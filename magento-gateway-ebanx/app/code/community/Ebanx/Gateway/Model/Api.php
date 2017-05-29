@@ -34,9 +34,9 @@ class Ebanx_Gateway_Model_Api {
         return Mage::helper('ebanx')->isModeSandbox() ? self::URL_PRINT_SANDBOX : self::URL_PRINT_LIVE;
     }
 
-    public function createBoleto(Varien_Object $data) {
+    public function createCashPayment(Varien_Object $data) {
         $paymentData = new Payment([
-            'type' => 'boleto',
+            'type' => $data->getEbanxMethod(),
             'address' => new Address([
                 'address' => 'Rua Rodrigues',
                 'city' => 'Vila Malena d\'Oeste',

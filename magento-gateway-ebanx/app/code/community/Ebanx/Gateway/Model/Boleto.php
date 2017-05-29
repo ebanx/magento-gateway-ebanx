@@ -34,12 +34,13 @@ class Ebanx_Gateway_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
         
         // create data to benjamin
         $data = new Varien_Object();
-        $data->setMerchantPaymentCode($order->getIncrementId());
-        $data->setEbanxDueDate($dueDate);
+        $data->setMerchantPaymentCode($order->getIncrementId())
+            ->setEbanxMethod('boleto')
+            ->setEbanxDueDate($dueDate);
 
 
         // connect api
-        $result = Mage::getSingleton('ebanx/api')->createBoleto($data);
+        $result = Mage::getSingleton('ebanx/api')->createCashPayment($data);
         Mage::log($result, null, 'benjamin-result.log', true);
 
         // throw errors
