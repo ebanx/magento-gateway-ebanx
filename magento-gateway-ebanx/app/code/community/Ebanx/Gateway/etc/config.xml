@@ -72,6 +72,15 @@
                 <allowspecific>1</allowspecific>
                 <specificcountry>BR</specificcountry>
             </ebanx_boleto>
+            <ebanx_baloto>
+                <active>1</active>
+                <model>ebanx/baloto</model>
+                <title>Baloto</title>
+                <payment_action>charge</payment_action>
+                <sort_order>1</sort_order>
+                <allowspecific>1</allowspecific>
+                <specificcountry>CO</specificcountry>
+            </ebanx_baloto>
         </payment>
     </default>
 </config>

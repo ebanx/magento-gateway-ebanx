@@ -14,6 +14,9 @@
         <reference name="checkout.success">
             <block type="ebanx/checkout_success_payment_boleto" name="ebanx.success.payment.boleto" as="ebanx_boleto" template="ebanx/checkout/success/boleto.phtml"/>
         </reference>
+        <reference name="checkout.success">
+            <block type="ebanx/checkout_success_payment_baloto" name="ebanx.success.payment.baloto" as="ebanx_baloto" template="ebanx/checkout/success/baloto.phtml"/>
+        </reference>
     </ebanx_checkout_success_handle>
 
     <checkout_onepage_success>
