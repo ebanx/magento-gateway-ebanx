@@ -12,7 +12,7 @@
             "source": {
                 "type": "git",
                 "url": "/Users/coelho/Sites/benjamin",
-                "reference": "f2471d67a045b33c4beba28af76f5ef332523ffa"
+                "reference": "5fdd0c54fa57dda036ac242e9e8dfaff7939a25d"
             },
             "require": {
                 "guzzlehttp/guzzle": "^5.3.1",
@@ -42,29 +42,29 @@
             },
             "scripts": {
                 "test": [
-                    "phpunit tests --colors"
+                    "phpunit"
                 ],
                 "test-only": [
-                    "phpunit tests --colors --filter"
+                    "phpunit --filter"
                 ],
                 "dup-check": [
-                    "vendor/bin/phpcpd src && vendor/bin/phpcpd tests"
+                    "phpcpd src && phpcpd tests"
                 ],
                 "test-all": [
                     "composer test && composer dup-check"
                 ],
                 "style-check": [
-                    "vendor/bin/php-cs-fixer fix --dry-run --verbose --diff ./"
+                    "php-cs-fixer fix --dry-run --verbose --diff ./"
                 ],
                 "style-fix": [
-                    "vendor/bin/php-cs-fixer fix --verbose ./"
+                    "php-cs-fixer fix --verbose ./"
                 ]
             },
             "license": [
                 "MIT"
             ],
             "description": "Business rule provider lib for plugin implementations",
-            "time": "2017-05-24 23:01:33"
+            "time": "2017-05-27 01:36:29"
         },
         {
             "name": "guzzlehttp/guzzle",
