@@ -2,28 +2,30 @@
 
 abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abstract
 {
+	private $payment;
+
+	protected $ebanx;
+	protected $adapter;
+
 	protected $_isGateway = true;
 	protected $_canUseFormMultishipping = false;
 	protected $_isInitializeNeeded = true;
-	
-	public function validate() {
-        parent::validate();
-        return $this;
-    }
+	protected $_canRefund = true;
 
-	public function assignData($data)
-	{
-		if (!($data instanceof Varien_Object)) {
-			$data = new Varien_Object($data);
-		}
-		
-		$info = $this->getInfoInstance();
-		
-		
-		return $this;
+	public function __construct() {
+		parent::__construct();
+
+		$this->ebanx = Mage::getSingleton('ebanx/api')->ebanx();
+		$this->adapter = Mage::getModel('ebanx/adapters_paymentAdapter');
 	}
-
+	
 	function initialize($paymentAction, $stateObject) {
-		throw new Exception('You need to create this method.');
+		$this->payment = $this->getInfoInstance();
+
+		// Create payment data
+		$this->data = new Varien_Object();
+		$this->data->setMerchantPaymentCode($this->order->getIncrementId())
+					->setEbanxMethod($this->_code)
+					->setPayment($this->payment);
 	}
 }
