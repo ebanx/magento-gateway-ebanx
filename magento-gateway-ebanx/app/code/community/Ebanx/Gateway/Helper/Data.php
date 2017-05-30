@@ -4,7 +4,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract {
         return Mage::getStoreConfig('payment/ebanx_settings/mode');
     }
 
-    public function isModeSandbox() {
+    public function isSandboxMode() {
         return $this->getMode() === Ebanx_Gateway_Model_Source_Mode::SANDBOX;
     }
 

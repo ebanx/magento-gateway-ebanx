@@ -21,7 +21,6 @@ class Ebanx_Gateway_Model_Baloto extends Mage_Payment_Model_Method_Abstract {
 
         $info = $this->getInfoInstance();
         
-        
         return $this;
     }
 

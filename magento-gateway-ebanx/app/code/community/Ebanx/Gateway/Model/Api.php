@@ -18,7 +18,7 @@ class Ebanx_Gateway_Model_Api {
         $config = new Config(array(
             "integrationKey" => Mage::helper('ebanx')->getIntegrationKeyLive(),
             "sandboxIntegrationKey" => Mage::helper('ebanx')->getIntegrationKeySandbox(),
-            "isSandbox" => Mage::helper('ebanx')->isModeSandbox(),
+            "isSandbox" => Mage::helper('ebanx')->isSandboxMode(),
             "baseCurrency" => Currency::USD,
             "notificationUrl" => "http://magento.dev/"
         ));
@@ -31,7 +31,7 @@ class Ebanx_Gateway_Model_Api {
     }
 
     public function getEbanxUrl() {
-        return Mage::helper('ebanx')->isModeSandbox() ? self::URL_PRINT_SANDBOX : self::URL_PRINT_LIVE;
+        return Mage::helper('ebanx')->isSandboxMode() ? self::URL_PRINT_SANDBOX : self::URL_PRINT_LIVE;
     }
 
     public function createCashPayment(Varien_Object $data) {
