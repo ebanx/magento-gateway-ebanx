@@ -36,8 +36,11 @@ class Ebanx_Gateway_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
         $data = new Varien_Object();
         $data->setMerchantPaymentCode($order->getIncrementId())
             ->setEbanxMethod('boleto')
-            ->setEbanxDueDate($dueDate);
-
+            ->setEbanxDueDate($dueDate)
+            ->setAddressStreet($order->getBillingAddress()->getStreetFull())
+            ->setAddressCity($order->getBillingAddress()->getCity())
+            ->setAddressRegion($order->getBillingAddress()->getRegion())
+            ->setName($order->getBillingAddress()->getName());
 
         // connect api
         $result = Mage::getSingleton('ebanx/api')->createCashPayment($data);
