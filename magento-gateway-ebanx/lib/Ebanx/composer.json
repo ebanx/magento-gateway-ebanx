@@ -5,10 +5,10 @@
     "license": "MIT",
     "repositories": [{
         "type": "vcs",
-        "url": "/Users/coelho/Sites/benjamin"
+        "url": "https://github.com/ebanx/benjamin.git"
     }],
     "minimum-stability": "dev",
     "require": {
-        "ebanx/benjamin": "dev-master"
+        "ebanx/benjamin": "master"
     }
 }

@@ -4,15 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9399985dcecf2365df4ef69c9c79926b",
+    "content-hash": "4795fba10e82e7cf2dce5f9990e2954a",
     "packages": [
         {
             "name": "ebanx/benjamin",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "/Users/coelho/Sites/benjamin",
-                "reference": "5fdd0c54fa57dda036ac242e9e8dfaff7939a25d"
+                "url": "https://github.com/ebanx/benjamin.git",
+                "reference": "dcc536ef7db56f428761a7e1c2427d45e21d9f6c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/dcc536ef7db56f428761a7e1c2427d45e21d9f6c",
+                "reference": "dcc536ef7db56f428761a7e1c2427d45e21d9f6c",
+                "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^5.3.1",
@@ -64,7 +70,11 @@
                 "MIT"
             ],
             "description": "Business rule provider lib for plugin implementations",
-            "time": "2017-05-27 01:36:29"
+            "support": {
+                "source": "https://github.com/ebanx/benjamin/tree/master",
+                "issues": "https://github.com/ebanx/benjamin/issues"
+            },
+            "time": "2017-05-31 02:05:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -270,9 +280,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "ebanx/benjamin": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
