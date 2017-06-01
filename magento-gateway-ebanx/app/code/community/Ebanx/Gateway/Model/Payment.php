@@ -27,8 +27,15 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 		parent::initialize($paymentAction, $stateObject);
 
 		$this->payment = $this->getInfoInstance();
-		$order         = $this->payment->getOrder();
+		$this->order   = $this->payment->getOrder();
 
+		$this->setupData();
+
+		$this->processPayment();
+	}
+
+	public function setupData()
+	{
 		// Create payment data
 		$id                  = $this->payment->getOrder()->getIncrementId();
 		$time                = time();
@@ -39,18 +46,16 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 					->setDueDate(Mage::helper('ebanx')->getDueDate())
 					->setEbanxMethod($this->_code)
 					->setStoreCurrency(Mage::app()->getStore()->getCurrentCurrencyCode())
-					->setAmountTotal($order->getGrandTotal())
-					->setPerson(Mage::getModel('customer/customer')->load($order->getCustomerId()))
-					->setItems($order->getAllVisibleItems())
-					->setRemoteIp($order->getRemoteIp())
-					->setBillingAddress($order->getBillingAddress())
+					->setAmountTotal($this->order->getGrandTotal())
+					->setPerson(Mage::getModel('customer/customer')->load($this->order->getCustomerId()))
+					->setItems($this->order->getAllVisibleItems())
+					->setRemoteIp($this->order->getRemoteIp())
+					->setBillingAddress($this->order->getBillingAddress())
 					->setPayment($this->payment)
 					->setOrder($order);
-
-		$this->process_payment();
 	}
 
-	public function process_payment()
+	public function processPayment()
 	{
 		$payment = $this->adapter->transform($this->data);
 
