@@ -65,7 +65,7 @@
         <payment>
             <ebanx_boleto>
                 <active>1</active>
-                <model>ebanx/boleto</model>
+                <model>ebanx/brazil_boleto</model>
                 <title>Boleto Bancário</title>
                 <payment_action>charge</payment_action>
                 <sort_order>1</sort_order>
