@@ -15,4 +15,10 @@ class Ebanx_Gateway_Model_Brazil_Boleto extends Ebanx_Gateway_Model_Payment
 
 		$this->gateway = $this->ebanx->boleto();
 	}
+
+	public function persistPayment()
+	{
+		parent::persistPayment();
+		$this->payment->setEbanxBarCode($this->result['payment']['boleto_barcode']);
+	}
 }
