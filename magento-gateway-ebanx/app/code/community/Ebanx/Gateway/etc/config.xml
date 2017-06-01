@@ -91,6 +91,15 @@
                 <allowspecific>1</allowspecific>
                 <specificcountry>CL</specificcountry>
             </ebanx_sencillito>
+            <ebanx_servipag>
+                <active>1</active>
+                <model>ebanx/chile_servipag</model>
+                <title>Servipag</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+                <allowspecific>1</allowspecific>
+                <specificcountry>CL</specificcountry>
+            </ebanx_servipag>
         </payment>
     </default>
 </config>
