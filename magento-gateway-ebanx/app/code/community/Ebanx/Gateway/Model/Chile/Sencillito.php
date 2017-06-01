@@ -15,20 +15,4 @@ class Ebanx_Gateway_Model_Chile_Sencillito extends Ebanx_Gateway_Model_Payment
 
 		$this->gateway = $this->ebanx->sencillito();
 	}
-
-	public function initialize($paymentAction, $stateObject)
-	{
-		parent::initialize($paymentAction, $stateObject);
-
-		var_dump($this->adapter->transform($this->data));
-
-		$res = $this->gateway->create($this->adapter->transform($this->data));
-
-		Mage::log($res, null, 'ebanx-sencillito.log', true);
-		
-		if ($res['status'] !== 'SUCCESS') {
-			Mage::throwException($res['status_message']);
-		}
-
-	}
 }

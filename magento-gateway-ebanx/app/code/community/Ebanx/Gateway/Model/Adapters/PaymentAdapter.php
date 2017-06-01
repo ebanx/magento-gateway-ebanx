@@ -1,7 +1,7 @@
 <?php
 require_once Mage::getBaseDir('lib') . '/Ebanx/vendor/autoload.php';
 
-use Ebanx\Benjamin\Models\Currency;
+use Ebanx\Benjamin\Models\Country;
 use Ebanx\Benjamin\Models\Payment;
 use Ebanx\Benjamin\Models\Address;
 use Ebanx\Benjamin\Models\Person;
@@ -15,8 +15,6 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 	 */
 	public function transform(Varien_Object $data)
 	{
-		$order = $data->getOrder();
-
 		return new Payment([
 			'type'                => $data->getEbanxMethod(),
 			'amountTotal'         => $data->getAmountTotal(),
@@ -31,10 +29,18 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 
 	public function transformAddress($address, $data)
 	{
+		$country = [
+			'cl' => Country::CHILE,
+			'br' => Country::BRAZIL,
+			'co' => Country::COLOMBIA,
+			'mx' => Country::MEXICO,
+			'pe' => Country::PERU,
+		];
+
 		return new Address([
 			'address'          => $address->getStreetFull(),
 			'city'             => $address->getCity(),
-			'country'          => $address->getCountry(),
+			'country'          => $country[strtolower($address->getCountry())],
 			'state'            => $address->getRegionCode(),
 			'streetComplement' => $address->getStreet2(),
 			'zipcode'          => $address->getPostcode()
@@ -49,25 +55,25 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 			'document'    => '52285363451',
 			'email'       => $person->getEmail(),
 			'ip'          => $data->getRemoteIp(),
-			'name'        => "$person->getFirstname() $person->getLastname",
-			'phoneNumber' => $data->getTelephone()
+			'name'        => $data->getPerson()->getFirstname() . ' '. $data->getPerson()->getLastname(),
+			'phoneNumber' => $data->getBillingAddress()->getTelephone()
 		]);
 	}
 
 	public function transformItems($items, $data)
-	{
-		$items = [];
+	{	
+		$itemsData = [];
 
 		foreach($items as $item) {
-			$items[] = new Item([
+			$itemsData[] = new Item([
 				'sku'         => $item->getSku(),
 				'name'        => $item->getName(),
 				'description' => $item->getDescription(),
-				'unitPrice'   => (float) $item->getPrice(),
+				'unitPrice'   => $item->getPrice(),
 				'quantity'    => $item->getTotalQtyOrdered()
 			]);
 		}
 
-		return $items;
+		return $itemsData;
 	}
 }
