@@ -22,7 +22,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 		$this->adapter = Mage::getModel('ebanx/adapters_paymentAdapter');
 	}
 	
-	function initialize($paymentAction, $stateObject)
+	public function initialize($paymentAction, $stateObject)
 	{
 		parent::initialize($paymentAction, $stateObject);
 
@@ -46,5 +46,35 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 					->setBillingAddress($order->getBillingAddress())
 					->setPayment($this->payment)
 					->setOrder($order);
+
+		$this->process_payment();
+	}
+
+	public function process_payment()
+	{
+		$payment = $this->adapter->transform($this->data);
+
+		// Do request
+		$res = $this->gateway->create($payment);
+
+		Mage::log($res, null, 'ebanx-sencillito.log', true);
+
+		if ($res['status'] !== 'SUCCESS') {
+			// TODO: Make an error handler
+			Mage::throwException($res['status_message']);
+		}
+
+		// Set the URL for redirect
+		if (!empty($res['redirect_url'])) {
+			self::$redirect_url = $res['redirect_url'];
+		}
+		else {
+			self::$redirect_url = Mage::getUrl('checkout/onepage/success');
+		}
+	}
+
+	public function getOrderPlaceRedirectUrl()
+	{
+		return self::$redirect_url;
 	}
 }
