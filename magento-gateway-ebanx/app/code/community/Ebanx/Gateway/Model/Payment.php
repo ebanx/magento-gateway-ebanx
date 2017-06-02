@@ -58,7 +58,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 					->setRemoteIp($this->order->getRemoteIp())
 					->setBillingAddress($this->order->getBillingAddress())
 					->setPayment($this->payment)
-					->setOrder($order);
+					->setOrder($this->order);
 	}
 
 	public function processPayment()
