@@ -12,7 +12,14 @@ class Ebanx_Gateway_Model_Peru_Safetypay extends Ebanx_Gateway_Model_Payment
 	public function __construct()
 	{
 		parent::__construct();
+	}
 
-		$this->gateway = $this->ebanx->safetypay();
+	public function initialize($paymentAction, $stateObject)
+	{
+		$safetyPayType = Mage::app()->getRequest()->getPost()['ebanx_safetypay_type'];
+
+		$this->gateway = $this->ebanx->safetyPay($safetyPayType);
+
+		parent::initialize($paymentAction, $stateObject);
 	}
 }
