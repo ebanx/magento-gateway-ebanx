@@ -1,7 +1,6 @@
 <?php
 require_once Mage::getBaseDir('lib') . '/Ebanx/vendor/autoload.php';
 
-use Ebanx\Benjamin\Models\Country;
 use Ebanx\Benjamin\Models\Payment;
 use Ebanx\Benjamin\Models\Address;
 use Ebanx\Benjamin\Models\Person;
@@ -9,6 +8,13 @@ use Ebanx\Benjamin\Models\Item;
 
 class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 {
+	private $helper;
+
+	public function __construct()
+	{
+		$this->helper = Mage::helper('ebanx');
+	}
+
 	/**
 	 * @param Varien_Object $data
 	 * @return Payment
@@ -29,19 +35,11 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 
 	public function transformAddress($address, $data)
 	{
-		$country = [
-			'cl' => Country::CHILE,
-			'br' => Country::BRAZIL,
-			'co' => Country::COLOMBIA,
-			'mx' => Country::MEXICO,
-			'pe' => Country::PERU,
-		];
-
 		return new Address([
 			'address'          => $address->getStreetFull(),
 			'streetNumber'     => '123', // TODO
 			'city'             => $address->getCity(),
-			'country'          => $country[strtolower($address->getCountry())],
+			'country'          => $this->helper->transformCountryCodeToName($address->getCountry()),
 			'state'            => $address->getRegionCode(),
 			'streetComplement' => $address->getStreet2(),
 			'zipcode'          => $address->getPostcode()

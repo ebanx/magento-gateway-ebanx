@@ -1,4 +1,8 @@
 <?php
+require_once Mage::getBaseDir('lib') . '/Ebanx/vendor/autoload.php';
+
+use Ebanx\Benjamin\Models\Country;
+
 class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 {
     public function getMode()
@@ -36,4 +40,17 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         $dueDate = new Zend_Date(Mage::getModel('core/date')->timestamp());
         return $dueDate->addDay($this->getDueDateDays())->get('YYYY-MM-dd HH:mm:ss');
     }
+
+	public function transformCountryCodeToName($countryCode)
+	{
+		$countries = [
+			'cl' => Country::CHILE,
+			'br' => Country::BRAZIL,
+			'co' => Country::COLOMBIA,
+			'mx' => Country::MEXICO,
+			'pe' => Country::PERU,
+		];
+
+		return $countries[strtolower($countryCode)];
+	}
 }

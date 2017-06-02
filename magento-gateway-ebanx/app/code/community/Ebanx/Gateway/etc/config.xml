@@ -69,9 +69,6 @@
                 <title>Boleto Bancário</title>
                 <payment_action>charge</payment_action>
                 <sort_order>1</sort_order>
-                <allowspecific>1</allowspecific>
-                <specificcountry>BR</specificcountry>
-                <allowed_currencies>BRL,USD,EUR</allowed_currencies>
             </ebanx_boleto>
             <ebanx_baloto>
                 <active>1</active>
@@ -79,9 +76,6 @@
                 <title>Baloto</title>
                 <payment_action>charge</payment_action>
                 <sort_order>1</sort_order>
-                <allowspecific>1</allowspecific>
-                <specificcountry>CO</specificcountry>
-                <allowed_currencies>COP,USD,EUR</allowed_currencies>
             </ebanx_baloto>
             <!-- Chile -->
             <ebanx_sencillito>
@@ -90,9 +84,6 @@
                 <title>Sencillito</title>
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
-                <allowspecific>1</allowspecific>
-                <specificcountry>CL</specificcountry>
-                <allowed_currencies>CLP,USD,EUR</allowed_currencies>
             </ebanx_sencillito>
             <ebanx_servipag>
                 <active>1</active>
@@ -100,9 +91,6 @@
                 <title>Servipag</title>
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
-                <allowspecific>1</allowspecific>
-                <specificcountry>CL</specificcountry>
-                <allowed_currencies>CLP,USD,EUR</allowed_currencies>
             </ebanx_servipag>
             <!-- Peru -->
             <ebanx_pagoefectivo>
@@ -111,10 +99,17 @@
                 <title>PagoEfectivo</title>
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
+            </ebanx_pagoefectivo>
+            <ebanx_safetypay>
+                <active>1</active>
+                <model>ebanx/peru_safetypay</model>
+                <title>SafetyPay</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
                 <allowspecific>1</allowspecific>
                 <specificcountry>PE</specificcountry>
                 <allowed_currencies>PEN,USD,EUR</allowed_currencies>
-            </ebanx_pagoefectivo>
+            </ebanx_safetypay>
         </payment>
     </default>
 </config>
