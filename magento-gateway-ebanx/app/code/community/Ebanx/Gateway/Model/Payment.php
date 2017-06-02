@@ -6,7 +6,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 	protected $ebanx;
 	protected $adapter;
 	protected $data;
-	protected $result;
+	protected $customer;
 	static protected $redirect_url;
 
 	protected $_isGateway               = true;
@@ -21,17 +21,23 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 		$this->ebanx   = Mage::getSingleton('ebanx/api')->ebanx();
 		$this->adapter = Mage::getModel('ebanx/adapters_paymentAdapter');
 	}
-	
+
 	public function initialize($paymentAction, $stateObject)
 	{
-		parent::initialize($paymentAction, $stateObject);
+		try {
+			parent::initialize($paymentAction, $stateObject);
 
-		$this->payment = $this->getInfoInstance();
-		$this->order   = $this->payment->getOrder();
+			$this->payment  = $this->getInfoInstance();
+			$this->order    = $this->payment->getOrder();
+			$this->customer = Mage::getModel('customer/customer')->load($this->order->getCustomerId());
 
-		$this->setupData();
-		$this->processPayment();
-		$this->persistPayment();
+			$this->setupData();
+
+			$this->processPayment();
+		}
+		catch (Exception $e) {
+			Mage::throwException($e->getMessage());
+		}
 	}
 
 	public function setupData()
@@ -47,7 +53,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 					->setEbanxMethod($this->_code)
 					->setStoreCurrency(Mage::app()->getStore()->getCurrentCurrencyCode())
 					->setAmountTotal($this->order->getGrandTotal())
-					->setPerson(Mage::getModel('customer/customer')->load($this->order->getCustomerId()))
+					->setPerson($this->customer)
 					->setItems($this->order->getAllVisibleItems())
 					->setRemoteIp($this->order->getRemoteIp())
 					->setBillingAddress($this->order->getBillingAddress())
@@ -57,16 +63,16 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 	public function processPayment()
 	{
-		$payment = $this->adapter->transform($this->data);
+		$paymentData = $this->adapter->transform($this->data);
 
 		// Do request
-		$res = $this->gateway->create($payment);
+		$res = $this->gateway->create($paymentData);
 
-		Mage::log($res, null, $this->_code . '.log', true);
+		Mage::log(print_r($res, true), null, 'ebanx-' . $this->getCode() . '.log', true);
 
 		if ($res['status'] !== 'SUCCESS') {
 			// TODO: Make an error handler
-			Mage::throwException($res['status_message']);
+			Mage::throwException($res['status_code'] . ' - ' . $res['status_message']);
 		}
 
 		// Set the URL for redirect
@@ -88,5 +94,14 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 	public function getOrderPlaceRedirectUrl()
 	{
 		return self::$redirect_url;
+	}
+
+	public function canUseForCurrency($currencyCode)
+	{
+		// TODO: Check the currency using Benjamin, not config.xml
+
+		$allowedCurrencies = explode(',', $this->getConfigData('allowed_currencies'));
+
+		return in_array($currencyCode, $allowedCurrencies);
 	}
 }

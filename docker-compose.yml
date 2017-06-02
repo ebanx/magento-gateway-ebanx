@@ -17,6 +17,7 @@ services:
       - ./magento-gateway-ebanx/skin/frontend/base/default/css/ebanx/:/var/www/htdocs/skin/frontend/base/default/css/ebanx/
       - ./magento-gateway-ebanx/skin/frontend/base/default/js/ebanx/:/var/www/htdocs/skin/frontend/base/default/js/ebanx/
       - ./magento-gateway-ebanx/lib/Ebanx/:/var/www/htdocs/lib/Ebanx/
+      - /var/www/htdocs
     environment:
       MYSQL_HOST: magento_db
       MYSQL_DATABASE: magento

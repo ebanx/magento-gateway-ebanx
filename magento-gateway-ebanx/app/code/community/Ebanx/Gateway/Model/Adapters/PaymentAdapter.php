@@ -53,7 +53,7 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 		return new Person([
 			'type'        => 'personal', // TODO
 			'birthdate'   => new \DateTime('1978-03-29 08:15:51.000000 UTC'), // TODO
-			'document'    => '52285363451',
+			'document'    => null,
 			'email'       => $person->getEmail(),
 			'ip'          => $data->getRemoteIp(),
 			'name'        => $data->getPerson()->getFirstname() . ' '. $data->getPerson()->getLastname(),
@@ -62,7 +62,7 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 	}
 
 	public function transformItems($items, $data)
-	{	
+	{
 		$itemsData = [];
 
 		foreach($items as $item) {
