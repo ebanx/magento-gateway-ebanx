@@ -115,6 +115,16 @@
                 <specificcountry>PE</specificcountry>
                 <allowed_currencies>PEN,USD,EUR</allowed_currencies>
             </ebanx_pagoefectivo>
+            <ebanx_safetypay>
+                <active>1</active>
+                <model>ebanx/peru_safetypay</model>
+                <title>Safetypay</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+                <allowspecific>1</allowspecific>
+                <specificcountry>PE</specificcountry>
+                <allowed_currencies>PEN,USD,EUR</allowed_currencies>
+            </ebanx_safetypay>
         </payment>
     </default>
 </config>
