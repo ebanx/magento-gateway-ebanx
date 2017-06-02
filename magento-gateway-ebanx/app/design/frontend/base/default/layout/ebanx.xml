@@ -12,8 +12,10 @@
             </action>
         </reference>
         <reference name="checkout.success">
-            <block type="ebanx/checkout_success_payment_boleto" name="ebanx.success.payment.boleto" as="ebanx_boleto" template="ebanx/checkout/success/boleto.phtml"/>
-            <block type="ebanx/checkout_success_payment_baloto" name="ebanx.success.payment.baloto" as="ebanx_baloto" template="ebanx/checkout/success/baloto.phtml"/>
+            <block type="ebanx/checkout_success" name="ebanx.success.payment" as="ebanx_success" template="ebanx/checkout/success.phtml">
+                <block type="ebanx/checkout_success_payment_boleto" name="ebanx.success.payment.boleto" as="ebanx_boleto" template="ebanx/checkout/success/boleto.phtml"/>
+                <block type="ebanx/checkout_success_payment_baloto" name="ebanx.success.payment.baloto" as="ebanx_baloto" template="ebanx/checkout/success/baloto.phtml"/>
+            </block>
         </reference>
     </ebanx_checkout_success_handle>
 
