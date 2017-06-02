@@ -1,0 +1,20 @@
+<ul class="form-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+    <li>
+        <div class="<?php echo $this->getMethodCode() ?>-instructions-content">
+            <p>Paga con SafetyPay.</p>
+
+            <p>
+                <label for="ebanx_safetypay_type_cash">
+                    <input type="radio" id="ebanx_safetypay_type_cash" name="ebanx_safetypay_type" value="Cash" checked>
+                    Cash
+                </label>
+            </p>
+            <p>
+                <label for="ebanx_safetypay_type_online">
+                    <input type="radio" id="ebanx_safetypay_type_online" name="ebanx_safetypay_type" value="Online">
+                    Online
+                </label>
+            </p>
+        </div>
+    </li>
+</ul>

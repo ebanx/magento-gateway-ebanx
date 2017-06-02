@@ -58,7 +58,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 					->setRemoteIp($this->order->getRemoteIp())
 					->setBillingAddress($this->order->getBillingAddress())
 					->setPayment($this->payment)
-					->setOrder($order);
+					->setOrder($this->order);
 	}
 
 	public function processPayment()
@@ -68,7 +68,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 		// Do request
 		$res = $this->gateway->create($paymentData);
 
-		Mage::log(print_r($res, true), null, 'ebanx-' . $this->getCode() . '.log', true);
+		Mage::log(print_r($res, true), null, $this->getCode() . '.log', true);
 
 		if ($res['status'] !== 'SUCCESS') {
 			// TODO: Make an error handler
