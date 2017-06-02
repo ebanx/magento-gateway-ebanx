@@ -18,4 +18,11 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment extends Mage_Checkout_Block_O
     public function getPayment() {
         return $this->getOrder()->getPayment();
     }
+
+    public function getSuccessPaymentBlock() {
+        $orderId = Mage::app()->getRequest()->getParam('order_id');
+        $order = Mage::getModel("sales/order")->load($orderId);
+
+        return $order->getPayment()->getMethodInstance()->getCode();
+    }
 }
