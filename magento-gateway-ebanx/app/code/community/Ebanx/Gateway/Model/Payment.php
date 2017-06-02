@@ -89,12 +89,11 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 		return self::$redirect_url;
 	}
 
-	public function canUseForCurrency($currencyCode)
+
+	public function canUseForCountry($country)
 	{
-		// TODO: Check the currency using Benjamin, not config.xml
+		$countryName = Mage::helper('ebanx')->transformCountryCodeToName($country);
 
-		$allowedCurrencies = explode(',', $this->getConfigData('allowed_currencies'));
-
-		return in_array($currencyCode, $allowedCurrencies);
+		return $this->gateway->isAvailableForCountry($countryName);
 	}
 }
