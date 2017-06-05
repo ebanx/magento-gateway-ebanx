@@ -124,6 +124,14 @@
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_oxxo>
+            <!-- Colombia -->
+            <ebanx_pse>
+                <active>1</active>
+                <model>ebanx/colombia_pse</model>
+                <title>PSE - Pago Seguros en Línea</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_pse>
         </payment>
     </default>
 </config>
