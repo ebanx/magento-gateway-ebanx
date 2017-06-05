@@ -1,8 +1,6 @@
 <?php
 class Ebanx_Gateway_Model_Mexico_Oxxo extends Ebanx_Gateway_Model_Payment
 {
-    protected $gateway;
-
     protected $_code = 'ebanx_oxxo';
 
     protected $_formBlockType = 'ebanx/form_oxxo';

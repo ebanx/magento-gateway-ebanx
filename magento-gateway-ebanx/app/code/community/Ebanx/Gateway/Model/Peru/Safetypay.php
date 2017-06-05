@@ -2,8 +2,6 @@
 
 class Ebanx_Gateway_Model_Peru_Safetypay extends Ebanx_Gateway_Model_Payment
 {
-	protected $gateway;
-
 	protected $_code = 'ebanx_safetypay';
 
 	protected $_formBlockType = 'ebanx/form_safetypay';
