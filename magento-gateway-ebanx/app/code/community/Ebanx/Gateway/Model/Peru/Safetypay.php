@@ -12,6 +12,8 @@ class Ebanx_Gateway_Model_Peru_Safetypay extends Ebanx_Gateway_Model_Payment
 	public function __construct()
 	{
 		parent::__construct();
+
+		$this->gateway = $this->ebanx->safetyPayCash();
 	}
 
 	public function initialize($paymentAction, $stateObject)
