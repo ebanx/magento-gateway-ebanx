@@ -15,9 +15,4 @@ class Ebanx_Gateway_Model_Colombia_Baloto extends Ebanx_Gateway_Model_Payment
 
 		$this->gateway = $this->ebanx->baloto();
 	}
-
-	public function persistPayment()
-	{
-		parent::persistPayment();
-	}
 }
