@@ -4,14 +4,15 @@ This plugin enables you to integrate your Magento 1.x store with the EBANX payme
 
 ## Getting Started with Docker
 
-**To install this plugin, you need to install Docker on your machine.**
+**To contribute to this repository you may use Docker.**
 
-Firstlly, run the command **once**:
+First run this command **once**:
 ```
 chmod +x $(pwd)/scripts/start.sh && $(pwd)/scripts/start.sh
 ```
 
-This will install and run the project with Docker.
+This will install and run the project with Docker on port 80.
+If you want to change that port you may use an environment variable or the `.env` file. Just run `cp .env.example .env` and change the ports the way you want it.
 
 After that, you can use the command to start:
 ```
@@ -24,14 +25,7 @@ The admin can be acessed by http://localhost/admin using the credentials `ebanx`
 
 #### Issues
 
-If you have getting trouble, maybe you can disable your built-in apache if you are using mac.
-
-```
-sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist
-```
-
-Try that ;)
-
+If you have getting trouble to set up Docker, make sure you've changed the external port docker uses by following the above steps.
 
 ## Tasks
 
