@@ -2,6 +2,7 @@
 require_once Mage::getBaseDir('lib') . '/Ebanx/vendor/autoload.php';
 
 use Ebanx\Benjamin\Models\Country;
+use Ebanx\Benjamin\Models\Bank;
 
 class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 {
@@ -56,5 +57,17 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		];
 
 		return $countries[strtolower($countryCode)];
+	}
+
+	public function transformTefToBankName($bankCode)
+	{
+		$banks = [
+			'itau' => Bank::ITAU,
+			'bradesco' => Bank::BRADESCO,
+			'bancodobrasil' => Bank::BANCO_DO_BRASIL,
+			'banrisul' => Bank::BANRISUL
+		];
+
+		return $banks[strtolower($bankCode)];
 	}
 }
