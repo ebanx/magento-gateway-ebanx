@@ -6,9 +6,6 @@ use Ebanx\Benjamin\Models\Configs\CreditCardConfig;
 
 class Ebanx_Gateway_Model_Api
 {
-    const URL_PRINT_LIVE    = 'https://ebanx.com/print/?hash=';
-    const URL_PRINT_SANDBOX = 'https://sandbox.ebanx.com/print/?hash=';
-
     protected $benjamin;
 
     public function __construct()
@@ -33,9 +30,4 @@ class Ebanx_Gateway_Model_Api
 	{
 		return $this->benjamin;
 	}
-
-    public function getEbanxUrl()
-	{
-        return Mage::helper('ebanx')->isSandboxMode() ? self::URL_PRINT_SANDBOX : self::URL_PRINT_LIVE;
-    }
 }

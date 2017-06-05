@@ -3,6 +3,10 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment_Boleto extends Ebanx_Gateway_
     protected function _construct() {
         parent::_construct();
     }
+
+	public function getEbanxBarCode() {
+        return $this->getOrder()->getPayment()->getEbanxBarCode();
+    }
     
 	public function getEbanxBarCodeFormated() {
         $code = $this->getEbanxBarCode();
