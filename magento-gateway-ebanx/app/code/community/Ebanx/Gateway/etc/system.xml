@@ -89,7 +89,9 @@
                         </debug_log>
                         <brazil_taxes translate="label">
                             <label>Checkout for</label>
-                            <comment>In order to process with the EBANX Plugin in Brazil there a few mandatory fields such as CPF identification for individuals and CNPJ for companies.</comment>
+                            <comment>In order to process with the EBANX Plugin in Brazil there a few mandatory fields
+                                such as CPF identification for individuals and CNPJ for companies.
+                            </comment>
                             <frontend_type>multiselect</frontend_type>
                             <source_model>ebanx/source_persontype</source_model>
                             <sort_order>50</sort_order>
@@ -97,7 +99,6 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </brazil_taxes>
-
 
 
                         <payment_methods_title translate="label">
@@ -155,7 +156,6 @@
                         </payment_methods_peru>
 
 
-
                         <heading_cc translate="label">
                             <label>Credit Card</label>
                             <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
@@ -191,7 +191,8 @@
                         </order_status>
                         <save_card_data translate="label">
                             <label>Save Card Data</label>
-                            <comment>Allow your customer to save credit card and debit card data for future purchases.</comment>
+                            <comment>Allow your customer to save credit card and debit card data for future purchases.
+                            </comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>220</sort_order>
@@ -201,7 +202,8 @@
                         </save_card_data>
                         <one_click_payment translate="label">
                             <label>One-Click Payment</label>
-                            <comment>Allow your customer to complete payments in one-click using credit cards saved.</comment>
+                            <comment>Allow your customer to complete payments in one-click using credit cards saved.
+                            </comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>225</sort_order>
@@ -211,7 +213,10 @@
                         </one_click_payment>
                         <auto_capture translate="label">
                             <label>Auto-Capture</label>
-                            <comment>Automatically capture payments from your customers, just for credit card. Otherwise you will need to capture the payment manually. Not captured payments will be cancelled in 4 days.</comment>
+                            <comment>Automatically capture payments from your customers, just for credit card. Otherwise
+                                you will need to capture the payment manually. Not captured payments will be cancelled
+                                in 4 days.
+                            </comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>230</sort_order>
@@ -221,7 +226,9 @@
                         </auto_capture>
                         <max_instalments translate="label">
                             <label>Maximum Number of Instalments</label>
-                            <comment>Establish the maximum number of instalments in which your customer can pay, as consented on your contract.</comment>
+                            <comment>Establish the maximum number of instalments in which your customer can pay, as
+                                consented on your contract.
+                            </comment>
                             <frontend_type>select</frontend_type>
                             <source_model>ebanx/source_instalment</source_model>
                             <sort_order>235</sort_order>
@@ -231,7 +238,9 @@
                         </max_instalments>
                         <min_installment_value translate="label">
                             <label>Minimum Installment Value</label>
-                            <comment>Set the minimum instalment value during checkout. The minimum EBANX allows for BRL is 20 and MXN is 100, lower values in these currencies will be ignored.</comment>
+                            <comment>Set the minimum instalment value during checkout. The minimum EBANX allows for BRL
+                                is 20 and MXN is 100, lower values in these currencies will be ignored.
+                            </comment>
                             <frontend_type>text</frontend_type>
                             <validate>required-entry validate-number</validate>
                             <sort_order>240</sort_order>
@@ -241,7 +250,9 @@
                         </min_installment_value>
                         <use_interest_rates translate="label">
                             <label>Interest Rates</label>
-                            <comment>Enable and set a custom interest rate for your customers according to the number of Instalments you allow the payment.</comment>
+                            <comment>Enable and set a custom interest rate for your customers according to the number of
+                                Instalments you allow the payment.
+                            </comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>245</sort_order>
@@ -260,7 +271,6 @@
                         </interest_rate>
 
 
-
                         <heading_cash translate="label">
                             <label>Cash Payments</label>
                             <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
@@ -270,7 +280,9 @@
                         </heading_cash>
                         <due_date_days translate="label">
                             <label>Days to Expiration</label>
-                            <comment>Define the maximum number of days on which your customer can complete the payment of: Boleto, OXXO, Sencilito, PagoEfectivo and SafetyPay.</comment>
+                            <comment>Define the maximum number of days on which your customer can complete the payment
+                                of: Boleto, OXXO, Sencilito, PagoEfectivo and SafetyPay.
+                            </comment>
                             <frontend_type>select</frontend_type>
                             <source_model>ebanx/source_duedate</source_model>
                             <sort_order>310</sort_order>

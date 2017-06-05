@@ -2,18 +2,22 @@
     <br/>
     <p class="magento-thankyou-order-received"><?php echo $this->__("Seu boleto Baloto foi gerado com êxito.") ?></p>
     <p><?php echo $this->__("Mandamos uma cópia para o email %s.", "<strong>" . $this->getOrder()->getCustomerEmail() . "</strong>") ?></p>
-    <p><?php echo $this->__('Ficou alguma dúvida? Por favor envie um email para <a href="mailto:%s" target="_blank">soporte@ebanx.com</a>', "soporte@ebanx.com") ?>.</p>
+    <p><?php echo $this->__('Ficou alguma dúvida? Por favor envie um email para <a href="mailto:%s" target="_blank">soporte@ebanx.com</a>', "soporte@ebanx.com") ?>
+        .</p>
 </div>
 
 <hr>
 
 <div class="banking-ticket__actions">
     <div class="ebanx-button--group ebanx-button--group-two">
-        <a href="<?php echo $this->getEbanxUrlPdf(); ?>" target="_blank" class="button banking-ticket__action"><?php echo $this->__('Salvar em PDF'); ?></a>
-        <a href="<?php echo $this->getEbanxUrlPrint() ?>" target="_blank" class="button banking-ticket__action"><?php echo $this->__('Imprimir boleto'); ?></a>
+        <a href="<?php echo $this->getEbanxUrlPdf(); ?>" target="_blank"
+           class="button banking-ticket__action"><?php echo $this->__('Salvar em PDF'); ?></a>
+        <a href="<?php echo $this->getEbanxUrlPrint() ?>" target="_blank"
+           class="button banking-ticket__action"><?php echo $this->__('Imprimir boleto'); ?></a>
     </div>
 </div>
 
 <div>
-    <iframe id="ebanx-baloto-frame" src="<?php echo $this->getEbanxUrl(); ?>" style="width: 100%; border: 0px; height: 1000px"></iframe>
+    <iframe id="ebanx-baloto-frame" src="<?php echo $this->getEbanxUrl(); ?>"
+            style="width: 100%; border: 0px; height: 1000px"></iframe>
 </div>
