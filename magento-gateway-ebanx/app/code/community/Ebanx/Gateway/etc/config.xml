@@ -78,6 +78,13 @@
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_tef>
+            <ebanx_wallet>
+                <active>1</active>
+                <model>ebanx/brazil_wallet</model>
+                <title>Saldo EBANX</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_wallet>
             <!-- Colombia -->
             <ebanx_baloto>
                 <active>1</active>
