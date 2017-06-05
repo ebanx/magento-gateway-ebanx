@@ -19,6 +19,5 @@ class Ebanx_Gateway_Model_Colombia_Baloto extends Ebanx_Gateway_Model_Payment
 	public function persistPayment()
 	{
 		parent::persistPayment();
-		$this->payment->setEbanxBarCode($this->result['payment']['baloto_barcode']);
 	}
 }
