@@ -6,8 +6,8 @@ use Ebanx\Benjamin\Models\Configs\CreditCardConfig;
 
 class Ebanx_Gateway_Model_Api
 {
-    const URL_PRINT_LIVE    = 'https://ebanx.com/print/?hash=';
-    const URL_PRINT_SANDBOX = 'https://sandbox.ebanx.com/print/?hash=';
+    const URL_PRINT_LIVE    = 'https://ebanx.com/print/';
+    const URL_PRINT_SANDBOX = 'https://sandbox.ebanx.com/print/';
 
     protected $benjamin;
 

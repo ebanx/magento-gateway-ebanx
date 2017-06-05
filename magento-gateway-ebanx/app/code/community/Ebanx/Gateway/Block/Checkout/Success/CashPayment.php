@@ -15,15 +15,11 @@ class Ebanx_Gateway_Block_Checkout_Success_CashPayment extends Ebanx_Gateway_Blo
     }
 
 	public function getEbanxUrl() {
-        return Mage::getSingleton('ebanx/api')->getEbanxUrl() . self::getEbanxPaymentHash();
+        return Mage::getSingleton('ebanx/api')->getEbanxUrl() . '?hash=' . self::getEbanxPaymentHash();
     }
 
 	public function getEbanxUrlPdf() {
         return self::getEbanxUrl() . '&format=pdf';
-    }
-
-	public function getEbanxUrlPrint() {
-        return self::getEbanxUrl() . '&format=print';
     }
 
 }
