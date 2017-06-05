@@ -72,7 +72,7 @@
             </ebanx_boleto>
             <ebanx_baloto>
                 <active>1</active>
-                <model>ebanx/baloto</model>
+                <model>ebanx/colombia_baloto</model>
                 <title>Baloto</title>
                 <payment_action>charge</payment_action>
                 <sort_order>1</sort_order>
