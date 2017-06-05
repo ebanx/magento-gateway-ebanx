@@ -2,31 +2,38 @@
 class Ebanx_Gateway_Block_Checkout_Success_CashPayment extends Ebanx_Gateway_Block_Checkout_Success_Payment {
     protected $_order;
 
-    protected function _construct() {
+    protected function _construct()
+    {
         parent::_construct();
     }
 
-    public function getEbanxPaymentHash() {
+    public function getEbanxPaymentHash()
+    {
         return $this->getOrder()->getPayment()->getEbanxPaymentHash();
     }
     
-    public function getEbanxDueDate() {
+    public function getEbanxDueDate()
+    {
         return Mage::helper('core')->formatDate($this->getOrder()->getPayment()->getEbanxDueDate(), Mage_Core_Model_Locale::FORMAT_TYPE_FULL, false);
     }
 
-	public function getEbanxUrl() {
+	public function getEbanxUrl()
+    {
         return Mage::getSingleton('ebanx/api')->getEbanxUrl();
     }
 
-	public function getEbanxUrlIframe() {
+	public function getEbanxUrlIframe()
+    {
         return $this->getEbanxUrl() . '?hash=' . $this->getEbanxPaymentHash();
     }
 
-	public function getEbanxUrlPdf() {
+	public function getEbanxUrlPdf()
+    {
         return $this->getEbanxUrlIframe() . '&format=pdf';
     }
 
-	public function getEbanxUrlPrint() {
+	public function getEbanxUrlPrint()
+    {
         return $this->getEbanxUrlIframe() . '&format=print';
     }
 
