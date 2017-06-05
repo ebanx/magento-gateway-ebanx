@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source $(pwd)/.env
+
 echo "Shutting down containers..."
 docker-compose down
 
@@ -18,4 +20,4 @@ docker exec -it magento install-magento
 # docker exec -it magento_db chmod +x /create_user.sql
 # docker exec -it magento_db /bin/bash -c 'mysql -uroot -proot < /create_user.sql'
 
-echo "Everything is fine... Magento is live in http://localhost"
+echo "Everything is fine... Magento is live in http://localhost:${MAGENTO_EXTERNAL_PORT:-80}"
