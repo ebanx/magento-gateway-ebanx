@@ -43,6 +43,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 	public function transformCountryCodeToName($countryCode)
 	{
+        if (!$countryCode) {
+            return false;
+        }
+        
 		$countries = [
 			'cl' => Country::CHILE,
 			'br' => Country::BRAZIL,
