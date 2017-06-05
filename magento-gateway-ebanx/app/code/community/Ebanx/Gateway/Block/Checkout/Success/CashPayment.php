@@ -14,10 +14,6 @@ class Ebanx_Gateway_Block_Checkout_Success_CashPayment extends Ebanx_Gateway_Blo
         return Mage::helper('core')->formatDate($this->getOrder()->getPayment()->getEbanxDueDate(), Mage_Core_Model_Locale::FORMAT_TYPE_FULL, false);
     }
 
-	public function getEbanxBarCode() {
-        return $this->getOrder()->getPayment()->getEbanxBarCode();
-    }
-
 	public function getEbanxUrl() {
         return Mage::getSingleton('ebanx/api')->getEbanxUrl() . self::getEbanxPaymentHash();
     }
