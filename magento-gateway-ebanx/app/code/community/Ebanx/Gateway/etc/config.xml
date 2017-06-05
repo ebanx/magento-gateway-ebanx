@@ -65,7 +65,7 @@
         <payment>
             <ebanx_boleto>
                 <active>1</active>
-                <model>ebanx/boleto</model>
+                <model>ebanx/brazil_boleto</model>
                 <title>Boleto Bancário</title>
                 <payment_action>charge</payment_action>
                 <sort_order>1</sort_order>
@@ -106,9 +106,6 @@
                 <title>SafetyPay</title>
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
-                <allowspecific>1</allowspecific>
-                <specificcountry>PE</specificcountry>
-                <allowed_currencies>PEN,USD,EUR</allowed_currencies>
             </ebanx_safetypay>
         </payment>
     </default>

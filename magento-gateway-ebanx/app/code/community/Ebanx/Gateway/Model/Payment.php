@@ -6,6 +6,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 	protected $ebanx;
 	protected $adapter;
 	protected $data;
+	protected $result;
 	protected $customer;
 	static protected $redirect_url;
 
@@ -34,6 +35,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 			$this->setupData();
 
 			$this->processPayment();
+			$this->persistPayment();
 		}
 		catch (Exception $e) {
 			Mage::throwException($e->getMessage());
@@ -82,6 +84,13 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 		else {
 			self::$redirect_url = Mage::getUrl('checkout/onepage/success');
 		}
+
+		$this->result = $res;
+	}
+
+	public function persistPayment()
+	{
+		$this->payment->setEbanxPaymentHash($this->result['payment']['hash']);
 	}
 
 	public function getOrderPlaceRedirectUrl()

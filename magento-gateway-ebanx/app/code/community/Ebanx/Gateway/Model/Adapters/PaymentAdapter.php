@@ -37,6 +37,7 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 	{
 		return new Address([
 			'address'          => $address->getStreetFull(),
+			'streetNumber'     => '123', // TODO
 			'city'             => $address->getCity(),
 			'country'          => $this->helper->transformCountryCodeToName($address->getCountry()),
 			'state'            => $address->getRegionCode(),

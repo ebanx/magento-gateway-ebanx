@@ -18,4 +18,9 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment extends Mage_Checkout_Block_O
     public function getPayment() {
         return $this->getOrder()->getPayment();
     }
+
+    public function getSuccessPaymentBlock() {
+
+        return $this->getPayment()->getMethodInstance()->getCode();
+    }
 }
