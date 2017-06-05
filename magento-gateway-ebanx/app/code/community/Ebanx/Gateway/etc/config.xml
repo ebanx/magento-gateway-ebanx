@@ -106,9 +106,6 @@
                 <title>SafetyPay</title>
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
-                <allowspecific>1</allowspecific>
-                <specificcountry>PE</specificcountry>
-                <allowed_currencies>PEN,USD,EUR</allowed_currencies>
             </ebanx_safetypay>
         </payment>
     </default>
