@@ -1,5 +1,4 @@
 <?php
-
 class Ebanx_Gateway_Model_Brazil_Tef extends Ebanx_Gateway_Model_Payment
 {
 	protected $gateway;
@@ -14,5 +13,15 @@ class Ebanx_Gateway_Model_Brazil_Tef extends Ebanx_Gateway_Model_Payment
 		parent::__construct();
 
 		$this->gateway = $this->ebanx->tef();
+	}
+
+	public function transformPaymentData()
+	{
+		parent::transformPaymentData();
+
+		$bank = Mage::app()->getRequest()->getPost('ebanx_tef');
+		$bankCode = Mage::helper('ebanx')->transformTefToBankName($bank);
+
+		$this->paymentData->bankCode = $bankCode;
 	}
 }
