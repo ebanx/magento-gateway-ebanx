@@ -2,12 +2,14 @@
 
 abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abstract
 {
+	protected $gateway;
 	protected $payment;
 	protected $ebanx;
 	protected $adapter;
 	protected $data;
 	protected $result;
 	protected $customer;
+	protected $paymentData;
 	static protected $redirect_url;
 
 	protected $_isGateway               = true;
@@ -34,7 +36,10 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 			$this->setupData();
 
+			$this->transformPaymentData();
+
 			$this->processPayment();
+
 			$this->persistPayment();
 		}
 		catch (Exception $e) {
@@ -63,12 +68,15 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 					->setOrder($this->order);
 	}
 
+	public function transformPaymentData()
+	{
+		$this->paymentData = $this->adapter->transform($this->data);
+	}
+
 	public function processPayment()
 	{
-		$paymentData = $this->adapter->transform($this->data);
-
 		// Do request
-		$res = $this->gateway->create($paymentData);
+		$res = $this->gateway->create($this->paymentData);
 
 		Mage::log(print_r($res, true), null, $this->getCode() . '.log', true);
 
@@ -97,7 +105,6 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 	{
 		return self::$redirect_url;
 	}
-
 
 	public function canUseForCountry($country)
 	{
