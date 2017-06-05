@@ -5,6 +5,14 @@ use Ebanx\Benjamin\Models\Country;
 
 class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 {
+    const URL_PRINT_LIVE    = 'https://ebanx.com/print/';
+    const URL_PRINT_SANDBOX = 'https://sandbox.ebanx.com/print/';
+
+    public function getEbanxUrl()
+	{
+        return $this->isSandboxMode() ? self::URL_PRINT_SANDBOX : self::URL_PRINT_LIVE;
+    }
+
     public function getMode()
 	{
         return Mage::getStoreConfig('payment/ebanx_settings/mode');
