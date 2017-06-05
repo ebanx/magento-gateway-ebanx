@@ -2,6 +2,7 @@
 
 abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abstract
 {
+	protected $gateway;
 	protected $payment;
 	protected $ebanx;
 	protected $adapter;
