@@ -10,9 +10,12 @@ rm -rf $(pwd)/.data
 
 echo "Starting containers..."
 docker-compose up -d
+sleep 20
+
+echo "Importing sample data..."
+docker exec -it magento install-sampledata
 
 echo "Installing magento..."
-sleep 20
 docker exec -it magento install-magento
 
 # echo "Creating admin user..."
