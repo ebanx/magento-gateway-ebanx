@@ -6,6 +6,17 @@
         </Ebanx_Gateway>
     </modules>
     <global>
+        <events>
+            <controller_front_init_routers>
+                <observers>
+                    <ebanx_gateway_observer>
+                        <type>singleton</type>
+                        <class>Ebanx_Gateway_Model_Observer</class>
+                        <method>interceptPaymentNotification</method>
+                    </ebanx_gateway_observer>
+                </observers>
+            </controller_front_init_routers>
+        </events>
         <helpers>
             <ebanx>
                 <class>Ebanx_Gateway_Helper</class>
