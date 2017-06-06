@@ -78,4 +78,16 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 		return $banks[strtolower($bankCode)];
 	}
+
+	public function getOrderByHash($hash)
+	{
+		$resource = Mage::getSingleton('core/resource');
+		$connection = $resource->getConnection('core_read');
+		$table = $resource->getTableName('sales/order_payment');
+
+		$query = "SELECT entity_id FROM $table WHERE ebanx_payment_hash = '$hash'";
+		$orderId = $connection->fetchOne($query);
+
+		return Mage::getModel('sales/order')->load($orderId);
+	}
 }
