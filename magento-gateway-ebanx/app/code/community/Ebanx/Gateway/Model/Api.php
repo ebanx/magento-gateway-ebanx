@@ -10,10 +10,11 @@ class Ebanx_Gateway_Model_Api
     const URL_PRINT_SANDBOX = 'https://sandbox.ebanx.com/print/?hash=';
 
     protected $benjamin;
+    protected $config;
 
-    public function __construct()
+	public function getConfig()
 	{
-        $config = new Config(array(
+		return new Config(array(
             'integrationKey'        => Mage::helper('ebanx')->getLiveIntegrationKey(),
             'sandboxIntegrationKey' => Mage::helper('ebanx')->getSandboxIntegrationKey(),
             'isSandbox'             => Mage::helper('ebanx')->isSandboxMode(),
@@ -21,17 +22,18 @@ class Ebanx_Gateway_Model_Api
             'notificationUrl'       => Mage::getBaseUrl(),
             'redirectUrl'           => Mage::getBaseUrl(),
         ));
-        // Mage::log($config, null, 'benjamin-config.log', true);
-        // $creditCardConfig = new CreditCardConfig();
-        // $creditCardConfig->addInterest(1,0.2);
-        // $this->benjamin = EBANX($config, $creditCardConfig);
-
-        $this->benjamin = EBANX($config);
-    }
+	}
 
 	public function ebanx()
 	{
-		return $this->benjamin;
+		return EBANX($this->getConfig());
+	}
+
+	public function ebanxCreditCard()
+	{
+		$creditCardConfig = new CreditCardConfig();
+
+		return EBANX($this->getConfig(), $creditCardConfig);
 	}
 
     public function getEbanxUrl()
