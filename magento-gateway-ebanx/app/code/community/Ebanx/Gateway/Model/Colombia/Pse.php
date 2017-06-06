@@ -1,4 +1,5 @@
 <?php
+
 class Ebanx_Gateway_Model_Colombia_Pse extends Ebanx_Gateway_Model_Payment
 {
 	protected $_code = 'ebanx_pse';
