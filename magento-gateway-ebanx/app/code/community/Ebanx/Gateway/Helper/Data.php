@@ -102,4 +102,16 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 		return $status[strtoupper($ebanxStatus)];
 	}
+
+	public function getTranslatedOrderStatus($ebanxStatus)
+	{
+		$status = [
+			'CO' => 'Confirmed',
+			'PE' => 'Pending',
+			'OP' => 'Open',
+			'CA' => 'Canceled'
+		];
+
+		return $status[strtoupper($ebanxStatus)];
+	}
 }
