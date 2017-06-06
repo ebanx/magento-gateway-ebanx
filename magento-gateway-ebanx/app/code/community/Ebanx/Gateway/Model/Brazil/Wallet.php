@@ -1,4 +1,5 @@
 <?php
+
 class Ebanx_Gateway_Model_Brazil_Wallet extends Ebanx_Gateway_Model_Payment
 {
 	protected $_code = 'ebanx_wallet';

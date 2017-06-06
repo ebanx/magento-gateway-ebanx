@@ -1,3 +1,3 @@
-window.onload=function(){
-    var clipboard = new Clipboard('.ebanx-button--copy');
+window.onload = function () {
+  var clipboard = new Clipboard('.ebanx-button--copy');
 };
