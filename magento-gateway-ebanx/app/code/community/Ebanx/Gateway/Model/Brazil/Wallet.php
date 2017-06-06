@@ -1,8 +1,6 @@
 <?php
 class Ebanx_Gateway_Model_Brazil_Wallet extends Ebanx_Gateway_Model_Payment
 {
-	protected $gateway;
-
 	protected $_code = 'ebanx_wallet';
 
 	protected $_formBlockType = 'ebanx/form_wallet';
