@@ -15,11 +15,14 @@ class Ebanx_Gateway_Model_Observer
 			]
 		];
 
-		$hash = $request->hash;
 		$helper = Mage::helper('ebanx');
-		$order = $helper->getOrderByHash($hash);
 
-		Mage::log(print_r($order, true), null, 'observer.log', true);
+		$hash = $request->hash;
+		$order = $helper->getOrderByHash($hash);
+		$status = $helper->getEbanxMagentoOrder($payment['payment']['status']);
+
+		// Update the order
+		$order->setState($status, true)->save();
 	}
 
 	private function isEbanxPaymentRequest($request)
