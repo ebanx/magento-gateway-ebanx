@@ -1,20 +1,35 @@
-<ul class="form-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+<?php $_code=$this->getMethodCode() ?>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
     <li>
-        <div class="<?php echo $this->getMethodCode() ?>-instructions-content">
-            <p>Pagar com Cartão de Crédito.</p>
-
-            <p>
-                <label for="ebanx_safetypay_type_cash">
-                    <input type="radio" id="ebanx_safetypay_type_cash" name="ebanx_safetypay_type" value="Cash" checked>
-                    Cash
-                </label>
-            </p>
-            <p>
-                <label for="ebanx_safetypay_type_online">
-                    <input type="radio" id="ebanx_safetypay_type_online" name="ebanx_safetypay_type" value="Online">
-                    Online
-                </label>
-            </p>
+        <p>Pagar com Cartão de Crédito.</p>
+    </li>
+    <li>
+        <label for="<?php echo $_code ?>_cc_number" class="required"><em>*</em><?php echo $this->__('Credit Card Number') ?></label>
+        <div class="input-box">
+            <input type="text" id="<?php echo $_code ?>_cc_number" name="payment[cc_number]" title="<?php echo Mage::helper('core')->jsQuoteEscape($this->__('Credit Card Number')) ?>" class="input-text validate-cc-number" value="" />
+        </div>
+    </li>
+    <li id="<?php echo $_code ?>_cc_type_exp_div">
+        <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em><?php echo $this->__('Expiration Date') ?></label>
+        <div class="input-box">
+            <div class="v-fix">
+                <select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month]" class="month validate-cc-exp required-entry">
+                </select>
+            </div>
+            <div class="v-fix">
+                <?php $_ccExpYear = $this->getInfoData('cc_exp_year') ?>
+                <select id="<?php echo $_code ?>_expiration_yr" name="payment[cc_exp_year]" class="year required-entry">
+                </select>
+            </div>
+        </div>
+    </li>
+    <?php echo $this->getChildHtml() ?>
+    <li id="<?php echo $_code ?>_cc_type_cvv_div">
+        <label for="<?php echo $_code ?>_cc_cid" class="required"><em>*</em><?php echo $this->__('Card Verification Number') ?></label>
+        <div class="input-box">
+            <div class="v-fix">
+                <input type="text" title="<?php echo Mage::helper('core')->jsQuoteEscape($this->__('Card Verification Number')) ?>" class="input-text cvv required-entry validate-cc-cvn" id="<?php echo $_code ?>_cc_cid" name="payment[cc_cid]" value="" />
+            </div>
         </div>
     </li>
 </ul>
