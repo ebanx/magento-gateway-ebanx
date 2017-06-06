@@ -90,4 +90,16 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 		return Mage::getModel('sales/order')->load($orderId);
 	}
+
+	public function getEbanxMagentoOrder($ebanxStatus)
+	{
+		$status = [
+			'CO' => Mage_Sales_Model_Order::STATE_PROCESSING,
+			'PE' => Mage_Sales_Model_Order::STATE_PENDING_PAYMENT,
+			'OP' => Mage_Sales_Model_Order::STATE_NEW,
+			'CA' => Mage_Sales_Model_Order::STATE_CANCELED
+		];
+
+		return $status[strtoupper($ebanxStatus)];
+	}
 }
