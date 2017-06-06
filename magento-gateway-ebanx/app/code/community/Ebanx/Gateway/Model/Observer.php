@@ -11,7 +11,7 @@ class Ebanx_Gateway_Model_Observer
 		// TOOD: Make a Benjamin query to find the payment by hash
 		$payment = [
 			'payment' => [
-				'status' => 'CO'
+				'status' => 'PE'
 			]
 		];
 
@@ -19,10 +19,16 @@ class Ebanx_Gateway_Model_Observer
 
 		$hash = $request->hash;
 		$order = $helper->getOrderByHash($hash);
-		$status = $helper->getEbanxMagentoOrder($payment['payment']['status']);
+		$ebanxStatus = $payment['payment']['status'];
+		$status = $helper->getEbanxMagentoOrder($ebanxStatus);
 
-		// Update the order
-		$order->setState($status, true)->save();
+		// Updating the order status
+		$order->setState($status, true);
+
+		// Adding an order note
+		$order->addStatusHistoryComment(__('EBANX: The payment has been updated to: %s.', $helper->getTranslatedOrderStatus($ebanxStatus)));
+
+		$order->save();
 	}
 
 	private function isEbanxPaymentRequest($request)
