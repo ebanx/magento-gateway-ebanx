@@ -94,10 +94,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 	public function getEbanxMagentoOrder($ebanxStatus)
 	{
 		$status = [
-			'CO' => Mage_Sales_Model_Order::STATE_PROCESSING,
-			'PE' => Mage_Sales_Model_Order::STATE_PENDING_PAYMENT,
-			'OP' => Mage_Sales_Model_Order::STATE_NEW,
-			'CA' => Mage_Sales_Model_Order::STATE_CANCELED
+			'CO' => Mage::getStoreConfig('payment/ebanx_settings/payment_co_status'),
+			'PE' => Mage::getStoreConfig('payment/ebanx_settings/payment_pe_status'),
+			'OP' => Mage::getStoreConfig('payment/ebanx_settings/payment_op_status'),
+			'CA' => Mage::getStoreConfig('payment/ebanx_settings/payment_ca_status')
 		];
 
 		return $status[strtoupper($ebanxStatus)];
