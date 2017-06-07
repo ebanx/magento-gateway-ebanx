@@ -12,6 +12,7 @@ abstract class Ebanx_Gateway_Model_Payment_CreditCard extends Mage_Payment_Model
 	protected $paymentData;
 	static protected $redirect_url;
 
+	protected $_canSaveCc     			= false;
 	protected $_isGateway               = true;
 	protected $_canUseFormMultishipping = false;
 	protected $_isInitializeNeeded      = true;
