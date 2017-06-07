@@ -85,8 +85,9 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		$connection = $resource->getConnection('core_read');
 		$table = $resource->getTableName('sales/order_payment');
 
-		$query = "SELECT entity_id FROM $table WHERE ebanx_payment_hash = '$hash'";
-		$orderId = $connection->fetchOne($query);
+		$query = "SELECT entity_id FROM $table WHERE ebanx_payment_hash = :hash";
+		$binds = array('hash' => $hash);
+		$orderId = $connection->fetchOne($query, $binds);
 
 		return Mage::getModel('sales/order')->load($orderId);
 	}
