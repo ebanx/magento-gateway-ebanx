@@ -1,5 +1,5 @@
 <?php
-class Ebanx_Gateway_Block_Form_CreditCardBR extends Mage_Payment_Block_Form
+class Ebanx_Gateway_Block_Form_CreditCardBR extends Mage_Payment_Block_Form_Cc
 {
     protected function _construct()
     {
