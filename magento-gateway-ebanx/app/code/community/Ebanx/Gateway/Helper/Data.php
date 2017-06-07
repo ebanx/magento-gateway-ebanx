@@ -81,15 +81,20 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 	public function getOrderByHash($hash)
 	{
-		$resource = Mage::getSingleton('core/resource');
-		$connection = $resource->getConnection('core_read');
-		$table = $resource->getTableName('sales/order_payment');
+		$model = Mage::getModel('sales/order_payment')
+			->getCollection()
+			->setPageSize(1)
+			->setCurPage(1)
+			->addFieldToFilter('ebanx_payment_hash', $hash)
+			->load();
 
-		$query = "SELECT entity_id FROM $table WHERE ebanx_payment_hash = :hash";
-		$binds = array('hash' => $hash);
-		$orderId = $connection->fetchOne($query, $binds);
+		if ($model->count() !== 1 ) {
+			Mage::throwException($this->__('EBANX: Invalid payment hash. We couldn\'t find the order.'));
+		};
 
-		return Mage::getModel('sales/order')->load($orderId);
+		$payment = $model->getFirstItem();
+
+		return Mage::getModel('sales/order')->load($payment->getParentId());
 	}
 
 	public function getEbanxMagentoOrder($ebanxStatus)
