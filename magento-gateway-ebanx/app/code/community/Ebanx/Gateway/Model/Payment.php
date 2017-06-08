@@ -95,7 +95,8 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 	public function persistPayment()
 	{
-		$this->payment->setEbanxPaymentHash($this->result['payment']['hash']);
+		$this->payment->setEbanxPaymentHash($this->result['payment']['hash'])
+			->setEbanxEnvironment(Mage::helper('ebanx')->getMode());
 	}
 
 	public function getOrderPlaceRedirectUrl()

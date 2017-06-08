@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ebanx/benjamin.git",
-                "reference": "0ef0313dd36387e2c25f1e66031097d1d1307f1a"
+                "reference": "8c3712d30d7ffe1ecaa3a936229136599a433be8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/0ef0313dd36387e2c25f1e66031097d1d1307f1a",
-                "reference": "0ef0313dd36387e2c25f1e66031097d1d1307f1a",
+                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/8c3712d30d7ffe1ecaa3a936229136599a433be8",
+                "reference": "8c3712d30d7ffe1ecaa3a936229136599a433be8",
                 "shasum": ""
             },
             "require": {
@@ -74,7 +74,7 @@
                 "source": "https://github.com/ebanx/benjamin/tree/master",
                 "issues": "https://github.com/ebanx/benjamin/issues"
             },
-            "time": "2017-06-02 19:41:09"
+            "time": "2017-06-07 16:43:38"
         },
         {
             "name": "guzzlehttp/guzzle",

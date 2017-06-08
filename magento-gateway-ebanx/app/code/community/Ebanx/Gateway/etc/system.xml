@@ -100,7 +100,6 @@
                             <show_in_store>0</show_in_store>
                         </brazil_taxes>
 
-
                         <payment_methods_title translate="label">
                             <label>Payment Methods</label>
                             <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
@@ -163,14 +162,14 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                         </heading_cc>
-                        <title translate="label">
+                        <title_cc translate="label">
                             <label>Title</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>205</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                        </title>
+                        </title_cc>
                         <sort_order translate="label">
                             <label>Sort Order</label>
                             <frontend_type>text</frontend_type>
@@ -180,15 +179,6 @@
                             <show_in_store>0</show_in_store>
                             <frontend_class>validate-number</frontend_class>
                         </sort_order>
-                        <order_status translate="label">
-                            <label>New Order Status</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_order_status_processing</source_model>
-                            <sort_order>215</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
-                        </order_status>
                         <save_card_data translate="label">
                             <label>Save Card Data</label>
                             <comment>Allow your customer to save credit card and debit card data for future purchases.
@@ -290,6 +280,55 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </due_date_days>
+
+                        <!-- Payment Status -->
+                        <payment_status_title translate="label">
+                            <label>Payment Status</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>319</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </payment_status_title>
+                        <payment_co_status translate="label">
+                            <label>Confirmed Payment Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <comment>Payments paid. The customer paid the Boleto and EBANX receives the payment.</comment>
+                            <sort_order>320</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </payment_co_status>
+                        <payment_pe_status translate="label">
+                            <label>Pending Payment Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <comment>Payments that are pending of payments. For example, the customer not paid the Boleto yet.</comment>
+                            <sort_order>321</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </payment_pe_status>
+                        <payment_op_status translate="label">
+                            <label>Opened Payment Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <comment>Payments created but haven't been signed to a payment method.</comment>
+                            <sort_order>322</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </payment_op_status>
+                        <payment_ca_status translate="label">
+                            <label>Canceled Payment Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <comment>Payments canceled when the customer not paid and it was canceled by EBANX.</comment>
+                            <sort_order>323</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </payment_ca_status>
                     </fields>
                 </ebanx_settings>
             </groups>

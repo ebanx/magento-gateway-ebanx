@@ -14,8 +14,8 @@ class Ebanx_Gateway_Model_Api
 			'sandboxIntegrationKey' => Mage::helper('ebanx')->getSandboxIntegrationKey(),
 			'isSandbox' => Mage::helper('ebanx')->isSandboxMode(),
 			'baseCurrency' => Mage::app()->getStore()->getCurrentCurrencyCode(),
-			'notificationUrl' => Mage::getBaseUrl(),
-			'redirectUrl' => Mage::getBaseUrl(),
+			'notificationUrl' => Mage::getUrl('ebanx/index/notification/'),
+			'redirectUrl' => Mage::getUrl('ebanx/index/notification/'),
 		));
 		// Mage::log($config, null, 'benjamin-config.log', true);
 		// $creditCardConfig = new CreditCardConfig();
