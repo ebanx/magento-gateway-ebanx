@@ -8,7 +8,7 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 
 	private function initialize()
 	{
-		$this->helper = Mage::helper('ebanx');
+		$this->helper = Mage::helper('ebanx/order');
 		$this->validateEbanxPaymentRequest();
 		$this->hash = $this->getRequest()->getParam('hash');
 		$this->loadOrder();
@@ -44,7 +44,7 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 		$this->order->save();
 	}
 
-	private function sendJsonResponse($data)
+	private function setResponseToJson($data)
 	{
         $this->getResponse()->clearHeaders()->setHeader(
             'Content-type',
@@ -82,7 +82,7 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 		} catch (Ebanx_Gateway_Exception $e) {
 			Mage::log($e->getMessage(), null, 'ebanx_error.log', true);
 
-			return $this->sendJsonResponse([
+			return $this->setResponseToJson([
 				'success' => false,
 				'message' => $e->getMessage()
 			]);
@@ -92,7 +92,7 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 			$statusEbanx = $this->loadEbanxPaymentStatus();
 			$this->updateOrder($statusEbanx);
 
-			$this->sendJsonResponse([
+			$this->setResponseToJson([
 				'success' => true,
 				'order' => $this->order->getIncrementId()
 			]);
