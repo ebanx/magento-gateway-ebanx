@@ -1,5 +1,22 @@
 <?xml version="1.0"?>
 <layout>
+    <!-- Checkout Page -->
+    <ebanx_checkout_handle>
+        <reference name="head">
+            <action method="addCss"><stylesheet>ebanx/css/checkout.css</stylesheet></action>
+            <action method="addJs"><script>//js.ebanx.com/ebanx-1.5.min.js</script></action>
+            <action method="addJs"><script>ebanx/js/checkout.js</script></action>
+        </reference>
+    </ebanx_checkout_handle>
+
+    <checkout_onepage_index>
+        <update handle="ebanx_checkout_handle"/>
+    </checkout_onepage_index>
+
+    <onepagecheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </onepagecheckout_index_index>
+
     <!-- Succes Page -->
     <ebanx_checkout_success_handle>
         <reference name="head">
