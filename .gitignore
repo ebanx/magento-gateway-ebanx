@@ -2,3 +2,4 @@
 .data
 magento-gateway-ebanx/lib/Ebanx/vendor
 .env
+.idea
