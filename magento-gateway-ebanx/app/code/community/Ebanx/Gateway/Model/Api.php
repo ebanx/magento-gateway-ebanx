@@ -31,7 +31,11 @@ class Ebanx_Gateway_Model_Api
 
 	public function ebanxCreditCard()
 	{
-		$creditCardConfig = new CreditCardConfig();
+		$creditCardConfig = new CreditCardConfig(array(
+			'maxInstalments'      => 12,
+			'minInstalmentAmount' => 20,
+			'interestRates'       => 0,
+		));
 
 		return EBANX($this->getConfig(), $creditCardConfig);
 	}
