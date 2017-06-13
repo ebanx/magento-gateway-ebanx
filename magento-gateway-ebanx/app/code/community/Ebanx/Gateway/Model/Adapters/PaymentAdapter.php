@@ -5,6 +5,7 @@ use Ebanx\Benjamin\Models\Payment;
 use Ebanx\Benjamin\Models\Address;
 use Ebanx\Benjamin\Models\Person;
 use Ebanx\Benjamin\Models\Item;
+use Ebanx\Benjamin\Models\Card;
 
 class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 {
@@ -31,6 +32,24 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 			'responsible'         => $this->transformPerson($data->getPerson(), $data),
 			'items'               => $this->transformItems($data->getItems(), $data)
 		]);
+	}
+
+	/**
+	 * @param Varien_Object $data
+	 * @return Payment
+	 */
+	public function transformCard(Varien_Object $data)
+	{
+		$payment = $this->transform($data);
+		$payment->card = new Card([
+			'autoCapture' => true,
+			'token'       => 12312312312312312312312313123123123123,
+			'cvv'         => 123,
+			'name'        => $data->getPerson()->getFirstname() . ' '. $data->getPerson()->getLastname(),
+			'type'        => 'mastercard',
+		]);
+
+		return $payment;
 	}
 
 	public function transformAddress($address, $data)

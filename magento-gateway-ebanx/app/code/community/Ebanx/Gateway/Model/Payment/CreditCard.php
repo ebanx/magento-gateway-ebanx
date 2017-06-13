@@ -71,7 +71,7 @@ abstract class Ebanx_Gateway_Model_Payment_CreditCard extends Mage_Payment_Model
 
 	public function transformPaymentData()
 	{
-		$this->paymentData = $this->adapter->transform($this->data);
+		$this->paymentData = $this->adapter->transformCard($this->data);
 	}
 
 	public function processPayment()
