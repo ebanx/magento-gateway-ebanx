@@ -5,7 +5,10 @@
         <reference name="head">
             <action method="addCss"><stylesheet>ebanx/css/checkout.css</stylesheet></action>
             <action method="addJs"><script>//js.ebanx.com/ebanx-1.5.min.js</script></action>
-            <action method="addJs"><script>ebanx/js/checkout.js</script></action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/checkout.js</name>
+            </action>
         </reference>
     </ebanx_checkout_handle>
 
