@@ -144,6 +144,11 @@
                 <payment_pe_status>holded</payment_pe_status>
                 <payment_op_status>pending</payment_op_status>
                 <payment_ca_status>canceled</payment_ca_status>
+                <!-- Compliance Fields -->
+                <cpf_field>taxvat</cpf_field>
+                <cnpj_field>taxvat</cnpj_field>
+                <rut_field>taxvat</rut_field>
+                <dni_field>taxvat</dni_field>
             </ebanx_settings>
         </payment>
     </default>

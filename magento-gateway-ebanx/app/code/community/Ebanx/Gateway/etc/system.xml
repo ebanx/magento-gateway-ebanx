@@ -329,6 +329,47 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </payment_ca_status>
+
+                        <!-- Checkout Fields -->
+                        <compliance_fields_title translate="label">
+                            <label>Compliance Fields</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </compliance_fields_title>
+                        <cpf_field translate="label">
+                            <label>CPF Document</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>410</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </cpf_field>
+                        <cnpj_field translate="label">
+                            <label>CNPJ Document</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>411</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </cnpj_field>
+                        <rut_field translate="label">
+                            <label>RUT Document</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>412</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </rut_field>
+                        <dni_field translate="label">
+                            <label>DNI Document</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>413</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </dni_field>
                     </fields>
                 </ebanx_settings>
             </groups>
