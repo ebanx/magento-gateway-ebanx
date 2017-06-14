@@ -137,4 +137,59 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 				return $this->__('Document Number');
 		}
 	}
+
+	public function getBrazilianDocumentNumber()
+	{
+		$customer = array_merge(
+			Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getData()['customer_address']->getCustomer()->getData(),
+			Mage::app()->getRequest()->getParams()
+		);
+
+		if ($cpfField = Mage::getStoreConfig('payment/ebanx_settings/cpf_field')) {
+			if ($customer[$cpfField]) {
+				return $customer[$cpfField];
+			}
+		}
+
+		if ($cnpjField = Mage::getStoreConfig('payment/ebanx_settings/cnpj_field')) {
+			if ($customer[$cnpjField]) {
+				return $customer[$cnpjField];
+			}
+		}
+
+
+		return $customer['ebanx-document'];
+	}
+
+	public function getChileanDocumentNumber()
+	{
+		$customer = array_merge(
+			Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getData()['customer_address']->getCustomer()->getData(),
+			Mage::app()->getRequest()->getParams()
+		);
+
+		if ($rutField = Mage::getStoreConfig('payment/ebanx_settings/rut_field')) {
+			if ($customer[$rutField]) {
+				return $customer[$rutField];
+			}
+		}
+
+		return $customer['ebanx-document'];
+	}
+
+	public function getColombianDocumentNumber()
+	{
+		$customer = array_merge(
+			Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getData()['customer_address']->getCustomer()->getData(),
+			Mage::app()->getRequest()->getParams()
+		);
+
+		if ($rutField = Mage::getStoreConfig('payment/ebanx_settings/rut_field')) {
+			if ($customer[$rutField]) {
+				return $customer[$rutField];
+			}
+		}
+
+		return $customer['ebanx-document'];
+	}
 }

@@ -26,6 +26,9 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 	public function initialize($paymentAction, $stateObject)
 	{
+		var_dump(Mage::helper('ebanx')->getDocumentNumber());
+		exit;
+
 		try {
 			parent::initialize($paymentAction, $stateObject);
 
