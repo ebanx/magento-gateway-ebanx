@@ -140,10 +140,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 	public function getBrazilianDocumentNumber()
 	{
-		$customer = array_merge(
-			Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getData()['customer_address']->getCustomer()->getData(),
-			Mage::app()->getRequest()->getParams()
-		);
+		$customer = $this->getCustomerData();
 
 		if ($cpfField = Mage::getStoreConfig('payment/ebanx_settings/cpf_field')) {
 			if ($customer[$cpfField]) {
@@ -163,10 +160,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 	public function getChileanDocumentNumber()
 	{
-		$customer = array_merge(
-			Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getData()['customer_address']->getCustomer()->getData(),
-			Mage::app()->getRequest()->getParams()
-		);
+		$customer = $this->getCustomerData();
 
 		if ($rutField = Mage::getStoreConfig('payment/ebanx_settings/rut_field')) {
 			if ($customer[$rutField]) {
@@ -179,10 +173,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 	public function getColombianDocumentNumber()
 	{
-		$customer = array_merge(
-			Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getData()['customer_address']->getCustomer()->getData(),
-			Mage::app()->getRequest()->getParams()
-		);
+		$customer = $this->getCustomerData();
 
 		if ($rutField = Mage::getStoreConfig('payment/ebanx_settings/rut_field')) {
 			if ($customer[$rutField]) {
@@ -191,5 +182,17 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		}
 
 		return $customer['ebanx-document'];
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getCustomerData()
+	{
+		$customer = array_merge(
+			Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getData()['customer_address']->getCustomer()->getData(),
+			Mage::app()->getRequest()->getParams()
+		);
+		return $customer;
 	}
 }
