@@ -1,0 +1,10 @@
+<?php if (Mage::helper('ebanx')->hasComplianceFieldFromSettings($this->getMethodCode())) return; ?>
+
+<div class="ebanx-compliance-fields">
+  <label class="ebanx-document-label">
+    <span class="ebanx-document-text required"><?php echo Mage::helper('ebanx')->getLabelForComplianceField($this->getMethodCode()); ?> <em>*</em></span>
+    <div class="input-box">
+      <input type="text" name="ebanx-document[<?php echo $this->getMethodCode() ?>]" />
+    </div>
+  </label>
+</div>

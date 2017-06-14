@@ -140,6 +140,8 @@
             </ebanx_oxxo>
             <!-- Settings -->
             <ebanx_settings>
+                <brazil_taxes>cpf</brazil_taxes>
+
                 <payment_co_status>processing</payment_co_status>
                 <payment_pe_status>holded</payment_pe_status>
                 <payment_op_status>pending</payment_op_status>
