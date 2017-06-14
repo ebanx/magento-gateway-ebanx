@@ -50,8 +50,7 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 	{
 		return new Person([
 			'type' => 'personal', // TODO
-			'birthdate' => new \DateTime('1978-03-29 08:15:51.000000 UTC'), // TODO
-			'document' => $this->helper()->getDocumentNumber(),
+			'document' => $this->helper->getDocumentNumber(),
 			'email' => $person->getEmail(),
 			'ip' => $data->getRemoteIp(),
 			'name' => $data->getPerson()->getFirstname() . ' ' . $data->getPerson()->getLastname(),

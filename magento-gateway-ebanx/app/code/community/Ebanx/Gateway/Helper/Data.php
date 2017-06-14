@@ -99,13 +99,17 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 		$fields = $methodsToFields[$code];
 
+		if (empty($fields)) {
+			return true;
+		}
+
 		foreach ($fields as $field) {
-			if (!Mage::getStoreConfig('payment/ebanx_settings/' . $field)) {
-				return false;
+			if (Mage::getStoreConfig('payment/ebanx_settings/' . $field)) {
+				return true;
 			}
 		}
 
-		return true;
+		return false;
 	}
 
 	public function getBrazilianDocumentLabel()
@@ -184,15 +188,39 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return $customer['ebanx-document'];
 	}
 
+	public function getDocumentNumber()
+	{
+		$countryCode = $this->getCustomerData()['country_id'];
+		$country = $this->transformCountryCodeToName($countryCode);
+
+		switch ($country) {
+			case Country::BRAZIL:
+				return $this->getBrazilianDocumentNumber();
+			case Country::CHILE:
+				return $this->getChileanDocumentNumber();
+			case Country::COLOMBIA:
+				return $this->getColombianDocumentNumber();
+			default:
+				return null;
+
+		}
+	}
+
 	/**
 	 * @return array
 	 */
 	private function getCustomerData()
 	{
-		$customer = array_merge(
-			Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getData()['customer_address']->getCustomer()->getData(),
+		$checkoutData = Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getData();
+
+		$customerAddressData = array_key_exists('customer_address_id', $checkoutData)
+			? Mage::getModel('customer/address')->load($checkoutData['customer_address_id'])->getCustomer()->getData()
+			: $checkoutData['customer_address']->getCustomer()->getData();
+
+		return array_merge(
+			$checkoutData,
+			$customerAddressData,
 			Mage::app()->getRequest()->getParams()
 		);
-		return $customer;
 	}
 }
