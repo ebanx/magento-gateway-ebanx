@@ -1,14 +1,16 @@
 {
-    "name": "ebanx/magento-gateway-ebanx",
-    "description": "",
-    "type": "project",
-    "license": "MIT",
-    "repositories": [{
-        "type": "vcs",
-        "url": "https://github.com/ebanx/benjamin.git"
-    }],
-    "minimum-stability": "dev",
-    "require": {
-        "ebanx/benjamin": "master"
+  "name": "ebanx/magento-gateway-ebanx",
+  "description": "",
+  "type": "project",
+  "license": "MIT",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/ebanx/benjamin.git"
     }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "ebanx/benjamin": "master"
+  }
 }

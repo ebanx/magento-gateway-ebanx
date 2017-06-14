@@ -2,8 +2,6 @@
 
 class Ebanx_Gateway_Model_Peru_Pagoefectivo extends Ebanx_Gateway_Model_Payment
 {
-	protected $gateway;
-
 	protected $_code = 'ebanx_pagoefectivo';
 
 	protected $_formBlockType = 'ebanx/form_pagoefectivo';

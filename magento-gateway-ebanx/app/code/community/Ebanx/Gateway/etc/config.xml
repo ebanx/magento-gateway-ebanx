@@ -85,14 +85,28 @@
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_cc_br>
+            <ebanx_wallet>
+                <active>1</active>
+                <model>ebanx/brazil_wallet</model>
+                <title>Saldo EBANX</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_wallet>
             <!-- Colombia -->
             <ebanx_baloto>
                 <active>1</active>
-                <model>ebanx/baloto</model>
+                <model>ebanx/colombia_baloto</model>
                 <title>Baloto</title>
-                <payment_action>charge</payment_action>
+                <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_baloto>
+            <ebanx_pse>
+                <active>1</active>
+                <model>ebanx/colombia_pse</model>
+                <title>PSE - Pago Seguros en Línea</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_pse>
             <!-- Chile -->
             <ebanx_sencillito>
                 <active>1</active>
@@ -131,6 +145,13 @@
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_oxxo>
+            <!-- Settings -->
+            <ebanx_settings>
+                <payment_co_status>processing</payment_co_status>
+                <payment_pe_status>holded</payment_pe_status>
+                <payment_op_status>pending</payment_op_status>
+                <payment_ca_status>canceled</payment_ca_status>
+            </ebanx_settings>
         </payment>
     </default>
 </config>

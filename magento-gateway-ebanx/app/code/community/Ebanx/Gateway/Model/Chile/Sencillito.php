@@ -2,8 +2,6 @@
 
 class Ebanx_Gateway_Model_Chile_Sencillito extends Ebanx_Gateway_Model_Payment
 {
-	protected $gateway;
-
 	protected $_code = 'ebanx_sencillito';
 
 	protected $_formBlockType = 'ebanx/form_sencillito';
