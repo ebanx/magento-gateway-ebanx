@@ -55,9 +55,9 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 		return new Person([
 			'type' => $this->helper->getPersonType($document),
 			'document' => $document,
-			'email' => $person->getEmail(),
+			'email' => $person->getCustomerEmail(),
 			'ip' => $data->getRemoteIp(),
-			'name' => $data->getPerson()->getFirstname() . ' ' . $data->getPerson()->getLastname(),
+			'name' => $person->getCustomerFirstname() . ' ' . $person->getCustomerLastname(),
 			'phoneNumber' => $data->getBillingAddress()->getTelephone()
 		]);
 	}
