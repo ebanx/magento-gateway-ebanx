@@ -3,6 +3,7 @@ require_once Mage::getBaseDir('lib') . '/Ebanx/vendor/autoload.php';
 
 use Ebanx\Benjamin\Models\Bank;
 use Ebanx\Benjamin\Models\Country;
+use Ebanx\Benjamin\Models\Person;
 
 class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 {
@@ -206,9 +207,6 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		}
 	}
 
-	/**
-	 * @return array
-	 */
 	private function getCustomerData()
 	{
 		$checkoutData = Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getData();
@@ -217,10 +215,15 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			? Mage::getModel('customer/address')->load($checkoutData['customer_address_id'])->getCustomer()->getData()
 			: $checkoutData['customer_address']->getCustomer()->getData();
 
+		$customerSessionData = Mage::getSingleton('customer/session')->getCustomer()->getData();
+
+		$customerParams = Mage::app()->getRequest()->getParams();
+
 		return array_merge(
 			$checkoutData,
 			$customerAddressData,
-			Mage::app()->getRequest()->getParams()
+			$customerSessionData,
+			$customerParams
 		);
 	}
 }
