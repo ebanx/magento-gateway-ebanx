@@ -1,10 +1,21 @@
-<?php if (Mage::helper('ebanx')->hasComplianceFieldFromSettings($this->getMethodCode())) return; ?>
+<?php
+  $helper = $helper = Mage::helper('ebanx');
+
+  if ($helper->hasComplianceFieldFromSettings($this->getMethodCode())) return;
+
+  $customer_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
+  $customer = Mage::getModel('customer/customer')->load($customer_id);
+?>
 
 <div class="ebanx-compliance-fields">
   <label class="ebanx-document-label">
-    <span class="ebanx-document-text required"><?php echo Mage::helper('ebanx')->getLabelForComplianceField($this->getMethodCode()); ?> <em>*</em></span>
+    <span class="ebanx-document-text required"><?php echo $helper->getLabelForComplianceField($this->getMethodCode()); ?> <em>*</em></span>
     <div class="input-box">
-      <input type="text" name="ebanx-document" />
+      <input
+        type="text"
+        name="ebanx-document"
+        value="<?php echo $customer->getEbanxCustomerDocument() ?>"
+      />
     </div>
   </label>
 </div>

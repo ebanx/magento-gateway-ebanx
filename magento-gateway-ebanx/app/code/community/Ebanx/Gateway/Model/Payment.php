@@ -22,6 +22,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 		$this->ebanx = Mage::getSingleton('ebanx/api')->ebanx();
 		$this->adapter = Mage::getModel('ebanx/adapters_paymentAdapter');
+		$this->helper = Mage::helper('ebanx');
 	}
 
 	public function initialize($paymentAction, $stateObject)
@@ -54,7 +55,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 		$this->data = new Varien_Object();
 		$this->data->setMerchantPaymentCode($merchantPaymentCode)
-			->setDueDate(Mage::helper('ebanx')->getDueDate())
+			->setDueDate($this->helper->getDueDate())
 			->setEbanxMethod($this->_code)
 			->setStoreCurrency(Mage::app()->getStore()->getCurrentCurrencyCode())
 			->setAmountTotal($this->order->getGrandTotal())
@@ -95,8 +96,13 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 	public function persistPayment()
 	{
-		$this->payment->setEbanxPaymentHash($this->result['payment']['hash'])
-			->setEbanxEnvironment(Mage::helper('ebanx')->getMode());
+		$this->payment
+			->setEbanxPaymentHash($this->result['payment']['hash'])
+			->setEbanxEnvironment($this->helper->getMode());
+
+		$this->customer
+			->setEbanxCustomerDocument($this->helper->getDocumentNumber())
+			->save();
 	}
 
 	public function getOrderPlaceRedirectUrl()
@@ -106,7 +112,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 	public function canUseForCountry($country)
 	{
-		$countryName = Mage::helper('ebanx')->transformCountryCodeToName($country);
+		$countryName = $this->helper->transformCountryCodeToName($country);
 
 		return $this->gateway->isAvailableForCountry($countryName);
 	}
