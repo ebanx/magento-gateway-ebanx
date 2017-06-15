@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Helper_Order extends Mage_Core_Helper_Abstract
+class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
 {
 	public function getOrderByHash($hash)
 	{

@@ -55,9 +55,11 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 
 	public function transformAddress($address, $data)
 	{
+		$street = $this->helper->split_street($address->getStreetFull());
+
 		return new Address([
-			'address' => $address->getStreetFull(),
-			'streetNumber' => '123', // TODO
+			'address' => $street['streetName'],
+			'streetNumber' => $street['houseNumber'],
 			'city' => $address->getCity(),
 			'country' => $this->helper->transformCountryCodeToName($address->getCountry()),
 			'state' => $address->getRegionCode(),
@@ -68,10 +70,11 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 
 	public function transformPerson($person, $data)
 	{
+		$document = $this->helper->getDocumentNumber();
+
 		return new Person([
-			'type' => 'personal', // TODO
-			'birthdate' => new \DateTime('1978-03-29 08:15:51.000000 UTC'), // TODO
-			'document' => '35433160874',
+			'type' => $this->helper->getPersonType($document),
+			'document' => $document,
 			'email' => $person->getEmail(),
 			'ip' => $data->getRemoteIp(),
 			'name' => $data->getPerson()->getFirstname() . ' ' . $data->getPerson()->getLastname(),
