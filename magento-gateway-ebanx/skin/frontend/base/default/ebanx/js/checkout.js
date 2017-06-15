@@ -10,10 +10,12 @@ function handleEbanxForm(formId) {
   var EBANX_DEVICE_FINGERPRINT = 'ebanx_device_fingerprint';
   var EBANX_BILLING_INSTALMENTS = 'ebanx_billing_instalments';
   var EBANX_BILLING_CVV = 'ebanx_billing_cvv';
-  var EBANX_MODE = 'ebanx_ebanx_mode';
+  var EBANX_MODE = 'ebanx_mode';
   var EBANX_INTEGRATION_KEY = 'ebanx_integration_key';
   var EBANX_COUNTRY = 'ebanx_country';
 
+  var responseData;
+  var iterations = 0;
 
   var cardName = document.getElementById(CARD_NAME_ID);
   var cardNumber = document.getElementById(CARD_NUMBER_ID);
@@ -32,11 +34,16 @@ function handleEbanxForm(formId) {
 
   var ebanxForm = document.getElementById(formId);
 
-  EBANX.config.setMode(ebanxMode.value);
+  if (ebanxMode.value === 'sandbox') {
+    EBANX.config.setMode('test');
+  } else {
+    EBANX.config.setMode('live');
+  }
   EBANX.config.setPublishableKey(ebanxIntegrationKey.value);
   EBANX.config.setCountry(ebanxCountry.value);
 
   if (ebanxForm) {
+    document.getElementById(CARD_NAME_ID).addEventListener('focusout', handleToken, false);
     document.getElementById(CARD_NUMBER_ID).addEventListener('focusout', handleToken, false);
     document.getElementById(CARD_EXPIRATION_MONTH_ID).addEventListener('focusout', handleToken, false);
     document.getElementById(CARD_EXPIRATION_YEAR_ID).addEventListener('focusout', handleToken, false);
@@ -59,31 +66,24 @@ function handleEbanxForm(formId) {
   }
 
   function generateToken() {
-    EBANX.card.createToken({
-      card_number: parseInt(cardNumber.value.replace(/ /g,'')),
-      card_name: cardName.value,
-      card_due_date: (parseInt( cardExpirationMonth.value ) || 0) + '/' + (parseInt( cardExpirationYear.value ) || 0),
-      card_cvv: cardCvv.value
-    }, saveToken());
+    if (!responseData) {
+      EBANX.card.createToken({
+        card_number: parseInt(cardNumber.value.replace(/ /g,'')),
+        card_name: cardName.value,
+        card_due_date: (parseInt( cardExpirationMonth.value ) || 0) + '/' + (parseInt( cardExpirationYear.value ) || 0),
+        card_cvv: cardCvv.value
+      }, saveToken);
+    }
   }
 
-  function saveToken() {
-
+  function saveToken(response) {
+    if (response.status !== 'SUCCESS' && iterations++ < 3){
+      return generateToken();
+    }
+    responseData = response.data;
+    ebanxToken.value = responseData.token;
+    ebanxBrand.value = responseData.payment_type_code;
+    ebanxMaskedCardNumber.value = responseData.masked_card_number;
+    ebanxDeviceFingerprint.value = responseData.deviceId;
   }
-
-//   function removeHiddenInputs() {
-//   var ebanxToken = document.getElementById(EBANX_TOKEN);
-//   var ebanxBrand = document.getElementById(EBANX_BRAND);
-//   var ebanxMaskedCardNumber = document.getElementById(EBANX_MASKED_CARD_NUMBER);
-//   var ebanxDeviceFingerprint = document.getElementById(EBANX_DEVICE_FINGERPRINT);
-//   var ebanxBillingInstalments = document.getElementById(EBANX_BILLING_INSTALMENTS);
-//   var ebanxBillingCvv = document.getElementById(EBANX_BILLING_CVV);
-//   var ebanxBillingCvv = document.getElementById(EBANX_BILLING_CVV);
-//   ebanxToken.parentNode.removeChild(ebanxToken);
-//   ebanxBrand.parentNode.removeChild(ebanxBrand);
-//   ebanxMaskedCardNumber.parentNode.removeChild(ebanxMaskedCardNumber);
-//   ebanxDeviceFingerprint.parentNode.removeChild(ebanxDeviceFingerprint);
-//   ebanxBillingInstalments.parentNode.removeChild(ebanxBillingInstalments);
-//   ebanxBillingCvv.parentNode.removeChild(ebanxBillingCvv);
-//   }
 }
