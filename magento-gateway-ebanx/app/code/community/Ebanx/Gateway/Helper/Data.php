@@ -226,4 +226,15 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			$customerParams
 		);
 	}
+
+	public function getPersonType($document)
+	{
+		$document = str_replace(['.', '-', '/'], '', $document);
+
+		if ($this->getCustomerData()['country_id'] !== 'BR' || strlen($document) < 14) {
+			return Person::TYPE_PERSONAL;
+		}
+
+		return Person::TYPE_BUSINESS;
+	}
 }
