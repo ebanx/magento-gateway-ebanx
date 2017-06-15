@@ -163,7 +163,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                         </heading_cc>
-                        <title_cc translate="label">
+                        <!-- <title_cc translate="label">
                             <label>Title</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>205</sort_order>
@@ -214,7 +214,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                        </auto_capture>
+                        </auto_capture>-->
                         <max_instalments translate="label">
                             <label>Maximum Number of Instalments</label>
                             <comment>Establish the maximum number of instalments in which your customer can pay, as
