@@ -32,7 +32,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 			$this->payment = $this->getInfoInstance();
 			$this->order = $this->payment->getOrder();
-			$this->customer = Mage::getModel('customer/customer')->load($this->order->getCustomerId());
+			$this->customer = Mage::getModel('sales/order')->load($this->order->getId());
 
 			$this->setupData();
 
@@ -99,9 +99,11 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 			->setEbanxPaymentHash($this->result['payment']['hash'])
 			->setEbanxEnvironment($this->helper->getMode());
 
-		$this->customer
-			->setEbanxCustomerDocument($this->helper->getDocumentNumber())
-			->save();
+		if ($this->order->getCustomerId()) {
+			Mage::getModel('customer/customer')->load($this->order->getCustomerId())
+				->setEbanxCustomerDocument($this->helper->getDocumentNumber($this->order))
+				->save();
+		}
 	}
 
 	public function getOrderPlaceRedirectUrl()

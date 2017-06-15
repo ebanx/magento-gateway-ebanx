@@ -156,7 +156,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 		if ($cpfField = Mage::getStoreConfig('payment/ebanx_settings/cpf_field')) {
 			if ($cpfField === 'taxvat') {
-				return Mage::getModel('sales/order')->load($this->order->getId())->getCustomerTaxvat();
+				return $this->order->getCustomerTaxvat();
 			}
 
 			if ($customer[$cpfField]) {
@@ -166,7 +166,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 		if ($cnpjField = Mage::getStoreConfig('payment/ebanx_settings/cnpj_field')) {
 			if ($cnpjField === 'taxvat') {
-				return Mage::getModel('sales/order')->load($this->order->getId())->getCustomerTaxvat();
+				return $this->order->getCustomerTaxvat();
 			}
 
 			if ($customer[$cnpjField]) {
@@ -184,7 +184,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 		if ($rutField = Mage::getStoreConfig('payment/ebanx_settings/rut_field')) {
 			if ($rutField === 'taxvat') {
-				return Mage::getModel('sales/order')->load($this->order->getId())->getCustomerTaxvat();
+				return $this->order->getCustomerTaxvat();
 			}
 
 			if ($customer[$rutField]) {
@@ -201,7 +201,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 		if ($dniField = Mage::getStoreConfig('payment/ebanx_settings/dni_field')) {
 			if ($dniField === 'taxvat') {
-				return Mage::getModel('sales/order')->load($this->order->getId())->getCustomerTaxvat();
+				return $this->order->getCustomerTaxvat();
 			}
 
 			if ($customer[$dniField]) {
