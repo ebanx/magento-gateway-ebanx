@@ -56,7 +56,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 		$this->data = new Varien_Object();
 		$this->data->setMerchantPaymentCode($merchantPaymentCode)
 			->setDueDate($this->helper->getDueDate())
-			->setEbanxMethod($this->_code)
+			->setEbanxMethod($this->getCode())
 			->setStoreCurrency(Mage::app()->getStore()->getCurrentCurrencyCode())
 			->setAmountTotal($this->order->getGrandTotal())
 			->setPerson($this->customer)

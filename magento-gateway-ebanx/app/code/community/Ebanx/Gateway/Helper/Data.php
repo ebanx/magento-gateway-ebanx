@@ -10,6 +10,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 	const URL_PRINT_LIVE = 'https://ebanx.com/print/';
 	const URL_PRINT_SANDBOX = 'https://sandbox.ebanx.com/print/';
 
+	private $order;
+
 	public function getEbanxUrl()
 	{
 		return $this->isSandboxMode() ? self::URL_PRINT_SANDBOX : self::URL_PRINT_LIVE;
@@ -153,12 +155,20 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		$customer = $this->getCustomerData();
 
 		if ($cpfField = Mage::getStoreConfig('payment/ebanx_settings/cpf_field')) {
+			if ($cpfField === 'taxvat') {
+				return Mage::getModel('sales/order')->load($this->order->getId())->getCustomerTaxvat();
+			}
+
 			if ($customer[$cpfField]) {
 				return $customer[$cpfField];
 			}
 		}
 
 		if ($cnpjField = Mage::getStoreConfig('payment/ebanx_settings/cnpj_field')) {
+			if ($cnpjField === 'taxvat') {
+				return Mage::getModel('sales/order')->load($this->order->getId())->getCustomerTaxvat();
+			}
+
 			if ($customer[$cnpjField]) {
 				return $customer[$cnpjField];
 			}
@@ -173,6 +183,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		$customer = $this->getCustomerData();
 
 		if ($rutField = Mage::getStoreConfig('payment/ebanx_settings/rut_field')) {
+			if ($rutField === 'taxvat') {
+				return Mage::getModel('sales/order')->load($this->order->getId())->getCustomerTaxvat();
+			}
+
 			if ($customer[$rutField]) {
 				return $customer[$rutField];
 			}
@@ -185,17 +199,22 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 	{
 		$customer = $this->getCustomerData();
 
-		if ($rutField = Mage::getStoreConfig('payment/ebanx_settings/rut_field')) {
-			if ($customer[$rutField]) {
-				return $customer[$rutField];
+		if ($dniField = Mage::getStoreConfig('payment/ebanx_settings/dni_field')) {
+			if ($dniField === 'taxvat') {
+				return Mage::getModel('sales/order')->load($this->order->getId())->getCustomerTaxvat();
+			}
+
+			if ($customer[$dniField]) {
+				return $customer[$dniField];
 			}
 		}
 
 		return $customer['ebanx-document'];
 	}
 
-	public function getDocumentNumber()
+	public function getDocumentNumber($order)
 	{
+		$this->order = $order;
 		$countryCode = $this->getCustomerData()['country_id'];
 		$country = $this->transformCountryCodeToName($countryCode);
 
@@ -208,7 +227,6 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 				return $this->getColombianDocumentNumber();
 			default:
 				return null;
-
 		}
 	}
 
@@ -216,20 +234,22 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 	{
 		$checkoutData = Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getData();
 
-		$customerAddressData = array_key_exists('customer_address_id', $checkoutData)
+		$customerAddressData = array_key_exists('customer_address_id', $checkoutData) && !is_null($checkoutData['customer_address_id'])
 			? Mage::getModel('customer/address')->load($checkoutData['customer_address_id'])->getCustomer()->getData()
-			: $checkoutData['customer_address']->getCustomer()->getData();
+			: $checkoutData;
 
 		$customerSessionData = Mage::getSingleton('customer/session')->getCustomer()->getData();
 
 		$customerParams = Mage::app()->getRequest()->getParams();
 
-		return array_merge(
+		$data = array_merge(
 			$checkoutData,
 			$customerAddressData,
 			$customerSessionData,
 			$customerParams
 		);
+
+		return $data;
 	}
 
 	public function getPersonType($document)
