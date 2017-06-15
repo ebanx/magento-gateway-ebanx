@@ -4,9 +4,10 @@
     <p><?php echo $this->__("Mandamos uma cópia para o email %s.", "<strong>" . $this->getOrder()->getCustomerEmail() . "</strong>") ?></p>
     <p>
         <?php echo $this->__("- Não se esqueça, ele vence %s. Depois disso não é mais possível realizar o pagamento.", "<strong>" . $this->getEbanxDueDate() . "</strong>") ?></p>
-        <?php echo $this->__("- Dica: Além dos bancos e casas lotéricas você também pode pagar pelo seu internet banking, sem sair de casa."); ?>
+    <?php echo $this->__("- Dica: Além dos bancos e casas lotéricas você também pode pagar pelo seu internet banking, sem sair de casa."); ?>
     </p>
-    <p><?php echo $this->__('Ficou alguma dúvida? A gente te <a href="%s" target="_blank">ajuda</a>', "https://www.ebanx.com/br/ajuda/pagamentos/boleto-bancario") ?>.</p>
+    <p><?php echo $this->__('Ficou alguma dúvida? A gente te <a href="%s" target="_blank">ajuda</a>', "https://www.ebanx.com/br/ajuda/pagamentos/boleto-bancario") ?>
+        .</p>
 </div>
 
 <hr>
@@ -19,7 +20,8 @@
         ?>
     </div>
     <div class="banking-ticket__barcode-copy">
-        <button type="button" class="button ebanx-button--copy" data-clipboard-text="<?php echo $this->getEbanxBarCode(); ?>"><?php echo $this->__('Copiar'); ?></button>
+        <button type="button" class="button ebanx-button--copy"
+                data-clipboard-text="<?php echo $this->getEbanxBarCode(); ?>"><?php echo $this->__('Copiar'); ?></button>
     </div>
 </div>
 
@@ -27,11 +29,14 @@
 
 <div class="banking-ticket__actions">
     <div class="ebanx-button--group ebanx-button--group-two">
-        <a href="<?php echo $this->getEbanxUrlPdf(); ?>" target="_blank" class="button banking-ticket__action"><?php echo $this->__('Salvar em PDF'); ?></a>
-        <a href="<?php echo $this->getEbanxUrlPrint() ?>" target="_blank" class="button banking-ticket__action"><?php echo $this->__('Imprimir boleto'); ?></a>
+        <a href="<?php echo $this->getEbanxUrlPdf(); ?>" target="_blank"
+           class="button banking-ticket__action"><?php echo $this->__('Salvar em PDF'); ?></a>
+        <a href="<?php echo $this->getEbanxUrlPrint() ?>" target="_blank"
+           class="button banking-ticket__action"><?php echo $this->__('Imprimir boleto'); ?></a>
     </div>
 </div>
 
 <div>
-    <iframe id="ebanx-boleto-frame" src="<?php echo $this->getEbanxUrl(); ?>" style="width: 100%; border: 0px; height: 1000px"></iframe>
+    <iframe id="ebanx-boleto-frame" src="<?php echo $this->getEbanxUrlIframe(); ?>"
+            style="width: 100%; border: 0px; height: 1000px"></iframe>
 </div>
