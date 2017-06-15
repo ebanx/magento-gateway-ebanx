@@ -26,7 +26,7 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 		$mode    = $this->order->getEbanxEnvironment() === 'sandbox';
 		$payment = $api->paymentInfo()->findByHash($this->hash, $mode);
 
-		Mage::log($payment, null, 'ebanx_payment_notification.log', true);
+		$this->helper->log($payment, 'ebanx_payment_notification.log');
 
 		if ($payment['status'] !== 'SUCCESS') {
 			throw new Ebanx_Gateway_Exception($this->helper->__('EBANX: Payment doesn\'t exist.'));
@@ -80,7 +80,7 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 		try {
 			$this->initialize();
 		} catch (Ebanx_Gateway_Exception $e) {
-			Mage::log($e->getMessage(), null, 'ebanx_error.log', true);
+			$this->helper->error_log($e->getMessage());
 
 			return $this->setResponseToJson([
 				'success' => false,
@@ -98,7 +98,7 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 			]);
 		} catch (Exception $e) {
 			$this->order->addStatusHistoryComment($this->helper->__('EBANX: We could not update the order status. Error message: %s.', $e->getMessage()));
-			Mage::log($e->getMessage(), null, 'ebanx_error.log', true);
+			$this->helper->error_log($e->getMessage());
 			Mage::throwException($e->getMessage());
 		}
 	}
