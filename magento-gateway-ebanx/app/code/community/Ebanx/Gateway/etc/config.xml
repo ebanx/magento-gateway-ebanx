@@ -140,10 +140,24 @@
             </ebanx_oxxo>
             <!-- Settings -->
             <ebanx_settings>
+                <brazil_taxes>cpf</brazil_taxes>
+
+                <!-- Brazil Payment Methods -->
+                <payment_methods_brazil>credit_card,boleto,tef,wallet</payment_methods_brazil>
+                <payment_methods_chile>sencillito,servipag</payment_methods_chile>
+                <payment_methods_colombia>eft,baloto</payment_methods_colombia>
+                <payment_methods_peru>safetypay,pagoefectivo</payment_methods_peru>
+                <payment_methods_mexico>credit_card,debit_card,oxxo</payment_methods_mexico>
+
                 <payment_co_status>processing</payment_co_status>
                 <payment_pe_status>holded</payment_pe_status>
                 <payment_op_status>pending</payment_op_status>
                 <payment_ca_status>canceled</payment_ca_status>
+                <!-- Compliance Fields -->
+                <cpf_field>taxvat</cpf_field>
+                <cnpj_field>taxvat</cnpj_field>
+                <rut_field>taxvat</rut_field>
+                <dni_field>taxvat</dni_field>
             </ebanx_settings>
         </payment>
     </default>

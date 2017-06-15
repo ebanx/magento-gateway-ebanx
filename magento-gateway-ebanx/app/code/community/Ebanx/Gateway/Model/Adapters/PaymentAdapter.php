@@ -48,10 +48,11 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 
 	public function transformPerson($person, $data)
 	{
+		$document = $this->helper->getDocumentNumber();
+
 		return new Person([
-			'type' => 'personal', // TODO
-			'birthdate' => new \DateTime('1978-03-29 08:15:51.000000 UTC'), // TODO
-			'document' => null,
+			'type' => $this->helper->getPersonType($document), // TODO
+			'document' => $document,
 			'email' => $person->getEmail(),
 			'ip' => $data->getRemoteIp(),
 			'name' => $data->getPerson()->getFirstname() . ' ' . $data->getPerson()->getLastname(),
