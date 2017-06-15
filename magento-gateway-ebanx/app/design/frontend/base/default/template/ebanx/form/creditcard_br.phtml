@@ -4,6 +4,12 @@
         <p>Pagar com Cartão de Crédito.</p>
     </li>
     <li>
+        <label for="<?php echo $_code ?>_cc_name" class="required"><em>*</em><?php echo $this->__('Nome no Cartão') ?></label>
+        <div class="input-box">
+            <input type="text" id="<?php echo $_code ?>_cc_name" name="payment[cc_name]" title="<?php echo Mage::helper('core')->jsQuoteEscape($this->__('Nome no Cartão')) ?>" class="input-text" value="" />
+        </div>
+    </li>
+    <li>
         <label for="<?php echo $_code ?>_cc_number" class="required"><em>*</em><?php echo $this->__('Número do Cartão') ?></label>
         <div class="input-box">
             <input type="text" id="<?php echo $_code ?>_cc_number" name="payment[cc_number]" title="<?php echo Mage::helper('core')->jsQuoteEscape($this->__('Número do Cartão')) ?>" class="input-text validate-cc-number" value="" />
@@ -45,6 +51,10 @@
 <input type="hidden" name="ebanx_device_fingerprint" id="ebanx_device_fingerprint" />
 <input type="hidden" name="ebanx_billing_instalments" id="ebanx_billing_instalments" />
 <input type="hidden" name="ebanx_billing_cvv" id="ebanx_billing_cvv" />
+<input type="hidden" name="ebanx_mode" id="ebanx_mode" value="<?php echo Mage::helper('ebanx')->getMode() ?>" />
+<input type="hidden" name="ebanx_integration_key" id="ebanx_integration_key" value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>" />
+<input type="hidden" name="ebanx_country" id="ebanx_country" value="br" />
+
 <script type="text/javascript">
     //<![CDATA[
     handleEbanxForm('dt_method_ebanx_cc_br');

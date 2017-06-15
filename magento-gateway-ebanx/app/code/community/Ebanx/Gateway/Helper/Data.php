@@ -29,6 +29,11 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return Mage::getStoreConfig('payment/ebanx_settings/integration_key_' . $this->getMode());
 	}
 
+	public function getPublicIntegrationKey()
+	{
+		return Mage::getStoreConfig('payment/ebanx_settings/integration_key_public_' . $this->getMode());
+	}
+
 	public function getSandboxIntegrationKey()
 	{
 		return Mage::getStoreConfig('payment/ebanx_settings/integration_key_' . Ebanx_Gateway_Model_Source_Mode::SANDBOX);
