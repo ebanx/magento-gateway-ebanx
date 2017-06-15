@@ -2,6 +2,7 @@
 require_once Mage::getBaseDir('lib') . '/Ebanx/vendor/autoload.php';
 
 use Ebanx\Benjamin\Models\Configs\Config;
+use Ebanx\Benjamin\Models\Configs\CreditCardConfig;
 
 class Ebanx_Gateway_Model_Api
 {

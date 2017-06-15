@@ -1,6 +1,6 @@
 <?php
 
-abstract class Ebanx_Gateway_Model_Payment_CreditCard extends Mage_Payment_Model_Method_Abstract
+abstract class Ebanx_Gateway_Model_Payment_CreditCard extends Ebanx_Gateway_Model_Payment
 {
 	protected $gateway;
 	protected $payment;

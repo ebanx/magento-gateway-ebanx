@@ -14,8 +14,8 @@ services:
       - ./magento-gateway-ebanx/app/design/frontend/base/default/layout/:/var/www/htdocs/app/design/frontend/base/default/layout/
       - ./magento-gateway-ebanx/app/design/frontend/base/default/template/ebanx/:/var/www/htdocs/app/design/frontend/base/default/template/ebanx/
       - ./magento-gateway-ebanx/skin/adminhtml/default/default/ebanx/:/var/www/htdocs/skin/adminhtml/default/default/ebanx/
-      - ./magento-gateway-ebanx/skin/frontend/base/default/css/ebanx/:/var/www/htdocs/skin/frontend/base/default/css/ebanx/
-      - ./magento-gateway-ebanx/skin/frontend/base/default/js/ebanx/:/var/www/htdocs/skin/frontend/base/default/js/ebanx/
+      - ./magento-gateway-ebanx/skin/frontend/base/default/ebanx/css/:/var/www/htdocs/skin/frontend/base/default/ebanx/css/
+      - ./magento-gateway-ebanx/skin/frontend/base/default/ebanx/js/:/var/www/htdocs/skin/frontend/base/default/ebanx/js/
       - ./magento-gateway-ebanx/lib/Ebanx/:/var/www/htdocs/lib/Ebanx/
       - /var/www/htdocs
     environment:
