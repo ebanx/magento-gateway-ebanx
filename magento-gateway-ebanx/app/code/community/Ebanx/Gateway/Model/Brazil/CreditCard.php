@@ -14,5 +14,4 @@ class Ebanx_Gateway_Model_Brazil_CreditCard extends Ebanx_Gateway_Model_Payment_
 
 		$this->gateway = $this->ebanx->creditCard();
 	}
-
 }

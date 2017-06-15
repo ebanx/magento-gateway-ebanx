@@ -44,16 +44,16 @@
             </div>
         </div>
     </li>
+    <input type="hidden" name="payment[ebanx_token]" id="ebanx_token" />
+    <input type="hidden" name="payment[ebanx_brand]" id="ebanx_brand" />
+    <input type="hidden" name="payment[ebanx_masked_card_number]" id="ebanx_masked_card_number" />
+    <input type="hidden" name="payment[ebanx_device_fingerprint]" id="ebanx_device_fingerprint" />
+    <input type="hidden" name="payment[ebanx_billing_instalments]" id="ebanx_billing_instalments" />
+    <input type="hidden" name="payment[ebanx_billing_cvv]" id="ebanx_billing_cvv" />
+    <input type="hidden" name="payment[ebanx_mode]" id="ebanx_mode" value="<?php echo Mage::helper('ebanx')->getMode() ?>" />
+    <input type="hidden" name="payment[ebanx_integration_key]" id="ebanx_integration_key" value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>" />
+    <input type="hidden" name="payment[ebanx_country]" id="ebanx_country" value="br" />
 </ul>
-<input type="hidden" name="ebanx_token" id="ebanx_token" />
-<input type="hidden" name="ebanx_brand" id="ebanx_brand" />
-<input type="hidden" name="ebanx_masked_card_number" id="ebanx_masked_card_number" />
-<input type="hidden" name="ebanx_device_fingerprint" id="ebanx_device_fingerprint" />
-<input type="hidden" name="ebanx_billing_instalments" id="ebanx_billing_instalments" />
-<input type="hidden" name="ebanx_billing_cvv" id="ebanx_billing_cvv" />
-<input type="hidden" name="ebanx_mode" id="ebanx_mode" value="<?php echo Mage::helper('ebanx')->getMode() ?>" />
-<input type="hidden" name="ebanx_integration_key" id="ebanx_integration_key" value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>" />
-<input type="hidden" name="ebanx_country" id="ebanx_country" value="br" />
 
 <script type="text/javascript">
     //<![CDATA[

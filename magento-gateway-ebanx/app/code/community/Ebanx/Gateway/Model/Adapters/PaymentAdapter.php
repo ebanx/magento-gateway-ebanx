@@ -34,19 +34,20 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 		]);
 	}
 
-	/**
-	 * @param Varien_Object $data
-	 * @return Payment
-	 */
 	public function transformCard(Varien_Object $data)
 	{
+		$gatewayFields = Mage::app()->getRequest()->getPost('payment');
+
 		$payment = $this->transform($data);
+		$payment->deviceId = $gatewayFields['ebanx_device_fingerprint'];
+
 		$payment->card = new Card([
 			'autoCapture' => true,
-			'token'       => 12312312312312312312312313123123123123,
-			'cvv'         => 123,
-			'name'        => $data->getPerson()->getFirstname() . ' '. $data->getPerson()->getLastname(),
-			'type'        => 'mastercard',
+			'cvv' => $gatewayFields['cc_cid'],
+			'dueDate' => DateTime::createFromFormat('n-Y', $gatewayFields['cc_exp_month'] . '-' . $gatewayFields['cc_exp_year']),
+			'name' => $gatewayFields['cc_name'],
+			'token' => $gatewayFields['ebanx_token'],
+			'type' => $gatewayFields['ebanx_brand'],
 		]);
 
 		return $payment;
@@ -70,7 +71,7 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 		return new Person([
 			'type' => 'personal', // TODO
 			'birthdate' => new \DateTime('1978-03-29 08:15:51.000000 UTC'), // TODO
-			'document' => null,
+			'document' => '35433160874',
 			'email' => $person->getEmail(),
 			'ip' => $data->getRemoteIp(),
 			'name' => $data->getPerson()->getFirstname() . ' ' . $data->getPerson()->getLastname(),
