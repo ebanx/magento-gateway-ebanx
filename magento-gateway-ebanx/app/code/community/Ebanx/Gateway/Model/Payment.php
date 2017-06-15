@@ -74,7 +74,6 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 	public function processPayment()
 	{
-		// Do request
 		$res = $this->gateway->create($this->paymentData);
 
 		$this->helper->log($res, $this->getCode() . '.log');
