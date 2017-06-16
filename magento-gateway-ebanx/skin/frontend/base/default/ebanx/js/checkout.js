@@ -37,7 +37,7 @@ function handleEbanxForm(formId) {
   if (ebanxMode.value === 'sandbox') {
     EBANX.config.setMode('test');
   } else {
-    EBANX.config.setMode('live');
+    EBANX.config.setMode('production');
   }
   EBANX.config.setPublishableKey(ebanxIntegrationKey.value);
   EBANX.config.setCountry(ebanxCountry.value);
