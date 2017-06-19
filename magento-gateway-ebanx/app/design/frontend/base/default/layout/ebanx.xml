@@ -1,5 +1,27 @@
 <?xml version="1.0"?>
 <layout>
+    <!-- Checkout Page -->
+    <ebanx_checkout_handle>
+        <reference name="head">
+            <action method="addCss"><stylesheet>ebanx/css/checkout.css</stylesheet></action>
+            <block type="core/text" name="your_external_file">
+                <action method="setText"><text><![CDATA[<script src="//js.ebanx.com/ebanx-1.5.min.js"></script>]]></text></action>
+            </block>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/checkout.js</name>
+            </action>
+        </reference>
+    </ebanx_checkout_handle>
+
+    <checkout_onepage_index>
+        <update handle="ebanx_checkout_handle"/>
+    </checkout_onepage_index>
+
+    <onepagecheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </onepagecheckout_index_index>
+
     <!-- Succes Page -->
     <ebanx_checkout_success_handle>
         <reference name="head">

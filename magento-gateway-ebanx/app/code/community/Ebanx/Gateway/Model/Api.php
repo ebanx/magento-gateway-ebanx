@@ -2,10 +2,24 @@
 require_once Mage::getBaseDir('lib') . '/Ebanx/vendor/autoload.php';
 
 use Ebanx\Benjamin\Models\Configs\Config;
+use Ebanx\Benjamin\Models\Configs\CreditCardConfig;
 
 class Ebanx_Gateway_Model_Api
 {
 	protected $benjamin;
+    protected $config;
+
+	public function getConfig()
+	{
+		return new Config(array(
+			'integrationKey' => Mage::helper('ebanx')->getLiveIntegrationKey(),
+			'sandboxIntegrationKey' => Mage::helper('ebanx')->getSandboxIntegrationKey(),
+			'isSandbox' => Mage::helper('ebanx')->isSandboxMode(),
+			'baseCurrency' => Mage::app()->getStore()->getCurrentCurrencyCode(),
+			'notificationUrl' => Mage::getBaseUrl(),
+			'redirectUrl' => Mage::getBaseUrl(),
+		));
+	}
 
 	public function __construct()
 	{
@@ -27,6 +41,17 @@ class Ebanx_Gateway_Model_Api
 
 	public function ebanx()
 	{
-		return $this->benjamin;
+		return EBANX($this->getConfig());
+	}
+
+	public function ebanxCreditCard()
+	{
+		$creditCardConfig = new CreditCardConfig(array(
+			'maxInstalments'      => 12,
+			'minInstalmentAmount' => 20,
+			'interestRates'       => 0,
+		));
+
+		return EBANX($this->getConfig(), $creditCardConfig);
 	}
 }

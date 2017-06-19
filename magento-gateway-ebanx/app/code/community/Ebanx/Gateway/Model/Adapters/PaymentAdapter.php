@@ -3,6 +3,7 @@ require_once Mage::getBaseDir('lib') . '/Ebanx/vendor/autoload.php';
 
 use Ebanx\Benjamin\Models\Address;
 use Ebanx\Benjamin\Models\Item;
+use Ebanx\Benjamin\Models\Card;
 use Ebanx\Benjamin\Models\Payment;
 use Ebanx\Benjamin\Models\Person;
 
@@ -31,6 +32,25 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 			'responsible' => $this->transformPerson($data->getPerson(), $data),
 			'items' => $this->transformItems($data->getItems(), $data)
 		]);
+	}
+
+	public function transformCard(Varien_Object $data)
+	{
+		$gatewayFields = Mage::app()->getRequest()->getPost('payment');
+
+		$payment = $this->transform($data);
+		$payment->deviceId = $gatewayFields['ebanx_device_fingerprint'];
+
+		$payment->card = new Card([
+			'autoCapture' => true,
+			'cvv' => $gatewayFields['cc_cid'],
+			'dueDate' => DateTime::createFromFormat('n-Y', $gatewayFields['cc_exp_month'] . '-' . $gatewayFields['cc_exp_year']),
+			'name' => $gatewayFields['cc_name'],
+			'token' => $gatewayFields['ebanx_token'],
+			'type' => $gatewayFields['ebanx_brand'],
+		]);
+
+		return $payment;
 	}
 
 	public function transformAddress($address, $data)
