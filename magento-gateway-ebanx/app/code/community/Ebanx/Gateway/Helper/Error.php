@@ -10,6 +10,21 @@ class Ebanx_Gateway_Helper_Error extends Mage_Core_Helper_Abstract
 		$this->errors = $this->setupErrors();
 	}
 
+	public function getLanguage($country)
+	{
+		switch (strtolower($country)) {
+			case 'br':
+				return 'pt-br';
+			case 'mx':
+			case 'cl':
+			case 'co':
+			case 'pe':
+				return 'es';
+				break;
+			default:
+				return 'pt-br';
+		};
+	}
 	public function setupErrors()
 	{
 		return array(
