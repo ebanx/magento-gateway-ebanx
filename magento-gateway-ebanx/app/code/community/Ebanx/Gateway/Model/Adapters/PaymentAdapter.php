@@ -43,7 +43,7 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 			'streetNumber' => $street['houseNumber'],
 			'city' => $address->getCity(),
 			'country' => $this->helper->transformCountryCodeToName($address->getCountry()),
-			'state' => $address->getRegionCode(),
+			'state' => $address->getRegion(),
 			'streetComplement' => $address->getStreet2(),
 			'zipcode' => $address->getPostcode()
 		]);
@@ -68,12 +68,13 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 		$itemsData = [];
 
 		foreach ($items as $item) {
+			$product = $item->getProduct();
+
 			$itemsData[] = new Item([
 				'sku' => $item->getSku(),
 				'name' => $item->getName(),
-				'description' => $item->getDescription(),
-				'unitPrice' => $item->getPrice(),
-				'quantity' => $item->getTotalQtyOrdered()
+				'unitPrice' => $product->getPrice(),
+				'quantity' => $item->getQtyToInvoice()
 			]);
 		}
 
