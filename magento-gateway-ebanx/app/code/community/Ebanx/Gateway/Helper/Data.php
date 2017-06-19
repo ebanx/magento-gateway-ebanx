@@ -267,7 +267,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		Mage::log($data, null, $filename, true);
 	}
 
-	public function error_log($data)
+	public function errorLog($data)
 	{
 		$this->log($data, 'ebanx_error.log');
 	}
