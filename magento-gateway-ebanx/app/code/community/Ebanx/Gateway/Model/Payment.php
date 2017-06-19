@@ -22,6 +22,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 		$this->ebanx = Mage::getSingleton('ebanx/api')->ebanx();
 		$this->adapter = Mage::getModel('ebanx/adapters_paymentAdapter');
+		$this->helper = Mage::helper('ebanx');
 	}
 
 	public function initialize($paymentAction, $stateObject)
@@ -31,7 +32,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 			$this->payment = $this->getInfoInstance();
 			$this->order = $this->payment->getOrder();
-			$this->customer = Mage::getModel('customer/customer')->load($this->order->getCustomerId());
+			$this->customer = Mage::getModel('sales/order')->load($this->order->getId());
 
 			$this->setupData();
 
@@ -54,8 +55,8 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 		$this->data = new Varien_Object();
 		$this->data->setMerchantPaymentCode($merchantPaymentCode)
-			->setDueDate(Mage::helper('ebanx')->getDueDate())
-			->setEbanxMethod($this->_code)
+			->setDueDate($this->helper->getDueDate())
+			->setEbanxMethod($this->getCode())
 			->setStoreCurrency(Mage::app()->getStore()->getCurrentCurrencyCode())
 			->setAmountTotal($this->order->getGrandTotal())
 			->setPerson($this->customer)
@@ -73,14 +74,17 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 	public function processPayment()
 	{
-		// Do request
 		$res = $this->gateway->create($this->paymentData);
 
-		Mage::log(print_r($res, true), null, $this->getCode() . '.log', true);
+		$this->helper->log($res, $this->getCode());
 
 		if ($res['status'] !== 'SUCCESS') {
-			// TODO: Make an error handler
-			Mage::throwException($res['status_code'] . ' - ' . $res['status_message']);
+			$error = Mage::helper('ebanx/error');
+			$country = $this->order->getBillingAddress()->getCountry();
+			$code = $res['status_code'];
+
+			$this->helper->errorLog($res);
+			Mage::throwException($error->getError($code, $country));
 		}
 
 		// Set the URL for redirect
@@ -95,8 +99,15 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 	public function persistPayment()
 	{
-		$this->payment->setEbanxPaymentHash($this->result['payment']['hash'])
-			->setEbanxEnvironment(Mage::helper('ebanx')->getMode());
+		$this->payment
+			->setEbanxPaymentHash($this->result['payment']['hash'])
+			->setEbanxEnvironment($this->helper->getMode());
+
+		if ($this->order->getCustomerId()) {
+			Mage::getModel('customer/customer')->load($this->order->getCustomerId())
+				->setEbanxCustomerDocument($this->helper->getDocumentNumber($this->order))
+				->save();
+		}
 	}
 
 	public function getOrderPlaceRedirectUrl()
@@ -106,7 +117,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 	public function canUseForCountry($country)
 	{
-		$countryName = Mage::helper('ebanx')->transformCountryCodeToName($country);
+		$countryName = $this->helper->transformCountryCodeToName($country);
 
 		return $this->gateway->isAvailableForCountry($countryName);
 	}
