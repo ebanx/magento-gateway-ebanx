@@ -34,11 +34,8 @@ function handleEbanxForm(formId) {
 
   var ebanxForm = document.getElementById(formId);
 
-  if (ebanxMode.value === 'sandbox') {
-    EBANX.config.setMode('test');
-  } else {
-    EBANX.config.setMode('production');
-  }
+  var mode = ebanxMode.value === 'sandbox' ? 'test' : 'production';
+  EBANX.config.setMode(mode);
   EBANX.config.setPublishableKey(ebanxIntegrationKey.value);
   EBANX.config.setCountry(ebanxCountry.value);
 
@@ -60,10 +57,14 @@ function handleEbanxForm(formId) {
   function isFormEmpty() {
     if (cardNumber &&
       // cardName &&
-      cardExpirationMonth && cardExpirationYear && cardCvv) {
-      return (cardNumber.value.length === 0 ||
-      // cardName.value.length === 0 ||
-      cardExpirationMonth.value === 0 || cardExpirationYear.value === 0 || cardCvv.value.length === 0);
+      cardExpirationMonth &&
+      cardExpirationYear &&
+      cardCvv) {
+      return (cardNumber.value.length ||
+      // cardName.value.length ||
+      cardExpirationMonth.value ||
+      cardExpirationYear.value ||
+      cardCvv.value.length);
     }
 
     return true;
