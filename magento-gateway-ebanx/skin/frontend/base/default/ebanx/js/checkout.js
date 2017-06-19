@@ -1,5 +1,5 @@
 function handleEbanxForm(formId) {
-  var CARD_NAME_ID = 'ebanx_cc_br_cc_name';
+  // var CARD_NAME_ID = 'ebanx_cc_br_cc_name';
   var CARD_NUMBER_ID = 'ebanx_cc_br_cc_number';
   var CARD_EXPIRATION_MONTH_ID = 'ebanx_cc_br_expiration';
   var CARD_EXPIRATION_YEAR_ID = 'ebanx_cc_br_expiration_yr';
@@ -17,7 +17,7 @@ function handleEbanxForm(formId) {
   var responseData;
   var iterations = 0;
 
-  var cardName = document.getElementById(CARD_NAME_ID);
+  // var cardName = document.getElementById(CARD_NAME_ID);
   var cardNumber = document.getElementById(CARD_NUMBER_ID);
   var cardExpirationMonth = document.getElementById(CARD_EXPIRATION_MONTH_ID);
   var cardExpirationYear = document.getElementById(CARD_EXPIRATION_YEAR_ID);
@@ -43,7 +43,7 @@ function handleEbanxForm(formId) {
   EBANX.config.setCountry(ebanxCountry.value);
 
   if (ebanxForm) {
-    document.getElementById(CARD_NAME_ID).addEventListener('focusout', handleToken, false);
+    // document.getElementById(CARD_NAME_ID).addEventListener('focusout', handleToken, false);
     document.getElementById(CARD_NUMBER_ID).addEventListener('focusout', handleToken, false);
     document.getElementById(CARD_EXPIRATION_MONTH_ID).addEventListener('focusout', handleToken, false);
     document.getElementById(CARD_EXPIRATION_YEAR_ID).addEventListener('focusout', handleToken, false);
@@ -58,8 +58,12 @@ function handleEbanxForm(formId) {
   }
 
   function isFormEmpty() {
-    if (cardName && cardNumber && cardExpirationMonth && cardExpirationYear && cardCvv) {
-      return (cardName.value.length === 0 || cardNumber.value.length === 0 || cardExpirationMonth.value === 0 || cardExpirationYear.value === 0 || cardCvv.value.length === 0);
+    if (cardNumber &&
+      // cardName &&
+      cardExpirationMonth && cardExpirationYear && cardCvv) {
+      return (cardNumber.value.length === 0 ||
+      // cardName.value.length === 0 ||
+      cardExpirationMonth.value === 0 || cardExpirationYear.value === 0 || cardCvv.value.length === 0);
     }
 
     return true;
@@ -69,7 +73,7 @@ function handleEbanxForm(formId) {
     if (!responseData) {
       EBANX.card.createToken({
         card_number: parseInt(cardNumber.value.replace(/ /g,'')),
-        card_name: cardName.value,
+        // card_name: cardName.value,
         card_due_date: (parseInt( cardExpirationMonth.value ) || 0) + '/' + (parseInt( cardExpirationYear.value ) || 0),
         card_cvv: cardCvv.value
       }, saveToken);
