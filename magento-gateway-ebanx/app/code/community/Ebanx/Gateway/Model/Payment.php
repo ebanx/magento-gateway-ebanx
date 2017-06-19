@@ -76,11 +76,15 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 	{
 		$res = $this->gateway->create($this->paymentData);
 
-		$this->helper->log($res, $this->getCode() . '.log');
+		$this->helper->log($res, $this->getCode());
 
 		if ($res['status'] !== 'SUCCESS') {
-			// TODO: Make an error handler
-			Mage::throwException($res['status_code'] . ' - ' . $res['status_message']);
+			$error = Mage::helper('ebanx/error');
+			$country = $this->order->getBillingAddress()->getCountry();
+			$code = $res['status_code'];
+
+			$this->helper->errorLog($res);
+			Mage::throwException($error->getError($code, $country));
 		}
 
 		// Set the URL for redirect
