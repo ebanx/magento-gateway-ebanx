@@ -5,7 +5,7 @@ class Ebanx_Gateway_Block_Adminhtml_System_Config_Form_Field_Interest
 {
 	public function __construct()
 	{
-		$this->addColumn('installments', array(
+		$this->addColumn('instalments', array(
 			'label' => Mage::helper('ebanx')->__('Up To'),
 			'style' => 'width:120px',
 		));
@@ -37,7 +37,7 @@ class Ebanx_Gateway_Block_Adminhtml_System_Config_Form_Field_Interest
 		$extraParams = ' data-value="#{' . $columnName . '}" ' .
 			(isset($column['style']) ? ' style="' . $column['style'] . '"' : '');
 
-		if ($columnName == 'installments') {
+		if ($columnName == 'instalments') {
 			return $this->getInstallmentsSelectHtml($elementName, $extraParams);
 		}
 		return parent::_renderCellTemplate($columnName);
@@ -52,7 +52,7 @@ class Ebanx_Gateway_Block_Adminhtml_System_Config_Form_Field_Interest
 	{
 		$select = $this->getLayout()->createBlock('adminhtml/html_select')
 			->setName($name)
-			->setClass('select-installments')
+			->setClass('select-instalments')
 			->setExtraParams($extraParams)
 			->setOptions(Mage::getSingleton('ebanx/source_instalment')->toOptionArray());
 
@@ -68,7 +68,7 @@ class Ebanx_Gateway_Block_Adminhtml_System_Config_Form_Field_Interest
 	{
 		$html = parent::_toHtml();
 		$html .= Mage::helper('adminhtml/js')->getScript(
-			"$$('.select-installments').each(function(el){ el.value = el.readAttribute('data-value'); });\n"
+			"$$('.select-instalments').each(function(el){ el.value = el.readAttribute('data-value'); });\n"
 		);
 
 		return $html;
