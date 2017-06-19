@@ -25,6 +25,16 @@ class Ebanx_Gateway_Helper_Error extends Mage_Core_Helper_Abstract
 				return 'pt-br';
 		};
 	}
+
+	public function getError($code = 'GENERAL', $country = null)
+	{
+		$language = $this->getLanguage($country);
+
+		$isErrorExist = array_key_exists($code, $this->errors[$language]);
+
+		return $isErrorExist ? $this->errors[$language][strtoupper($code)] : $this->errors[$language][$this->generalCode];
+	}
+
 	public function setupErrors()
 	{
 		return array(
