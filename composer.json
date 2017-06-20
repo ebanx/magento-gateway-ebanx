@@ -3,6 +3,9 @@
   "description": "",
   "type": "project",
   "license": "MIT",
+  "config": {
+    "vendor-dir": "magento-gateway-ebanx/lib/Ebanx/vendor"
+  },
   "repositories": [
     {
       "type": "vcs",
