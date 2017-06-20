@@ -28,23 +28,15 @@ abstract class Ebanx_Gateway_Model_Payment_CreditCard extends Ebanx_Gateway_Mode
 
 	public function setupData()
 	{
-		// Create payment data
-		$id                  = $this->payment->getOrder()->getIncrementId();
-		$time                = time();
-		$merchantPaymentCode = "$id-$time";
+		parent::setupData();
 
-		$this->data = new Varien_Object();
-		$this->data->setMerchantPaymentCode($merchantPaymentCode)
-					->setDueDate(Mage::helper('ebanx')->getDueDate())
-					->setEbanxMethod($this->_code)
-					->setStoreCurrency(Mage::app()->getStore()->getCurrentCurrencyCode())
-					->setAmountTotal($this->order->getGrandTotal())
-					->setPerson($this->customer)
-					->setItems($this->order->getAllVisibleItems())
-					->setRemoteIp($this->order->getRemoteIp())
-					->setBillingAddress($this->order->getBillingAddress())
-					->setPayment($this->payment)
-					->setOrder($this->order);
+		$this->data->setGatewayFields(Mage::app()->getRequest()->getPost('payment'));
+		$this->data->setInstalmentTerms(
+			$this->gateway->getPaymentTermsForCountryAndValue(
+				$this->helper->transformCountryCodeToName($this->data->getBillingAddress()->getCountry()),
+				$this->data->getAmountTotal()
+			)
+		);
 	}
 
 	public function transformPaymentData()
