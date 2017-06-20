@@ -3,12 +3,9 @@
   "description": "",
   "type": "project",
   "license": "MIT",
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/ebanx/benjamin.git"
-    }
-  ],
+  "config": {
+    "vendor-dir": "magento-gateway-ebanx/lib/Ebanx/vendor"
+  },
   "minimum-stability": "dev",
   "require": {
     "ebanx/benjamin": "master"
