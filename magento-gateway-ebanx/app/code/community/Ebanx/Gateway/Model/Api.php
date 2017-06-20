@@ -31,10 +31,6 @@ class Ebanx_Gateway_Model_Api
 			'notificationUrl' => Mage::getUrl('ebanx/index/notification/'),
 			'redirectUrl' => Mage::getUrl('ebanx/index/notification/'),
 		));
-		// Mage::log($config, null, 'benjamin-config.log', true);
-		// $creditCardConfig = new CreditCardConfig();
-		// $creditCardConfig->addInterest(1,0.2);
-		// $this->benjamin = EBANX($config, $creditCardConfig);
 
 		$this->benjamin = EBANX($config);
 	}

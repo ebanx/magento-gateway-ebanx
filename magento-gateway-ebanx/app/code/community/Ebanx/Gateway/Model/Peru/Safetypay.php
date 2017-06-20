@@ -22,4 +22,9 @@ class Ebanx_Gateway_Model_Peru_Safetypay extends Ebanx_Gateway_Model_Payment
 
 		parent::initialize($paymentAction, $stateObject);
 	}
+
+	public function isAvailable()
+	{
+		return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_peru']));
+	}
 }

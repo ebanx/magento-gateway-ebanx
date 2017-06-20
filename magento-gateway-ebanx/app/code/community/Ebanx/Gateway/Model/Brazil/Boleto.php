@@ -14,6 +14,11 @@ class Ebanx_Gateway_Model_Brazil_Boleto extends Ebanx_Gateway_Model_Payment
 		$this->gateway = $this->ebanx->boleto();
 	}
 
+	public function isAvailable()
+	{
+		return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_brazil']));
+	}
+
 	public function persistPayment()
 	{
 		parent::persistPayment();

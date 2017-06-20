@@ -2,10 +2,10 @@
 
 class Ebanx_Gateway_Model_Source_MethodsBrazil
 {
-	const CREDIT_CARD = 'credit_card';
-	const BOLETO = 'boleto';
-	const TEF = 'tef';
-	const WALLET = 'wallet';
+	const CREDIT_CARD = 'ebanx_cc_br';
+	const BOLETO = 'ebanx_boleto';
+	const TEF = 'ebanx_tef';
+	const WALLET = 'ebanx_wallet';
 
 	public function toOptionArray()
 	{

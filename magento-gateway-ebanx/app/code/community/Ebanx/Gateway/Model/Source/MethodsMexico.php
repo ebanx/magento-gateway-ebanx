@@ -2,9 +2,9 @@
 
 class Ebanx_Gateway_Model_Source_MethodsMexico
 {
-	const CREDIT_CARD = 'credit_card';
-	const DEBIT_CARD = 'debit_card';
-	const OXXO = 'oxxo';
+	const CREDIT_CARD = 'ebanx_cc_mx';
+	const DEBIT_CARD = 'ebanx_dc_mx';
+	const OXXO = 'ebanx_oxxo';
 
 	public function toOptionArray()
 	{
