@@ -66,6 +66,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return Mage::getStoreConfig('payment/ebanx_settings/min_instalment_value');
     }
+    public function getInterestRate()
+    {
+        return Mage::getStoreConfig('payment/AA/interest_rate');
+    }
 
 	public function transformCountryCodeToName($countryCode)
 	{
