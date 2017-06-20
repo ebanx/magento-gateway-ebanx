@@ -41,13 +41,44 @@ class Ebanx_Gateway_Model_Brazil_CreditCard extends Ebanx_Gateway_Model_Payment_
             if ($i == 1) {
                 $label = Mage::helper('ebanx')->__('Pague a vista - %s', $quote->getStore()->formatPrice($amount, false));
             } else {
-                // TODO: Interest Rates
+                $interestRate = $this->getInterestRate($i);
                 $result = $amount / $i;
 
-                $label = Mage::helper('ebanx')->__('%sx - %s sem juros', $i, $quote->getStore()->formatPrice(round($result, 2), false));
+                if ($interestRate > 0) {
+                    $label = Mage::helper('ebanx')->__('%sx - %s com juros', $i, $quote->getStore()->formatPrice(round($result, 2), false));
+                } else {
+                    $label = Mage::helper('ebanx')->__('%sx - %s sem juros', $i, $quote->getStore()->formatPrice(round($result, 2), false));
+                }
             }
             $options[$i] = $label;
         }
         return $options;
+    }
+
+    public function getInterestRate($instalments)
+    {
+        if ($instalments < 2) {
+            return 0;
+        }
+
+        $interestMap = unserialize(Mage::helper('ebanx')->getInterestRate());
+        Mage::log(print_r($interestMap, true), null, 'ebanxInterestRates.log', true);
+        usort($interestMap, array($this, '_sortInterestRateByInstalments'));
+        $interestMap = array_reverse($interestMap, true);
+        $interestRate = 0;
+        foreach ($interestMap as $item) {
+            if ($instalments <= $item['instalments']) {
+                $interestRate = $item['interest'];
+            }
+        }
+        return (float)$interestRate/100;
+    }
+
+    protected function _sortInterestRateByInstalments($a, $b)
+    {
+        if ($a['instalments'] == $b['instalments']) {
+            return 0;
+        }
+        return ($a['instalments'] < $b['instalments']) ? -1 : 1;
     }
 }
