@@ -78,6 +78,13 @@
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_tef>
+            <ebanx_cc_br>
+                <active>1</active>
+                <model>ebanx/brazil_creditcard</model>
+                <title>Cartão de Crédito</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_cc_br>
             <ebanx_wallet>
                 <active>1</active>
                 <model>ebanx/brazil_wallet</model>
