@@ -17,7 +17,7 @@ class Ebanx_Gateway_Model_Brazil_CreditCard extends Ebanx_Gateway_Model_Payment_
 		$this->gateway = $this->ebanx->creditCard();
 	}
 
-	public function isAvailable()
+	public function isAvailable($quote = null)
 	{
 		return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_brazil']));
   }
