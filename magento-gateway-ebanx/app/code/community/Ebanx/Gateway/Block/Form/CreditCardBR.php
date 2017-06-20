@@ -16,8 +16,8 @@ class Ebanx_Gateway_Block_Form_CreditCardBR extends Mage_Payment_Block_Form_Cc
 	{
 		$amount = Mage::helper('core')->formatPrice($instalment->baseAmount, false);
 		$instalmentNumber = $instalment->instalmentNumber;
-		$interestMessage = $instalment->hasInterests ? 'com juros' : 'sem juros';
-		$message = sprintf('%sx de %s %s', $instalmentNumber, $amount, $interestMessage);
+		$interestMessage = $instalment->hasInterests ? ' com juros' : '';
+		$message = sprintf('%sx de %s%s', $instalmentNumber, $amount, $interestMessage);
 		return $message;
 	}
 }
