@@ -42,9 +42,27 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return Mage::getStoreConfig('payment/ebanx_settings/integration_key_' . Ebanx_Gateway_Model_Source_Mode::SANDBOX);
 	}
 
+	public function getSandboxPublicIntegrationKey()
+	{
+		return Mage::getStoreConfig('payment/ebanx_settings/integration_key_public_' . Ebanx_Gateway_Model_Source_Mode::SANDBOX);
+	}
+
 	public function getLiveIntegrationKey()
 	{
 		return Mage::getStoreConfig('payment/ebanx_settings/integration_key_' . Ebanx_Gateway_Model_Source_Mode::LIVE);
+	}
+
+	public function getLivePublicIntegrationKey()
+	{
+		return Mage::getStoreConfig('payment/ebanx_settings/integration_key_public_' . Ebanx_Gateway_Model_Source_Mode::LIVE);
+	}
+
+	public function isKeysFilled()
+	{
+		$hasSandboxKeys = !empty($this->getSandboxIntegrationKey()) && !empty($this->getSandboxPublicIntegrationKey());
+		$hasLiveKeys = !empty($this->getLiveIntegrationKey()) && !empty($this->getLivePublicIntegrationKey());
+
+		return $this->isSandboxMode() ? $hasSandboxKeys : $hasLiveKeys;
 	}
 
 	public function getDueDate()
