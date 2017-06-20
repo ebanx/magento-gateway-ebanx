@@ -3,6 +3,7 @@
 abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abstract
 {
 	static protected $redirect_url;
+
 	protected $gateway;
 	protected $payment;
 	protected $ebanx;
@@ -11,6 +12,8 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 	protected $result;
 	protected $customer;
 	protected $paymentData;
+	protected $configs;
+
 	protected $_isGateway = true;
 	protected $_canUseFormMultishipping = false;
 	protected $_isInitializeNeeded = true;
@@ -20,6 +23,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 	{
 		parent::__construct();
 
+		$this->configs = Mage::getStoreConfig('payment/ebanx_settings');
 		$this->ebanx = Mage::getSingleton('ebanx/api')->ebanx();
 		$this->adapter = Mage::getModel('ebanx/adapters_paymentAdapter');
 		$this->helper = Mage::helper('ebanx');
@@ -54,10 +58,12 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 		$merchantPaymentCode = "$id-$time";
 
 		$this->data = new Varien_Object();
-		$this->data->setMerchantPaymentCode($merchantPaymentCode)
+		$this->data
+			->setMerchantPaymentCode($merchantPaymentCode)
 			->setDueDate($this->helper->getDueDate())
 			->setEbanxMethod($this->getCode())
-			->setStoreCurrency(Mage::app()->getStore()->getCurrentCurrencyCode())
+			->setStoreCurrency(Mage::app()->getStore()
+			->getCurrentCurrencyCode())
 			->setAmountTotal($this->order->getGrandTotal())
 			->setPerson($this->customer)
 			->setItems($this->order->getAllVisibleItems())
@@ -113,6 +119,11 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 	public function getOrderPlaceRedirectUrl()
 	{
 		return self::$redirect_url;
+	}
+
+	public function isAvailable()
+	{
+		return $this->helper->isKeysFilled();
 	}
 
 	public function canUseForCountry($country)

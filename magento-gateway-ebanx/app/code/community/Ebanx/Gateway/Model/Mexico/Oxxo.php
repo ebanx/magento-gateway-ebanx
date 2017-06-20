@@ -12,4 +12,9 @@ class Ebanx_Gateway_Model_Mexico_Oxxo extends Ebanx_Gateway_Model_Payment
 		parent::__construct();
 		$this->gateway = $this->ebanx->oxxo();
 	}
+
+	public function isAvailable()
+	{
+		return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_mexico']));
+	}
 }

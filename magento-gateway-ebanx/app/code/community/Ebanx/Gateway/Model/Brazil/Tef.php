@@ -23,4 +23,9 @@ class Ebanx_Gateway_Model_Brazil_Tef extends Ebanx_Gateway_Model_Payment
 
 		$this->paymentData->bankCode = $bankCode;
 	}
+
+	public function isAvailable()
+	{
+		return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_brazil']));
+	}
 }

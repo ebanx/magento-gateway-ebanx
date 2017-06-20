@@ -13,4 +13,9 @@ class Ebanx_Gateway_Model_Peru_Pagoefectivo extends Ebanx_Gateway_Model_Payment
 
 		$this->gateway = $this->ebanx->pagoefectivo();
 	}
+
+	public function isAvailable()
+	{
+		return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_peru']));
+	}
 }
