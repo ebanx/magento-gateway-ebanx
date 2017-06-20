@@ -6,12 +6,6 @@
   "config": {
     "vendor-dir": "magento-gateway-ebanx/lib/Ebanx/vendor"
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/ebanx/benjamin.git"
-    }
-  ],
   "minimum-stability": "dev",
   "require": {
     "ebanx/benjamin": "master"
