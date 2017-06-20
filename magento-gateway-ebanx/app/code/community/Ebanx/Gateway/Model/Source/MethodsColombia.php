@@ -2,8 +2,8 @@
 
 class Ebanx_Gateway_Model_Source_MethodsColombia
 {
-	const EFT = 'eft';
-	const BALOTO = 'baloto';
+	const EFT = 'ebanx_pse';
+	const BALOTO = 'ebanx_baloto';
 
 	public function toOptionArray()
 	{

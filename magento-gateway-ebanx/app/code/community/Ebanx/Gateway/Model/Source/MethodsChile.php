@@ -2,8 +2,8 @@
 
 class Ebanx_Gateway_Model_Source_MethodsChile
 {
-	const SENCILLITO = 'sencillito';
-	const SERVIPAG = 'servipag';
+	const SENCILLITO = 'ebanx_sencillito';
+	const SERVIPAG = 'ebanx_servipag';
 
 	public function toOptionArray()
 	{
