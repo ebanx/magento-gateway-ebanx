@@ -26,28 +26,6 @@ abstract class Ebanx_Gateway_Model_Payment_CreditCard extends Ebanx_Gateway_Mode
 		$this->adapter = Mage::getModel('ebanx/adapters_paymentAdapter');
 	}
 
-	public function initialize($paymentAction, $stateObject)
-	{
-		try {
-			parent::initialize($paymentAction, $stateObject);
-
-			$this->payment  = $this->getInfoInstance();
-			$this->order    = $this->payment->getOrder();
-			$this->customer = Mage::getModel('customer/customer')->load($this->order->getCustomerId());
-
-			$this->setupData();
-
-			$this->transformPaymentData();
-
-			$this->processPayment();
-
-			$this->persistPayment();
-		}
-		catch (Exception $e) {
-			Mage::throwException($e->getMessage());
-		}
-	}
-
 	public function setupData()
 	{
 		// Create payment data
@@ -95,22 +73,5 @@ abstract class Ebanx_Gateway_Model_Payment_CreditCard extends Ebanx_Gateway_Mode
 		}
 
 		$this->result = $res;
-	}
-
-	public function persistPayment()
-	{
-		$this->payment->setEbanxPaymentHash($this->result['payment']['hash']);
-	}
-
-	public function getOrderPlaceRedirectUrl()
-	{
-		return self::$redirect_url;
-	}
-
-	public function canUseForCountry($country)
-	{
-		$countryName = Mage::helper('ebanx')->transformCountryCodeToName($country);
-
-		return $this->gateway->isAvailableForCountry($countryName);
 	}
 }
