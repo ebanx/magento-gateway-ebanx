@@ -47,8 +47,8 @@ class Ebanx_Gateway_Model_Api
 	public function ebanxCreditCard()
 	{
 		$creditCardConfig = new CreditCardConfig(array(
-			'maxInstalments'      => 12,
-			'minInstalmentAmount' => 20,
+			'maxInstalments'      => Mage::helper('ebanx')->getMaxInstalments(),
+			'minInstalmentAmount' => Mage::helper('ebanx')->getMinInstalmentValue(),
 			'interestRates'       => 0,
 		));
 

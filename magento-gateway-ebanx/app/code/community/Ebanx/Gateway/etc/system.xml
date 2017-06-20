@@ -231,8 +231,8 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </max_instalments>
-                        <min_installment_value translate="label">
-                            <label>Minimum Installment Value</label>
+                        <min_instalment_value translate="label">
+                            <label>Minimum Instalment Value</label>
                             <comment>Set the minimum instalment value during checkout. The minimum EBANX allows for BRL
                                 is 20 and MXN is 100, lower values in these currencies will be ignored.
                             </comment>
@@ -242,7 +242,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                        </min_installment_value>
+                        </min_instalment_value>
                         <use_interest_rates translate="label">
                             <label>Interest Rates</label>
                             <comment>Enable and set a custom interest rate for your customers according to the number of
