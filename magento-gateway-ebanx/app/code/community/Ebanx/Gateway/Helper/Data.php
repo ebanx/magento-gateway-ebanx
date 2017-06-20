@@ -53,10 +53,19 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return $dueDate->addDay($this->getDueDateDays())->get('YYYY-MM-dd HH:mm:ss');
 	}
 
-	public function getDueDateDays()
-	{
-		return Mage::getStoreConfig('payment/ebanx_settings/due_date_days');
-	}
+    public function getDueDateDays()
+    {
+        return Mage::getStoreConfig('payment/ebanx_settings/due_date_days');
+    }
+
+    public function getMaxInstalments()
+    {
+        return Mage::getStoreConfig('payment/ebanx_settings/max_instalments');
+    }
+    public function getMinInstalmentValue()
+    {
+        return Mage::getStoreConfig('payment/ebanx_settings/min_instalment_value');
+    }
 
 	public function transformCountryCodeToName($countryCode)
 	{
@@ -304,7 +313,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		}
 		return array(
 			'streetName' => $street_name,
-			'houseNumber' => $house_number,
+			'houseNumber' => $house_number  ?: 0,
 			'additionToAddress' => $addition_to_address
 		);
 	}

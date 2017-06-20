@@ -40,6 +40,24 @@
             </div>
         </div>
     </li>
+    <?php $_instalmentOptions = $this->getInstalmentTerms() ?>
+    <?php $_selected = $this->getInfoData('instalments') ?>
+    <?php if (count($_instalmentOptions) > 1): ?>
+    <li id="<?php echo $_code ?>-instalments-div">
+        <label for="<?php echo $_code ?>_instalments" class="required"><em>*</em><?php echo $this->__('Instalments') ?></label>
+        <div class="input-box">
+            <select id="<?php echo $_code ?>_instalments" name="payment[instalments]" title="<?php echo $this->__('Instalments') ?>" class="required-entry validate-select">
+                <option value=""><?php echo $this->__('Selecione') ?></option>
+                <?php foreach ($_instalmentOptions as $_instalmentTerm): ?>
+                    <option value="<?php echo $_instalmentTerm->instalmentNumber ?>">
+                        <?php echo $this->formatInstalment($_instalmentTerm); ?>
+                    </option>
+                <?php endforeach ?>
+            </select>
+            <input type="hidden" id="<?php echo $_code ?>_instalment_description" name="payment[instalment_description]" value="<?php echo $this->escapeHtml($this->getInfoData('instalment_description')) ?>" />
+        </div>
+    </li>
+    <?php endif ?>
     <input type="hidden" name="payment[ebanx_token]" id="ebanx_token" />
     <input type="hidden" name="payment[ebanx_brand]" id="ebanx_brand" />
     <input type="hidden" name="payment[ebanx_masked_card_number]" id="ebanx_masked_card_number" />

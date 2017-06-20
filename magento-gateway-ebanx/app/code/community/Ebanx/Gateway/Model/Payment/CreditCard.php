@@ -74,21 +74,4 @@ abstract class Ebanx_Gateway_Model_Payment_CreditCard extends Ebanx_Gateway_Mode
 
 		$this->result = $res;
 	}
-
-	public function persistPayment()
-	{
-		$this->payment->setEbanxPaymentHash($this->result['payment']['hash']);
-	}
-
-	public function getOrderPlaceRedirectUrl()
-	{
-		return self::$redirect_url;
-	}
-
-	public function canUseForCountry($country)
-	{
-		$countryName = Mage::helper('ebanx')->transformCountryCodeToName($country);
-
-		return $this->gateway->isAvailableForCountry($countryName);
-	}
 }

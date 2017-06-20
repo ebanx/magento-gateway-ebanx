@@ -1,4 +1,6 @@
 <?php
+use Ebanx\Benjamin\Models\Country;
+
 class Ebanx_Gateway_Model_Brazil_CreditCard extends Ebanx_Gateway_Model_Payment_CreditCard
 {
 	protected $gateway;
@@ -13,5 +15,13 @@ class Ebanx_Gateway_Model_Brazil_CreditCard extends Ebanx_Gateway_Model_Payment_
 		parent::__construct();
 
 		$this->gateway = $this->ebanx->creditCard();
+	}
+
+	public function getInstalmentTerms()
+	{
+		$quote = $this->getInfoInstance()->getQuote();
+		$amount = $quote->getGrandTotal();
+
+		return $this->gateway->getPaymentTermsForCountryAndValue(Country::BRAZIL, $amount);
 	}
 }

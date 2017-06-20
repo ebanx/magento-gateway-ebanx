@@ -40,6 +40,9 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 
 		$payment = $this->transform($data);
 		$payment->deviceId = $gatewayFields['ebanx_device_fingerprint'];
+		if (isset($gatewayFields['instalments'])) {
+			$payment->instalments = $gatewayFields['instalments'];
+		}
 
 		$payment->card = new Card([
 			'autoCapture' => true,
