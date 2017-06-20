@@ -47,6 +47,11 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return Mage::getStoreConfig('payment/ebanx_settings/integration_key_' . Ebanx_Gateway_Model_Source_Mode::LIVE);
 	}
 
+	public function areKeysFilled()
+	{
+		return !empty($this->getIntegrationKey()) && !empty($this->getPublicIntegrationKey());
+	}
+
 	public function getDueDate()
 	{
 		$dueDate = new Zend_Date(Mage::getModel('core/date')->timestamp());
@@ -99,17 +104,22 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 	public function hasComplianceFieldFromSettings($code)
 	{
 		$methodsToFields = [
+			// Brazil
 			'ebanx_boleto' => ['cpf_field', 'cnpj_field'],
 			'ebanx_tef' => ['cpf_field', 'cnpj_field'],
 			'ebanx_wallet' => ['cpf_field', 'cnpj_field'],
 			'ebanx_cc_br' => ['cpf_field', 'cnpj_field'],
+			// Chile
 			'ebanx_sencillito' => ['rut_field'],
 			'ebanx_servipag' => ['rut_field'],
+			// Colombia
 			'ebanx_baloto' => ['dni_field'],
 			'ebanx_pse' => ['dni_field'],
+			// Mexico
 			'ebanx_oxxo' => [],
 			'ebanx_cc_mx' => [],
 			'ebanx_dc_mx' => [],
+			// Peru
 			'ebanx_pagoefectivo' => [],
 			'ebanx_safetypay' => []
 		];

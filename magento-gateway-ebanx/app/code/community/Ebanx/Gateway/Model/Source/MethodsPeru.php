@@ -2,8 +2,8 @@
 
 class Ebanx_Gateway_Model_Source_MethodsPeru
 {
-	const SAFETYPAY = 'safetypay';
-	const PAGOEFECTIVO = 'pagoefectivo';
+	const SAFETYPAY = 'ebanx_safetypay';
+	const PAGOEFECTIVO = 'ebanx_pagoefectivo';
 
 	public function toOptionArray()
 	{
