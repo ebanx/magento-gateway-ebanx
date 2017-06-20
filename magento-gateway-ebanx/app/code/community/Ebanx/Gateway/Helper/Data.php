@@ -68,7 +68,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
     public function getInterestRate()
     {
-        return Mage::getStoreConfig('payment/AA/interest_rate');
+        return Mage::getStoreConfig('payment/ebanx_settings/interest_rate');
     }
 
 	public function transformCountryCodeToName($countryCode)
