@@ -313,7 +313,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		}
 		return array(
 			'streetName' => $street_name,
-			'houseNumber' => $house_number,
+			'houseNumber' => $house_number  ?: 0,
 			'additionToAddress' => $addition_to_address
 		);
 	}
