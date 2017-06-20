@@ -4,21 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4795fba10e82e7cf2dce5f9990e2954a",
+    "content-hash": "8d5cc83ea22ac4a5902cf2165e47e6a7",
     "packages": [
         {
             "name": "ebanx/benjamin",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ebanx/benjamin.git",
-                "reference": "5165239b262bc6d989255dd713c6d1b26155bf7f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/5165239b262bc6d989255dd713c6d1b26155bf7f",
-                "reference": "5165239b262bc6d989255dd713c6d1b26155bf7f",
-                "shasum": ""
+                "url": "https://github.com//ebanx/benjamin",
+                "reference": "f5c711307cb6fb28f5f2f2de3890d14391e6f058"
             },
             "require": {
                 "guzzlehttp/guzzle": "^5.3.1",
@@ -41,40 +35,12 @@
                     "main.php"
                 ]
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "phpunit"
-                ],
-                "test-only": [
-                    "phpunit --filter"
-                ],
-                "dup-check": [
-                    "phpcpd src && phpcpd tests"
-                ],
-                "test-all": [
-                    "composer test && composer dup-check"
-                ],
-                "style-check": [
-                    "php-cs-fixer fix --dry-run --verbose --diff ./"
-                ],
-                "style-fix": [
-                    "php-cs-fixer fix --verbose ./"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Business rule provider lib for plugin implementations",
-            "support": {
-                "source": "https://github.com/ebanx/benjamin/tree/master",
-                "issues": "https://github.com/ebanx/benjamin/issues"
-            },
-            "time": "2017-06-19 18:50:50"
+            "time": "2017-06-19 20:41:12"
         },
         {
             "name": "guzzlehttp/guzzle",
