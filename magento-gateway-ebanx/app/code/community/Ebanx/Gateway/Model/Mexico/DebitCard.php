@@ -17,4 +17,17 @@ class Ebanx_Gateway_Model_Mexico_DebitCard extends Ebanx_Gateway_Model_Payment
 	{
 		return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_mexico']));
 	}
+
+	public function setupData()
+	{
+		parent::setupData();
+
+		$this->data->setGatewayFields(Mage::app()->getRequest()->getPost('payment'));
+		$this->data->setPaymentType('dc');
+	}
+
+	public function transformPaymentData()
+	{
+		$this->paymentData = $this->adapter->transformCard($this->data);
+	}
 }

@@ -48,11 +48,13 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 			$payment->amountTotal = $term->baseAmount * $term->instalmentNumber;
 		}
 
+		$code = $data->getPaymentType();
+
 		$payment->card = new Card([
 			'autoCapture' => true,
-			'cvv' => $gatewayFields['cc_cid'],
-			'dueDate' => DateTime::createFromFormat('n-Y', $gatewayFields['cc_exp_month'] . '-' . $gatewayFields['cc_exp_year']),
-			'name' => $gatewayFields['cc_name'],
+			'cvv' => $gatewayFields[$code . '_cid'],
+			'dueDate' => DateTime::createFromFormat('n-Y', $gatewayFields[$code . '_exp_month'] . '-' . $gatewayFields[$code . '_exp_year']),
+			'name' => $gatewayFields[$code . '_name'],
 			'token' => $gatewayFields['ebanx_token'],
 			'type' => $gatewayFields['ebanx_brand'],
 		]);
