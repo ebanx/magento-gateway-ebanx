@@ -37,12 +37,15 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 
 	public function transformCard(Varien_Object $data)
 	{
-		$gatewayFields = Mage::app()->getRequest()->getPost('payment');
+		$gatewayFields = $data->getGatewayFields();
+		$instalmentTerms = $data->getInstalmentTerms();
 
 		$payment = $this->transform($data);
 		$payment->deviceId = $gatewayFields['ebanx_device_fingerprint'];
 		if (isset($gatewayFields['instalments'])) {
 			$payment->instalments = $gatewayFields['instalments'];
+			$term = $instalmentTerms[$gatewayFields['instalments'] - 1];
+			$payment->amountTotal = $term->baseAmount * $term->instalmentNumber;
 		}
 
 		$payment->card = new Card([

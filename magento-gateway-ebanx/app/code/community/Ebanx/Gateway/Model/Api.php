@@ -36,8 +36,25 @@ class Ebanx_Gateway_Model_Api
 		$creditCardConfig = new CreditCardConfig(array(
 			'maxInstalments'      => Mage::helper('ebanx')->getMaxInstalments(),
 			'minInstalmentAmount' => Mage::helper('ebanx')->getMinInstalmentValue(),
-			'interestRates'       => 0,
 		));
+
+        $interestRate = unserialize(Mage::helper('ebanx')->getInterestRate());
+        usort($interestRate, function ($value, $previous) {
+            if ($value['instalments'] === $previous['instalments']) {
+                return 0;
+            }
+
+            return ($value['instalments'] < $previous['instalments']) ? -1 : 1;
+        });
+
+        for ($i = 1; $i <= Mage::helper('ebanx')->getMaxInstalments(); $i++) {
+            foreach ($interestRate as $interestConfig) {
+                if ($i <= $interestConfig['instalments']) {
+                    $creditCardConfig->addInterest($i, $interestConfig['interest']);
+                    break;
+                }
+            }
+        }
 
 		return $this->ebanx->addConfig($creditCardConfig);
 	}
