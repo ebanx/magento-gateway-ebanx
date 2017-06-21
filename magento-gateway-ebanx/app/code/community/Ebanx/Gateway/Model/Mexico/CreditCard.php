@@ -3,8 +3,6 @@ use Ebanx\Benjamin\Models\Country;
 
 class Ebanx_Gateway_Model_Mexico_CreditCard extends Ebanx_Gateway_Model_Payment_CreditCard
 {
-	protected $gateway;
-
 	protected $_code = 'ebanx_cc_mx';
 
 	protected $_formBlockType = 'ebanx/form_creditcard_mx';
