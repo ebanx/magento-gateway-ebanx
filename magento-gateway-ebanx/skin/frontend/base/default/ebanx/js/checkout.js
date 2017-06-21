@@ -1,14 +1,14 @@
-function handleEbanxForm(countryCode) {
+function handleEbanxForm(countryCode, paymentType) {
   var gid = function (element) {
     return document.getElementById(element);
   };
   var responseData = null;
 
-  var cardName = gid('ebanx_cc_' + countryCode + '_cc_name');
-  var cardNumber = gid('ebanx_cc_' + countryCode + '_cc_number');
-  var cardExpirationMonth = gid('ebanx_cc_' + countryCode + '_expiration');
-  var cardExpirationYear = gid('ebanx_cc_' + countryCode + '_expiration_yr');
-  var cardCvv = gid('ebanx_cc_' + countryCode + '_cc_cid');
+  var cardName = gid('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_name');
+  var cardNumber = gid('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_number');
+  var cardExpirationMonth = gid('ebanx_' + paymentType + '_' + countryCode + '_expiration');
+  var cardExpirationYear = gid('ebanx_' + paymentType + '_' + countryCode + '_expiration_yr');
+  var cardCvv = gid('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_cid');
   var ebanxToken = gid('ebanx_token');
   var ebanxBrand = gid('ebanx_brand');
   var ebanxMaskedCardNumber = gid('ebanx_masked_card_number');
@@ -19,7 +19,7 @@ function handleEbanxForm(countryCode) {
   var ebanxIntegrationKey = gid('ebanx_integration_key');
   var ebanxCountry = gid('ebanx_country');
 
-  var ebanxForm = gid('dt_method_ebanx_cc_' + countryCode);
+  var ebanxForm = gid('dt_method_ebanx_' + paymentType + '_' + countryCode);
 
   var mode = ebanxMode.value === 'sandbox' ? 'test' : 'production';
   EBANX.config.setMode(mode);
