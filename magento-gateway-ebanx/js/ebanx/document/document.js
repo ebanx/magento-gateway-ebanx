@@ -28,10 +28,10 @@ var changeTaxVatLabel = function () {
 };
 
 var init = function () {
+  var countrySelect = qs('#billing\\:country_id');
   taxVatLabel = qs('label[for="billing\\:taxvat"]');
 
-  if (taxVatLabel) {
-    var countrySelect = qs('#billing\\:country_id');
+  if (taxVatLabel && countrySelect) {
     defaultLabel = taxVatLabel.innerHTML;
 
     countrySelect.addEventListener('change', changeTaxVatLabel);
