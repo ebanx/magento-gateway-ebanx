@@ -26,7 +26,7 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 		$mode    = $this->order->getEbanxEnvironment() === 'sandbox';
 		$payment = $api->paymentInfo()->findByHash($this->hash, $mode);
 
-		$this->helper->log($payment, 'ebanx_payment_notification.log');
+		$this->helper->log($payment, 'ebanx_payment_notification');
 
 		if ($payment['status'] !== 'SUCCESS') {
 			throw new Ebanx_Gateway_Exception($this->helper->__('EBANX: Payment doesn\'t exist.'));

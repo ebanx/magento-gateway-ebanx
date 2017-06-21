@@ -6,7 +6,7 @@ use Ebanx\Benjamin\Models\Configs\CreditCardConfig;
 
 class Ebanx_Gateway_Model_Api
 {
-	protected $benjamin;
+	protected $ebanx;
     protected $config;
 
 	public function getConfig()
@@ -16,28 +16,19 @@ class Ebanx_Gateway_Model_Api
 			'sandboxIntegrationKey' => Mage::helper('ebanx')->getSandboxIntegrationKey(),
 			'isSandbox' => Mage::helper('ebanx')->isSandboxMode(),
 			'baseCurrency' => Mage::app()->getStore()->getCurrentCurrencyCode(),
-			'notificationUrl' => Mage::getBaseUrl(),
-			'redirectUrl' => Mage::getBaseUrl(),
+			'notificationUrl' => Mage::getUrl('ebanx/index/notification/'),
+			'redirectUrl' => Mage::getUrl('ebanx/index/notification/'),
 		));
 	}
 
 	public function __construct()
 	{
-		$config = new Config(array(
-			'integrationKey' => Mage::helper('ebanx')->getLiveIntegrationKey(),
-			'sandboxIntegrationKey' => Mage::helper('ebanx')->getSandboxIntegrationKey(),
-			'isSandbox' => Mage::helper('ebanx')->isSandboxMode(),
-			'baseCurrency' => Mage::app()->getStore()->getCurrentCurrencyCode(),
-			'notificationUrl' => Mage::getUrl('ebanx/index/notification/'),
-			'redirectUrl' => Mage::getUrl('ebanx/index/notification/'),
-		));
-
-		$this->benjamin = EBANX($config);
+		$this->ebanx = EBANX($this->getConfig());
 	}
 
 	public function ebanx()
 	{
-		return EBANX($this->getConfig());
+		return $this->ebanx;
 	}
 
 	public function ebanxCreditCard()
@@ -65,6 +56,6 @@ class Ebanx_Gateway_Model_Api
             }
         }
 
-		return EBANX($this->getConfig(), $creditCardConfig);
+		return $this->ebanx->addConfig($creditCardConfig);
 	}
 }
