@@ -282,18 +282,18 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return Person::TYPE_BUSINESS;
 	}
 
-	public function log($data, $filename = 'ebanx.log')
+	public function log($data, $filename = 'ebanx', $extension = '.log')
 	{
 		$isLogEnabled = Mage::getStoreConfig('payment/ebanx_settings/debug_log') === '1';
 
 		if (!$isLogEnabled) return;
 
-		Mage::log($data, null, $filename, true);
+		Mage::log($data, null, $filename . $extension, true);
 	}
 
 	public function errorLog($data)
 	{
-		$this->log($data, 'ebanx_error.log');
+		$this->log($data, 'ebanx_error');
 	}
 
 	/**
