@@ -55,7 +55,6 @@ function handleEbanxForm(countryCode) {
   var saveToken = function (response) {
     if (response.data.hasOwnProperty('status')) {
       responseData = response.data;
-      console.log(responseData.payment_type_code);
       ebanxToken.value = responseData.token;
       ebanxBrand.value = responseData.payment_type_code;
       ebanxMaskedCardNumber.value = responseData.masked_card_number;
