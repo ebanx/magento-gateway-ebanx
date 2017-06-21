@@ -7,7 +7,7 @@ class Ebanx_Gateway_Model_Brazil_CreditCard extends Ebanx_Gateway_Model_Payment_
 
 	protected $_code = 'ebanx_cc_br';
 
-	protected $_formBlockType = 'ebanx/form_creditcardbr';
+	protected $_formBlockType = 'ebanx/form_creditcard_br';
 	protected $_infoBlockType = 'ebanx/info_creditcardbr';
 
 	public function __construct()
