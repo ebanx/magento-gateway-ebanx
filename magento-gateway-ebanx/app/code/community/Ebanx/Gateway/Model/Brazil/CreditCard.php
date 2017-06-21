@@ -20,13 +20,18 @@ class Ebanx_Gateway_Model_Brazil_CreditCard extends Ebanx_Gateway_Model_Payment_
 	public function isAvailable()
 	{
 		return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_brazil']));
-  }
-    
-  public function getInstalmentTerms()
+	}
+
+	public function getInstalmentTerms()
 	{
 		$quote = $this->getInfoInstance()->getQuote();
 		$amount = $quote->getGrandTotal();
 
 		return $this->gateway->getPaymentTermsForCountryAndValue(Country::BRAZIL, $amount);
+	}
+
+	public function canUseForCountry($country)
+	{
+		return $country === 'BR' && parent::canUseForCountry($country);
 	}
 }
