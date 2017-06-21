@@ -1,14 +1,14 @@
-function handleEbanxForm(formId) {
+function handleEbanxForm(countryCode) {
   var gid = function (element) {
     return document.getElementById(element);
   };
   var responseData = null;
 
-  var cardName = gid('ebanx_cc_br_cc_name');
-  var cardNumber = gid('ebanx_cc_br_cc_number');
-  var cardExpirationMonth = gid('ebanx_cc_br_expiration');
-  var cardExpirationYear = gid('ebanx_cc_br_expiration_yr');
-  var cardCvv = gid('ebanx_cc_br_cc_cid');
+  var cardName = gid('ebanx_cc_' + countryCode + '_cc_name');
+  var cardNumber = gid('ebanx_cc_' + countryCode + '_cc_number');
+  var cardExpirationMonth = gid('ebanx_cc_' + countryCode + '_expiration');
+  var cardExpirationYear = gid('ebanx_cc_' + countryCode + '_expiration_yr');
+  var cardCvv = gid('ebanx_cc_' + countryCode + '_cc_cid');
   var ebanxToken = gid('ebanx_token');
   var ebanxBrand = gid('ebanx_brand');
   var ebanxMaskedCardNumber = gid('ebanx_masked_card_number');
@@ -19,7 +19,7 @@ function handleEbanxForm(formId) {
   var ebanxIntegrationKey = gid('ebanx_integration_key');
   var ebanxCountry = gid('ebanx_country');
 
-  var ebanxForm = gid(formId);
+  var ebanxForm = gid('dt_method_ebanx_cc_' + countryCode);
 
   var mode = ebanxMode.value === 'sandbox' ? 'test' : 'production';
   EBANX.config.setMode(mode);
@@ -55,6 +55,7 @@ function handleEbanxForm(formId) {
   var saveToken = function (response) {
     if (response.data.hasOwnProperty('status')) {
       responseData = response.data;
+      console.log(responseData.payment_type_code);
       ebanxToken.value = responseData.token;
       ebanxBrand.value = responseData.payment_type_code;
       ebanxMaskedCardNumber.value = responseData.masked_card_number;

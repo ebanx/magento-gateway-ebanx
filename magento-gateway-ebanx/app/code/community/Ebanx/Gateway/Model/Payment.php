@@ -83,7 +83,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 	{
 		$res = $this->gateway->create($this->paymentData);
 
-		$this->helper->log($res, $this->getCode());
+		$this->helper->log($res, $this->getCode() . '.log');
 
 		if ($res['status'] !== 'SUCCESS') {
 			$error = Mage::helper('ebanx/error');

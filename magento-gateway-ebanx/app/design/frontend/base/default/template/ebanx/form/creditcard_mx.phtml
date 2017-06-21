@@ -4,7 +4,6 @@
         <p>Pagar con Tarjeta de Credito.</p>
     </li>
     <?php include 'fields.phtml' ?>
-    <input type="hidden" name="payment[cc_name]" id="<?php echo $_code ?>_cc_name" value="Ebanx Magento Plugin" />
     <li>
         <label for="<?php echo $_code ?>_cc_name" class="required"><em>*</em><?php echo $this->__('Nome no Cartão') ?></label>
         <div class="input-box">
@@ -77,6 +76,6 @@
 
 <script type="text/javascript">
     //<![CDATA[
-    handleEbanxForm('dt_method_ebanx_cc_mx');
+    handleEbanxForm('mx');
     //]]>
 </script>
