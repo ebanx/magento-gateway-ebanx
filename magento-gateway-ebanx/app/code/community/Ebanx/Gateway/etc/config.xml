@@ -40,8 +40,23 @@
                 <ebanx_due_date>
                     <to_order>*</to_order>
                 </ebanx_due_date>
+                <ebanx_instalment>
+                    <to_order>*</to_order>
+                </ebanx_instalment>
             </sales_convert_quote_payment>
         </fieldsets>
+
+        <sales>
+            <quote>
+                <totals>
+                    <ebanx>
+                        <class>ebanx/quote_total</class>
+                        <after>discount</after>
+                        <before>tax</before>
+                    </ebanx>
+                </totals>
+            </quote>
+        </sales>
     </global>
     <frontend>
         <routers>
