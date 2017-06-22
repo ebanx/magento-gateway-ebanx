@@ -2,60 +2,55 @@
 
 abstract class Ebanx_Gateway_Model_Payment_CreditCard extends Ebanx_Gateway_Model_Payment
 {
-	protected $_canSaveCc = false;
+    protected $_canSaveCc = false;
 
-	/**
-	 * @return string
-	 */
-	abstract protected function getCountry();
+    /**
+     * @return string
+     */
+    abstract protected function getCountry();
 
-	public function __construct()
-	{
-		parent::__construct();
+    public function __construct()
+    {
+        parent::__construct();
 
-		$this->gateway = $this->ebanx->creditCard();
-	}
 
-	public function getInstalmentTerms()
-	{
-		$quote = $this->getInfoInstance()->getQuote();
-		$amount = $quote->getGrandTotal();
+        $this->ebanx = Mage::getSingleton('ebanx/api')->ebanxCreditCard();
+        $this->gateway = $this->ebanx->creditCard();
+    }
 
-		return $this->gateway->getPaymentTermsForCountryAndValue($this->getCountry(), $amount);
-	}
+    public function getInstalmentTerms()
+    {
+        $quote = $this->getInfoInstance()->getQuote();
+        $amount = $quote->getGrandTotal();
 
-	public function canUseForCountry($country)
-	{
-		return $this->helper->transformCountryCodeToName($country) === $this->getCountry()
-			&& parent::canUseForCountry($country);
-	}
+        return $this->gateway->getPaymentTermsForCountryAndValue($this->getCountry(), $amount);
+    }
 
-	public function __construct()
-	{
-		parent::__construct();
+    public function canUseForCountry($country)
+    {
+        return $this->helper->transformCountryCodeToName($country) === $this->getCountry()
+            && parent::canUseForCountry($country);
+    }
 
-		$this->ebanx   = Mage::getSingleton('ebanx/api')->ebanxCreditCard();
-	}
+    public function setupData()
+    {
+        parent::setupData();
 
-	public function setupData()
-	{
-		parent::setupData();
+        $this->data->setGatewayFields(Mage::app()->getRequest()->getPost('payment'));
+        $this->data->setInstalmentTerms(
+            $this->gateway->getPaymentTermsForCountryAndValue(
+                $this->helper->transformCountryCodeToName($this->data->getBillingAddress()->getCountry()),
+                $this->data->getAmountTotal()
+            )
+        );
+    }
 
-		$this->data->setGatewayFields(Mage::app()->getRequest()->getPost('payment'));
-		$this->data->setInstalmentTerms(
-			$this->gateway->getPaymentTermsForCountryAndValue(
-				$this->helper->transformCountryCodeToName($this->data->getBillingAddress()->getCountry()),
-				$this->data->getAmountTotal()
-			)
-		);
-	}
+    public function transformPaymentData()
+    {
+        $this->paymentData = $this->adapter->transformCard($this->data);
+    }
 
-	public function transformPaymentData()
-	{
-		$this->paymentData = $this->adapter->transformCard($this->data);
-	}
-
-	public function persistPayment()
+    public function persistPayment()
     {
         parent::persistPayment();
 
