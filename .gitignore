@@ -4,3 +4,4 @@ magento-gateway-ebanx/lib/Ebanx/vendor
 .env
 .idea
 .phpintel
+magento-gateway-ebanx/app/design/frontend/base/default/layout/checkouttester.xml
