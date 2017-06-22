@@ -4,12 +4,18 @@
     <ebanx_checkout_handle>
         <reference name="head">
             <action method="addCss"><stylesheet>ebanx/css/checkout.css</stylesheet></action>
-            <block type="core/text" name="your_external_file">
+            <block type="core/text" name="lib_js">
                 <action method="setText"><text><![CDATA[<script src="//js.ebanx.com/ebanx-1.5.min.js"></script>]]></text></action>
             </block>
             <action method="addItem">
                 <type>skin_js</type>
                 <name>ebanx/js/checkout.js</name>
+            </action>
+            <action method="addJs">
+                <script>ebanx/document/document.js</script>
+            </action>
+            <action method="setText">
+                <text>olar</text>
             </action>
         </reference>
     </ebanx_checkout_handle>
