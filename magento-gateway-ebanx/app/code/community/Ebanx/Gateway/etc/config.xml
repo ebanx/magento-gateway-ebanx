@@ -60,17 +60,6 @@
                 </ebanx>
             </updates>
         </layout>
-        <events>
-            <core_block_abstract_to_html_after>
-                <observers>
-                    <ebanx_add_total_observer>
-                        <type>singleton</type>
-                        <class>ebanx/observer</class>
-                        <method>addTotal</method>
-                    </ebanx_add_total_observer>
-                </observers>
-            </core_block_abstract_to_html_after>
-        </events>
     </frontend>
     <default>
         <payment>
