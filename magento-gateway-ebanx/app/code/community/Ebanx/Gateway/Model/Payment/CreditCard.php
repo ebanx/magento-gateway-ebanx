@@ -28,4 +28,12 @@ abstract class Ebanx_Gateway_Model_Payment_CreditCard extends Ebanx_Gateway_Mode
 	{
 		$this->paymentData = $this->adapter->transformCard($this->data);
 	}
+
+	public function persistPayment()
+    {
+        parent::persistPayment();
+
+        $gatewayFields = $this->data->getGatewayFields();
+        $this->payment->setInstalments($gatewayFields['instalments']);
+    }
 }
