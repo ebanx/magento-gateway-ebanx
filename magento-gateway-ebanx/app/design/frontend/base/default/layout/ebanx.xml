@@ -3,9 +3,15 @@
     <!-- Checkout Page -->
     <ebanx_checkout_handle>
         <reference name="head">
-            <action method="addCss"><stylesheet>ebanx/css/checkout.css</stylesheet></action>
+            <action method="addCss">
+                <stylesheet>ebanx/css/checkout.css</stylesheet>
+            </action>
             <block type="core/text" name="lib_js">
-                <action method="setText"><text><![CDATA[<script src="//js.ebanx.com/ebanx-1.5.min.js"></script>]]></text></action>
+                <action method="setText">
+                    <text><![CDATA[
+                        <script src="//js.ebanx.com/ebanx-1.5.min.js"></script>]]>
+                    </text>
+                </action>
             </block>
             <action method="addItem">
                 <type>skin_js</type>
@@ -19,15 +25,12 @@
             </action>
         </reference>
     </ebanx_checkout_handle>
-
     <checkout_onepage_index>
         <update handle="ebanx_checkout_handle"/>
     </checkout_onepage_index>
-
     <onepagecheckout_index_index>
         <update handle="ebanx_checkout_handle"/>
     </onepagecheckout_index_index>
-
     <!-- Succes Page -->
     <ebanx_checkout_success_handle>
         <reference name="head">
@@ -40,8 +43,7 @@
             </action>
         </reference>
         <reference name="checkout.success">
-            <block type="ebanx/checkout_success_payment" name="ebanx.success.payment" as="ebanx_success"
-                   template="ebanx/checkout/success.phtml">
+            <block type="ebanx/checkout_success_payment" name="ebanx.success.payment" as="ebanx_success" template="ebanx/checkout/success.phtml">
                 <block type="ebanx/checkout_success_payment_boleto" name="ebanx.success.payment.boleto"
                        as="ebanx_boleto" template="ebanx/checkout/success/boleto.phtml"/>
                 <block type="ebanx/checkout_success_payment_baloto" name="ebanx.success.payment.baloto"
@@ -49,11 +51,9 @@
             </block>
         </reference>
     </ebanx_checkout_success_handle>
-
     <checkout_onepage_success>
         <update handle="ebanx_checkout_success_handle"/>
     </checkout_onepage_success>
-
     <onepagecheckout_index_success>
         <update handle="ebanx_checkout_success_handle"/>
     </onepagecheckout_index_success>
