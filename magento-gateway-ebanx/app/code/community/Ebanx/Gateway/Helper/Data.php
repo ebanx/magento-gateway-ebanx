@@ -249,7 +249,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		}
 	}
 
-	private function getCustomerData()
+	public function getCustomerData()
 	{
 		$checkoutData = Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getData();
 

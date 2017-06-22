@@ -63,6 +63,7 @@ $installer->addAttribute('order_payment', 'ebanx_environment', array(
 , 'comparable' => 0
 , 'default' => null
 ));
+
 $installer->addAttribute('order_payment', 'ebanx_instalments', array(
 	'type' => Varien_Db_Ddl_Table::TYPE_VARCHAR
 , 'is_user_defined' => 0

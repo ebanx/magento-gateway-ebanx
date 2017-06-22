@@ -4,6 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+    "hash": "5e7f69f48dc0ec4357710a98b4bc868f",
     "content-hash": "8d5cc83ea22ac4a5902cf2165e47e6a7",
     "packages": [
         {
@@ -13,6 +14,12 @@
                 "type": "git",
                 "url": "https://github.com//ebanx/benjamin",
                 "reference": "f5c711307cb6fb28f5f2f2de3890d14391e6f058"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/f5c711307cb6fb28f5f2f2de3890d14391e6f058",
+                "reference": "f5c711307cb6fb28f5f2f2de3890d14391e6f058",
+                "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^5.3.1",
@@ -35,11 +42,39 @@
                     "main.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit"
+                ],
+                "test-only": [
+                    "phpunit --filter"
+                ],
+                "dup-check": [
+                    "phpcpd src && phpcpd tests"
+                ],
+                "test-all": [
+                    "composer test && composer dup-check"
+                ],
+                "style-check": [
+                    "php-cs-fixer fix --dry-run --verbose --diff ./"
+                ],
+                "style-fix": [
+                    "php-cs-fixer fix --verbose ./"
+                ]
+            },
             "license": [
                 "MIT"
             ],
             "description": "Business rule provider lib for plugin implementations",
+            "support": {
+                "source": "https://github.com/ebanx/benjamin/tree/master",
+                "issues": "https://github.com/ebanx/benjamin/issues"
+            },
             "time": "2017-06-19 20:41:12"
         },
         {
