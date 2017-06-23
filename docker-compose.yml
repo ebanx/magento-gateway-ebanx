@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  magento:
+    image: alexcheng/magento:latest
+    container_name: magento
+    ports:
+      - ${MAGENTO_EXTERNAL_PORT:-80}:80
+    links:
+      - magento_db
+    volumes:
+      - ./magento-gateway-ebanx/app/code/community/Ebanx/:/var/www/htdocs/app/code/community/Ebanx/
+      - ./magento-gateway-ebanx/app/etc/modules/Ebanx_Gateway.xml:/var/www/htdocs/app/etc/modules/Ebanx_Gateway.xml
+      - ./magento-gateway-ebanx/app/design/frontend/base/default/layout/:/var/www/htdocs/app/design/frontend/base/default/layout/
+      - ./magento-gateway-ebanx/app/design/frontend/base/default/template/ebanx/:/var/www/htdocs/app/design/frontend/base/default/template/ebanx/
+      - ./magento-gateway-ebanx/skin/adminhtml/default/default/ebanx/:/var/www/htdocs/skin/adminhtml/default/default/ebanx/
+      - ./magento-gateway-ebanx/skin/frontend/base/default/ebanx/:/var/www/htdocs/skin/frontend/base/default/ebanx/
+      - ./magento-gateway-ebanx/lib/Ebanx/:/var/www/htdocs/lib/Ebanx/
+      - ./magento-gateway-ebanx/js/ebanx/:/var/www/htdocs/js/ebanx/
+      - /var/www/htdocs
+    environment:
+      MYSQL_HOST: magento_db
+      MYSQL_DATABASE: magento
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MAGENTO_LOCALE: en_US
+      MAGENTO_TIMEZONE: America/Sao_Paulo
+      MAGENTO_DEFAULT_CURRENCY: USD
+      MAGENTO_ADMIN_USERNAME: ebanx
+      MAGENTO_ADMIN_PASSWORD: ebanx123
+      MAGENTO_ADMIN_FIRSTNAME: EBANX
+      MAGENTO_ADMIN_LASTNAME: Store
+      MAGENTO_ADMIN_EMAIL: magento@ebanx.com
+      MAGENTO_URL: http://localhost:${MAGENTO_EXTERNAL_PORT:-80}
+
+  magento_db:
+    image: mysql:5
+    container_name: magento_db
+    ports:
+      - ${MYSQL_EXTERNAL_PORT:-3306}:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: magento
+    volumes:
+      - ./.data:/var/lib/mysql

@@ -1,0 +1,35 @@
+<ul class="form-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+    <li>
+        <div class="<?php echo $this->getMethodCode() ?>-instructions-content">
+            <?php include 'fields.phtml' ?>
+
+            <p>Selecione o seu banco. A seguir, você será redirecionado para concluir o pagamento pelo seu internet
+                banking.</p>
+
+            <p>
+                <label for="ebanx_tef_itau">
+                    <input type="radio" id="ebanx_tef_itau" name="ebanx_tef" value="itau" checked>
+                    Itaú
+                </label>
+            </p>
+            <p>
+                <label for="ebanx_tef_bradesco">
+                    <input type="radio" id="ebanx_tef_bradesco" name="ebanx_tef" value="bradesco">
+                    Bradesco
+                </label>
+            </p>
+            <p>
+                <label for="ebanx_tef_bb">
+                    <input type="radio" id="ebanx_tef_bb" name="ebanx_tef" value="bancodobrasil">
+                    Banco do Brasil
+                </label>
+            </p>
+            <p>
+                <label for="ebanx_tef_banrisul">
+                    <input type="radio" id="ebanx_tef_banrisul" name="ebanx_tef" value="banrisul">
+                    Banrisul
+                </label>
+            </p>
+        </div>
+    </li>
+</ul>
