@@ -56,7 +56,6 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
         );
 	}
 
-
 	private function validateEbanxPaymentRequest()
 	{
 		$request = $this->getRequest();

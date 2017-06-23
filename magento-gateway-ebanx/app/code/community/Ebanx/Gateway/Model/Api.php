@@ -7,7 +7,7 @@ use Ebanx\Benjamin\Models\Configs\CreditCardConfig;
 class Ebanx_Gateway_Model_Api
 {
 	protected $ebanx;
-    protected $config;
+	protected $config;
 
 	public function getConfig()
 	{

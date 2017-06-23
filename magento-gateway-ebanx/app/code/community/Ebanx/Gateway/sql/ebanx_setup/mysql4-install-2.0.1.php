@@ -64,7 +64,7 @@ $installer->addAttribute('order_payment', 'ebanx_environment', array(
 , 'default' => null
 ));
 
-$installer->addAttribute('quote_payment', 'ebanx_instalments', array(
+$installer->addAttribute('order_payment', 'ebanx_instalments', array(
     'type' => Varien_Db_Ddl_Table::TYPE_VARCHAR
 , 'is_user_defined' => 0
 , 'label' => 'Instalments'
@@ -77,10 +77,10 @@ $installer->addAttribute('quote_payment', 'ebanx_instalments', array(
 , 'comparable' => 0
 , 'default' => null
 ));
-$installer->addAttribute('order_payment', 'ebanx_instalments', array(
-    'type' => Varien_Db_Ddl_Table::TYPE_VARCHAR
+
+$installer->addAttribute('order_payment', 'ebanx_local_amount', array(
+	'type' => Varien_Db_Ddl_Table::TYPE_VARCHAR
 , 'is_user_defined' => 0
-, 'label' => 'Instalments'
 , 'visible' => 1
 , 'required' => 0
 , 'user_defined' => 0
