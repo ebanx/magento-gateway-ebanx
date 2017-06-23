@@ -1,14 +1,14 @@
 <?php
   $customer = $this->getCustomer();
-  $order = $this->getOrder();
   $payment = $this->getPayment();
-  $core = Mage::helper('core');
 ?>
 
 <div class="ebanx-details">
-  <p>Seu pagamento foi confirmado, <?= $customer['firstname'] ?>.</p>
-  <p>Valor a pagar com IOF (0.38%): <?= $core->formatPrice($order->getGrandTotal() * 1.0038) ?></p>
-  <!-- <p>4 parcelas de € 120,46</p> -->
-  <p>Pago com Cartão <?= ucfirst($payment->getCcType()) ?>: <?= $payment->getCcLast4() ?></p>
-  <p>Obrigado por ter comprado conosco.</p>
+  <p><strong><?= trim($customer['firstname']) ?></strong>, seu pagamento de <strong><?= $this->formatPriceWithLocalCurrency($this->currencyCode, $payment->getEbanxLocalAmount()); ?></strong> foi aprovado o/</p>
+  <p>Na sua fatura do seu cartão <strong><?= ucfirst($payment->getCcType()) ?> <?= $payment->getCcLast4() ?></strong> a compra aparecerá com a seguinte descrição:</p>
+  <!-- TODO -->
+  <h3><strong>EBANX*AliExpress</strong></h3>
+  <p>Se tiver alguma dúvida em relação ao seu pagamento, acesse a Conta EBANX com o email <strong><?= $customer['email'] ?></strong>.</p>
+
+  <?php include 'apps.phtml' ?>
 </div>
