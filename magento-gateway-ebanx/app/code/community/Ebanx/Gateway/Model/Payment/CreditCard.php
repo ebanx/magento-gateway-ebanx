@@ -35,6 +35,7 @@ abstract class Ebanx_Gateway_Model_Payment_CreditCard extends Ebanx_Gateway_Mode
         parent::setupData();
 
         $this->data->setGatewayFields(Mage::app()->getRequest()->getPost('payment'));
+		$this->data->setPaymentType('cc');
         $this->data->setInstalmentTerms(
             $this->gateway->getPaymentTermsForCountryAndValue(
                 $this->helper->transformCountryCodeToName($this->data->getBillingAddress()->getCountry()),

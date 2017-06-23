@@ -167,6 +167,13 @@
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_cc_mx>
+            <ebanx_dc_mx>
+                <active>1</active>
+                <model>ebanx/mexico_debitcard</model>
+                <title>Tarjeta de Debito</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_dc_mx>
             <!-- Settings -->
             <ebanx_settings>
                 <brazil_taxes>cpf</brazil_taxes>
