@@ -27,7 +27,7 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 			'amountTotal' => $data->getAmountTotal(),
 			'merchantPaymentCode' => $data->getMerchantPaymentCode(),
 			'orderNumber' => $data->getOrderId(),
-			'dueDate' => $data->getDueDate(),
+			'dueDate' => new \DateTime($data->getDueDate()),
 			'address' => $this->transformAddress($data->getBillingAddress(), $data),
 			'person' => $this->transformPerson($data->getPerson(), $data),
 			'responsible' => $this->transformPerson($data->getPerson(), $data),

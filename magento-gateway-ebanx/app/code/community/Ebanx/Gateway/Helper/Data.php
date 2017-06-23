@@ -7,7 +7,7 @@ use Ebanx\Benjamin\Models\Person;
 
 class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 {
-	const URL_PRINT_LIVE = 'https://ebanx.com/print/';
+	const URL_PRINT_LIVE = 'https://print.ebanx.com/print/';
 	const URL_PRINT_SANDBOX = 'https://sandbox.ebanx.com/print/';
 
 	private $order;
@@ -52,10 +52,12 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return !empty($this->getIntegrationKey()) && !empty($this->getPublicIntegrationKey());
 	}
 
-	public function getDueDate()
+	public function getDueDate($date = null, $format = 'YYYY-MM-dd HH:mm:ss')
 	{
-		$dueDate = new Zend_Date(Mage::getModel('core/date')->timestamp());
-		return $dueDate->addDay($this->getDueDateDays())->get('YYYY-MM-dd HH:mm:ss');
+		$date = !is_null($date) ? $date : Mage::getModel('core/date')->timestamp();
+		$dueDate = new Zend_Date($date);
+
+		return $dueDate->addDay($this->getDueDateDays())->get($format);
 	}
 
     public function getDueDateDays()

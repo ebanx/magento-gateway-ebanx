@@ -53,6 +53,8 @@
                 <block type="ebanx/checkout_success_payment_creditcardbr" name="ebanx.success.payment.creditcardbr" as="ebanx_cc_br" template="ebanx/checkout/success/creditcardbr.phtml"/>
                 <!-- Colombia -->
                 <block type="ebanx/checkout_success_payment_baloto" name="ebanx.success.payment.baloto" as="ebanx_baloto" template="ebanx/checkout/success/baloto.phtml"/>
+                <!-- Mexico -->
+                <block type="ebanx/checkout_success_payment_oxxo" name="ebanx.success.payment.oxxo" as="ebanx_oxxo" template="ebanx/checkout/success/oxxo.phtml"/>
             </block>
         </reference>
     </ebanx_checkout_success_handle>
