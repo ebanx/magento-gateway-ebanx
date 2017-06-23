@@ -13,13 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com//ebanx/benjamin",
-                "reference": "f5c711307cb6fb28f5f2f2de3890d14391e6f058"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/f5c711307cb6fb28f5f2f2de3890d14391e6f058",
-                "reference": "f5c711307cb6fb28f5f2f2de3890d14391e6f058",
-                "shasum": ""
+                "reference": "b5f533df2bdb4c501cf2b353f6473f940d985fae"
             },
             "require": {
                 "guzzlehttp/guzzle": "^5.3.1",
@@ -42,40 +36,12 @@
                     "main.php"
                 ]
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "phpunit"
-                ],
-                "test-only": [
-                    "phpunit --filter"
-                ],
-                "dup-check": [
-                    "phpcpd src && phpcpd tests"
-                ],
-                "test-all": [
-                    "composer test && composer dup-check"
-                ],
-                "style-check": [
-                    "php-cs-fixer fix --dry-run --verbose --diff ./"
-                ],
-                "style-fix": [
-                    "php-cs-fixer fix --verbose ./"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Business rule provider lib for plugin implementations",
-            "support": {
-                "source": "https://github.com/ebanx/benjamin/tree/master",
-                "issues": "https://github.com/ebanx/benjamin/issues"
-            },
-            "time": "2017-06-19 20:41:12"
+            "time": "2017-06-23 19:58:49"
         },
         {
             "name": "guzzlehttp/guzzle",
