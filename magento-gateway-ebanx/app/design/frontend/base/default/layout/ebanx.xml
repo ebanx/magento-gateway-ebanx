@@ -55,6 +55,8 @@
                 <block type="ebanx/checkout_success_payment_baloto" name="ebanx.success.payment.baloto" as="ebanx_baloto" template="ebanx/checkout/success/baloto.phtml"/>
                 <!-- Mexico -->
                 <block type="ebanx/checkout_success_payment_oxxo" name="ebanx.success.payment.oxxo" as="ebanx_oxxo" template="ebanx/checkout/success/oxxo.phtml"/>
+                <!-- Peru -->
+                <block type="ebanx/checkout_success_payment_pagoefectivo" name="ebanx.success.payment.pagoefectivo" as="ebanx_pagoefectivo" template="ebanx/checkout/success/pagoefectivo.phtml"/>
             </block>
         </reference>
     </ebanx_checkout_success_handle>
