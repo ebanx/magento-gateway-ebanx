@@ -7,7 +7,7 @@ use Ebanx\Benjamin\Models\Person;
 
 class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 {
-	const URL_PRINT_LIVE = 'https://print.ebanx.com/print/';
+	const URL_PRINT_LIVE = 'https://print.ebanx.com/';
 	const URL_PRINT_SANDBOX = 'https://sandbox.ebanx.com/print/';
 
 	private $order;
@@ -328,5 +328,40 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'houseNumber' => $house_number  ?: 0,
 			'additionToAddress' => $addition_to_address
 		);
+	}
+
+	public function getPaymentByHash($hash)
+	{
+		$ebanx = Mage::getSingleton('ebanx/api')->ebanx();
+
+		return $ebanx->paymentInfo()->findByHash($hash);
+	}
+
+	public function getVoucherUrlByHash($hash, $format = 'basic')
+	{
+		$res = $this->getPaymentByHash($hash);
+
+		if ($res['status'] !== 'SUCCESS') {
+			return;
+		}
+
+		$payment = $res['payment'];
+
+		switch ($payment['payment_type_code']) {
+			case 'boleto':
+				$url = $payment['boleto_url'];
+				break;
+			case 'pagoefectivo':
+				$url = $payment['cip_url'];
+				break;
+			case 'oxxo':
+				$url = $payment['oxxo_url'];
+				break;
+			case 'baloto':
+				$url = $payment['baloto_url'];
+				break;
+		}
+
+		return "{$url}&format={$format}";
 	}
 }
