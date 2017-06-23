@@ -109,7 +109,8 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 		$this->payment
 			->setEbanxPaymentHash($this->result['payment']['hash'])
 			->setEbanxEnvironment($this->helper->getMode())
-			->setEbanxDueDate($this->helper->getDueDate($this->order->getCreatedAt()));
+			->setEbanxDueDate($this->helper->getDueDate($this->order->getCreatedAt()))
+			->setEbanxLocalAmount($this->result['payment']['amount_br']);
 
 		if ($this->order->getCustomerId()) {
 			Mage::getModel('customer/customer')->load($this->order->getCustomerId())
