@@ -9,34 +9,29 @@ class Ebanx_Gateway_Block_Checkout_Success_CashPayment extends Ebanx_Gateway_Blo
 		parent::_construct();
 	}
 
-	public function getEbanxDueDate()
+	public function getEbanxDueDate($format = 'dd/MM')
 	{
-		return Mage::helper('core')->formatDate($this->getOrder()->getPayment()->getEbanxDueDate(), Mage_Core_Model_Locale::FORMAT_TYPE_FULL, false);
-	}
+		$date = new Zend_Date($this->getPayment()->getEbanxDueDate());
 
-	public function getEbanxUrl()
-	{
-		return $this->helper->getEbanxUrl();
+		return $date->get($format);
 	}
 
 	public function getEbanxUrlPrint($type)
 	{
-		return $this->getEbanxUrlIframe($type) . '&format=print';
+		$hash = $this->getEbanxPaymentHash();
+		return $this->helper->getVoucherUrlByHash($hash, 'print');
 	}
 
 	public function getEbanxUrlPdf($type)
 	{
-		return $this->getEbanxUrlIframe($type) . '&format=pdf';
+		$hash = $this->getEbanxPaymentHash();
+		return $this->helper->getVoucherUrlByHash($hash, 'pdf');
 	}
 
 	public function getEbanxUrlBasic($type)
 	{
-		return $this->getEbanxUrlIframe($type) . '&format=basic';
-	}
-
-	public function getEbanxUrlIframe($type = '')
-	{
-		return $this->getEbanxUrl() . $type . '?hash=' . $this->getEbanxPaymentHash();
+		$hash = $this->getEbanxPaymentHash();
+		return $this->helper->getVoucherUrlByHash($hash, 'basic');
 	}
 
 	public function getEbanxPaymentHash()
@@ -44,11 +39,10 @@ class Ebanx_Gateway_Block_Checkout_Success_CashPayment extends Ebanx_Gateway_Blo
 		return $this->getOrder()->getPayment()->getEbanxPaymentHash();
 	}
 
-	public function getVoucherUrl($type)
+	public function getVoucherUrl()
 	{
 		return Mage::getUrl('ebanx/voucher', [
-			'hash' => $this->getEbanxPaymentHash(),
-			'type' => $type
+			'hash' => $this->getEbanxPaymentHash()
 		]);
 	}
 }
