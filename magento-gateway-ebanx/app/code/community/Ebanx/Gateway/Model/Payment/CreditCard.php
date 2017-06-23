@@ -18,12 +18,10 @@ abstract class Ebanx_Gateway_Model_Payment_CreditCard extends Ebanx_Gateway_Mode
         $this->gateway = $this->ebanx->creditCard();
     }
 
-    public function getInstalmentTerms()
+    public function getInstalmentTerms($grandTotal = null)
     {
-        $quote = $this->getInfoInstance()->getQuote();
-        $amount = $quote->getGrandTotal();
-
-        return $this->gateway->getPaymentTermsForCountryAndValue($this->getCountry(), $amount);
+		$amount = $grandTotal ?: $this->getTotal();
+		return $this->gateway->getPaymentTermsForCountryAndValue($this->getCountry(), $amount);
     }
 
     public function canUseForCountry($country)
@@ -57,4 +55,10 @@ abstract class Ebanx_Gateway_Model_Payment_CreditCard extends Ebanx_Gateway_Mode
         $gatewayFields = $this->data->getGatewayFields();
         $this->payment->setInstalments($gatewayFields['instalments']);
     }
+
+	public function getTotal()
+	{
+		$quote = $this->getInfoInstance()->getQuote();
+		return $quote->getGrandTotal();
+	}
 }

@@ -8,46 +8,31 @@ class Ebanx_Gateway_Model_Quote_Total extends Mage_Sales_Model_Quote_Address_Tot
 
     public function collect(Mage_Sales_Model_Quote_Address $address)
     {
-        $quote = $address->getQuote();
-        $payment = $quote->getPayment();
+		$payment = $address->getQuote()->getPayment();
 
-        $baseDiscount = 10;
         if(!$payment->hasMethodInstance()) {
-            Mage::log(
-                'No interest - ' . $payment->getMethodInstance()->getCode(), //Objects extending Varien_Object can use this
-                Zend_Log::DEBUG,  //Log level
-                'total.log',         //Log file name; if blank, will use config value (system.log by default)
-                true              //force logging regardless of config setting
-            );
-
             return $this;
         }
 
-        $payment = $payment->getMethodInstance();
+		$isCardPayment = substr($payment->getMethodInstance()->getCode(), 0, 8) === 'ebanx_cc';
+		if(!$isCardPayment) {
+			return $this;
+		}
 
-//        TODO: IF CREDIT CARD
-        if($payment->getCode() === 'ebanx_cc_br') {
-            Mage::log(
-                $payment->getGatewayFields(),
-                Zend_Log::DEBUG,  //Log level
-                'total.log',         //Log file name; if blank, will use config value (system.log by default)
-                true              //force logging regardless of config setting
-            );
+        $paymentInstance = $payment->getMethodInstance();
 
-//            $instalments = $payment->getInstalments();
-//            $interestRate = $payment->getMethodInstance()->getInterestRate($instalments);
-//            $instalmentAmount = $payment->getMethodInstance()->calcInstalmentAmount($amount, $instalments, $interestRate);
-//            $amount = $instalmentAmount * $instalments;
-//
-////            GET INTEREST AMOUNT
-////            $baseDiscount = $payment->gateway->getPaymentTermsForCountryAndValue(Country::BRAZIL, $address->getBaseGrandTotal());
-//            $discount = Mage::app()->getStore()->convertPrice($baseDiscount);
-//            $address->setBaseEbanxInterestAmount($baseDiscount);
-//            $address->setEbanxInterestAmount($discount);
-//
-//            $address->setBaseGrandTotal($address->getBaseGrandTotal() + $baseDiscount);
-//            $address->setGrandTotal($address->getGrandTotal() + $discount);
-        }
+		$gatewayFields = Mage::app()->getRequest()->getPost('payment');
+		$instalments = $gatewayFields['instalments'];
+		$grandTotal = $gatewayFields['grand_total'];
+		$instalmentTerms = $paymentInstance->getInstalmentTerms($grandTotal);
+
+		$instalmentAmount = $instalmentTerms[$instalments - 1]->baseAmount;
+		$interestAmount = ($instalmentAmount * $instalments) - $grandTotal;
+
+		if ($interestAmount > 0) {
+			$address->setEbanxInterestAmount($interestAmount / 2);
+			$address->setGrandTotal($interestAmount / 2);
+		}
 
         return $this;
     }
