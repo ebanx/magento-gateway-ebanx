@@ -8,7 +8,7 @@ class Ebanx_Gateway_Model_Mexico_CreditCard extends Ebanx_Gateway_Model_Payment_
 	protected $_formBlockType = 'ebanx/form_creditcard_mx';
 	protected $_infoBlockType = 'ebanx/info_creditcardmx';
 
-	public function isAvailable()
+	public function isAvailable($quote = null)
 	{
 		return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_mexico']));
 	}

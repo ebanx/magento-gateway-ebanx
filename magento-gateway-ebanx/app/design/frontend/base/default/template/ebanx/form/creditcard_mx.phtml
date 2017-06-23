@@ -1,23 +1,23 @@
 <?php $_code=$this->getMethodCode() ?>
 <ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
     <li>
-        <p>Pagar con Tarjeta de Credito.</p>
+        <p>Pagar con Tarjeta de Crédito.</p>
     </li>
     <?php include 'fields.phtml' ?>
     <li>
-        <label for="<?php echo $_code ?>_cc_name" class="required"><em>*</em><?php echo $this->__('Nome no Cartão') ?></label>
+        <label for="<?php echo $_code ?>_cc_name" class="required"><em>*</em>Titular de la tarjeta</label>
         <div class="input-box">
-            <input type="text" id="<?php echo $_code ?>_cc_name" name="payment[cc_name]" title="<?php echo Mage::helper('core')->jsQuoteEscape($this->__('Nome no Cartão')) ?>" class="input-text validate-cc-name" value="" />
+            <input type="text" id="<?php echo $_code ?>_cc_name" name="payment[cc_name]" title="<?php echo Mage::helper('core')->jsQuoteEscape('Titular de la tarjeta') ?>" class="input-text validate-cc-name" value="" />
         </div>
     </li>
     <li>
-        <label for="<?php echo $_code ?>_cc_number" class="required"><em>*</em><?php echo $this->__('Número do Cartão') ?></label>
+        <label for="<?php echo $_code ?>_cc_number" class="required"><em>*</em>Número de la tarjeta</label>
         <div class="input-box">
-            <input type="text" id="<?php echo $_code ?>_cc_number" name="payment[cc_number]" title="<?php echo Mage::helper('core')->jsQuoteEscape($this->__('Número do Cartão')) ?>" class="input-text validate-cc-number" value="" />
+            <input type="text" id="<?php echo $_code ?>_cc_number" name="payment[cc_number]" title="<?php echo Mage::helper('core')->jsQuoteEscape('Número de la tarjeta') ?>" class="input-text validate-cc-number" value="" />
         </div>
     </li>
     <li id="<?php echo $_code ?>_cc_type_exp_div">
-        <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em><?php echo $this->__('Data de validade') ?></label>
+        <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em>Fecha de expiración</label>
         <div class="input-box">
             <div class="v-fix">
                 <select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month]" class="month validate-cc-exp required-entry">
@@ -38,10 +38,10 @@
     </li>
     <?php echo $this->getChildHtml() ?>
     <li id="<?php echo $_code ?>_cc_type_cvv_div">
-        <label for="<?php echo $_code ?>_cc_cid" class="required"><em>*</em><?php echo $this->__('Código de segurança') ?></label>
+        <label for="<?php echo $_code ?>_cc_cid" class="required"><em>*</em>Código de verificación</label>
         <div class="input-box">
             <div class="v-fix">
-                <input type="text" title="<?php echo Mage::helper('core')->jsQuoteEscape($this->__('Código de segurança')) ?>" class="input-text cvv required-entry validate-cc-cvn" id="<?php echo $_code ?>_cc_cid" name="payment[cc_cid]" value="" />
+                <input type="text" title="<?php echo Mage::helper('core')->jsQuoteEscape('Código de verificación') ?>" class="input-text cvv required-entry validate-cc-cvn" id="<?php echo $_code ?>_cc_cid" name="payment[cc_cid]" value="" />
             </div>
         </div>
     </li>
@@ -49,9 +49,9 @@
     <?php $_selected = $this->getInfoData('instalments') ?>
     <?php if (count($_instalmentOptions) > 1): ?>
     <li id="<?php echo $_code ?>-instalments-div">
-        <label for="<?php echo $_code ?>_instalments" class="required"><em>*</em><?php echo $this->__('Instalments') ?></label>
+        <label for="<?php echo $_code ?>_instalments" class="required"><em>*</em>Meses</label>
         <div class="input-box">
-            <select id="<?php echo $_code ?>_instalments" name="payment[instalments]" title="<?php echo $this->__('Instalments') ?>" class="required-entry validate-select">
+            <select id="<?php echo $_code ?>_instalments" name="payment[instalments]" title="Meses" class="required-entry validate-select">
                 <option value=""><?php echo $this->__('Selecione') ?></option>
                 <?php foreach ($_instalmentOptions as $_instalmentTerm): ?>
                     <option value="<?php echo $_instalmentTerm->instalmentNumber ?>">
