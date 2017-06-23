@@ -124,9 +124,9 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 		return self::$redirect_url;
 	}
 
-	public function isAvailable()
+	public function isAvailable($quote = null)
 	{
-		return $this->helper->areKeysFilled();
+		return parent::isAvailable() && $this->helper->areKeysFilled();
 	}
 
 	public function canUseForCountry($country)

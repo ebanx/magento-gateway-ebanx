@@ -67,10 +67,11 @@
     <input type="hidden" name="payment[ebanx_mode]" id="ebanx_mode" value="<?php echo Mage::helper('ebanx')->getMode() ?>" />
     <input type="hidden" name="payment[ebanx_integration_key]" id="ebanx_integration_key" value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>" />
     <input type="hidden" name="payment[ebanx_country]" id="ebanx_country" value="br" />
+    <input type="hidden" name="payment[grand_total]" id="grand_total" value="<?php echo $this->getTotal() ?>" />
 </ul>
 
 <script type="text/javascript">
     //<![CDATA[
-    handleEbanxForm('br');
+    handleEbanxForm('br', 'cc');
     //]]>
 </script>

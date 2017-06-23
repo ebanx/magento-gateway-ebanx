@@ -24,6 +24,11 @@ abstract class Ebanx_Gateway_Block_Form_CreditCard extends Mage_Payment_Block_Fo
 		return $this->getMethod()->getInstalmentTerms();
 	}
 
+	public function getTotal()
+	{
+		return $this->getMethod()->getTotal();
+	}
+
 	public function formatInstalment($instalment)
 	{
 		$amount = Mage::helper('core')->formatPrice($instalment->baseAmount, false);
