@@ -21,7 +21,7 @@ abstract class Ebanx_Gateway_Block_Form_CreditCard extends Mage_Payment_Block_Fo
 
 	public function getInstalmentTerms()
 	{
-		return $this->getMethod()->getInstalmentTerms(100);
+		return $this->getMethod()->getInstalmentTerms();
 	}
 
 	public function getTotal()
