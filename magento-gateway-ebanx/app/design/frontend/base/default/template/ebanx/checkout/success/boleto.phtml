@@ -1,43 +1,43 @@
+<?php
+  $customer = $this->getCustomer();
+  $order = $this->getOrder();
+  $payment = $this->getPayment();
+  $dueDate = $this->helper->getDueDate($order->getEbanxDueDate(), 'dd/MM');
+?>
+
 <div class="ebanx-details">
-    <div class="banking-ticket__desc">
-        <br />
-        <p class="magento-thankyou-order-received"><?php echo $this->__("Pronto, seu boleto foi gerado, %s.", $this->getOrder()->getBillingAddress()->getFirstname()) ?></p>
-        <p><?php echo $this->__("Mandamos uma cópia para o email %s.", "<strong>" . $this->getOrder()->getCustomerEmail() . "</strong>") ?></p>
-        <p>
-            <?php echo $this->__("- Não se esqueça, ele vence %s. Depois disso não é mais possível realizar o pagamento.", "<strong>" . $this->getEbanxDueDate() . "</strong>") ?></p>
-        <?php echo $this->__("- Dica: Além dos bancos e casas lotéricas você também pode pagar pelo seu internet banking, sem sair de casa."); ?>
-        </p>
-        <p><?php echo $this->__('Ficou alguma dúvida? A gente te <a href="%s" target="_blank">ajuda</a>', "https://www.ebanx.com/br/ajuda/pagamentos/boleto-bancario") ?>
-            .</p>
-    </div>
+    <p><strong><?= $customer['firstname'] ?></strong>, seu boleto foi gerado e a data de vencimento é dia <strong><?= $this->getEbanxDueDate() ?></strong> :)</p>
+    <p>Enviamos uma cópia para o email <strong><?= $customer['email'] ?></strong></p>
+    <p>Pague o boleto no Internet Banking de seu banco apenas copiando o código de barras! Você também pode imprimir o boleto e pagar em casas lotéricas e no caixa do seu banco.</p>
+    <p><b>Dica</b>: Pagar seu boleto até às 21h de dias úteis, faz com que o pagamento tenha a chance de ser confirmado mais rápido :)</p>
 
-    <hr />
-
-    <div class="banking-ticket__barcode">
-        <div class="banking-ticket__barcode-code">
-            <?php
+    <h3>
+        <?php
             $barCodeFormated = $this->getEbanxBarCodeFormated();
             echo $barCodeFormated['boleto1'] . '.' . $barCodeFormated['boleto2'] . ' ' . $barCodeFormated['boleto3'] . '.' . $barCodeFormated['boleto4'] . ' ' . $barCodeFormated['boleto5'] . '.' . $barCodeFormated['boleto6'] . ' ' . $barCodeFormated['boleto7'] . ' ' . $barCodeFormated['boleto8'];
-            ?>
-        </div>
-        <div class="banking-ticket__barcode-copy">
-            <button type="button" class="button ebanx-button--copy"
-                    data-clipboard-text="<?php echo $this->getEbanxBarCode(); ?>"><?php echo $this->__('Copiar'); ?></button>
-        </div>
+        ?>
+    </h3>
+
+    <div class="ebanx-groups">
+        <button type="button" class="button ebanx-button--copy"
+                    data-clipboard-text="<?php echo $this->getEbanxBarCode(); ?>"><?php echo $this->__('Copiar Número'); ?></button>
     </div>
 
-    <hr />
 
-    <div class="banking-ticket__actions">
-        <div class="ebanx-button--group ebanx-button--group-two">
-            <a href="<?php echo $this->getEbanxUrlBasic(); ?>" target="_blank"
+    <div class="ebanx-groups">
+        <div class="ebanx-group">
+            <a href="<?php echo $this->getEbanxUrlPdf(); ?>" target="_blank"
                class="button banking-ticket__action"><?php echo $this->__('Salvar em PDF'); ?></a>
+        </div>
+        <div class="ebanx-group">
             <a href="<?php echo $this->getEbanxUrlPrint() ?>" target="_blank"
                class="button banking-ticket__action"><?php echo $this->__('Imprimir boleto'); ?></a>
         </div>
     </div>
 
     <div>
-        <iframe id="ebanx-boleto-frame" src="<?php echo $this->getEbanxUrlIframe(); ?>" style="width: 100%; border: 0px; height: 1000px"></iframe>
+        <iframe id="ebanx-boleto-frame" src="<?php echo $this->getVoucherUrl('boleto'); ?>" style="width: 100%; border: 0px; height: 1000px"></iframe>
     </div>
+
+    <?php include 'apps.phtml' ?>
 </div>
