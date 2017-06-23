@@ -78,6 +78,19 @@ $installer->addAttribute('order_payment', 'ebanx_instalments', array(
 , 'default' => null
 ));
 
+$installer->addAttribute('order_payment', 'ebanx_local_amount', array(
+	'type' => Varien_Db_Ddl_Table::TYPE_VARCHAR
+, 'is_user_defined' => 0
+, 'visible' => 1
+, 'required' => 0
+, 'user_defined' => 0
+, 'nullable' => true
+, 'searchable' => 0
+, 'filterable' => 0
+, 'comparable' => 0
+, 'default' => null
+));
+
 $installer->addAttribute('customer', 'ebanx_customer_document', array(
 	'type' => Varien_Db_Ddl_Table::TYPE_VARCHAR
 , 'is_user_defined' => 0
