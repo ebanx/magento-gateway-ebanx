@@ -1,26 +1,29 @@
 <?php
-  $customer = $this->getCustomer();
-  $order = $this->getOrder();
-  $payment = $this->getPayment();
-  $dueDate = $this->helper->getDueDate($order->getEbanxDueDate(), 'dd/MM');
+$customer = $this->getCustomer();
+$order = $this->getOrder();
+$payment = $this->getPayment();
+$dueDate = $this->helper->getDueDate($order->getEbanxDueDate(), 'dd/MM');
 ?>
 
 <div class="ebanx-details">
-    <p><strong><?= $customer['firstname'] ?></strong>, seu boleto foi gerado e a data de vencimento é dia <strong><?= $this->getEbanxDueDate() ?></strong> :)</p>
+    <p><strong><?= $customer['firstname'] ?></strong>, seu boleto foi gerado e a data de vencimento é dia
+        <strong><?= $this->getEbanxDueDate() ?></strong> :)</p>
     <p>Enviamos uma cópia para o email <strong><?= $customer['email'] ?></strong></p>
-    <p>Pague o boleto no Internet Banking de seu banco apenas copiando o código de barras! Você também pode imprimir o boleto e pagar em casas lotéricas e no caixa do seu banco.</p>
-    <p><b>Dica</b>: Pagar seu boleto até às 21h de dias úteis, faz com que o pagamento tenha a chance de ser confirmado mais rápido :)</p>
+    <p>Pague o boleto no Internet Banking de seu banco apenas copiando o código de barras! Você também pode imprimir o
+        boleto e pagar em casas lotéricas e no caixa do seu banco.</p>
+    <p><b>Dica</b>: Pagar seu boleto até às 21h de dias úteis, faz com que o pagamento tenha a chance de ser confirmado
+        mais rápido :)</p>
 
     <h3>
         <?php
-            $barCodeFormated = $this->getEbanxBarCodeFormated();
-            echo $barCodeFormated['boleto1'] . '.' . $barCodeFormated['boleto2'] . ' ' . $barCodeFormated['boleto3'] . '.' . $barCodeFormated['boleto4'] . ' ' . $barCodeFormated['boleto5'] . '.' . $barCodeFormated['boleto6'] . ' ' . $barCodeFormated['boleto7'] . ' ' . $barCodeFormated['boleto8'];
+        $barCodeFormated = $this->getEbanxBarCodeFormated();
+        echo $barCodeFormated['boleto1'] . '.' . $barCodeFormated['boleto2'] . ' ' . $barCodeFormated['boleto3'] . '.' . $barCodeFormated['boleto4'] . ' ' . $barCodeFormated['boleto5'] . '.' . $barCodeFormated['boleto6'] . ' ' . $barCodeFormated['boleto7'] . ' ' . $barCodeFormated['boleto8'];
         ?>
     </h3>
 
     <div class="ebanx-groups">
         <button type="button" class="button ebanx-button--copy"
-                    data-clipboard-text="<?php echo $this->getEbanxBarCode(); ?>"><?php echo $this->__('Copiar Número'); ?></button>
+                data-clipboard-text="<?php echo $this->getEbanxBarCode(); ?>"><?php echo $this->__('Copiar Número'); ?></button>
     </div>
 
 
@@ -36,7 +39,8 @@
     </div>
 
     <div>
-        <iframe id="ebanx-boleto-frame" src="<?php echo $this->getVoucherUrl('boleto'); ?>" style="width: 100%; border: 0px; height: 1000px"></iframe>
+        <iframe id="ebanx-boleto-frame" src="<?php echo $this->getVoucherUrl('boleto'); ?>"
+                style="width: 100%; border: 0px; height: 1000px"></iframe>
     </div>
 
     <?php include 'apps.phtml' ?>

@@ -27,16 +27,6 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return Mage::getStoreConfig('payment/ebanx_settings/mode');
 	}
 
-	public function getIntegrationKey()
-	{
-		return Mage::getStoreConfig('payment/ebanx_settings/integration_key_' . $this->getMode());
-	}
-
-	public function getPublicIntegrationKey()
-	{
-		return Mage::getStoreConfig('payment/ebanx_settings/integration_key_public_' . $this->getMode());
-	}
-
 	public function getSandboxIntegrationKey()
 	{
 		return Mage::getStoreConfig('payment/ebanx_settings/integration_key_' . Ebanx_Gateway_Model_Source_Mode::SANDBOX);
@@ -52,6 +42,16 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return !empty($this->getIntegrationKey()) && !empty($this->getPublicIntegrationKey());
 	}
 
+	public function getIntegrationKey()
+	{
+		return Mage::getStoreConfig('payment/ebanx_settings/integration_key_' . $this->getMode());
+	}
+
+	public function getPublicIntegrationKey()
+	{
+		return Mage::getStoreConfig('payment/ebanx_settings/integration_key_public_' . $this->getMode());
+	}
+
 	public function getDueDate($date = null, $format = 'YYYY-MM-dd HH:mm:ss')
 	{
 		$date = !is_null($date) ? $date : Mage::getModel('core/date')->timestamp();
@@ -60,39 +60,24 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return $dueDate->addDay($this->getDueDateDays())->get($format);
 	}
 
-    public function getDueDateDays()
-    {
-        return Mage::getStoreConfig('payment/ebanx_settings/due_date_days');
-    }
-
-    public function getMaxInstalments()
-    {
-        return Mage::getStoreConfig('payment/ebanx_settings/max_instalments');
-    }
-    public function getMinInstalmentValue()
-    {
-        return Mage::getStoreConfig('payment/ebanx_settings/min_instalment_value');
-    }
-    public function getInterestRate()
-    {
-        return Mage::getStoreConfig('payment/ebanx_settings/interest_rate');
-    }
-
-	public function transformCountryCodeToName($countryCode)
+	public function getDueDateDays()
 	{
-		if (!$countryCode) {
-			return false;
-		}
+		return Mage::getStoreConfig('payment/ebanx_settings/due_date_days');
+	}
 
-		$countries = [
-			'cl' => Country::CHILE,
-			'br' => Country::BRAZIL,
-			'co' => Country::COLOMBIA,
-			'mx' => Country::MEXICO,
-			'pe' => Country::PERU,
-		];
+	public function getMaxInstalments()
+	{
+		return Mage::getStoreConfig('payment/ebanx_settings/max_instalments');
+	}
 
-		return $countries[strtolower($countryCode)];
+	public function getMinInstalmentValue()
+	{
+		return Mage::getStoreConfig('payment/ebanx_settings/min_instalment_value');
+	}
+
+	public function getInterestRate()
+	{
+		return Mage::getStoreConfig('payment/ebanx_settings/interest_rate');
 	}
 
 	public function transformTefToBankName($bankCode)
@@ -145,14 +130,6 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return false;
 	}
 
-	public function getBrazilianDocumentLabel()
-	{
-		$label = [];
-		$taxes = explode(',', Mage::getStoreConfig('payment/ebanx_settings/brazil_taxes'));
-
-		return strtoupper(implode(' / ', $taxes));
-	}
-
 	public function getLabelForComplianceField($code)
 	{
 		switch ($code) {
@@ -173,6 +150,71 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			default:
 				return $this->__('Document Number');
 		}
+	}
+
+	public function getBrazilianDocumentLabel()
+	{
+		$label = [];
+		$taxes = explode(',', Mage::getStoreConfig('payment/ebanx_settings/brazil_taxes'));
+
+		return strtoupper(implode(' / ', $taxes));
+	}
+
+	public function getDocumentNumber($order)
+	{
+		$this->order = $order;
+		$countryCode = $this->getCustomerData()['country_id'];
+		$country = $this->transformCountryCodeToName($countryCode);
+
+		switch ($country) {
+			case Country::BRAZIL:
+				return $this->getBrazilianDocumentNumber();
+			case Country::CHILE:
+				return $this->getChileanDocumentNumber();
+			case Country::COLOMBIA:
+				return $this->getColombianDocumentNumber();
+			default:
+				return null;
+		}
+	}
+
+	public function getCustomerData()
+	{
+		$checkoutData = Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getData();
+
+		$customerAddressData = array_key_exists('customer_address_id', $checkoutData) && !is_null($checkoutData['customer_address_id'])
+			? Mage::getModel('customer/address')->load($checkoutData['customer_address_id'])->getCustomer()->getData()
+			: $checkoutData;
+
+		$customerSessionData = Mage::getSingleton('customer/session')->getCustomer()->getData();
+
+		$customerParams = Mage::app()->getRequest()->getParams();
+
+		$data = array_merge(
+			$checkoutData,
+			$customerAddressData,
+			$customerSessionData,
+			$customerParams
+		);
+
+		return $data;
+	}
+
+	public function transformCountryCodeToName($countryCode)
+	{
+		if (!$countryCode) {
+			return false;
+		}
+
+		$countries = [
+			'cl' => Country::CHILE,
+			'br' => Country::BRAZIL,
+			'co' => Country::COLOMBIA,
+			'mx' => Country::MEXICO,
+			'pe' => Country::PERU,
+		];
+
+		return $countries[strtolower($countryCode)];
 	}
 
 	public function getBrazilianDocumentNumber()
@@ -237,46 +279,6 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return $customer['ebanx-document'];
 	}
 
-	public function getDocumentNumber($order)
-	{
-		$this->order = $order;
-		$countryCode = $this->getCustomerData()['country_id'];
-		$country = $this->transformCountryCodeToName($countryCode);
-
-		switch ($country) {
-			case Country::BRAZIL:
-				return $this->getBrazilianDocumentNumber();
-			case Country::CHILE:
-				return $this->getChileanDocumentNumber();
-			case Country::COLOMBIA:
-				return $this->getColombianDocumentNumber();
-			default:
-				return null;
-		}
-	}
-
-	public function getCustomerData()
-	{
-		$checkoutData = Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getData();
-
-		$customerAddressData = array_key_exists('customer_address_id', $checkoutData) && !is_null($checkoutData['customer_address_id'])
-			? Mage::getModel('customer/address')->load($checkoutData['customer_address_id'])->getCustomer()->getData()
-			: $checkoutData;
-
-		$customerSessionData = Mage::getSingleton('customer/session')->getCustomer()->getData();
-
-		$customerParams = Mage::app()->getRequest()->getParams();
-
-		$data = array_merge(
-			$checkoutData,
-			$customerAddressData,
-			$customerSessionData,
-			$customerParams
-		);
-
-		return $data;
-	}
-
 	public function getPersonType($document)
 	{
 		$document = str_replace(['.', '-', '/'], '', $document);
@@ -288,6 +290,11 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return Person::TYPE_BUSINESS;
 	}
 
+	public function errorLog($data)
+	{
+		$this->log($data, 'ebanx_error');
+	}
+
 	public function log($data, $filename = 'ebanx', $extension = '.log')
 	{
 		$isLogEnabled = Mage::getStoreConfig('payment/ebanx_settings/debug_log') === '1';
@@ -297,18 +304,14 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		Mage::log($data, null, $filename . $extension, true);
 	}
 
-	public function errorLog($data)
-	{
-		$this->log($data, 'ebanx_error');
-	}
-
 	/**
 	 * Splits address in street name, house number and addition
 	 *
 	 * @param  string $address Address to be split
 	 * @return array
 	 */
-	public function split_street($address) {
+	public function split_street($address)
+	{
 		$result = preg_match('/^([^,\-\/\#0-9]*)\s*[,\-\/\#]?\s*([0-9]+)\s*[,\-\/]?\s*([^,\-\/]*)(\s*[,\-\/]?\s*)([^,\-\/]*)$/', $address, $matches);
 		if ($result === false) {
 			throw new \RuntimeException(sprintf('Problems trying to parse address: \'%s\'', $address));
@@ -329,16 +332,9 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		}
 		return array(
 			'streetName' => $street_name,
-			'houseNumber' => $house_number  ?: 0,
+			'houseNumber' => $house_number ?: 0,
 			'additionToAddress' => $addition_to_address
 		);
-	}
-
-	public function getPaymentByHash($hash)
-	{
-		$ebanx = Mage::getSingleton('ebanx/api')->ebanx();
-
-		return $ebanx->paymentInfo()->findByHash($hash);
 	}
 
 	public function getVoucherUrlByHash($hash, $format = 'basic')
@@ -367,5 +363,12 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		}
 
 		return "{$url}&format={$format}";
+	}
+
+	public function getPaymentByHash($hash)
+	{
+		$ebanx = Mage::getSingleton('ebanx/api')->ebanx();
+
+		return $ebanx->paymentInfo()->findByHash($hash);
 	}
 }

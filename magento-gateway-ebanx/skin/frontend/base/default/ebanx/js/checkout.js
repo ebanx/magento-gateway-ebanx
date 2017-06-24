@@ -35,18 +35,18 @@ function handleEbanxForm(countryCode, paymentType) {
 
   var isFormEmpty = function () {
     return !cardNumber.value.length ||
-    !cardName.value.length ||
-    !cardExpirationMonth.value.length ||
-    !cardExpirationYear.value.length ||
-    !cardCvv.value.length;
+      !cardName.value.length ||
+      !cardExpirationMonth.value.length ||
+      !cardExpirationYear.value.length ||
+      !cardCvv.value.length;
   };
 
   var generateToken = function () {
     if (!responseData) {
       EBANX.card.createToken({
-        card_number: parseInt(cardNumber.value.replace(/ /g,'')),
+        card_number: parseInt(cardNumber.value.replace(/ /g, '')),
         card_name: cardName.value,
-        card_due_date: (parseInt( cardExpirationMonth.value ) || 0) + '/' + (parseInt( cardExpirationYear.value ) || 0),
+        card_due_date: (parseInt(cardExpirationMonth.value) || 0) + '/' + (parseInt(cardExpirationYear.value) || 0),
         card_cvv: cardCvv.value
       }, saveToken);
     }

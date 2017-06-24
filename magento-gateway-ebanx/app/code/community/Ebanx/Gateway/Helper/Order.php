@@ -11,7 +11,7 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
 			->addFieldToFilter('ebanx_payment_hash', $hash)
 			->load();
 
-		if ($model->count() !== 1 ) {
+		if ($model->count() !== 1) {
 			Mage::throwException($this->__('EBANX: Invalid payment hash. We couldn\'t find the order.'));
 		};
 
