@@ -4,7 +4,7 @@
   "type": "project",
   "license": "MIT",
   "config": {
-    "vendor-dir": "magento-gateway-ebanx/lib/Ebanx/vendor"
+    "vendor-dir": "lib/Ebanx/vendor"
   },
   "minimum-stability": "dev",
   "require": {
