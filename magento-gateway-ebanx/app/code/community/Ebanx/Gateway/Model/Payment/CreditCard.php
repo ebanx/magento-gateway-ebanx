@@ -60,19 +60,9 @@ abstract class Ebanx_Gateway_Model_Payment_CreditCard extends Ebanx_Gateway_Mode
 		parent::persistPayment();
 
 		$gatewayFields = $this->data->getGatewayFields();
-		$this->payment->setInstalments($gatewayFields['instalments']);
-	}
-
-	public function persistPayment()
-	{
-		parent::persistPayment();
-
-		$params = Mage::app()->getRequest()->getParams();
-		$paymentData = $params['payment'];
-		$last4 = substr($paymentData['ebanx_masked_card_number'], -4);
-
-		$this->payment
+		$last4 = substr($gatewayFields['ebanx_masked_card_number'], -4);
+		$this->payment->setInstalments($gatewayFields['instalments'])
 			->setCcLast4($last4)
-			->setCcType($paymentData['ebanx_brand']);
+			->setCcType($gatewayFields['ebanx_brand']);
 	}
 }
