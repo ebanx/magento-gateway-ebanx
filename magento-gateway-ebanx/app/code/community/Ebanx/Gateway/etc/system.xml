@@ -236,7 +236,8 @@
                         <min_instalment_value translate="label">
                             <label>Minimum Instalment Value</label>
                             <comment>Set the minimum instalment value during checkout. The minimum EBANX allows for BRL
-                                is 20 and MXN is 100, lower values in these currencies considered will not be considered.
+                                is 20 and MXN is 100, lower values in these currencies considered will not be
+                                considered.
                             </comment>
                             <frontend_type>text</frontend_type>
                             <validate>required-entry validate-number</validate>
@@ -247,7 +248,8 @@
                         </min_instalment_value>
                         <use_interest_rates translate="label">
                             <label>Interest Rates</label>
-                            <comment>Enable and set custom interest rates according to the number of installments you have allowed the payment for your customers.
+                            <comment>Enable and set custom interest rates according to the number of installments you
+                                have allowed the payment for your customers.
                             </comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -299,7 +301,8 @@
                             <label>Confirmed Payment Status</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_order_status</source_model>
-                            <comment>Payment paid, the customer has paid the order and EBANX received the payment.</comment>
+                            <comment>Payment paid, the customer has paid the order and EBANX received the payment.
+                            </comment>
                             <sort_order>320</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -329,7 +332,9 @@
                             <label>Canceled Payment Status</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_order_status</source_model>
-                            <comment>Payment canceled when the customer hasn't make the payment, so EBANX set as canceled.</comment>
+                            <comment>Payment canceled when the customer hasn't make the payment, so EBANX set as
+                                canceled.
+                            </comment>
                             <sort_order>323</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>

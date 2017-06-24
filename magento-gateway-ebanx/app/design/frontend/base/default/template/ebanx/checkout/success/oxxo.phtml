@@ -1,8 +1,8 @@
 <?php
-  $customer = $this->getCustomer();
-  $order = $this->getOrder();
-  $payment = $this->getPayment();
-  $dueDate = $this->helper->getDueDate($order->getEbanxDueDate(), 'dd/MM');
+$customer = $this->getCustomer();
+$order = $this->getOrder();
+$payment = $this->getPayment();
+$dueDate = $this->helper->getDueDate($order->getEbanxDueDate(), 'dd/MM');
 ?>
 
 <div class="ebanx-details">
@@ -10,21 +10,23 @@
 
     <p>Enviamos una copia a <strong><?= $customer['email'] ?></strong>.</p>
 
-    <p>No lo olvides: tu boleta vence el día <strong><?= $dueDate; ?></strong>. Después de esa fecha no será posible realizar el pago y la boleta será cancelada automáticamente.</p>
+    <p>No lo olvides: tu boleta vence el día <strong><?= $dueDate; ?></strong>. Después de esa fecha no será posible
+        realizar el pago y la boleta será cancelada automáticamente.</p>
 
     <p>¿Dudas? Con gusto te <a href="https://www.ebanx.com/mx/ayuda/pagos/boleta" target="_blank">ayudaremos</a>.</p>
 
     <div class="ebanx-groups">
-      <div class="ebanx-group">
-          <a href="<?= $this->getEbanxUrlPdf('oxxo') ?>" target="_blank" class="button">Guardar como PDF</a>
-      </div>
-      <div class="ebanx-group">
-          <a href="<?= $this->getEbanxUrlPrint('oxxo') ?>" target="_blank" class="button">Imprimir OXXO</a>
-      </div>
+        <div class="ebanx-group">
+            <a href="<?= $this->getEbanxUrlPdf('oxxo') ?>" target="_blank" class="button">Guardar como PDF</a>
+        </div>
+        <div class="ebanx-group">
+            <a href="<?= $this->getEbanxUrlPrint('oxxo') ?>" target="_blank" class="button">Imprimir OXXO</a>
+        </div>
     </div>
 
     <div class="ebanx-cash-payment">
-      <iframe id="ebanx-boleto-frame" src="<?php echo $this->getVoucherUrl('oxxo'); ?>" style="width: 100%; border: 0px; height: 1000px"></iframe>
+        <iframe id="ebanx-boleto-frame" src="<?php echo $this->getVoucherUrl('oxxo'); ?>"
+                style="width: 100%; border: 0px; height: 1000px"></iframe>
     </div>
 
     <?php include 'apps.phtml' ?>

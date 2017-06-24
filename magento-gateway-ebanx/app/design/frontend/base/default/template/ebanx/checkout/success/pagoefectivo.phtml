@@ -7,18 +7,20 @@ $payment = $this->getPayment();
 ?>
 
 <div class="ebanx-details">
-  <p>¡Listo <?= $customer['firstname'] ?>!</p>
-  <p>Acabamos de confirmar la operación y procesaremos tu orden. Imprime tu cupón y acércate a cualquier centro autorizado para realizar tu pago.</p>
-  <p>Una copia del cupón fue enviada al correo electrónico: <strong><?= $customer['email'] ?></strong></p>
-  <p>Si tienes dudas, por favor escribe a <a href="mailto:soporte@ebanx.com">soporte@ebanx.com</a>.</p>
+    <p>¡Listo <?= $customer['firstname'] ?>!</p>
+    <p>Acabamos de confirmar la operación y procesaremos tu orden. Imprime tu cupón y acércate a cualquier centro
+        autorizado para realizar tu pago.</p>
+    <p>Una copia del cupón fue enviada al correo electrónico: <strong><?= $customer['email'] ?></strong></p>
+    <p>Si tienes dudas, por favor escribe a <a href="mailto:soporte@ebanx.com">soporte@ebanx.com</a>.</p>
 
-  <div class="ebanx-groups">
-    <a href="<?= $this->getEbanxUrlPrint('cip') ?>" target="_blank" class="button">Imprimir Voucher</a>
-  </div>
+    <div class="ebanx-groups">
+        <a href="<?= $this->getEbanxUrlPrint('cip') ?>" target="_blank" class="button">Imprimir Voucher</a>
+    </div>
 
-  <div class="ebanx-cash-payment">
-    <iframe id="ebanx-boleto-frame" src="<?php echo $this->getVoucherUrl('cip'); ?>" style="width: 100%; border: 0px; height: 1000px"></iframe>
-  </div>
+    <div class="ebanx-cash-payment">
+        <iframe id="ebanx-boleto-frame" src="<?php echo $this->getVoucherUrl('cip'); ?>"
+                style="width: 100%; border: 0px; height: 1000px"></iframe>
+    </div>
 
-  <?php include 'apps.phtml' ?>
+    <?php include 'apps.phtml' ?>
 </div>

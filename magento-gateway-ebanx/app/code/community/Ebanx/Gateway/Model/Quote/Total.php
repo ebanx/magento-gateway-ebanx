@@ -1,25 +1,26 @@
 <?php
+
 class Ebanx_Gateway_Model_Quote_Total extends Mage_Sales_Model_Quote_Address_Total_Abstract
 {
-    public function __construct()
-    {
-        $this->setCode('ebanx_interest');
-    }
+	public function __construct()
+	{
+		$this->setCode('ebanx_interest');
+	}
 
-    public function collect(Mage_Sales_Model_Quote_Address $address)
-    {
+	public function collect(Mage_Sales_Model_Quote_Address $address)
+	{
 		$payment = $address->getQuote()->getPayment();
 
-        if(!$payment->hasMethodInstance()) {
-            return $this;
-        }
-
-		$isCardPayment = substr($payment->getMethodInstance()->getCode(), 0, 8) === 'ebanx_cc';
-		if(!$isCardPayment) {
+		if (!$payment->hasMethodInstance()) {
 			return $this;
 		}
 
-        $paymentInstance = $payment->getMethodInstance();
+		$isCardPayment = substr($payment->getMethodInstance()->getCode(), 0, 8) === 'ebanx_cc';
+		if (!$isCardPayment) {
+			return $this;
+		}
+
+		$paymentInstance = $payment->getMethodInstance();
 
 		$gatewayFields = Mage::app()->getRequest()->getPost('payment');
 		$instalments = $gatewayFields['instalments'];
@@ -34,20 +35,20 @@ class Ebanx_Gateway_Model_Quote_Total extends Mage_Sales_Model_Quote_Address_Tot
 			$address->setGrandTotal($interestAmount / 2);
 		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function fetch(Mage_Sales_Model_Quote_Address $address)
-    {
-        $amount = $address->getEbanxInterestAmount();
-        $title = Mage::helper('ebanx')->__('Interest Rate');
-        if ($amount != 0){
-            $address->addTotal(array(
-                'code' => $this->getCode(),
-                'title' => $title,
-                'value' => $amount,
-            ));
-        }
-        return $this;
-    }
+	public function fetch(Mage_Sales_Model_Quote_Address $address)
+	{
+		$amount = $address->getEbanxInterestAmount();
+		$title = Mage::helper('ebanx')->__('Interest Rate');
+		if ($amount != 0) {
+			$address->addTotal(array(
+				'code' => $this->getCode(),
+				'title' => $title,
+				'value' => $amount,
+			));
+		}
+		return $this;
+	}
 }

@@ -9,6 +9,11 @@ class Ebanx_Gateway_Model_Api
 	protected $ebanx;
 	protected $config;
 
+	public function __construct()
+	{
+		$this->ebanx = EBANX($this->getConfig(), $this->getCreditCardConfig());
+	}
+
 	public function getConfig()
 	{
 		return new Config(array(
@@ -19,21 +24,6 @@ class Ebanx_Gateway_Model_Api
 			'notificationUrl' => Mage::getUrl('ebanx/index/notification/'),
 			'redirectUrl' => Mage::getUrl('ebanx/index/notification/'),
 		));
-	}
-
-	public function __construct()
-	{
-		$this->ebanx = EBANX($this->getConfig(), $this->getCreditCardConfig());
-	}
-
-	public function ebanx()
-	{
-		return $this->ebanx;
-	}
-
-	public function ebanxCreditCard()
-	{
-		return $this->ebanx;
 	}
 
 	/**
@@ -65,5 +55,15 @@ class Ebanx_Gateway_Model_Api
 			}
 		}
 		return $creditCardConfig;
+	}
+
+	public function ebanx()
+	{
+		return $this->ebanx;
+	}
+
+	public function ebanxCreditCard()
+	{
+		return $this->ebanx;
 	}
 }

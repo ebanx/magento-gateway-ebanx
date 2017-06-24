@@ -2,8 +2,8 @@
 require_once Mage::getBaseDir('lib') . '/Ebanx/vendor/autoload.php';
 
 use Ebanx\Benjamin\Models\Address;
-use Ebanx\Benjamin\Models\Item;
 use Ebanx\Benjamin\Models\Card;
+use Ebanx\Benjamin\Models\Item;
 use Ebanx\Benjamin\Models\Payment;
 use Ebanx\Benjamin\Models\Person;
 
@@ -14,25 +14,6 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 	public function __construct()
 	{
 		$this->helper = Mage::helper('ebanx');
-	}
-
-	/**
-	 * @param Varien_Object $data
-	 * @return Payment
-	 */
-	public function transform(Varien_Object $data)
-	{
-		return new Payment([
-			'type' => $data->getEbanxMethod(),
-			'amountTotal' => $data->getAmountTotal(),
-			'merchantPaymentCode' => $data->getMerchantPaymentCode(),
-			'orderNumber' => $data->getOrderId(),
-			'dueDate' => new \DateTime($data->getDueDate()),
-			'address' => $this->transformAddress($data->getBillingAddress(), $data),
-			'person' => $this->transformPerson($data->getPerson(), $data),
-			'responsible' => $this->transformPerson($data->getPerson(), $data),
-			'items' => $this->transformItems($data->getItems(), $data)
-		]);
 	}
 
 	public function transformCard(Varien_Object $data)
@@ -60,6 +41,25 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 		]);
 
 		return $payment;
+	}
+
+	/**
+	 * @param Varien_Object $data
+	 * @return Payment
+	 */
+	public function transform(Varien_Object $data)
+	{
+		return new Payment([
+			'type' => $data->getEbanxMethod(),
+			'amountTotal' => $data->getAmountTotal(),
+			'merchantPaymentCode' => $data->getMerchantPaymentCode(),
+			'orderNumber' => $data->getOrderId(),
+			'dueDate' => new \DateTime($data->getDueDate()),
+			'address' => $this->transformAddress($data->getBillingAddress(), $data),
+			'person' => $this->transformPerson($data->getPerson(), $data),
+			'responsible' => $this->transformPerson($data->getPerson(), $data),
+			'items' => $this->transformItems($data->getItems(), $data)
+		]);
 	}
 
 	public function transformAddress($address, $data)

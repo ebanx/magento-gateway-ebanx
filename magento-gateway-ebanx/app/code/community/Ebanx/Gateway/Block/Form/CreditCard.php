@@ -1,24 +1,7 @@
 <?php
+
 abstract class Ebanx_Gateway_Block_Form_CreditCard extends Mage_Payment_Block_Form_Cc
 {
-	/**
-	 * @return string
-	 */
-	abstract protected function getTemplatePath();
-
-	/**
-	 * @param bool $hasInterests
-	 *
-	 * @return string
-	 */
-	abstract protected function getInterestMessage($hasInterests);
-
-	protected function _construct()
-	{
-		parent::_construct();
-		$this->setTemplate($this->getTemplatePath());
-	}
-
 	public function getInstalmentTerms()
 	{
 		return $this->getMethod()->getInstalmentTerms();
@@ -37,4 +20,21 @@ abstract class Ebanx_Gateway_Block_Form_CreditCard extends Mage_Payment_Block_Fo
 		$message = sprintf('%sx de %s %s', $instalmentNumber, $amount, $interestMessage);
 		return $message;
 	}
+
+	/**
+	 * @param bool $hasInterests
+	 * @return string
+	 */
+	abstract protected function getInterestMessage($hasInterests);
+
+	protected function _construct()
+	{
+		parent::_construct();
+		$this->setTemplate($this->getTemplatePath());
+	}
+
+	/**
+	 * @return string
+	 */
+	abstract protected function getTemplatePath();
 }
