@@ -17,7 +17,7 @@
         <div class="input-box">
             <input type="text" id="<?php echo $_code ?>_dc_number" name="payment[dc_number]"
                    title="<?php echo Mage::helper('core')->jsQuoteEscape('Número de la tarjeta') ?>"
-                   class="input-text validate-dc-number" value=""/>
+                   class="input-text validate-dc-number ebanx-format-cc-number required-entry" value=""/>
         </div>
     </li>
     <li id="<?php echo $_code ?>_dc_type_exp_div">
@@ -47,7 +47,7 @@
         <div class="input-box">
             <div class="v-fix">
                 <input type="text" title="<?php echo Mage::helper('core')->jsQuoteEscape('Código de verificación') ?>"
-                       class="input-text cvv required-entry validate-dc-cvn" id="<?php echo $_code ?>_dc_cid"
+                       class="input-text cvv required-entry validate-dc-cvn ebanx-format-cvc-number" id="<?php echo $_code ?>_dc_cid"
                        name="payment[dc_cid]" value=""/>
             </div>
         </div>
@@ -65,8 +65,9 @@
     <input type="hidden" name="payment[ebanx_country]" id="ebanx_country" value="mx"/>
 </ul>
 
-<script type="text/javascript">
-    //<![CDATA[
+<script>
     handleEbanxForm('mx', 'dc');
-    //]]>
+
+    EBANXCreditCard.formatCardNumber(document.querySelector('input#ebanx_dc_mx_dc_number'));
+    EBANXCreditCard.formatCardCVC(document.querySelector('input#ebanx_dc_mx_dc_cid'));
 </script>

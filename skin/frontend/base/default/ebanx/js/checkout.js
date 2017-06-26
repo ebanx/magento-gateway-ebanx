@@ -26,7 +26,6 @@ function handleEbanxForm(countryCode, paymentType) {
   EBANX.config.setPublishableKey(ebanxIntegrationKey.value);
   EBANX.config.setCountry(ebanxCountry.value);
 
-
   var handleToken = function () {
     if (!isFormEmpty()) {
       generateToken();
@@ -61,8 +60,6 @@ function handleEbanxForm(countryCode, paymentType) {
       ebanxDeviceFingerprint.value = responseData.deviceId;
       return;
     }
-    var errorMessage = response.error.err.message || response.error.err.status_message;
-    alert(errorMessage);
   };
 
   var clearResponseData = function () {

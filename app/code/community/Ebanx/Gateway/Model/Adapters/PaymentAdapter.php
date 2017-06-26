@@ -64,7 +64,7 @@ class Ebanx_Gateway_Model_Adapters_PaymentAdapter
 
 	public function transformAddress($address, $data)
 	{
-		$street = $this->helper->split_street($address->getStreetFull());
+		$street = $this->helper->split_street($address->getStreet1());
 
 		return new Address([
 			'address' => $street['streetName'],
