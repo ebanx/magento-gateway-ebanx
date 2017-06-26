@@ -10,7 +10,7 @@
         <div class="input-box">
             <input type="text" id="<?php echo $_code ?>_cc_number"
                    title="<?php echo Mage::helper('core')->jsQuoteEscape('Número do Cartão') ?>"
-                   class="input-text validate-cc-number" value=""/>
+                   class="input-text required-entry validate-cc-number ebanx-format-cc-number" value=""/>
         </div>
     </li>
     <li id="<?php echo $_code ?>_cc_type_exp_div">
@@ -18,7 +18,7 @@
         <div class="input-box">
             <div class="v-fix">
                 <select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month]"
-                        class="month validate-cc-exp required-entry">
+                        class="month required-entry validate-cc-exp">
                     <?php foreach ($this->getCcMonths() as $k => $v): ?>
                         <option value="<?php echo $k ?>"><?php echo $v ?></option>
                     <?php endforeach ?>
@@ -40,7 +40,7 @@
         <div class="input-box">
             <div class="v-fix">
                 <input type="text" title="<?php echo Mage::helper('core')->jsQuoteEscape('Código de segurança') ?>"
-                       class="input-text cvv required-entry validate-cc-cvn" id="<?php echo $_code ?>_cc_cid"
+                       class="input-text cvv required-entry validate-cc-cvn ebanx-format-cvc-number" id="<?php echo $_code ?>_cc_cid"
                        name="payment[cc_cid]" value=""/>
             </div>
         </div>
@@ -80,8 +80,9 @@
     <input type="hidden" name="payment[grand_total]" id="grand_total" value="<?php echo $this->getTotal() ?>"/>
 </ul>
 
-<script type="text/javascript">
-    //<![CDATA[
+<script>
     handleEbanxForm('br', 'cc');
-    //]]>
+
+    EBANXCreditCard.formatCardNumber(document.querySelector('input#ebanx_cc_br_cc_number'));
+    EBANXCreditCard.formatCardCVC(document.querySelector('input#ebanx_cc_br_cc_cid'));
 </script>
