@@ -1,0 +1,10 @@
+<?php
+  $brazilAllowedDocumentFields = explode(',', Mage::getStoreConfig('payment/ebanx_settings/brazil_taxes'));
+?>
+
+<!-- EBANX Custom Variables -->
+<script>
+  var EBANXData = {
+    brazilAllowedDocumentFields: <?= json_encode($brazilAllowedDocumentFields) ?>
+  };
+</script>
