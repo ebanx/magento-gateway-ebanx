@@ -10,7 +10,7 @@ var qs = function (el) {
 var getLabelByCountry = function (country, defaultLabel) {
   switch (country.toLowerCase()) {
     case 'br':
-      return 'CPF / CNPJ';
+      return EBANXData.brazilAllowedDocumentFields.join(' / ').toUpperCase();
     case 'co':
       return 'DNI';
     case 'cl':
