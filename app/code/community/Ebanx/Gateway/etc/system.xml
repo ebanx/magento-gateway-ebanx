@@ -14,13 +14,12 @@
                         document.getElementById('logo_ebanx').src = SKIN_URL + 'ebanx/images/logo.png';
                     </script>
                     <br/>
-                    <p>Welcome to the EBANX Payments Magento Gateway.</p>
-                    <p>You can obtain the integration keys in the settings section, on the <a href="https://www.ebanx.com/business/en/dashboard" target="_blank">EBANX Dashboard.</a></p>
-                    <p>For any doubts, consult our <a href="https://www.ebanx.com/business/en/developers/" target="_blank">Developers page</a>.</p>
+                    <p>EBANX easy-to-setup checkout allows your business to accept local payments in Brazil, Mexico, Colombia, Chile & Peru.</p>
+                    <p>You can obtain your API keys in the settings section, on the <a href="https://dashboard.ebanx.com/" target="_blank" title="EBANX Dashboard">EBANX Dashboard</a>.</p>
                     ]]></comment>
                     <fields>
                         <heading_config translate="label">
-                            <label>Configuration</label>
+                            <label>API Keys</label>
                             <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
                             <sort_order>0</sort_order>
                             <show_in_default>1</show_in_default>
@@ -36,55 +35,51 @@
                             <show_in_store>0</show_in_store>
                         </mode>
                         <integration_key_sandbox translate="label">
-                            <label>Sanbox Integration Key</label>
+                            <label>Sandbox Integration Key</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends>
-                                <mode>sandbox</mode>
-                            </depends>
                         </integration_key_sandbox>
                         <integration_key_public_sandbox translate="label">
                             <label>Sandbox Public Integration Key</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>30</sort_order>
+                            <sort_order>25</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends>
-                                <mode>sandbox</mode>
-                            </depends>
                         </integration_key_public_sandbox>
                         <integration_key_live translate="label">
                             <label>Live Integration Key</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>20</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
-                            <depends>
-                                <mode>live</mode>
-                            </depends>
-                        </integration_key_live>
-                        <integration_key_public_live translate="label">
-                            <label>Live Public Integration Key</label>
-                            <frontend_type>text</frontend_type>
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends>
-                                <mode>live</mode>
-                            </depends>
+                        </integration_key_live>
+                        <integration_key_public_live translate="label">
+                            <label>Live Public Integration Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
                         </integration_key_public_live>
+
+                        <preferences_title translate="label">
+                            <label>Preferences</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </preferences_title>
                         <debug_log translate="label">
                             <label>Enable Debug Log</label>
                             <comment>Record all errors that occur when executing a transaction.</comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>40</sort_order>
+                            <sort_order>50</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -97,7 +92,7 @@
                             <frontend_type>multiselect</frontend_type>
                             <source_model>ebanx/source_persontype</source_model>
                             <validate>required-entry</validate>
-                            <sort_order>50</sort_order>
+                            <sort_order>60</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -222,10 +217,8 @@
                             <show_in_store>0</show_in_store>
                         </auto_capture>-->
                         <max_instalments translate="label">
-                            <label>Maximum Number of Instalments</label>
-                            <comment>Establish the maximum number of instalments in which your customer can pay, as
-                                consented on your contract.
-                            </comment>
+                            <label>Maximum n° of Instalments</label>
+                            <comment>Establish the maximum number of instalments in which your customer can pay, as consented on your contract.</comment>
                             <frontend_type>select</frontend_type>
                             <source_model>ebanx/source_instalment</source_model>
                             <sort_order>235</sort_order>
@@ -234,11 +227,8 @@
                             <show_in_store>0</show_in_store>
                         </max_instalments>
                         <min_instalment_value translate="label">
-                            <label>Minimum Instalment Value</label>
-                            <comment>Set the minimum instalment value during checkout. The minimum EBANX allows for BRL
-                                is 20 and MXN is 100, lower values in these currencies considered will not be
-                                considered.
-                            </comment>
+                            <label>Minimum Instalment (USD)</label>
+                            <comment>Set the minimum instalment value during the ckeckout. The minimum EBANX allows for BRL is 20 and MXN is 100, lower values in these currencies considered will not be considered.</comment>
                             <frontend_type>text</frontend_type>
                             <validate>required-entry validate-number</validate>
                             <sort_order>240</sort_order>
@@ -248,9 +238,7 @@
                         </min_instalment_value>
                         <use_interest_rates translate="label">
                             <label>Interest Rates</label>
-                            <comment>Enable and set custom interest rates according to the number of installments you
-                                have allowed the payment for your customers.
-                            </comment>
+                            <comment>Enable and set custom interest rates according to the number of installments you have allowed the payment for your customers.</comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>245</sort_order>
@@ -278,9 +266,7 @@
                         </heading_cash>
                         <due_date_days translate="label">
                             <label>Days to Expiration</label>
-                            <comment>Define the maximum number of days on which your customer can complete the payment
-                                of: Boleto, OXXO, Sencilito, PagoEfectivo and SafetyPay.
-                            </comment>
+                            <comment>Define the maximum number of days on which your customer can complete the payment of: Boleto, OXXO, Sencillito, PagoEfectivo and SafetyPay.</comment>
                             <frontend_type>select</frontend_type>
                             <source_model>ebanx/source_duedate</source_model>
                             <sort_order>310</sort_order>
@@ -293,17 +279,16 @@
                         <payment_status_title translate="label">
                             <label>Payment Status</label>
                             <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
-                            <sort_order>319</sort_order>
+                            <sort_order>320</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                         </payment_status_title>
                         <payment_co_status translate="label">
-                            <label>Confirmed Payment Status</label>
+                            <label>Paid Payment Status</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_order_status</source_model>
-                            <comment>Payment paid, the customer has paid the order and EBANX received the payment.
-                            </comment>
-                            <sort_order>320</sort_order>
+                            <comment>Payment paid, the customer has paid the order and EBANX received the payment.</comment>
+                            <sort_order>330</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -313,17 +298,17 @@
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_order_status</source_model>
                             <comment>Payment that have not yet been paid or is still being processed.</comment>
-                            <sort_order>321</sort_order>
+                            <sort_order>340</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </payment_pe_status>
                         <payment_op_status translate="label">
-                            <label>Opened Payment Status</label>
+                            <label>Requested Payment Status</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_order_status</source_model>
                             <comment>Payment was created but it has not yet been assigned to a payment method.</comment>
-                            <sort_order>322</sort_order>
+                            <sort_order>350</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -335,7 +320,7 @@
                             <comment>Payment canceled when the customer hasn't make the payment, so EBANX set as
                                 canceled.
                             </comment>
-                            <sort_order>323</sort_order>
+                            <sort_order>360</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -343,7 +328,7 @@
 
                         <!-- Checkout Fields -->
                         <compliance_fields_title translate="label">
-                            <label>Compliance Fields - EBANX really recommends the use of Tax/VAT fields</label>
+                            <label>Mandatory Fields</label>
                             <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
                             <sort_order>400</sort_order>
                             <show_in_default>1</show_in_default>
@@ -377,6 +362,8 @@
                             <label>DNI Document</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>413</sort_order>
+                            <comment>Processing with EBANX requires are few mandatory fields that need to be included in your checkout when processing to Brazil and Chile, such as: CPF, CNPJ, DNI and RUT.
+                                You can choose to substitute your TAX/VAT fields to those mandatory fields. If you left as blank, these fields will be added to your checkout automatically.</comment>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
