@@ -1,6 +1,6 @@
 <?php
 
-abstract class Ebanx_Gateway_Block_Form_CreditCard extends Mage_Payment_Block_Form_Cc
+abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Form_Cc
 {
 	public function getInstalmentTerms()
 	{

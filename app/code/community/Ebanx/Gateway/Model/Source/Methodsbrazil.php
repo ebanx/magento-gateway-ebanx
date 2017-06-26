@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Model_Source_MethodsBrazil
+class Ebanx_Gateway_Model_Source_Methodsbrazil
 {
 	const CREDIT_CARD = 'ebanx_cc_br';
 	const BOLETO = 'ebanx_boleto';

@@ -7,7 +7,7 @@ use Ebanx\Benjamin\Models\Item;
 use Ebanx\Benjamin\Models\Payment;
 use Ebanx\Benjamin\Models\Person;
 
-class Ebanx_Gateway_Model_Adapters_PaymentAdapter
+class Ebanx_Gateway_Model_Adapters_Paymentadapter
 {
 	private $helper;
 

@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Model_Source_MethodsColombia
+class Ebanx_Gateway_Model_Source_Methodscolombia
 {
 	const EFT = 'ebanx_pse';
 	const BALOTO = 'ebanx_baloto';

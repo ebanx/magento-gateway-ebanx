@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Block_Info_CreditCardBR extends Mage_Payment_Block_Info
+class Ebanx_Gateway_Block_Info_Creditcardbr extends Mage_Payment_Block_Info
 {
 	protected function _construct()
 	{

@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Model_Source_CustomerFields
+class Ebanx_Gateway_Model_Source_Customerfields
 {
 	public function toOptionArray()
 	{

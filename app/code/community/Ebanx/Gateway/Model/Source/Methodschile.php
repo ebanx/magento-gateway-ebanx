@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Model_Source_MethodsChile
+class Ebanx_Gateway_Model_Source_Methodschile
 {
 	const SENCILLITO = 'ebanx_sencillito';
 	const SERVIPAG = 'ebanx_servipag';
