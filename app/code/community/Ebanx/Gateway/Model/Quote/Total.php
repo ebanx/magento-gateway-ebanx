@@ -11,7 +11,7 @@ class Ebanx_Gateway_Model_Quote_Total extends Mage_Sales_Model_Quote_Address_Tot
 	{
 		$payment = $address->getQuote()->getPayment();
 
-		if (!$payment->hasMethodInstance()) {
+		if (!$payment->hasMethodInstance() || Mage::app()->getRequest()->getActionName() !== 'savePayment') {
 			return $this;
 		}
 
@@ -41,7 +41,7 @@ class Ebanx_Gateway_Model_Quote_Total extends Mage_Sales_Model_Quote_Address_Tot
 	public function fetch(Mage_Sales_Model_Quote_Address $address)
 	{
 		$amount = $address->getEbanxInterestAmount();
-		$title = Mage::helper('ebanx')->__('Interest Rate');
+		$title = Mage::helper('ebanx')->__('Interest Amount');
 		if ($amount != 0) {
 			$address->addTotal(array(
 				'code' => $this->getCode(),
