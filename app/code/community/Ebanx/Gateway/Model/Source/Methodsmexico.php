@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Model_Source_MethodsMexico
+class Ebanx_Gateway_Model_Source_Methodsmexico
 {
 	const CREDIT_CARD = 'ebanx_cc_mx';
 	const DEBIT_CARD = 'ebanx_dc_mx';

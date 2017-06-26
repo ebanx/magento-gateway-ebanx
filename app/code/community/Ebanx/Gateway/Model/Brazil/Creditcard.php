@@ -1,7 +1,7 @@
 <?php
 use Ebanx\Benjamin\Models\Country;
 
-class Ebanx_Gateway_Model_Brazil_CreditCard extends Ebanx_Gateway_Model_Payment_CreditCard
+class Ebanx_Gateway_Model_Brazil_Creditcard extends Ebanx_Gateway_Model_Payment_Creditcard
 {
 	protected $_code = 'ebanx_cc_br';
 

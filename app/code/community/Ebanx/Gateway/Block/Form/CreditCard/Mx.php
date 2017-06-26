@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Block_Form_CreditCard_MX extends Ebanx_Gateway_Block_Form_CreditCard
+class Ebanx_Gateway_Block_Form_Creditcard_Mx extends Ebanx_Gateway_Block_Form_Creditcard
 {
 	/**
 	 * @return string

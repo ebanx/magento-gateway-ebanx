@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Model_Source_MethodsPeru
+class Ebanx_Gateway_Model_Source_Methodsperu
 {
 	const SAFETYPAY = 'ebanx_safetypay';
 	const PAGOEFECTIVO = 'ebanx_pagoefectivo';
