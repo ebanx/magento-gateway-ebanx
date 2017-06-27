@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Block_Checkout_Success_CashPayment extends Ebanx_Gateway_Block_Checkout_Success_Payment
+class Ebanx_Gateway_Block_Checkout_Success_Cashpayment extends Ebanx_Gateway_Block_Checkout_Success_Payment
 {
 	protected $_order;
 
