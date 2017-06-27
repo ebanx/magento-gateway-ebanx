@@ -11,7 +11,7 @@ class Ebanx_Gateway_Block_Checkout_Success_Cashpayment extends Ebanx_Gateway_Blo
 		return $date->get($format);
 	}
 
-	public function getEbanxUrlPrint($type)
+	public function getEbanxUrlPrint()
 	{
 		$hash = $this->getEbanxPaymentHash();
 		return $this->helper->getVoucherUrlByHash($hash, 'print');
@@ -22,13 +22,13 @@ class Ebanx_Gateway_Block_Checkout_Success_Cashpayment extends Ebanx_Gateway_Blo
 		return $this->getOrder()->getPayment()->getEbanxPaymentHash();
 	}
 
-	public function getEbanxUrlPdf($type)
+	public function getEbanxUrlPdf()
 	{
 		$hash = $this->getEbanxPaymentHash();
 		return $this->helper->getVoucherUrlByHash($hash, 'pdf');
 	}
 
-	public function getEbanxUrlBasic($type)
+	public function getEbanxUrlBasic()
 	{
 		$hash = $this->getEbanxPaymentHash();
 		return $this->helper->getVoucherUrlByHash($hash, 'basic');

@@ -17,15 +17,15 @@ $dueDate = $this->helper->getDueDate($order->getEbanxDueDate(), 'dd/MM');
 
     <div class="ebanx-groups">
         <div class="ebanx-group">
-            <a href="<?= $this->getEbanxUrlPdf('oxxo') ?>" target="_blank" class="button">Guardar como PDF</a>
+            <a href="<?= $this->getEbanxUrlPdf() ?>" target="_blank" class="button">Guardar como PDF</a>
         </div>
         <div class="ebanx-group">
-            <a href="<?= $this->getEbanxUrlPrint('oxxo') ?>" target="_blank" class="button">Imprimir OXXO</a>
+            <a href="<?= $this->getEbanxUrlPrint() ?>" target="_blank" class="button">Imprimir OXXO</a>
         </div>
     </div>
 
     <div class="ebanx-cash-payment">
-        <iframe id="ebanx-boleto-frame" src="<?php echo $this->getVoucherUrl('oxxo'); ?>"
+        <iframe id="ebanx-boleto-frame" src="<?php echo $this->getVoucherUrl(); ?>"
                 style="width: 100%; border: 0px; height: 1000px"></iframe>
     </div>
 

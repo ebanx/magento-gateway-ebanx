@@ -14,11 +14,11 @@ $payment = $this->getPayment();
     <p>Si tienes dudas, por favor escribe a <a href="mailto:soporte@ebanx.com">soporte@ebanx.com</a>.</p>
 
     <div class="ebanx-groups">
-        <a href="<?= $this->getEbanxUrlPrint('cip') ?>" target="_blank" class="button">Imprimir Voucher</a>
+        <a href="<?= $this->getEbanxUrlPrint() ?>" target="_blank" class="button">Imprimir Voucher</a>
     </div>
 
     <div class="ebanx-cash-payment">
-        <iframe id="ebanx-boleto-frame" src="<?php echo $this->getVoucherUrl('cip'); ?>"
+        <iframe id="ebanx-boleto-frame" src="<?php echo $this->getVoucherUrl(); ?>"
                 style="width: 100%; border: 0px; height: 1000px"></iframe>
     </div>
 
