@@ -14,14 +14,14 @@ $dueDate = $this->helper->getDueDate($order->getEbanxDueDate(), 'dd/MM');
     <p><b>Dica</b>: Pagar seu boleto até às 21h de dias úteis, faz com que o pagamento tenha a chance de ser confirmado
         mais rápido :)</p>
 
-    <h3>
+    <h3 class="text-center">
         <?php
         $barCodeFormated = $this->getEbanxBarCodeFormated();
         echo $barCodeFormated['boleto1'] . '.' . $barCodeFormated['boleto2'] . ' ' . $barCodeFormated['boleto3'] . '.' . $barCodeFormated['boleto4'] . ' ' . $barCodeFormated['boleto5'] . '.' . $barCodeFormated['boleto6'] . ' ' . $barCodeFormated['boleto7'] . ' ' . $barCodeFormated['boleto8'];
         ?>
     </h3>
 
-    <div class="ebanx-groups">
+    <div class="ebanx-groups text-center">
         <button type="button" class="button ebanx-button--copy"
                 data-clipboard-text="<?php echo $this->getEbanxBarCode(); ?>"><?php echo $this->__('Copiar Número'); ?></button>
     </div>
