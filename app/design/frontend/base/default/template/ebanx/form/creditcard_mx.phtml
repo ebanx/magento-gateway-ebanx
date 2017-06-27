@@ -84,6 +84,7 @@
     <input type="hidden" name="payment[ebanx_integration_key]" id="ebanx_integration_key"
            value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
     <input type="hidden" name="payment[ebanx_country]" id="ebanx_country" value="mx"/>
+    <input type="hidden" name="payment[grand_total]" id="grand_total" value="<?php echo $this->getTotal() ?>"/>
 </ul>
 
 <script>
