@@ -35,6 +35,28 @@
     <onepagecheckout_index_index>
         <update handle="ebanx_checkout_handle"/>
     </onepagecheckout_index_index>
+    <onestepcheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </onestepcheckout_index_index>
+    <typostores_onestepcheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </typostores_onestepcheckout_index_index>
+    <opc_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </opc_index_index>
+    <aw_onestepcheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </aw_onestepcheckout_index_index>
+    <idecheckoutvm_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </idecheckoutvm_index_index>
+    <checkoutsimplificado_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </checkoutsimplificado_index_index>
+    <firecheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </firecheckout_index_index>
+
 
     <!-- Succes Page -->
     <ebanx_checkout_success_handle>

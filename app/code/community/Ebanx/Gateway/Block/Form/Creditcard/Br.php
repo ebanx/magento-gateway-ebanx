@@ -16,6 +16,6 @@ class Ebanx_Gateway_Block_Form_Creditcard_Br extends Ebanx_Gateway_Block_Form_Cr
 	 */
 	protected function getInterestMessage($hasInterests)
 	{
-		return $hasInterests ? 'com juros' : 'sem juros';
+		return $hasInterests ? 'com juros' : '';
 	}
 }

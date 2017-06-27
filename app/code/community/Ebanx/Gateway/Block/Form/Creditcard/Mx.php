@@ -16,6 +16,6 @@ class Ebanx_Gateway_Block_Form_Creditcard_Mx extends Ebanx_Gateway_Block_Form_Cr
 	 */
 	protected function getInterestMessage($hasInterests)
 	{
-		return $hasInterests ? 'con intereses' : 'sin interés';
+		return $hasInterests ? 'con intereses' : '';
 	}
 }

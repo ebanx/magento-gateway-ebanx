@@ -25,7 +25,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 		$this->configs = Mage::getStoreConfig('payment/ebanx_settings');
 		$this->ebanx = Mage::getSingleton('ebanx/api')->ebanx();
-		$this->adapter = Mage::getModel('ebanx/adapters_paymentAdapter');
+		$this->adapter = Mage::getModel('ebanx/adapters_paymentadapter');
 		$this->helper = Mage::helper('ebanx');
 	}
 
