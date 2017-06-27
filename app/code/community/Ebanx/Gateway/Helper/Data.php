@@ -214,7 +214,12 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'pe' => Country::PERU,
 		];
 
-		return $countries[strtolower($countryCode)];
+		$countryIndex = strtolower($countryCode);
+		if (!array_key_exists($countryIndex, $countries)) {
+			return null;
+		}
+
+		return $countries[$countryIndex];
 	}
 
 	public function getBrazilianDocumentNumber()
