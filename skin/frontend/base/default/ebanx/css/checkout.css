@@ -1,5 +1,22 @@
 .ebanx-compliance-fields {
+  overflow: hidden;
   margin-bottom: 30px;
+}
+
+.ebanx-document-text {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.ebanx-document-label {
+  width: 100%;
+  margin: 0 !important;
+}
+
+@media screen and (min-width: 1024px) {
+  .ebanx-document-label {
+    width: 50%;
+  }
 }
 
 input.input-text.identified,
@@ -41,4 +58,46 @@ input.input-text.elo.identified {
 
 input.input-text.unknown {
   background-image: url(/skin/frontend/base/default/ebanx/icons/unknown.png);
+}
+
+.ebanx-payment-method p {
+  overflow: hidden;
+  clear: both;
+}
+
+.ebanx-payment-method p:last-child {
+  margin: 0;
+}
+
+.ebanx-payment-method {
+  position: relative;
+
+  padding: 1em 15px;
+  padding-bottom: 30px;
+}
+
+.ebanx-payment-method.ebanx-es-method:after,
+.ebanx-payment-method.ebanx-br-method:after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  right: 15px;
+
+  background-size: 100%;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
+
+.ebanx-payment-method.ebanx-es-method:after {
+  width: 168px;
+  height: 22px;
+
+  background-image: url(/skin/frontend/base/default/ebanx/ebanx-estas-pagando.png);
+}
+
+.ebanx-payment-method.ebanx-br-method:after {
+  width: 136px;
+  height: 22px;
+
+  background-image: url(/skin/frontend/base/default/ebanx/ebanx-pagando.png);
 }
