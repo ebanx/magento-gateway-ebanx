@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<layout>
+    <!-- Checkout Page -->
+    <ebanx_checkout_handle>
+        <reference name="head">
+            <block type="page/html" name="custom-javascript" template="ebanx/checkout/checkout.phtml"/>
+            <action method="addCss">
+                <stylesheet>ebanx/css/checkout.css</stylesheet>
+            </action>
+            <block type="core/text" name="lib_js">
+                <action method="setText">
+                    <text><![CDATA[
+                        <script src="//js.ebanx.com/ebanx-1.5.min.js"></script>]]>
+                    </text>
+                </action>
+            </block>
+            <action method="addJs">
+                <script>ebanx/payment.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/checkout.js</name>
+            </action>
+            <action method="addJs">
+                <script>ebanx/document/document.js</script>
+            </action>
+            <action method="addJs">
+                <script>ebanx/vanilla-masker/vanilla-masker.min.js</script>
+            </action>
+            <action method="setText">
+                <text>olar</text>
+            </action>
+        </reference>
+    </ebanx_checkout_handle>
+    <ebanx_firecheckout_handle>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/firecheckout-interest.js</name>
+            </action>
+        </reference>
+    </ebanx_firecheckout_handle>
+    <checkout_onepage_index>
+        <update handle="ebanx_checkout_handle"/>
+    </checkout_onepage_index>
+    <onepagecheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </onepagecheckout_index_index>
+    <onestepcheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </onestepcheckout_index_index>
+    <typostores_onestepcheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </typostores_onestepcheckout_index_index>
+    <opc_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </opc_index_index>
+    <aw_onestepcheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </aw_onestepcheckout_index_index>
+    <idecheckoutvm_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </idecheckoutvm_index_index>
+    <checkoutsimplificado_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </checkoutsimplificado_index_index>
+    <firecheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+        <update handle="ebanx_firecheckout_handle"/>
+    </firecheckout_index_index>
+
+
+    <!-- Succes Page -->
+    <ebanx_checkout_success_handle>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>ebanx/css/thankyou-page.css</stylesheet>
+            </action>
+            <action method="addJs">
+                <script>ebanx/clipboard/clipboard.min.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/success.js</name>
+            </action>
+        </reference>
+        <reference name="checkout.success">
+            <block type="ebanx/checkout_success_payment" name="ebanx.success.payment" as="ebanx_success"
+                   template="ebanx/checkout/success.phtml">
+                <!-- Brazil -->
+                <block type="ebanx/checkout_success_payment_boleto" name="ebanx.success.payment.boleto"
+                       as="ebanx_boleto" template="ebanx/checkout/success/boleto.phtml"/>
+                <block type="ebanx/checkout_success_payment_creditcardbr" name="ebanx.success.payment.creditcardbr"
+                       as="ebanx_cc_br" template="ebanx/checkout/success/creditcardbr.phtml"/>
+                <!-- Colombia -->
+                <block type="ebanx/checkout_success_payment_baloto" name="ebanx.success.payment.baloto"
+                       as="ebanx_baloto" template="ebanx/checkout/success/baloto.phtml"/>
+                <!-- Mexico -->
+                <block type="ebanx/checkout_success_payment_oxxo" name="ebanx.success.payment.oxxo" as="ebanx_oxxo"
+                       template="ebanx/checkout/success/oxxo.phtml"/>
+                <block type="ebanx/checkout_success_payment_creditcardmx" name="ebanx.success.payment.creditcardmx"
+                       as="ebanx_cc_mx" template="ebanx/checkout/success/creditcardmx.phtml"/>
+                <block type="ebanx/checkout_success_payment_debitcard" name="ebanx.success.payment.debitcard"
+                       as="ebanx_dc_mx" template="ebanx/checkout/success/debitcard.phtml"/>
+                <!-- Peru -->
+                <block type="ebanx/checkout_success_payment_pagoefectivo" name="ebanx.success.payment.pagoefectivo"
+                       as="ebanx_pagoefectivo" template="ebanx/checkout/success/pagoefectivo.phtml"/>
+            </block>
+        </reference>
+    </ebanx_checkout_success_handle>
+    <checkout_onepage_success>
+        <update handle="ebanx_checkout_success_handle"/>
+    </checkout_onepage_success>
+    <onepagecheckout_index_success>
+        <update handle="ebanx_checkout_success_handle"/>
+    </onepagecheckout_index_success>
+</layout>

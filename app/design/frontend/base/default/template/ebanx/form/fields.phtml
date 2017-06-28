@@ -1,0 +1,50 @@
+<?php
+$helper = $helper = Mage::helper('ebanx');
+
+if ($helper->hasComplianceFieldFromSettings($this->getMethodCode())) return;
+
+$customer_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
+$customer = Mage::getModel('customer/customer')->load($customer_id);
+
+$skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+?>
+
+<div class="ebanx-compliance-fields">
+    <label class="ebanx-document-label">
+        <span class="ebanx-document-text required"><?= $helper->getLabelForComplianceField($this->getMethodCode()); ?>
+            <em>*</em></span>
+        <div>
+            <input
+                type="text"
+                name="ebanx-document[<?= $this->getMethodCode() ?>]"
+                value="<?= $customer->getEbanxCustomerDocument() ?>"
+                class="input-text"
+                id="ebanx-document-<?= $this->getMethodCode() ?>"
+            />
+        </div>
+    </label>
+</div>
+
+<?php
+$country = Mage::getSingleton('checkout/cart')->getQuote()
+    ->getShippingAddress()
+    ->getCountryId();
+if ($country === 'BR'):
+?>
+<script>
+    function inputHandler(masks, max, event) {
+        var c = event.target;
+        var v = c.value.replace(/\D/g, '');
+        var m = c.value.length > max ? 1 : 0;
+        VMasker(c).unMask();
+        VMasker(c).maskPattern(masks[m]);
+        c.value = VMasker.toPattern(v, masks[m]);
+    }
+
+    var docMask = ['999.999.999-999', '99.999.999/9999-99'];
+    var doc = document.querySelector('#ebanx-document-<?= $this->getMethodCode() ?>');
+    VMasker(doc).maskPattern(docMask[0]);
+    doc.addEventListener('input', inputHandler.bind(undefined, docMask, 14), false);
+</script>
+<?php
+endif;

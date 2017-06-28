@@ -1,4 +1,4 @@
-# EBANX Payment Gateway for Magento 1.x
+# EBANX Payment Gateway for Magento 1.0.0
 
 This plugin enables you to integrate your Magento 1.x store with the EBANX payment gateway.
 
@@ -29,37 +29,37 @@ If you have getting trouble to set up Docker, make sure you've changed the exter
 
 ## Tasks
 
-- [ ] Benjamin Integration
-- [ ] Settings Page
+- [X] Benjamin Integration
+- [X] Settings Page
 - [ ] Refunds
 - [ ] Payment by link
-- [ ] Checkout Manager and Compliance Fields
-- [ ] Debug Log
-- [ ] Sandbox mode
+- [X] Checkout Manager and Compliance Fields
+- [X] Debug Log
+- [X] Sandbox mode
 - [ ] Save credit card data
 - [ ] One Click Payment
-- [ ] Instalments
-- [ ] Minimum Instalment Values
-- [ ] Interest Rates
-- [ ] Days to Expiration
-- [ ] Checkout for CPF and CNPJ
-- [ ] Auto-capture payments
-- [ ] Payment Methods
-  - [ ] Brazil
-    - [ ] Boleto
-    - [ ] Credit Card
-    - [ ] TEF
-    - [ ] EBANX Wallet
-  - [ ] Mexico
-    - [ ] OXXO
-    - [ ] Debit Card
-    - [ ] Credit Card
-  - [ ] Peru
-    - [ ] Pago Efectivo
-    - [ ] SafetyPay
-  - [ ] Chile
-    - [ ] Sencillito
-    - [ ] ServiPag
-  - [ ] Colombia
-    - [ ] Baloto
-    - [ ] PSE
+- [X] Instalments
+- [X] Minimum Instalment Values
+- [X] Interest Rates
+- [X] Days to Expiration
+- [X] Checkout for CPF and CNPJ
+- [X] Auto-capture payments
+- [X] Payment Methods
+  - [X] Brazil
+    - [X] Boleto
+    - [X] Credit Card
+    - [X] TEF
+    - [X] EBANX Wallet
+  - [X] Mexico
+    - [X] OXXO
+    - [X] Debit Card
+    - [X] Credit Card
+  - [X] Peru
+    - [X] Pago Efectivo
+    - [X] SafetyPay
+  - [X] Chile
+    - [X] Sencillito
+    - [X] ServiPag
+  - [X] Colombia
+    - [X] Baloto
+    - [X] PSE

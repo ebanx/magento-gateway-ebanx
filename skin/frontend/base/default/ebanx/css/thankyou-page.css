@@ -1,0 +1,49 @@
+.ebanx-details {
+  margin: 30px 0;
+}
+
+.ebanx-details p {
+  margin: 5px 0;
+
+  line-height: 1.5;
+}
+
+.ebanx-groups {
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.ebanx-group {
+  margin: 10px 0;
+}
+
+.ebanx-group {
+  width: calc(50% - 10px);
+  margin: 0;
+  float: left;
+}
+
+.ebanx-group:last-child {
+  margin-left: 20px;
+}
+
+.ebanx-group a,
+.ebanx-group button {
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+.ebanx-group img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+.ebanx-badges .ebanx-group:first-child a {
+  text-align: right;
+}
+
+.ebanx-badges .ebanx-group:last-child a {
+  text-align: left;
+}
