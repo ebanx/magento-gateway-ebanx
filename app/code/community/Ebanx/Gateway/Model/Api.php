@@ -20,7 +20,7 @@ class Ebanx_Gateway_Model_Api
 			'integrationKey' => Mage::helper('ebanx')->getLiveIntegrationKey(),
 			'sandboxIntegrationKey' => Mage::helper('ebanx')->getSandboxIntegrationKey(),
 			'isSandbox' => Mage::helper('ebanx')->isSandboxMode(),
-			'baseCurrency' => Mage::app()->getStore()->getCurrentCurrencyCode(),
+			'baseCurrency' => Mage::app()->getStore()->getBaseCurrencyCode(),
 			'notificationUrl' => Mage::getUrl('ebanx/index/notification/'),
 			'redirectUrl' => Mage::getUrl('ebanx/index/notification/'),
 			'userValues' => array(
