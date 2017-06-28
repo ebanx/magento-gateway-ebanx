@@ -32,8 +32,6 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 	public function initialize($paymentAction, $stateObject)
 	{
 		try {
-			parent::initialize($paymentAction, $stateObject);
-
 			$this->payment = $this->getInfoInstance();
 			$this->order = $this->payment->getOrder();
 			$this->customer = Mage::getModel('sales/order')->load($this->order->getId());
@@ -45,6 +43,8 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 			$this->processPayment();
 
 			$this->persistPayment();
+
+			parent::initialize($paymentAction, $stateObject);
 		} catch (Exception $e) {
 			Mage::throwException($e->getMessage());
 		}
@@ -82,16 +82,20 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 	public function processPayment()
 	{
 		$res = $this->gateway->create($this->paymentData);
+		$error = Mage::helper('ebanx/error');
 
 		$this->helper->log($res, $this->getCode());
 
 		if ($res['status'] !== 'SUCCESS') {
-			$error = Mage::helper('ebanx/error');
 			$country = $this->order->getBillingAddress()->getCountry();
 			$code = $res['status_code'];
 
 			$this->helper->errorLog($res);
 			Mage::throwException($error->getError($code, $country));
+		}
+
+		if ($res['payment']['status'] === 'CA') {
+			Mage::throwException($error->getError('GENERAL', $country));
 		}
 
 		// Set the URL for redirect
