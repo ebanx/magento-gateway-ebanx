@@ -1,25 +1,23 @@
 function handleEbanxForm(countryCode, paymentType) {
-  var gid = function (element) {
+  var getById = function (element) {
     return document.getElementById(element);
   };
   var responseData = null;
 
-  var cardName = gid('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_name');
-  var cardNumber = gid('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_number');
-  var cardExpirationMonth = gid('ebanx_' + paymentType + '_' + countryCode + '_expiration');
-  var cardExpirationYear = gid('ebanx_' + paymentType + '_' + countryCode + '_expiration_yr');
-  var cardCvv = gid('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_cid');
-  var ebanxToken = gid('ebanx_token');
-  var ebanxBrand = gid('ebanx_brand');
-  var ebanxMaskedCardNumber = gid('ebanx_masked_card_number');
-  var ebanxDeviceFingerprint = gid('ebanx_device_fingerprint');
-  var ebanxBillingInstalments = gid('ebanx_billing_instalments');
-  var ebanxBillingCvv = gid('ebanx_billing_cvv');
-  var ebanxMode = gid('ebanx_mode');
-  var ebanxIntegrationKey = gid('ebanx_integration_key');
-  var ebanxCountry = gid('ebanx_country');
+  var cardName = getById('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_name');
+  var cardNumber = getById('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_number');
+  var cardExpirationMonth = getById('ebanx_' + paymentType + '_' + countryCode + '_expiration');
+  var cardExpirationYear = getById('ebanx_' + paymentType + '_' + countryCode + '_expiration_yr');
+  var cardCvv = getById('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_cid');
+  var ebanxToken = getById('ebanx_token');
+  var ebanxBrand = getById('ebanx_brand');
+  var ebanxMaskedCardNumber = getById('ebanx_masked_card_number');
+  var ebanxDeviceFingerprint = getById('ebanx_device_fingerprint');
+  var ebanxMode = getById('ebanx_mode');
+  var ebanxIntegrationKey = getById('ebanx_integration_key');
+  var ebanxCountry = getById('ebanx_country');
 
-  var ebanxForm = gid('dt_method_ebanx_' + paymentType + '_' + countryCode);
+  var hasEbanxForm = typeof getById('payment_form_ebanx_' + paymentType + '_' + countryCode) !== 'undefined';
 
   var mode = ebanxMode.value === 'sandbox' ? 'test' : 'production';
   EBANX.config.setMode(mode);
@@ -70,7 +68,7 @@ function handleEbanxForm(countryCode, paymentType) {
     ebanxDeviceFingerprint.value = '';
   };
 
-  if (ebanxForm) {
+  if (hasEbanxForm) {
     cardName.addEventListener('blur', handleToken, false);
     cardNumber.addEventListener('blur', handleToken, false);
     cardExpirationMonth.addEventListener('blur', handleToken, false);
