@@ -61,7 +61,7 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 
 		$gatewayFields = $this->data->getGatewayFields();
 		$last4 = substr($gatewayFields['ebanx_masked_card_number'], -4);
-		$instalments = $gatewayFields['instalments'] ?: 1;
+		$instalments = array_key_exists('instalments', $gatewayFields) ? $gatewayFields['instalments'] : 1;
 		$this->payment->setInstalments($instalments)
 			->setCcLast4($last4)
 			->setCcType($gatewayFields['ebanx_brand']);
