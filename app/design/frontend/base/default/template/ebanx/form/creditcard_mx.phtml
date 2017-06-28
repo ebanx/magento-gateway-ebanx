@@ -91,7 +91,7 @@
     handleEbanxForm('mx', 'cc');
 
     <?php if (count($_instalmentOptions) > 1): ?>
-    if (ebanxUpdateFireInterest) {
+    if (typeof ebanxUpdateFireInterest !== 'undefined') {
         document.getElementById('<?php echo $_code ?>_instalments')
             .addEventListener('change', function () {
                 ebanxUpdateFireInterest();
