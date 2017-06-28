@@ -23,6 +23,9 @@ class Ebanx_Gateway_Model_Quote_Total extends Mage_Sales_Model_Quote_Address_Tot
 		$paymentInstance = $payment->getMethodInstance();
 
 		$gatewayFields = Mage::app()->getRequest()->getPost('payment');
+		if (!array_key_exists('instalments', $gatewayFields)) {
+			return $this;
+		}
 		$instalments = $gatewayFields['instalments'];
 		$grandTotal = $gatewayFields['grand_total'];
 		$instalmentTerms = $paymentInstance->getInstalmentTerms($grandTotal);
