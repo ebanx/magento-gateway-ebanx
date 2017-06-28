@@ -24,6 +24,9 @@
             <action method="addJs">
                 <script>ebanx/document/document.js</script>
             </action>
+            <action method="addJs">
+                <script>ebanx/vanilla-masker/vanilla-masker.min.js</script>
+            </action>
             <action method="setText">
                 <text>olar</text>
             </action>
