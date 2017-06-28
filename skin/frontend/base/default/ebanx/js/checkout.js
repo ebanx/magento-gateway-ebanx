@@ -9,13 +9,13 @@ function handleEbanxForm(countryCode, paymentType) {
   var cardExpirationMonth = getById('ebanx_' + paymentType + '_' + countryCode + '_expiration');
   var cardExpirationYear = getById('ebanx_' + paymentType + '_' + countryCode + '_expiration_yr');
   var cardCvv = getById('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_cid');
-  var ebanxToken = getById('ebanx_token');
-  var ebanxBrand = getById('ebanx_brand');
-  var ebanxMaskedCardNumber = getById('ebanx_masked_card_number');
-  var ebanxDeviceFingerprint = getById('ebanx_device_fingerprint');
-  var ebanxMode = getById('ebanx_mode');
-  var ebanxIntegrationKey = getById('ebanx_integration_key');
-  var ebanxCountry = getById('ebanx_country');
+  var ebanxToken = getById('ebanx_' + paymentType + '_' + countryCode + '_token');
+  var ebanxBrand = getById('ebanx_' + paymentType + '_' + countryCode + '_brand');
+  var ebanxMaskedCardNumber = getById('ebanx_' + paymentType + '_' + countryCode + '_masked_card_number');
+  var ebanxDeviceFingerprint = getById('ebanx_' + paymentType + '_' + countryCode + '_device_fingerprint');
+  var ebanxMode = getById('ebanx_' + paymentType + '_' + countryCode + '_mode');
+  var ebanxIntegrationKey = getById('ebanx_' + paymentType + '_' + countryCode + '_integration_key');
+  var ebanxCountry = getById('ebanx_' + paymentType + '_' + countryCode + '_country');
 
   var hasEbanxForm = typeof getById('payment_form_ebanx_' + paymentType + '_' + countryCode) !== 'undefined';
 
