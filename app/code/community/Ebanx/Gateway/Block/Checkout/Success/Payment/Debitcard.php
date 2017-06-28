@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Block_Checkout_Success_Payment_Creditcardmx extends Ebanx_Gateway_Block_Checkout_Success_Creditcardpayment
+class Ebanx_Gateway_Block_Checkout_Success_Payment_Debitcardmx extends Ebanx_Gateway_Block_Checkout_Success_Creditcardpayment
 {
 	protected $currencyCode = 'MXN';
 
