@@ -2,7 +2,7 @@
 
 class Ebanx_Gateway_Block_Checkout_Success_Payment_Creditcardmx extends Ebanx_Gateway_Block_Checkout_Success_Creditcardpayment
 {
-	private $currencyCode = 'MXN';
+	protected $currencyCode = 'MXN';
 
 	protected function _construct()
 	{
