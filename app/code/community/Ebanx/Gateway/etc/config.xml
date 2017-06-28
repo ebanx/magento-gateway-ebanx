@@ -156,7 +156,7 @@
             <ebanx_oxxo>
                 <active>1</active>
                 <model>ebanx/mexico_oxxo</model>
-                <title>Oxxo</title>
+                <title>OXXO</title>
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_oxxo>
