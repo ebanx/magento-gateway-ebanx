@@ -29,6 +29,14 @@
             </action>
         </reference>
     </ebanx_checkout_handle>
+    <ebanx_firecheckout_handle>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/firecheckout-interest.js</name>
+            </action>
+        </reference>
+    </ebanx_firecheckout_handle>
     <checkout_onepage_index>
         <update handle="ebanx_checkout_handle"/>
     </checkout_onepage_index>
@@ -55,6 +63,7 @@
     </checkoutsimplificado_index_index>
     <firecheckout_index_index>
         <update handle="ebanx_checkout_handle"/>
+        <update handle="ebanx_firecheckout_handle"/>
     </firecheckout_index_index>
 
 
