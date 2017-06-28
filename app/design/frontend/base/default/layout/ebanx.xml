@@ -98,6 +98,10 @@
                 <!-- Mexico -->
                 <block type="ebanx/checkout_success_payment_oxxo" name="ebanx.success.payment.oxxo" as="ebanx_oxxo"
                        template="ebanx/checkout/success/oxxo.phtml"/>
+                <block type="ebanx/checkout_success_payment_creditcardmx" name="ebanx.success.payment.creditcardmx"
+                       as="ebanx_cc_mx" template="ebanx/checkout/success/creditcardmx.phtml"/>
+                <block type="ebanx/checkout_success_payment_debitcard" name="ebanx.success.payment.debitcard"
+                       as="ebanx_dc_mx" template="ebanx/checkout/success/debitcard.phtml"/>
                 <!-- Peru -->
                 <block type="ebanx/checkout_success_payment_pagoefectivo" name="ebanx.success.payment.pagoefectivo"
                        as="ebanx_pagoefectivo" template="ebanx/checkout/success/pagoefectivo.phtml"/>
