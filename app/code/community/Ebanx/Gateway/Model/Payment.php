@@ -64,7 +64,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 			->setDueDate($this->helper->getDueDate())
 			->setEbanxMethod($this->getCode())
 			->setStoreCurrency(Mage::app()->getStore()
-				->getCurrentCurrencyCode())
+			->getCurrentCurrencyCode())
 			->setAmountTotal($this->order->getGrandTotal())
 			->setPerson($this->customer)
 			->setItems($this->order->getAllVisibleItems())
@@ -114,7 +114,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 		if ($this->order->getCustomerId()) {
 			Mage::getModel('customer/customer')->load($this->order->getCustomerId())
-				->setEbanxCustomerDocument($this->helper->getDocumentNumber($this->order))
+				->setEbanxCustomerDocument($this->helper->getDocumentNumber($this->order, $this->data))
 				->save();
 		}
 	}

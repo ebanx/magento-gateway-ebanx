@@ -160,19 +160,20 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return strtoupper(implode(' / ', $taxes));
 	}
 
-	public function getDocumentNumber($order)
+	public function getDocumentNumber($order, $data)
 	{
 		$this->order = $order;
 		$countryCode = $this->getCustomerData()['country_id'];
 		$country = $this->transformCountryCodeToName($countryCode);
+		$methodCode = $data->getEbanxMethod();
 
 		switch ($country) {
 			case Country::BRAZIL:
-				return $this->getBrazilianDocumentNumber();
+				return $this->getBrazilianDocumentNumber($methodCode);
 			case Country::CHILE:
-				return $this->getChileanDocumentNumber();
+				return $this->getChileanDocumentNumber($methodCode);
 			case Country::COLOMBIA:
-				return $this->getColombianDocumentNumber();
+				return $this->getColombianDocumentNumber($methodCode);
 			default:
 				return null;
 		}
@@ -222,7 +223,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return $countries[$countryIndex];
 	}
 
-	public function getBrazilianDocumentNumber()
+	public function getBrazilianDocumentNumber($methodCode)
 	{
 		$customer = $this->getCustomerData();
 
@@ -247,10 +248,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		}
 
 
-		return $customer['ebanx-document'];
+		return $customer['ebanx-document'][$methodCode];
 	}
 
-	public function getChileanDocumentNumber()
+	public function getChileanDocumentNumber($methodCode)
 	{
 		$customer = $this->getCustomerData();
 
@@ -264,10 +265,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			}
 		}
 
-		return $customer['ebanx-document'];
+		return $customer['ebanx-document'][$methodCode];
 	}
 
-	public function getColombianDocumentNumber()
+	public function getColombianDocumentNumber($methodCode)
 	{
 		$customer = $this->getCustomerData();
 
@@ -281,7 +282,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			}
 		}
 
-		return $customer['ebanx-document'];
+		return $customer['ebanx-document'][$methodCode];
 	}
 
 	public function getPersonType($document)

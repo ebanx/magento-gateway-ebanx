@@ -79,7 +79,7 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 
 	public function transformPerson($person, $data)
 	{
-		$document = $this->helper->getDocumentNumber($data->getOrder());
+		$document = $this->helper->getDocumentNumber($data->getOrder(), $data);
 
 		return new Person([
 			'type' => $this->helper->getPersonType($document),

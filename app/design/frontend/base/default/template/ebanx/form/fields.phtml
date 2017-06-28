@@ -9,14 +9,14 @@ $customer = Mage::getModel('customer/customer')->load($customer_id);
 
 <div class="ebanx-compliance-fields">
     <label class="ebanx-document-label">
-        <span class="ebanx-document-text required"><?php echo $helper->getLabelForComplianceField($this->getMethodCode()); ?>
+        <span class="ebanx-document-text required"><?= $helper->getLabelForComplianceField($this->getMethodCode()); ?>
             <em>*</em></span>
         <div>
             <input
-                    type="text"
-                    name="ebanx-document"
-                    value="<?php echo $customer->getEbanxCustomerDocument() ?>"
-                    class="input-text"
+                type="text"
+                name="ebanx-document[<?= $this->getMethodCode() ?>]"
+                value="<?= $customer->getEbanxCustomerDocument() ?>"
+                class="input-text"
             />
         </div>
     </label>
