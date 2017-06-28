@@ -1,6 +1,13 @@
 .ebanx-compliance-fields {
   overflow: hidden;
+}
+
+.ebanx-compliance-fields:not(:last-child) {
   margin-bottom: 30px;
+}
+
+.ebanx-payment-method-desc {
+  margin: 20px 0 !important;
 }
 
 .ebanx-document-text {
@@ -101,3 +108,4 @@
 
   background-image: url(/skin/frontend/base/default/ebanx/ebanx-pagando.png);
 }
+
