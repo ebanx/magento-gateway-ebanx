@@ -5,6 +5,8 @@ if ($helper->hasComplianceFieldFromSettings($this->getMethodCode())) return;
 
 $customer_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
 $customer = Mage::getModel('customer/customer')->load($customer_id);
+
+$skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 ?>
 
 <div class="ebanx-compliance-fields">

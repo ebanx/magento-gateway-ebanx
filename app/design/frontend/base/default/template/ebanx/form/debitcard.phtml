@@ -1,9 +1,16 @@
-<?php $_code = $this->getMethodCode() ?>
+<?php
+    $_code = $this->getMethodCode();
+    $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+?>
 <ul class="form-list ebanx-payment-method ebanx-es-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
-    <li>
-        <p>Paga con tarjeta de débito.</p>
-    </li>
+    <div>
+        <img src="<?= $skin . 'frontend/base/default/ebanx/ebanx-debit-card.png' ?>" width="141" />
+    </div>
+
+    <p class="ebanx-payment-method-desc">Pagar con Tarjeta de Débito.</p>
+
     <?php include 'fields.phtml' ?>
+
     <li>
         <label for="<?php echo $_code ?>_dc_name" class="required"><em>*</em>Titular de la tarjeta</label>
         <div class="input-box">
