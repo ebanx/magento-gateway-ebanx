@@ -27,6 +27,10 @@ class Ebanx_Gateway_Model_Quote_Total extends Mage_Sales_Model_Quote_Address_Tot
 		$grandTotal = $gatewayFields['grand_total'];
 		$instalmentTerms = $paymentInstance->getInstalmentTerms($grandTotal);
 
+		if (!array_key_exists($instalments - 1, $instalmentTerms)) {
+			return $this;
+		}
+
 		$instalmentAmount = $instalmentTerms[$instalments - 1]->baseAmount;
 		$interestAmount = ($instalmentAmount * $instalments) - $grandTotal;
 

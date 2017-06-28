@@ -83,6 +83,15 @@
 <script>
     handleEbanxForm('br', 'cc');
 
+    <?php if (count($_instalmentOptions) > 1): ?>
+        if (ebanxUpdateFireInterest) {
+            document.getElementById('<?php echo $_code ?>_instalments')
+            .addEventListener('change', function () {
+                ebanxUpdateFireInterest();
+            });
+        }
+    <?php endif; ?>
+
     EBANXCreditCard.formatCardNumber(document.querySelector('input#ebanx_cc_br_cc_number'));
     EBANXCreditCard.formatCardCVC(document.querySelector('input#ebanx_cc_br_cc_cid'));
 </script>
