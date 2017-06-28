@@ -23,6 +23,10 @@ class Ebanx_Gateway_Model_Api
 			'baseCurrency' => Mage::app()->getStore()->getCurrentCurrencyCode(),
 			'notificationUrl' => Mage::getUrl('ebanx/index/notification/'),
 			'redirectUrl' => Mage::getUrl('ebanx/index/notification/'),
+			'userValues' => array(
+				1 => 'from_magento',
+				3 => 'version=1.0.0', //TODO: Create a method to get the current version
+			),
 		));
 	}
 
