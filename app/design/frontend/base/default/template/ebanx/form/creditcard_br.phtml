@@ -19,15 +19,24 @@
             <div class="v-fix">
                 <select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month]"
                         class="month required-entry validate-cc-exp">
-                    <?php foreach ($this->getCcMonths() as $k => $v): ?>
+                    <?php
+                    $_ccMonths = $this->getCcMonths();
+                    $_ccMonths[0] = $this->__('Mês');
+                    ?>
+                    <?php foreach ($_ccMonths as $k => $v): ?>
                         <option value="<?php echo $k ?>"><?php echo $v ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
             <div class="v-fix">
-                <?php $_ccExpYear = $this->getInfoData('cc_exp_year') ?>
+                <?php
+                $_ccExpYear = $this->getInfoData('cc_exp_year');
+
+                $_ccYears = $this->getCcYears();
+                $_ccYears[0] = $this->__('Ano');
+                ?>
                 <select id="<?php echo $_code ?>_expiration_yr" name="payment[cc_exp_year]" class="year required-entry">
-                    <?php foreach ($this->getCcYears() as $k => $v): ?>
+                    <?php foreach ($_ccYears as $k => $v): ?>
                         <option value="<?php echo $k ? $k : '' ?>"><?php echo $v ?></option>
                     <?php endforeach ?>
                 </select>
@@ -49,7 +58,7 @@
     <?php $_selected = $this->getInfoData('instalments') ?>
     <?php if (count($_instalmentOptions) > 1): ?>
         <li id="<?php echo $_code ?>-instalments-div">
-            <label for="<?php echo $_code ?>_instalments" class="required"><em>*</em>Instalments</label>
+            <label for="<?php echo $_code ?>_instalments" class="required"><em>*</em>Número de parcelas</label>
             <div class="input-box">
                 <select id="<?php echo $_code ?>_instalments" name="payment[instalments]" title="Instalments"
                         class="required-entry validate-select">
