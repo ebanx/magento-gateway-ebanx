@@ -1,10 +1,16 @@
+<?php $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN); ?>
+
 <ul class="form-list ebanx-payment-method ebanx-br-method" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
     <li>
         <div class="<?php echo $this->getMethodCode() ?>-instructions-content">
-            <?php include 'fields.phtml' ?>
+            <div>
+                <img src="<?= $skin . 'frontend/base/default/ebanx/ebanx-tef.png' ?>" width="115" />
+            </div>
 
-            <p>Selecione o seu banco. A seguir, você será redirecionado para concluir o pagamento pelo seu internet
+            <p class="ebanx-payment-method-desc">Selecione o seu banco. A seguir, você será redirecionado para concluir o pagamento pelo seu internet
                 banking.</p>
+
+            <?php include 'fields.phtml' ?>
 
             <p>
                 <label for="ebanx_tef_itau">
