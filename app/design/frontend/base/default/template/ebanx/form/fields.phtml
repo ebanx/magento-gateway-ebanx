@@ -23,6 +23,12 @@ $customer = Mage::getModel('customer/customer')->load($customer_id);
     </label>
 </div>
 
+<?php
+$country = Mage::getSingleton('checkout/cart')->getQuote()
+    ->getShippingAddress()
+    ->getCountryId();
+if ($country === 'BR'):
+?>
 <script>
     function inputHandler(masks, max, event) {
         var c = event.target;
@@ -38,3 +44,5 @@ $customer = Mage::getModel('customer/customer')->load($customer_id);
     VMasker(doc).maskPattern(docMask[0]);
     doc.addEventListener('input', inputHandler.bind(undefined, docMask, 14), false);
 </script>
+<?php
+endif;
