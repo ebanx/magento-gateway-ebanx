@@ -325,7 +325,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		if ($result === 0) {
 			return array(
 				'streetName' => $address,
-				'houseNumber' => '',
+				'houseNumber' => '0',
 				'additionToAddress' => ''
 			);
 		}
@@ -338,7 +338,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		}
 		return array(
 			'streetName' => $street_name,
-			'houseNumber' => $house_number ?: 0,
+			'houseNumber' => $house_number ?: '0',
 			'additionToAddress' => $addition_to_address
 		);
 	}
