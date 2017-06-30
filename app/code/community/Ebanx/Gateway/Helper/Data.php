@@ -39,7 +39,9 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 	public function areKeysFilled()
 	{
-		return !empty($this->getIntegrationKey()) && !empty($this->getPublicIntegrationKey());
+		$keys = $this->getIntegrationKey();
+		$publicKeys = $this->getPublicIntegrationKey();
+		return !empty($keys) && !empty($publicKeys);
 	}
 
 	public function getIntegrationKey()
