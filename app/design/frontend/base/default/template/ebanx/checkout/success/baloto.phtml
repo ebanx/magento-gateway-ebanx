@@ -1,10 +1,9 @@
 <?php
-$customer = $this->getCustomer();
+$order = $this->getOrder();
 ?>
-
 <div class="ebanx-details">
-    <p><?= trim($customer['firstname']) ?>, su boleta Baloto fue generado con éxito.</p>
-    <p>Una copia de la boleta fue enviada al correo electrónico <strong><?= $customer['email'] ?></strong>.</p>
+    <p><?= trim($order->getBillingAddress()->getFirstname()) ?>, su boleta Baloto fue generado con éxito.</p>
+    <p>Una copia de la boleta fue enviada al correo electrónico <strong><?= $order->getBillingAddress()->getEmail() ?></strong>.</p>
     <p>Si tienes dudas, por favor escribe a <a href="mailto:soporte@ebanx.com">soporte@ebanx.com</a>.</p>
 
     <div class="ebanx-groups">
