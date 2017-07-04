@@ -3,7 +3,6 @@ $order = $this->getOrder();
 $payment = $this->getPayment();
 $dueDate = $this->helper->getDueDate($order->getEbanxDueDate(), 'dd/MM');
 ?>
-
 <div class="ebanx-details">
     <p><strong><?= $order->getBillingAddress()->getFirstname(); ?></strong>, seu boleto foi gerado e a data de vencimento é dia
         <strong><?= $this->getEbanxDueDate() ?></strong> :)</p>
