@@ -84,9 +84,8 @@
                 <name>ebanx/js/success.js</name>
             </action>
         </reference>
-        <reference name="checkout.success">
-            <block type="ebanx/checkout_success_payment" name="ebanx.success.payment" as="ebanx_success"
-                   template="ebanx/checkout/success.phtml">
+        <reference name="content">
+            <block type="ebanx/checkout_success_payment" after="checkout.success" name="ebanx.success.payment" as="ebanx_success" template="ebanx/checkout/success.phtml">
                 <!-- Brazil -->
                 <block type="ebanx/checkout_success_payment_boleto" name="ebanx.success.payment.boleto"
                        as="ebanx_boleto" template="ebanx/checkout/success/boleto.phtml"/>
