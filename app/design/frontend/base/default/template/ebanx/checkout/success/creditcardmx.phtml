@@ -1,18 +1,13 @@
 <?php
-$customer = $this->getCustomer();
+$order = $this->getOrder();
 $payment = $this->getPayment();
 ?>
-
 <div class="ebanx-details">
-    <p><strong><?= trim($customer['firstname']) ?></strong>, su pago de
+    <p><strong><?= trim($order->getBillingAddress()->getFirstname()) ?></strong>, su pago de
         <strong><?= $this->formatPriceWithLocalCurrency($this->currencyCode, $payment->getEbanxLocalAmount()); ?></strong>
         fue aprobado./</p>
-    <!-- TODO -->
-    <!--<p>Na sua fatura do seu cartão <strong><?= ucfirst($payment->getCcType()) ?> <?= $payment->getCcLast4() ?></strong>
-        a compra aparecerá com a seguinte descrição:</p>
-    <h3><strong>EBANX*AliExpress</strong></h3>-->
     <p>Si tiene alguna duda acerca de su pago, acceda a la cuenta EBANX con el correo electrónico
-        <strong><?= $customer['email'] ?></strong>.</p>
+        <strong><?= $order->getBillingAddress()->getEmail() ?></strong>.</p>
 
     <?php include 'apps.phtml' ?>
 </div>

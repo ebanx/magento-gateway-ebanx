@@ -1,14 +1,12 @@
 <?php
-$customer = $this->getCustomer();
 $order = $this->getOrder();
 $payment = $this->getPayment();
 $dueDate = $this->helper->getDueDate($order->getEbanxDueDate(), 'dd/MM');
 ?>
-
 <div class="ebanx-details">
-    <p>¡Listo <?= $customer['firstname'] ?>! Tu boleta EBANX de pago en OXXO ha sido generada.</p>
+    <p>¡Listo <?= $order->getBillingAddress()->getFirstname() ?>! Tu boleta EBANX de pago en OXXO ha sido generada.</p>
 
-    <p>Enviamos una copia a <strong><?= $customer['email'] ?></strong>.</p>
+    <p>Enviamos una copia a <strong><?= $order->getBillingAddress()->getEmail() ?></strong>.</p>
 
     <p>No lo olvides: tu boleta vence el día <strong><?= $dueDate; ?></strong>. Después de esa fecha no será posible
         realizar el pago y la boleta será cancelada automáticamente.</p>
