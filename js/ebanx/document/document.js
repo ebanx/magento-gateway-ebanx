@@ -2,6 +2,7 @@
 
 var defaultLabel;
 var taxVatLabel;
+var taxVatInput;
 
 var qs = function (el) {
   return document.querySelector(el);
@@ -25,11 +26,15 @@ var changeTaxVatLabel = function () {
   var newLabel = getLabelByCountry(country, defaultLabel);
 
   taxVatLabel.innerHTML = newLabel;
+    if(taxVatInput) {
+      setTimeout(function(){taxVatInput.placeholder = newLabel;}, 10)
+    }
 };
 
 var init = function () {
   var countrySelect = qs('#billing\\:country_id');
   taxVatLabel = qs('label[for="billing\\:taxvat"]');
+  taxVatInput = document.getElementById('billing:taxvat');
 
   if (taxVatLabel && countrySelect) {
     defaultLabel = taxVatLabel.innerHTML;
