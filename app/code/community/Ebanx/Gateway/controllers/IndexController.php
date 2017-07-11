@@ -80,8 +80,8 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 	private function loadEbanxPaymentStatus()
 	{
 		$api = Mage::getSingleton('ebanx/api')->ebanx();
-		$mode = $this->order->getEbanxEnvironment() === 'sandbox';
-		$payment = $api->paymentInfo()->findByHash($this->hash, $mode);
+		$isSandbox = $this->order->getPayment()->getEbanxEnvironment() === 'sandbox';
+		$payment = $api->paymentInfo()->findByHash($this->hash, $isSandbox);
 
 		$this->helper->log($payment, 'ebanx_payment_notification');
 

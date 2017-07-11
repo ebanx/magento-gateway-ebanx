@@ -22,7 +22,7 @@ class Ebanx_Gateway_Model_Api
 			'isSandbox' => Mage::helper('ebanx')->isSandboxMode(),
 			'baseCurrency' => Mage::app()->getStore()->getBaseCurrencyCode(),
 			'notificationUrl' => Mage::getUrl('ebanx/index/notification/'),
-			'redirectUrl' => Mage::getUrl('ebanx/index/notification/'),
+			'redirectUrl' => Mage::getUrl('checkout/onepage/success'),
 			'userValues' => array(
 				1 => 'from_magento',
 				3 => 'version=1.0.0', //TODO: Create a method to get the current version
