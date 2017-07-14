@@ -11,6 +11,7 @@ services:
     volumes:
       - ./app/code/community/Ebanx/:/var/www/htdocs/app/code/community/Ebanx/
       - ./app/etc/modules/Ebanx_Gateway.xml:/var/www/htdocs/app/etc/modules/Ebanx_Gateway.xml
+      - ./app/design/adminhtml/default/default/layout/:/var/www/htdocs/app/design/adminhtml/default/default/layout/
       - ./app/design/frontend/base/default/layout/:/var/www/htdocs/app/design/frontend/base/default/layout/
       - ./app/design/frontend/base/default/template/ebanx/:/var/www/htdocs/app/design/frontend/base/default/template/ebanx/
       - ./skin/adminhtml/default/default/ebanx/:/var/www/htdocs/skin/adminhtml/default/default/ebanx/

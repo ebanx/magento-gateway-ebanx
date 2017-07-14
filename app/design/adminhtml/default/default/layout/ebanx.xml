@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout>
+    <admin_dashboard_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/chosen.jquery.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>ebanx/css/chosen.css</name>
+            </action>
+        </reference>
+    </admin_dashboard_index>
+</layout>
