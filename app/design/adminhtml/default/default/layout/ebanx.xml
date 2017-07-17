@@ -12,6 +12,9 @@
             <action method="addCss">
                 <name>ebanx/css/chosen.css</name>
             </action>
+            <action method="addCss">
+                <name>ebanx/css/chosen.overwrite.css</name>
+            </action>
         </reference>
     </adminhtml_system_config_edit>
 </layout>
