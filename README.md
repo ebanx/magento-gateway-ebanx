@@ -11,6 +11,11 @@ First run this command **once**:
 chmod +x $(pwd)/scripts/start.sh && $(pwd)/scripts/start.sh
 ```
 
+After the installation, you need to install the composer dependencies. Run the command at root folder:
+```
+composer install
+```
+
 This will install and run the project with Docker on port 80.
 If you want to change that port you may use an environment variable or the `.env` file. Just run `cp .env.example .env` and change the ports the way you want it.
 
