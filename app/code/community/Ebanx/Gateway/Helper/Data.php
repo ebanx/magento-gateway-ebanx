@@ -4,6 +4,7 @@ require_once Mage::getBaseDir('lib') . '/Ebanx/vendor/autoload.php';
 use Ebanx\Benjamin\Models\Bank;
 use Ebanx\Benjamin\Models\Country;
 use Ebanx\Benjamin\Models\Person;
+use Ebanx\Benjamin\Services\Exchange;
 
 class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 {
@@ -378,5 +379,12 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		$ebanx = Mage::getSingleton('ebanx/api')->ebanx();
 
 		return $ebanx->paymentInfo()->findByHash($hash);
+	}
+
+	public function getLocalAmountWithTax($currency, $value)
+	{
+		$ebanx = Mage::getSingleton('ebanx/api')->ebanx();
+
+		return $ebanx->exchange()->siteToLocalWithTax($currency, $value);
 	}
 }
