@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5e7f69f48dc0ec4357710a98b4bc868f",
+    "hash": "31ec8e93fd8f457b292b8bb4306300a8",
     "content-hash": "8d5cc83ea22ac4a5902cf2165e47e6a7",
     "packages": [
         {
@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com//ebanx/benjamin",
-                "reference": "b5f533df2bdb4c501cf2b353f6473f940d985fae"
+                "reference": "8dc6a044e6b21c1c853b4b17c01aa8b088235b09"
             },
             "require": {
                 "guzzlehttp/guzzle": "^5.3.1",
@@ -41,7 +41,7 @@
                 "MIT"
             ],
             "description": "Business rule provider lib for plugin implementations",
-            "time": "2017-06-23 19:58:49"
+            "time": "2017-06-29 18:16:56"
         },
         {
             "name": "guzzlehttp/guzzle",
