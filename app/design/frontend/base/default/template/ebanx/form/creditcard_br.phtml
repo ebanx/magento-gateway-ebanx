@@ -1,13 +1,20 @@
 <?php
     $_code = $this->getMethodCode();
     $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+    $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
+    $icon = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx-credit-card-br.png" width="200" /></div>';
 ?>
 
-<div>
-    <img src="<?= $skin . 'frontend/base/default/ebanx/ebanx-credit-card-br.png' ?>" width="200" />
-</div>
+<?php if($showInlineIcon) {
+    echo $icon;
+} ?>
 
 <ul class="form-list ebanx-payment-method ebanx-br-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
+
+    <?php if(!$showInlineIcon) {
+        echo $icon;
+    } ?>
+
     <p class="ebanx-payment-method-desc">Pagar com Cartão de Crédito.</p>
 
     <?php include 'fields.phtml' ?>
