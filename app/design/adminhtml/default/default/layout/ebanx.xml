@@ -1,15 +1,17 @@
 <?xml version="1.0"?>
 <layout>
-    <admin_dashboard_index>
+    <adminhtml_system_config_edit>
         <reference name="head">
-            <action method="addItem">
-                <type>skin_js</type>
-                <name>ebanx/js/chosen.jquery.js</name>
+            <action method="addJs">
+                <name>ebanx/chosen/chosen.proto.min.js</name>
             </action>
             <action method="addItem">
-                <type>skin_css</type>
+                <type>skin_js</type>
+                <name>ebanx/js/chosen-ebanx.js</name>
+            </action>
+            <action method="addCss">
                 <name>ebanx/css/chosen.css</name>
             </action>
         </reference>
-    </admin_dashboard_index>
+    </adminhtml_system_config_edit>
 </layout>

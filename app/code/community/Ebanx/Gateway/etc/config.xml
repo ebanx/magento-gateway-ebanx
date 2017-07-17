@@ -76,6 +76,15 @@
             </updates>
         </layout>
     </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <ebanx module="Ebanx_Gateway">
+                    <file>ebanx.xml</file>
+                </ebanx>
+            </updates>
+        </layout>
+    </adminhtml>
     <default>
         <payment>
             <!-- Brazil -->
