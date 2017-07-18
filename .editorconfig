@@ -5,10 +5,10 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{php,html,phtml}]
+[*.php]
 indent_style = tab
 indent_size = 4
 
-[*.{js,css}]
+[*.{js,html,phtml,css}]
 indent_style = space
 indent_size = 2
