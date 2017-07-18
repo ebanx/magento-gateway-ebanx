@@ -1,0 +1,9 @@
+.chosen-container .chosen-results li.highlighted {
+  background-color: #feaa44;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(20%, #feaa44), color-stop(90%, #f56d07));
+  background-image: -webkit-linear-gradient(#feaa44 20%, #f56d07 90%);
+  background-image: -moz-linear-gradient(#feaa44 20%, #f56d07 90%);
+  background-image: -o-linear-gradient(#feaa44 20%, #f56d07 90%);
+  background-image: linear-gradient(#feaa44 20%, #f56d07 90%);
+  color: #fff;
+}
