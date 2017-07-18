@@ -5,11 +5,11 @@
     $icon = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx-debit-card.png" width="141" /></div>';
 ?>
 
-<?= $showInlineIcon ? $icon : '' ?>
+<?= !$showInlineIcon ? null : $icon?>
 
 <ul class="form-list ebanx-payment-method ebanx-es-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
 
-    <?= !$showInlineIcon ? $icon : '' ?>
+    <?= $showInlineIcon ? null : $icon?>
 
     <p class="ebanx-payment-method-desc">Pagar con Tarjeta de Débito.</p>
 
