@@ -194,6 +194,8 @@
                 <payment_methods_peru>ebanx_pagoefectivo,ebanx_safetypay</payment_methods_peru>
                 <payment_methods_mexico>ebanx_oxxo,ebanx_cc_mx,ebanx_dc_mx</payment_methods_mexico>
 
+                <payment_methods_visualization>1</payment_methods_visualization>
+
                 <payment_co_status>processing</payment_co_status>
                 <payment_pe_status>holded</payment_pe_status>
                 <payment_op_status>pending</payment_op_status>
