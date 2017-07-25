@@ -82,6 +82,11 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return Mage::getStoreConfig('payment/ebanx_settings/interest_rate');
 	}
 
+	public function saveCreditCardAllowed()
+	{
+		return Mage::getStoreConfig('payment/ebanx_settings/save_card_data');
+	}
+
 	public function transformTefToBankName($bankCode)
 	{
 		$banks = [
