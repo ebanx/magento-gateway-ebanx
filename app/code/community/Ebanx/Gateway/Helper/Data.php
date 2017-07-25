@@ -328,7 +328,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		if ($result === 0) {
 			return array(
 				'streetName' => $address,
-				'houseNumber' => '0',
+				'houseNumber' => 'S/N',
 				'additionToAddress' => ''
 			);
 		}
@@ -341,7 +341,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		}
 		return array(
 			'streetName' => $street_name,
-			'houseNumber' => $house_number ?: '0',
+			'houseNumber' => $house_number ?: 'S/N',
 			'additionToAddress' => $addition_to_address
 		);
 	}
@@ -386,5 +386,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		$ebanx = Mage::getSingleton('ebanx/api')->ebanx();
 
 		return $ebanx->exchange()->siteToLocalWithTax($currency, $value);
+  }
+  
+	public function hasToShowInlineIcon()
+	{
+		return boolval(Mage::getStoreConfig('payment/ebanx_settings/payment_methods_visualization'));
 	}
 }

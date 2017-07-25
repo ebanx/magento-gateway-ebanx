@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addJs">
+                <name>ebanx/chosen/chosen.proto.min.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/chosen-ebanx.js</name>
+            </action>
+            <action method="addCss">
+                <name>ebanx/css/chosen.css</name>
+            </action>
+            <action method="addCss">
+                <name>ebanx/css/chosen.overwrite.css</name>
+            </action>
+        </reference>
+    </adminhtml_system_config_edit>
+</layout>

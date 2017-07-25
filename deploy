@@ -1,0 +1,49 @@
+<?php
+$phpversion = substr(phpversion(), 0, 3);
+$brewphp = str_replace('.', '', $phpversion);
+$hasChanged = false;
+
+if ($phpversion !== '5.4') {
+	echo "You need to use php 5.4 to deploy this extension. ";
+	if (PHP_OS !== 'Darwin') {
+		echo "You are using PHP " . $phpversion . PHP_EOL;
+		exit(1);
+	}
+	echo "Since you're using macOS this script will try to change your PHP version from $phpversion to 5.4." . PHP_EOL;
+
+	echo PHP_EOL;
+	if (!system("brew unlink php$brewphp && brew link php54")) {
+		echo PHP_EOL;
+		system("brew link php$brewphp");
+		echo PHP_EOL;
+		echo "This script couldn't change your PHP version using brew. Make sure you have php54 installed.";
+		exit(1);
+	}
+	$hasChanged = true;
+	echo PHP_EOL;
+	system("php -v");
+	echo PHP_EOL;
+}
+
+echo "Removing old vendor..." . PHP_EOL;
+system("rm -rf lib/Ebanx/vendor");
+echo "Downloading dependencies..." . PHP_EOL;
+system("composer install");
+
+system("rm -f magento-gateway-ebanx.zip");
+echo "Creating zip file..." . PHP_EOL;
+system("zip -rq magento-gateway-ebanx.zip app js lib skin");
+
+if ($hasChanged) {
+	echo "Returning you PHP version to $phpversion..." . PHP_EOL;
+
+	echo PHP_EOL;
+	system("brew unlink php54 && brew link php$brewphp");
+	echo PHP_EOL;
+	system("php -v");
+	echo PHP_EOL;
+}
+
+echo "The zip file magento-gateway-ebanx.zip was created." . PHP_EOL;
+
+exit(0);
