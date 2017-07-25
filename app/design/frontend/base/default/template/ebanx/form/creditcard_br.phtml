@@ -86,6 +86,16 @@
             </div>
         </li>
     <?php endif ?>
+    <?php if (Mage::helper('ebanx')->saveCreditCardAllowed()) : ?>
+        <li id="<?php echo $_code ?>-save-credit-card-div">
+            <div class="input-box">
+                <input type="checkbox" title="<?php echo Mage::helper('core')->jsQuoteEscape('Salvar este cartão para compras futuras') ?>"
+                       class="ebanx-save-credit-card" id="ebanx_save_credit_card"
+                       name="payment[ebanx_save_credit_card]" value=""/>
+                <label for="ebanx_save_credit_card" class="required">Salvar este cartão para compras futuras</label>
+            </div>
+        </li>
+    <?php endif; ?>
     <input type="hidden" name="payment[ebanx_token]" id="<?php echo $_code ?>_token"/>
     <input type="hidden" name="payment[ebanx_brand]" id="<?php echo $_code ?>_brand"/>
     <input type="hidden" name="payment[ebanx_masked_card_number]" id="<?php echo $_code ?>_masked_card_number"/>
