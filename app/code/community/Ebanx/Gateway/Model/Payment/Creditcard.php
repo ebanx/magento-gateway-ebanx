@@ -65,5 +65,22 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 		$this->payment->setInstalments($instalments)
 			->setCcLast4($last4)
 			->setCcType($gatewayFields['ebanx_brand']);
+
+		$this->persistCreditCardData();
+	}
+
+	private function persistCreditCardData()
+	{
+		$gatewayFields = $this->data->getGatewayFields();
+		var_dump($gatewayFields);
+		if (isset($gatewayFields['ebanx_save_credit_card']) && $gatewayFields['ebanx_save_credit_card']){
+			exit('ENTROU');
+
+			// get token
+			// get brand
+			// get masked number
+		}
+		exit('SAIU');
+
 	}
 }
