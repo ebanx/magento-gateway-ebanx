@@ -17,5 +17,5 @@
             <?php include 'fields.phtml' ?>
         </div>
     </li>
-    <li><p>Total a pagar en Peso chileno: <?php echo Mage::helper('ebanx/amount')->getLocalAmount('CLP') ?></p></li>
+    <li><p>Total a pagar en Peso chileno: <?php echo $this->getLocalAmount('CLP') ?></p></li>
 </ul>

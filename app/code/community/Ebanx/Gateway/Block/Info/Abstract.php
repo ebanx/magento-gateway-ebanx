@@ -2,8 +2,20 @@
 
 abstract class Ebanx_Gateway_Block_Info_Abstract extends Mage_Payment_Block_Info
 {
+	private function getTotal()
+	{
+		return $this->getMethod()->getTotal();
+	}
+
+	private function formatPriceWithLocalCurrency($currency, $price)
+	{
+		return Mage::app()->getLocale()->currency($currency)->toCurrency($price);
+	}
+
 	public function getLocalAmount($currency, $formatted = true)
 	{
-		return Mage::helper('ebanx/amount')->getLocalAmount($currency, $formatted);
+		$amount = round(Mage::helper('ebanx')->getLocalAmountWithTax($currency, $this->getTotal()), 2);
+
+		return $formatted ? $this->formatPriceWithLocalCurrency($currency, $amount) : $amount;
 	}
 }

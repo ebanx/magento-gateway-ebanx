@@ -73,9 +73,11 @@
             <div class="input-box">
                 <select id="<?php echo $_code ?>_instalments" name="payment[instalments]" title="Instalments"
                         class="required-entry validate-select">
-                    <option value="">Selecione</option>
                     <?php foreach ($_instalmentOptions as $_instalmentTerm): ?>
-                        <option value="<?php echo $_instalmentTerm->instalmentNumber ?>">
+                        <option
+                          value="<?php echo $_instalmentTerm->instalmentNumber ?>"
+                          data-local-amount="<?php echo Mage::app()->getLocale()->currency('BRL')->toCurrency($_instalmentTerm->localAmountWithTax * $_instalmentTerm->instalmentNumber) ?>"
+                        >
                             <?php echo $this->formatInstalment($_instalmentTerm); ?>
                         </option>
                     <?php endforeach ?>
@@ -86,21 +88,21 @@
             </div>
         </li>
     <?php endif ?>
-    <li><p>Total a pagar com IOF (0.38%): <?php echo Mage::helper('ebanx/amount')->getLocalAmount('BRL') ?></p></li>
-</ul>
+    <li><p>Total a pagar com IOF (0.38%): <span id="cc-br-local-amount"><?php echo $this->getLocalAmount('BRL') ?></span></p></li>
 
-<input type="hidden" name="payment[ebanx_token]" id="<?php echo $_code ?>_token"/>
-<input type="hidden" name="payment[ebanx_brand]" id="<?php echo $_code ?>_brand"/>
-<input type="hidden" name="payment[ebanx_masked_card_number]" id="<?php echo $_code ?>_masked_card_number"/>
-<input type="hidden" name="payment[ebanx_device_fingerprint]" id="<?php echo $_code ?>_device_fingerprint"/>
-<input type="hidden" name="payment[ebanx_billing_instalments]" id="<?php echo $_code ?>_billing_instalments"/>
-<input type="hidden" name="payment[ebanx_billing_cvv]" id="<?php echo $_code ?>_billing_cvv"/>
-<input type="hidden" name="payment[ebanx_mode]" id="<?php echo $_code ?>_mode"
-        value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
-<input type="hidden" name="payment[ebanx_integration_key]" id="<?php echo $_code ?>_integration_key"
-        value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
-<input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="br"/>
-<input type="hidden" name="payment[grand_total]" id="grand_total" value="<?php echo $this->getTotal() ?>"/>
+    <input type="hidden" name="payment[ebanx_token]" id="<?php echo $_code ?>_token"/>
+    <input type="hidden" name="payment[ebanx_brand]" id="<?php echo $_code ?>_brand"/>
+    <input type="hidden" name="payment[ebanx_masked_card_number]" id="<?php echo $_code ?>_masked_card_number"/>
+    <input type="hidden" name="payment[ebanx_device_fingerprint]" id="<?php echo $_code ?>_device_fingerprint"/>
+    <input type="hidden" name="payment[ebanx_billing_instalments]" id="<?php echo $_code ?>_billing_instalments"/>
+    <input type="hidden" name="payment[ebanx_billing_cvv]" id="<?php echo $_code ?>_billing_cvv"/>
+    <input type="hidden" name="payment[ebanx_mode]" id="<?php echo $_code ?>_mode"
+            value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
+    <input type="hidden" name="payment[ebanx_integration_key]" id="<?php echo $_code ?>_integration_key"
+            value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
+    <input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="br"/>
+    <input type="hidden" name="payment[grand_total]" id="grand_total" value="<?php echo $this->getTotal() ?>"/>
+</ul>
 
 <script>
     handleEbanxForm('br', 'cc');
@@ -116,4 +118,14 @@
 
     EBANXCreditCard.formatCardNumber(document.querySelector('input#ebanx_cc_br_cc_number'));
     EBANXCreditCard.formatCardCVC(document.querySelector('input#ebanx_cc_br_cc_cid'));
+
+    // Change Amount Local
+    var instalments = document.querySelector('#<?php echo $_code ?>_instalments');
+    var priceContainer = document.querySelector('#cc-br-local-amount');
+
+    instalments.addEventListener('change', function (e) {
+      var price = this.selectedOptions[0].getAttribute('data-local-amount');
+
+      priceContainer.innerHTML = price;
+    });
 </script>

@@ -141,4 +141,10 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 		return $this->gateway->isAvailableForCountry($countryName);
 	}
+
+	public function getTotal()
+	{
+		$quote = $this->getInfoInstance()->getQuote();
+		return $quote->getGrandTotal();
+	}
 }
