@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Model_Customercard extends Mage_Core_Model_Abstract
+class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
 {
 	/**
 	 * Internal constructor
