@@ -93,6 +93,11 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 			return;
 		}
 
+		$usercard = Mage::getModel('ebanx/usercard');
+		if ($usercard->isCardAlreadySavedForCustomer($maskedCardNumber, $customerId)) {
+			return;
+		}
+
 		// TODO: save credit card
 	}
 

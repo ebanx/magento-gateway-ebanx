@@ -21,7 +21,16 @@
         <models>
             <ebanx>
                 <class>Ebanx_Gateway_Model</class>
+                <resourceModel>ebanx_resource</resourceModel>
             </ebanx>
+            <ebanx_resource>
+                <class>Ebanx_Gateway_Model_Resource</class>
+                <entities>
+                    <usercard>
+                        <table>ebanx_user_cards</table>
+                    </usercard>
+                </entities>
+            </ebanx_resource>
         </models>
 
         <resources>
