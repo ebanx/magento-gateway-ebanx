@@ -98,7 +98,11 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 			return;
 		}
 
-		// TODO: save credit card
+		Mage::getModel('ebanx/usercard')->setUserId($customerId)
+			->setToken($token)
+			->setMaskedNumber($maskedCardNumber)
+			->setBrand($brand)
+			->save();
 	}
 
 	/**
