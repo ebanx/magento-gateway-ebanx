@@ -100,6 +100,7 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 			->setToken($token)
 			->setMaskedNumber($maskedCardNumber)
 			->setBrand($brand)
+			->setPaymentMethod($this->getCode())
 			->save();
 	}
 

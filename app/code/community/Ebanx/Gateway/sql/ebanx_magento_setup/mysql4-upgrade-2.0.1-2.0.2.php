@@ -13,6 +13,7 @@ CREATE TABLE {$this->getTable('ebanx_user_cards')} (
     `token` varchar(255) NOT NULL default '',
     `masked_number` varchar(20) NOT NULL default '',
     `brand` varchar(255) NOT NULL default '',
+    `payment_method` varchar(255) NOT NULL default '',
      PRIMARY KEY (ebanx_card_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
