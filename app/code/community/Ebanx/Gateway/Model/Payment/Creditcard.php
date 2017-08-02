@@ -64,6 +64,11 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 
 	private function persistCreditCardData()
 	{
+		if (!Mage::helper('ebanx')->saveCreditCardAllowed())
+		{
+			return;
+		}
+
 		$gatewayFields = $this->data->getGatewayFields();
 
 		$order = $this->getOrder();
