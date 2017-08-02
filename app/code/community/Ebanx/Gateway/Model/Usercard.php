@@ -34,6 +34,12 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
 		return $this->getCollectionByCustomerIdAndMaskedNumber($userId, $maskedNumber)->count() > 0;
 	}
 
+	public function getCustomerSavedCards($userId)
+	{
+		return $this->getCollection()
+			->addFieldToFilter('user_id', $userId);
+	}
+
 	/**
 	 * Returns a collection by customer ID and Masked Number
 	 *
