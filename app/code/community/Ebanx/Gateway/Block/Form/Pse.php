@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Block_Form_Pse extends Mage_Payment_Block_Form
+class Ebanx_Gateway_Block_Form_Pse extends Ebanx_Gateway_Block_Form_Abstract
 {
 	public function getBanksList()
 	{

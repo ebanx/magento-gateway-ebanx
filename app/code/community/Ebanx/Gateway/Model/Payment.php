@@ -130,7 +130,9 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 	public function isAvailable($quote = null)
 	{
-		return parent::isAvailable() && $this->helper->areKeysFilled();
+		return parent::isAvailable()
+		       && Mage::getStoreConfig('payment/ebanx_settings/enabled')
+		       && $this->helper->areKeysFilled();
 	}
 
 	public function canUseForCountry($country)
@@ -138,5 +140,11 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 		$countryName = $this->helper->transformCountryCodeToName($country);
 
 		return $this->gateway->isAvailableForCountry($countryName);
+	}
+
+	public function getTotal()
+	{
+		$quote = $this->getInfoInstance()->getQuote();
+		return $quote->getGrandTotal();
 	}
 }

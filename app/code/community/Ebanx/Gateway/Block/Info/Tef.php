@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Block_Info_Tef extends Mage_Payment_Block_Info
+class Ebanx_Gateway_Block_Info_Tef extends Ebanx_Gateway_Block_Info_Abstract
 {
 	protected function _construct()
 	{

@@ -195,7 +195,7 @@
             <!-- Settings -->
             <ebanx_settings>
                 <brazil_taxes>cpf</brazil_taxes>
-
+                <enabled>1</enabled>
                 <!-- Brazil Payment Methods -->
                 <payment_methods_brazil>ebanx_cc_br,ebanx_boleto,ebanx_tef,ebanx_wallet</payment_methods_brazil>
                 <payment_methods_chile>ebanx_sencillito,ebanx_servipag</payment_methods_chile>
@@ -204,6 +204,7 @@
                 <payment_methods_mexico>ebanx_oxxo,ebanx_cc_mx,ebanx_dc_mx</payment_methods_mexico>
 
                 <payment_methods_visualization>1</payment_methods_visualization>
+                <min_instalment_value>0</min_instalment_value>
 
                 <payment_co_status>processing</payment_co_status>
                 <payment_pe_status>holded</payment_pe_status>

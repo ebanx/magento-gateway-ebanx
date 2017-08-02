@@ -93,6 +93,8 @@
             </div>
         </li>
     <?php endif ?>
+    <li><p>Total a pagar en Peso mexicano: <?php echo $this->getLocalAmount('MXN') ?></p></li>
+
     <input type="hidden" name="payment[ebanx_token]" id="<?php echo $_code ?>_token"/>
     <input type="hidden" name="payment[ebanx_brand]" id="<?php echo $_code ?>_brand"/>
     <input type="hidden" name="payment[ebanx_masked_card_number]" id="<?php echo $_code ?>_masked_card_number"/>
@@ -100,12 +102,13 @@
     <input type="hidden" name="payment[ebanx_billing_instalments]" id="<?php echo $_code ?>_billing_instalments"/>
     <input type="hidden" name="payment[ebanx_billing_cvv]" id="<?php echo $_code ?>_billing_cvv"/>
     <input type="hidden" name="payment[ebanx_mode]" id="<?php echo $_code ?>_mode"
-           value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
+            value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
     <input type="hidden" name="payment[ebanx_integration_key]" id="<?php echo $_code ?>_integration_key"
-           value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
+            value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
     <input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="mx"/>
     <input type="hidden" name="payment[grand_total]" id="grand_total" value="<?php echo $this->getTotal() ?>"/>
 </ul>
+
 
 <script>
     handleEbanxForm('mx', 'cc');

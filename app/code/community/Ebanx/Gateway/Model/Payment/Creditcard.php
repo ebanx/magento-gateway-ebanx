@@ -8,7 +8,6 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 	{
 		parent::__construct();
 
-
 		$this->ebanx = Mage::getSingleton('ebanx/api')->ebanxCreditCard();
 		$this->gateway = $this->ebanx->creditCard();
 	}
@@ -17,12 +16,6 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 	{
 		$amount = $grandTotal ?: $this->getTotal();
 		return $this->gateway->getPaymentTermsForCountryAndValue($this->getCountry(), $amount);
-	}
-
-	public function getTotal()
-	{
-		$quote = $this->getInfoInstance()->getQuote();
-		return $quote->getGrandTotal();
 	}
 
 	/**
