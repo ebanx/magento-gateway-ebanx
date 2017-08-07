@@ -387,9 +387,9 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 		return $ebanx->exchange()->siteToLocalWithTax($currency, $value);
   }
-  
+
 	public function hasToShowInlineIcon()
 	{
-		return boolval(Mage::getStoreConfig('payment/ebanx_settings/payment_methods_visualization'));
+		return Mage::getStoreConfig('payment/ebanx_settings/payment_methods_visualization');
 	}
 }
