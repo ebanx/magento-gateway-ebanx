@@ -69,14 +69,13 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 			return;
 		}
 
-		$gatewayFields = $this->data->getGatewayFields();
-
 		$order = $this->getOrder();
-		$orderMethod = $this->getOrderMethod($order);
 
-		if ($orderMethod !== 'register' && $orderMethod !== 'customer') {
+		if ($order->getCustomerIsGuest()) {
 			return;
 		}
+
+		$gatewayFields = $this->data->getGatewayFields();
 
 		if (!isset($gatewayFields['ebanx_save_credit_card']) || $gatewayFields['ebanx_save_credit_card'] !== 'on') {
 			return;
@@ -113,20 +112,5 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 		$orderId = $paymentInfo->getOrder()->getRealOrderId();
 
 		return Mage::getModel('sales/order')->loadByIncrementId($orderId);
-	}
-
-	/**
-	 * Returns 'guest', 'register' or 'customer'
-	 *
-	 * @param Mage_Sales_Model_Order $order
-	 *
-	 * @return string
-	 */
-	private function getOrderMethod($order)
-	{
-		$quoteId = $order->getQuoteId();
-		$quote = Mage::getModel('sales/quote')->load($quoteId);
-
-		return $quote->getCheckoutMethod(true);
 	}
 }
