@@ -18,7 +18,7 @@ $icon           = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx
 
   <?php
   $savedCards = $this->getSavedCards();
-  if (Mage::helper('ebanx')->saveCreditCardAllowed() && !empty($savedCards)): ?>
+  if (Mage::helper('ebanx')->saveCreditCardAllowed() && $savedCards->getSize()): ?>
     <?php foreach ($savedCards as $card): ?>
       <li class="ebanx-credit-card-option">
         <input id="card[<?= $card->getEbanxCardId() ?>]" type="radio" name="selected_card" value="<?= $card->getEbanxCardId() ?>">
