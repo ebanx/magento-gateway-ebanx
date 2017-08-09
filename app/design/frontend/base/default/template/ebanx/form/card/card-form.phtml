@@ -1,19 +1,19 @@
-<input type="hidden" name="payment[cc_name]" id="<?php echo $_code ?>_cc_name" value="Ebanx Magento Plugin"/>
+<input type="hidden" name="payment[cc_name][newcard]" id="<?php echo $_code ?>_cc_name" value="Ebanx Magento Plugin"/>
 <div class="new-card">
   <div>
     <label for="<?php echo $_code ?>_cc_number" class="required"><em>*</em>Número do Cartão</label>
     <div class="input-box">
       <input type="text" id="<?php echo $_code ?>_cc_number"
              title="<?php echo Mage::helper('core')->jsQuoteEscape('Número do Cartão') ?>"
-             class="input-text required-entry validate-cc-number ebanx-format-cc-number" value=""/>
+             class="input-text validate-cc-number ebanx-format-cc-number" value=""/>
     </div>
   </div>
   <div id="<?php echo $_code ?>_cc_type_exp_div">
     <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em>Data de validade</label>
     <div class="input-box">
       <div class="v-fix">
-        <select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month]"
-                class="month required-entry validate-cc-exp">
+        <select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month][newcard]"
+                class="month validate-cc-exp">
           <?php
           $_ccMonths = $this->getCcMonths();
           $_ccMonths[0] = $this->__('Mês');
@@ -30,7 +30,7 @@
         $_ccYears = $this->getCcYears();
         $_ccYears[0] = $this->__('Ano');
         ?>
-        <select id="<?php echo $_code ?>_expiration_yr" name="payment[cc_exp_year]" class="year required-entry">
+        <select id="<?php echo $_code ?>_expiration_yr" name="payment[cc_exp_year][newcard]" class="year">
           <?php foreach ($_ccYears as $k => $v): ?>
             <option value="<?php echo $k ? $k : '' ?>"><?php echo $v ?></option>
           <?php endforeach ?>
@@ -44,48 +44,23 @@
     <div class="input-box">
       <div class="v-fix">
         <input type="text" title="<?php echo Mage::helper('core')->jsQuoteEscape('Código de segurança') ?>"
-               class="input-text cvv required-entry validate-cc-cvn ebanx-format-cvc-number" id="<?php echo $_code ?>_cc_cid"
-               name="payment[cc_cid]" value=""/>
+               class="input-text cvv validate-cc-cvn ebanx-format-cvc-number" id="<?php echo $_code ?>_cc_cid"
+               name="payment[cc_cid][newcard]" value=""/>
       </div>
     </div>
   </div>
-  <?php include 'instalments.phtml' ?>
   <?php if (Mage::helper('ebanx')->saveCreditCardAllowed()) : ?>
     <div id="<?php echo $_code ?>-save-credit-card-div">
       <div class="input-box">
         <input type="checkbox" title="<?php echo Mage::helper('core')->jsQuoteEscape('Salvar este cartão para compras futuras') ?>"
-               class="ebanx-save-credit-card" id="ebanx_save_credit_card" name="payment[ebanx_save_credit_card]"/>
+               class="ebanx-save-credit-card" id="ebanx_save_credit_card" name="payment[ebanx_save_credit_card][newcard]"/>
         <label for="ebanx_save_credit_card" class="required">Salvar este cartão para compras futuras</label>
       </div>
     </div>
   <?php endif; ?>
 </div>
 
-<input type="hidden" name="payment[ebanx_token]" id="<?php echo $_code ?>_token"/>
-<input type="hidden" name="payment[ebanx_brand]" id="<?php echo $_code ?>_brand"/>
-<input type="hidden" name="payment[ebanx_masked_card_number]" id="<?php echo $_code ?>_masked_card_number"/>
-<input type="hidden" name="payment[ebanx_device_fingerprint]" id="<?php echo $_code ?>_device_fingerprint"/>
-<input type="hidden" name="payment[ebanx_billing_instalments]" id="<?php echo $_code ?>_billing_instalments"/>
-<input type="hidden" name="payment[ebanx_billing_cvv]" id="<?php echo $_code ?>_billing_cvv"/>
-<input type="hidden" name="payment[ebanx_mode]" id="<?php echo $_code ?>_mode"
-       value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
-<input type="hidden" name="payment[ebanx_integration_key]" id="<?php echo $_code ?>_integration_key"
-       value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
-<input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="br"/>
-<input type="hidden" name="payment[grand_total]" id="grand_total" value="<?php echo $this->getTotal() ?>"/>
-
-
-<script>
-  handleEbanxForm('br', 'cc');
-
-  EBANXCreditCard.formatCardNumber(document.querySelector('input#ebanx_cc_br_cc_number'));
-  EBANXCreditCard.formatCardCVC(document.querySelector('input#ebanx_cc_br_cc_cid'));
-</script>
-
-<style rel="stylesheet" type="text/css">
-  .save-card,
-  .new-card { display: none; }
-
-  input[type=radio]:checked ~ .save-card { display: block; }
-  input[type=radio]:checked ~ .new-card { display: block; }
-</style>
+<input type="hidden" name="payment[ebanx_token][newcard]" id="<?php echo $_code ?>_token"/>
+<input type="hidden" name="payment[ebanx_brand][newcard]" id="<?php echo $_code ?>_brand"/>
+<input type="hidden" name="payment[ebanx_masked_card_number][newcard]" id="<?php echo $_code ?>_masked_card_number"/>
+<input type="hidden" name="payment[ebanx_device_fingerprint][newcard]" id="<?php echo $_code ?>_device_fingerprint"/>

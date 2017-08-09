@@ -20,36 +20,42 @@ $icon           = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx
   $savedCards = $this->getSavedCards();
   if (Mage::helper('ebanx')->saveCreditCardAllowed() && $savedCards->getSize()): ?>
     <?php foreach ($savedCards as $card): ?>
-      <li class="ebanx-credit-card-option">
-        <input id="card[<?= $card->getEbanxCardId() ?>]" type="radio" name="selected_card" value="<?= $card->getEbanxCardId() ?>">
-        <label for="card[<?= $card->getEbanxCardId() ?>]">
-          <img src="<?= $skin ?>frontend/base/default/ebanx/icons/<?= $card->getBrand() ?>.png" width="30" />
-          <span style="margin-left: 10px;">&bull;&bull;&bull;&bull; <?= substr($card->getMaskedNumber(), -4) ?></span>
-        </label>
-
-        <div class="save-card">
-          <label for="ebanx_cc_br_cc_cid" class="required"><em>*</em>Código de segurança</label>
-            <div class="input-box">
-              <div class="v-fix">
-                <input type="text" title="Código de segurança" class="input-text cvv required-entry validate-cc-cvn ebanx-format-cvc-number" id="ebanx_cc_br_cc_cid" name="payment[cc_cid]" value="" autocomplete="off">
-              </div>
-            </div>
-        </div>
-      </li>
+      <?php include 'card/saved-card.phtml' ?>
     <?php endforeach; ?>
     <li class="ebanx-credit-card-option">
-      <input id="card[newcard]" type="radio" name="selected_card" value="newcard">
+      <input id="card[newcard]" type="radio" name="payment[selected_card]" value="newcard">
       <label for="card[newcard]">Novo cartão</label>
       <?php include 'card/card-form.phtml' ?>
     </li>
 
   <?php else: ?>
-  <?php include 'card/card-form.phtml' ?>
+    <input id="card[newcard]" type="hidden" name="payment[selected_card]" value="newcard"/>
+    <?php include 'card/card-form.phtml' ?>
   <?php endif; ?>
 
+  <?php include 'card/instalments.phtml' ?>
   <li><p>Total a pagar com IOF (0.38%): <span id="cc-br-local-amount"><?php echo $this->getLocalAmount('BRL') ?></span>
     </p></li>
 </ul>
 
+<input type="hidden" name="payment[ebanx_mode]" id="<?php echo $_code ?>_mode"
+       value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
+<input type="hidden" name="payment[ebanx_integration_key]" id="<?php echo $_code ?>_integration_key"
+       value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
+<input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="br"/>
+<input type="hidden" name="payment[grand_total]" id="grand_total" value="<?php echo $this->getTotal() ?>"/>
 
+<script>
+  handleEbanxForm('br', 'cc');
 
+  EBANXCreditCard.formatCardNumber(document.querySelector('input#ebanx_cc_br_cc_number'));
+  EBANXCreditCard.formatCardCVC(document.querySelector('input#ebanx_cc_br_cc_cid'));
+</script>
+
+<style rel="stylesheet" type="text/css">
+  .save-card,
+  .new-card { display: none; }
+
+  input[type=radio]:checked ~ .save-card { display: block; }
+  input[type=radio]:checked ~ .new-card { display: block; }
+</style>
