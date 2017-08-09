@@ -80,10 +80,15 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 			return;
 		}
 
+		$selectedCard = $this->gatewayFields['selected_card'];
+		if ($selectedCard !== 'newcard') {
+			return;
+		}
+
 		$customerId = $order->getCustomerId();
-		$token = $this->gatewayFields['ebanx_token'];
-		$brand = $this->gatewayFields['ebanx_brand'];
-		$maskedCardNumber = $this->gatewayFields['ebanx_masked_card_number'];
+		$token = $this->gatewayFields['ebanx_token']['newcard'];
+		$brand = $this->gatewayFields['ebanx_brand']['newcard'];
+		$maskedCardNumber = $this->gatewayFields['ebanx_masked_card_number']['newcard'];
 
 		if (!$customerId || !$token || !$brand || !$maskedCardNumber) {
 			return;
