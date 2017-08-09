@@ -3,6 +3,7 @@
 abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Model_Payment
 {
 	protected $_canSaveCc = false;
+	private $gatewayFields;
 
 	public function __construct()
 	{
@@ -41,6 +42,7 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 				$this->data->getAmountTotal()
 			)
 		);
+		$this->gatewayFields = $this->data->getGatewayFields();
 	}
 
 	public function transformPaymentData()
@@ -52,12 +54,11 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 	{
 		parent::persistPayment();
 
-		$gatewayFields = $this->data->getGatewayFields();
-		$last4 = substr($gatewayFields['ebanx_masked_card_number'], -4);
-		$instalments = array_key_exists('instalments', $gatewayFields) ? $gatewayFields['instalments'] : 1;
+		$last4 = substr($this->gatewayFields['ebanx_masked_card_number'], -4);
+		$instalments = array_key_exists('instalments', $this->gatewayFields) ? $this->gatewayFields['instalments'] : 1;
 		$this->payment->setInstalments($instalments)
 			->setCcLast4($last4)
-			->setCcType($gatewayFields['ebanx_brand']);
+			->setCcType($this->gatewayFields['ebanx_brand']);
 
 		$this->persistCreditCardData();
 	}
@@ -75,16 +76,14 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 			return;
 		}
 
-		$gatewayFields = $this->data->getGatewayFields();
-
-		if (!isset($gatewayFields['ebanx_save_credit_card']) || $gatewayFields['ebanx_save_credit_card'] !== 'on') {
+		if (!isset($this->gatewayFields['ebanx_save_credit_card']) || $this->gatewayFields['ebanx_save_credit_card'] !== 'on') {
 			return;
 		}
 
 		$customerId = $order->getCustomerId();
-		$token = $gatewayFields['ebanx_token'];
-		$brand = $gatewayFields['ebanx_brand'];
-		$maskedCardNumber = $gatewayFields['ebanx_masked_card_number'];
+		$token = $this->gatewayFields['ebanx_token'];
+		$brand = $this->gatewayFields['ebanx_brand'];
+		$maskedCardNumber = $this->gatewayFields['ebanx_masked_card_number'];
 
 		if (!$customerId || !$token || !$brand || !$maskedCardNumber) {
 			return;

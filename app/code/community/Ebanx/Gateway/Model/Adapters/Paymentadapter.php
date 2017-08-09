@@ -22,7 +22,10 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 		$instalmentTerms = $data->getInstalmentTerms();
 
 		$payment = $this->transform($data);
-		$payment->deviceId = $gatewayFields['ebanx_device_fingerprint'];
+
+		$selectedCard = $gatewayFields['selected_card'];
+		$payment->deviceId = $gatewayFields['ebanx_device_fingerprint'][$selectedCard];
+
 		if (isset($gatewayFields['instalments'])) {
 			$payment->instalments = $gatewayFields['instalments'];
 			$term = $instalmentTerms[$gatewayFields['instalments'] - 1];
@@ -33,11 +36,11 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 
 		$payment->card = new Card([
 			'autoCapture' => true,
-			'cvv' => $gatewayFields[$code . '_cid'],
-			'dueDate' => DateTime::createFromFormat('n-Y', $gatewayFields[$code . '_exp_month'] . '-' . $gatewayFields[$code . '_exp_year']),
-			'name' => $gatewayFields[$code . '_name'],
-			'token' => $gatewayFields['ebanx_token'],
-			'type' => $gatewayFields['ebanx_brand'],
+			'cvv' => $gatewayFields[$code . '_cid'][$selectedCard],
+			'dueDate' => DateTime::createFromFormat('n-Y', $gatewayFields[$code . '_exp_month'][$selectedCard] . '-' . $gatewayFields[$code . '_exp_year'][$selectedCard]),
+			'name' => $gatewayFields[$code . '_name'][$selectedCard],
+			'token' => $gatewayFields['ebanx_token'][$selectedCard],
+			'type' => $gatewayFields['ebanx_brand'][$selectedCard],
 		]);
 
 		return $payment;
