@@ -50,6 +50,23 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 		$this->paymentData = $this->adapter->transformCard($this->data);
 	}
 
+	public function processPayment()
+	{
+		if ($this->gatewayFields['selected_card'] !== 'newcard') {
+			$customerId = $this->getOrder()->getCustomerId();
+			$selectedCard = $this->gatewayFields['selected_card'];
+			$token = $this->gatewayFields['ebanx_token'][$selectedCard];
+
+			if (!Mage::getModel('ebanx/usercard')->doesCardBelongsToCustomer($token, $customerId)){
+				$error = Mage::helper('ebanx/error');
+				$country = $this->getOrder()->getBillingAddress()->getCountry();
+				Mage::throwException($error->getError('GENERAL', $country));
+			}
+		}
+
+		parent::processPayment();
+	}
+
 	public function persistPayment()
 	{
 		parent::persistPayment();
@@ -80,8 +97,7 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 			return;
 		}
 
-		$selectedCard = $this->gatewayFields['selected_card'];
-		if ($selectedCard !== 'newcard') {
+		if ($this->gatewayFields['selected_card'] !== 'newcard') {
 			return;
 		}
 
