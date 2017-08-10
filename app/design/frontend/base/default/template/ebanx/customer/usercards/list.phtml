@@ -1,0 +1,66 @@
+<?php
+/**
+ * @see Cdev_XPaymentsConnector_Block_Customer_Usercards_List
+ */
+?>
+<div class="page-title">
+  <h1><?php echo $this->__('Payment cards') ?></h1>
+</div>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php echo $this->getChildHtml('pager'); ?>
+
+<?php if ($this->getCards()->getSize()): ?>
+  <form  id="credit-card-list-form" method="post" action="<?php echo $this->escapeUrl($this->getFormUrl()); ?>">
+
+    <table class="data-table" id="my-credit-cards-table">
+      <col width="1" />
+      <col />
+      <col width="1" />
+      <thead>
+      <tr>
+        <th></th>
+        <th><?php echo $this->__('Card number') ?></th>
+        <th><?php echo $this->__('Brand') ?></th>
+      </tr>
+      </thead>
+      <tbody>
+      <?php foreach ($this->getCards() as $card): ?>
+        <tr>
+          <td>
+            <input type="checkbox" class="checkbox related-checkbox" value="<?php echo $card->getEbanxCardId(); ?>" name="card[]" />
+          </td>
+          <td><?php echo $card->getMaskedNumber(); ?></td>
+          <td><?php echo $card->getBrand(); ?></td>
+        </tr>
+      <?php endforeach; ?>
+      </tbody>
+    </table>
+
+    <script type="text/javascript">decorateTable('my-credit-cards-table');</script>
+
+    <?php echo $this->getChildHtml('pager'); ?>
+
+    <div class="buttons-set">
+      <p class="back-link">
+        <a href="<?php echo $this->escapeUrl($this->getBackUrl()); ?>">
+          <small>&laquo;&nbsp;</small><?php echo $this->__('Back') ?>
+        </a>
+      </p>
+      <button class="button" type="submit" title="<?php echo $this->__('Remove'); ?>">
+        <span><span><?php echo $this->__('Remove'); ?></span></span>
+      </button>
+    </div>
+  </form>
+<?php else: ?>
+
+  <p><?php echo $this->__('You have no saved credit cards yet.'); ?></p>
+  <div class="buttons-set">
+    <p class="back-link">
+      <a href="<?php echo $this->escapeUrl($this->getBackUrl()); ?>">
+        <small>&laquo;&nbsp;</small><?php echo $this->__('Back') ?>
+      </a>
+    </p>
+  </div>
+
+<?php endif; ?>
