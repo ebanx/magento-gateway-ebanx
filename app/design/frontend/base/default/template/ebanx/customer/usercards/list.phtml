@@ -25,10 +25,14 @@ $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
       <?php foreach ($this->getCards() as $card): ?>
         <tr>
           <td>
-            <input type="checkbox" class="checkbox related-checkbox" value="<?= $card->getEbanxCardId(); ?>" name="card[]" />
+            <input type="checkbox" class="checkbox related-checkbox" value="<?= $card->getEbanxCardId(); ?>" id="card[<?= $card->getEbanxCardId(); ?>]" name="card[]" />
           </td>
-          <td><img style="float: left;" src="<?= $skin ?>frontend/base/default/ebanx/icons/<?= $card->getBrand() ?>.png" width="30"/>
-            <span style="float: left; margin-left: 10px;">&bull;&bull;&bull;&bull; <?= substr($card->getMaskedNumber(), -4) ?></span></td>
+          <td>
+            <label for="card[<?= $card->getEbanxCardId(); ?>]">
+              <img style="float: left;" src="<?= $skin ?>frontend/base/default/ebanx/icons/<?= $card->getBrand() ?>.png" width="30"/>
+              <span style="float: left; margin-left: 10px;">&bull;&bull;&bull;&bull; <?= substr($card->getMaskedNumber(), -4) ?></span>
+            </label>
+          </td>
         </tr>
       <?php endforeach; ?>
       </tbody>
