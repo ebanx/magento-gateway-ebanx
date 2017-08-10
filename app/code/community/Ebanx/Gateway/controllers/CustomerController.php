@@ -45,5 +45,16 @@ class Ebanx_Gateway_CustomerController extends Mage_Core_Controller_Front_Action
 	 */
 	public function removecardAction()
 	{
+		$cardsToRemove = $this->getRequest()->getParam('card');
+
+		if (!empty($cardsToRemove)) {
+			Mage::getModel('ebanx/usercard')->removeCardsFromUser(
+				$cardsToRemove,
+				Mage::getSingleton('customer/session')->getCustomerId()
+			);
+			Mage::getSingleton('customer/session')->addSuccess('The cards have been removed successfully.');
+		}
+
+		$this->_redirect('ebanx/customer/usercards');
 	}
 }

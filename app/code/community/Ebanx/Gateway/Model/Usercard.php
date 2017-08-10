@@ -11,6 +11,22 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
 	}
 
 	/**
+	 * Remove the cards from array cards
+	 *
+	 * @param array $cards
+	 * @param int $userId
+	 * @return Varien_Object
+	 */
+	public function removeCardsFromUser($cards, $userId)
+	{
+		$cards = $this->getCollectionByCustomerIdAndCardId($userId, $cards);
+
+		foreach ($cards as $card) {
+			$card->delete();
+		}
+	}
+
+	/**
 	 * Returns the registry by user id and masked number
 	 *
 	 * @param int $userId
@@ -64,6 +80,20 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
 		return $this->getCollection()
 					->addFieldToFilter('user_id', $userId)
 					->addFieldToFilter('masked_number', $maskedNumber);
+	}
+
+	/**
+	 * Returns a collection by customer ID and Card ID
+	 *
+	 * @param int $userId
+	 * @param array $cardId
+	 * @return Ebanx_Gateway_Model_Resource_Usercard_Collection
+	 */
+	private function getCollectionByCustomerIdAndCardId($userId, $cardId)
+	{
+		return $this->getCollection()
+					->addFieldToFilter('user_id', $userId)
+					->addFieldToFilter('ebanx_card_id', ['in' => $cardId]);
 	}
 
 	/**
