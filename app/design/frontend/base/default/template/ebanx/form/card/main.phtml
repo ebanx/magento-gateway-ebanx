@@ -20,7 +20,7 @@ $icon           = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx
 
   <?php
   $savedCards = $this->getSavedCards();
-  if (Mage::helper('ebanx')->saveCreditCardAllowed() && $savedCards->getSize()): ?>
+  if (Mage::helper('ebanx')->saveCreditCardAllowed() && $savedCards && $savedCards->getSize()): ?>
     <?php foreach ($savedCards as $card): ?>
       <?php include 'saved-card.phtml' ?>
     <?php endforeach; ?>
