@@ -12,6 +12,11 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
 		return $this->getMethod()->getTotal();
 	}
 
+	public function canShowSaveCardOption()
+	{
+		return Mage::getSingleton('checkout/session')->getQuote()->getCheckoutMethod() == "register" || Mage::getSingleton('customer/session')->isLoggedIn();
+	}
+
 	/**
 	 * @return array
 	 */
