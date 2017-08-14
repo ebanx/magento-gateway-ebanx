@@ -115,8 +115,17 @@
     </onepagecheckout_index_success>
 
     <catalog_product_view>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>ebanx/css/oneclick.css</stylesheet>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/oneclick.js</name>
+            </action>
+        </reference>
         <reference name="product.info.addtocart">
-            <block type="core/template" name="test" template="ebanx/catalog/product/view/oneclick.phtml" after="-"/>
+            <block type="ebanx/catalog_product_view_oneclick" name="ebanx_catalog_product_view_oneclick" template="ebanx/catalog/product/view/oneclick.phtml" after="-"/>
         </reference>
     </catalog_product_view>
 
