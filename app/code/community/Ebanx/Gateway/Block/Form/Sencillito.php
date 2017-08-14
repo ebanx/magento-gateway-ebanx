@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Block_Form_Sencillito extends Mage_Payment_Block_Form
+class Ebanx_Gateway_Block_Form_Sencillito extends Ebanx_Gateway_Block_Form_Abstract
 {
 	protected function _construct()
 	{

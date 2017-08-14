@@ -83,6 +83,11 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return Mage::getStoreConfig('payment/ebanx_settings/interest_rate');
 	}
 
+	public function saveCreditCardAllowed()
+	{
+		return Mage::getStoreConfig('payment/ebanx_settings/save_card_data');
+	}
+
 	public function transformTefToBankName($bankCode)
 	{
 		$banks = [
@@ -387,9 +392,9 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 		return $ebanx->exchange()->siteToLocalWithTax($currency, $value);
   }
-  
+
 	public function hasToShowInlineIcon()
 	{
-		return boolval(Mage::getStoreConfig('payment/ebanx_settings/payment_methods_visualization'));
+		return Mage::getStoreConfig('payment/ebanx_settings/payment_methods_visualization');
 	}
 }

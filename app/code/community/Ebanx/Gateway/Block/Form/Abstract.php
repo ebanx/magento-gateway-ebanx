@@ -1,6 +1,6 @@
 <?php
 
-abstract class Ebanx_Gateway_Block_Info_Abstract extends Mage_Payment_Block_Info
+abstract class Ebanx_Gateway_Block_Form_Abstract extends Mage_Payment_Block_Form
 {
 	private function getTotal()
 	{

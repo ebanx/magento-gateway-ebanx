@@ -119,4 +119,26 @@
             <block type="core/template" name="test" template="ebanx/catalog/product/view/oneclick.phtml" after="-"/>
         </reference>
     </catalog_product_view>
+
+    <!-- My Account - Saved Credit Card -->
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="ebanx" ifconfig="payment/ebanx_settings/save_card_data">
+                <name>customer_usercards</name>
+                <path>ebanx/customer/usercards</path>
+                <label>Saved Credit Cards</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <ebanx_customer_usercards translate="label">
+        <label>Customer My Account credit cards list</label>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="ebanx/customer_usercards_list" name="ebanx_customer_usercards_list" template="ebanx/customer/usercards/list.phtml" />
+        </reference>
+        <reference name="root">
+            <action method="setHeaderTitle" translate="title" module="ebanx"><title>Credit Cards list</title></action>
+        </reference>
+    </ebanx_customer_usercards>
 </layout>
