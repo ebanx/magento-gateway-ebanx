@@ -1,0 +1,67 @@
+<?php
+$text           = $this->getText();
+$lowerCountry   = $this->country;
+$localCurrency  = $this->localCurrency;
+$skin           = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+$_code          = $this->getMethodCode();
+$showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
+$icon           = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx-credit-card-' . $lowerCountry . '.png" width="200" /></div>';
+?>
+
+<?= !$showInlineIcon ? null : $icon ?>
+
+<ul class="form-list ebanx-payment-method ebanx-<?= $lowerCountry ?>-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
+
+  <?= $showInlineIcon ? null : $icon ?>
+
+  <p class="ebanx-payment-method-desc"><?= $text['method-desc'] ?></p>
+
+  <?php include '../fields.phtml' ?>
+
+  <?php
+  $savedCards = $this->getSavedCards();
+  if (Mage::helper('ebanx')->saveCreditCardAllowed() && $savedCards->getSize()): ?>
+    <?php foreach ($savedCards as $card): ?>
+      <?php include 'saved-card.phtml' ?>
+    <?php endforeach; ?>
+    <li class="ebanx-credit-card-option">
+      <input id="card[newcard]" type="radio" name="payment[selected_card]" value="newcard">
+      <label for="card[newcard]"><?= $text['newcard'] ?></label>
+      <div class="new-card">
+        <?php include 'card-form.phtml' ?>
+      </div>
+    </li>
+
+  <?php else: ?>
+    <input id="card[newcard]" type="hidden" name="payment[selected_card]" value="newcard"/>
+    <div>
+      <?php include 'card-form.phtml' ?>
+    </div>
+  <?php endif; ?>
+
+  <?php include 'instalments.phtml' ?>
+  <li><p><?= $text['local-amount'] ?><span id="cc-<?= $lowerCountry ?>-local-amount"><?php echo $this->getLocalAmount($localCurrency) ?></span>
+    </p></li>
+</ul>
+
+<input type="hidden" name="payment[ebanx_mode]" id="<?php echo $_code ?>_mode"
+       value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
+<input type="hidden" name="payment[ebanx_integration_key]" id="<?php echo $_code ?>_integration_key"
+       value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
+<input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="<?= $lowerCountry ?>"/>
+<input type="hidden" name="payment[grand_total]" id="grand_total" value="<?php echo $this->getTotal() ?>"/>
+
+<script>
+  handleEbanxForm('<?= $lowerCountry ?>', 'cc');
+
+  EBANXCreditCard.formatCardNumber(document.querySelector('input#<?= $_code ?>_cc_number'));
+  EBANXCreditCard.formatCardCVC(document.querySelector('input#<?= $_code ?>_cc_cid'));
+</script>
+
+<style rel="stylesheet" type="text/css">
+  .save-card,
+  .new-card { display: none; }
+
+  input[type=radio]:checked ~ .save-card { display: block; }
+  input[type=radio]:checked ~ .new-card { display: block; }
+</style>
