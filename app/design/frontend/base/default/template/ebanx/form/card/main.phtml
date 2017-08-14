@@ -16,7 +16,7 @@ $icon           = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx
 
   <p class="ebanx-payment-method-desc"><?= $text['method-desc'] ?></p>
 
-  <?php include '../fields.phtml' ?>
+  <?php include __DIR__ . '/../fields.phtml' ?>
 
   <?php
   $savedCards = $this->getSavedCards();
