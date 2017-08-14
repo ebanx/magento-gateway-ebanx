@@ -37,7 +37,7 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 		$payment->card = new Card([
 			'autoCapture' => true,
 			'cvv' => $gatewayFields[$code . '_cid'][$selectedCard],
-			'dueDate' => DateTime::createFromFormat('n-Y', $gatewayFields[$code . '_exp_month'][$selectedCard] . '-' . $gatewayFields[$code . '_exp_year'][$selectedCard]),
+			'dueDate' => $this->transformDueDate( $gatewayFields, $code, $selectedCard ),
 			'name' => $gatewayFields[$code . '_name'][$selectedCard],
 			'token' => $gatewayFields['ebanx_token'][$selectedCard],
 			'type' => $gatewayFields['ebanx_brand'][$selectedCard],
@@ -110,5 +110,19 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 		}
 
 		return $itemsData;
+	}
+
+	/**
+	 * @param $gatewayFields
+	 * @param $code
+	 * @param $selectedCard
+	 *
+	 * @return bool|DateTime
+	 */
+	private function transformDueDate( $gatewayFields, $code, $selectedCard ) {
+		$month = $gatewayFields[ $code . '_exp_month' ][ $selectedCard ] ?: 1;
+		$year = $gatewayFields[ $code . '_exp_year' ][ $selectedCard ] ?: 2120;
+
+		return DateTime::createFromFormat( 'n-Y', $month . '-' . $year );
 	}
 }
