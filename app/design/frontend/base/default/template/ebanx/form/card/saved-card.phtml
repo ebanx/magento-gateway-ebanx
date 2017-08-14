@@ -1,0 +1,60 @@
+<?php
+/**
+ * @var Ebanx_Gateway_Model_Usercard $card
+ */
+?>
+<li class="ebanx-credit-card-option">
+  <input id="card[<?= $card->getEbanxCardId() ?>]" type="radio" name="payment[selected_card]"
+         value="<?= $card->getEbanxCardId() ?>">
+  <label for="card[<?= $card->getEbanxCardId() ?>]">
+    <img src="<?= $skin ?>frontend/base/default/ebanx/icons/<?= $card->getBrand() ?>.png" width="30"/>
+    <span style="margin-left: 10px;">&bull;&bull;&bull;&bull; <?= substr($card->getMaskedNumber(), -4) ?></span>
+  </label>
+
+  <div class="save-card">
+    <label for="<?php echo $_code ?>_cc_cid" class="required"><em>*</em><?= $text['cvv'] ?></label>
+    <div class="input-box">
+      <div class="v-fix">
+        <input type="text" title="Código de segurança"
+               class="input-text cvv validate-cc-cvn ebanx-format-cvc-number" id="<?php echo $_code ?>_cc_cid[<?= $card->getEbanxCardId() ?>]"
+               name="payment[cc_cid][<?= $card->getEbanxCardId() ?>]" value="" autocomplete="off">
+      </div>
+    </div>
+    <div id="<?php echo $_code ?>_cc_type_exp_div[<?= $card->getEbanxCardId() ?>]">
+      <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em><?= $text['duedate'] ?></label>
+      <div class="input-box">
+        <div class="v-fix">
+          <select id="<?php echo $_code ?>_expiration[<?= $card->getEbanxCardId() ?>]" name="payment[cc_exp_month][<?= $card->getEbanxCardId() ?>]"
+                  class="month validate-cc-exp">
+            <?php
+            $_ccMonths = $this->getCcMonths();
+            $_ccMonths[0] = $this->__('Mês');
+            ?>
+            <?php foreach ($_ccMonths as $k => $v): ?>
+              <option value="<?php echo $k ?>"><?php echo $v ?></option>
+            <?php endforeach ?>
+          </select>
+        </div>
+        <div class="v-fix">
+          <?php
+          $_ccExpYear = $this->getInfoData('cc_exp_year');
+
+          $_ccYears = $this->getCcYears();
+          $_ccYears[0] = $this->__('Ano');
+          ?>
+          <select id="<?php echo $_code ?>_expiration_yr[<?= $card->getEbanxCardId() ?>]" name="payment[cc_exp_year][<?= $card->getEbanxCardId() ?>]" class="year">
+            <?php foreach ($_ccYears as $k => $v): ?>
+              <option value="<?php echo $k ? $k : '' ?>"><?php echo $v ?></option>
+            <?php endforeach ?>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <input type="hidden" name="payment[cc_name][<?= $card->getEbanxCardId() ?>]" value="Ebanx Magento Plugin"/>
+  <input type="hidden" name="payment[ebanx_token][<?= $card->getEbanxCardId() ?>]" value="<?= $card->getToken() ?>"/>
+  <input type="hidden" name="payment[ebanx_brand][<?= $card->getEbanxCardId() ?>]" value="<?= $card->getBrand() ?>"/>
+  <input type="hidden" name="payment[ebanx_masked_card_number][<?= $card->getEbanxCardId() ?>]" value="<?= $card->getMaskedNumber() ?>"/>
+  <input type="hidden" name="payment[ebanx_device_fingerprint][<?= $card->getEbanxCardId() ?>]" value=""/>
+</li>

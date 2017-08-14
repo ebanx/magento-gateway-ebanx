@@ -1,0 +1,42 @@
+<?php $_instalmentOptions = $this->getInstalmentTerms() ?>
+<?php $_selected = $this->getInfoData('instalments') ?>
+<?php if (count($_instalmentOptions) > 1): ?>
+  <li id="<?php echo $_code ?>-instalments-div">
+    <label for="<?php echo $_code ?>_instalments" class="required"><em>*</em><?= $text['instalments'] ?></label>
+    <div class="input-box">
+      <select id="<?php echo $_code ?>_instalments" name="payment[instalments]" title="Instalments"
+              class="required-entry validate-select">
+        <?php foreach ($_instalmentOptions as $_instalmentTerm): ?>
+          <option
+            value="<?php echo $_instalmentTerm->instalmentNumber ?>"
+            data-local-amount="<?php echo Mage::app()->getLocale()->currency($localCurrency)->toCurrency($_instalmentTerm->localAmountWithTax * $_instalmentTerm->instalmentNumber) ?>"
+          >
+            <?php echo $this->formatInstalment($_instalmentTerm); ?>
+          </option>
+        <?php endforeach ?>
+      </select>
+      <input type="hidden" id="<?php echo $_code ?>_instalment_description"
+             name="payment[instalment_description]"
+             value="<?php echo $this->escapeHtml($this->getInfoData('instalment_description')) ?>"/>
+    </div>
+  </li>
+
+  <script>
+    if (typeof ebanxUpdateFireInterest !== 'undefined') {
+      document.getElementById('<?php echo $_code ?>_instalments')
+        .addEventListener('change', function () {
+          ebanxUpdateFireInterest();
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Change Amount Local
+      var instalments = document.querySelector('#<?php echo $_code ?>_instalments');
+      var priceContainer = document.querySelector('#cc-<?= $lowerCountry ?>-local-amount');
+
+      instalments.addEventListener('change', function (e) {
+        priceContainer.innerHTML = this.selectedOptions[0].getAttribute('data-local-amount');
+      });
+    });
+  </script>
+<?php endif ?>

@@ -12,6 +12,24 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
 		return $this->getMethod()->getTotal();
 	}
 
+	public function canShowSaveCardOption()
+	{
+		return Mage::getSingleton('checkout/session')->getQuote()->getCheckoutMethod() == "register" || Mage::getSingleton('customer/session')->isLoggedIn();
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function getSavedCards()
+	{
+		if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
+			return [];
+		}
+		$customerId =  Mage::getSingleton('customer/session')->getCustomer()->getId();
+
+		return Mage::getModel('ebanx/usercard')->getCustomerSavedCards($customerId);
+	}
+
 	private function formatPriceWithLocalCurrency($currency, $price)
 	{
 		return Mage::app()->getLocale()->currency($currency)->toCurrency($price);
