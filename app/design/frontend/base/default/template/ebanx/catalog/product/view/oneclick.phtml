@@ -1,7 +1,13 @@
+<?php
+$savedCards = $this->usercards;
+?>
 <?php if ($this->canShowOneclickButton()): ?>
 <div id="ebanx-one-click-container" class="clearfix">
   <button type="button" title="Pague com um clique" id="product-oneclick-ebanx-button" class="button btn-cart btn-ebanx"><span><span>Pague com um clique</span></span></button>
   <div class="ebanx-one-click-tooltip" id="ebanx-one-click-tooltip">
+    <?php foreach ($savedCards as $card): ?>
+      <?php include __DIR__ . '/../../../form/card/saved-card.phtml' ?>
+    <?php endforeach; ?>
     <button id="ebanx-one-click-close-button"></button>
   </div>
 </div>

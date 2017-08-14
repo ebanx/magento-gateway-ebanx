@@ -2,6 +2,11 @@ document.addEventListener('DOMContentLoaded', function () {
   var button = document.getElementById('product-oneclick-ebanx-button');
   var tooltip = document.getElementById('ebanx-one-click-tooltip');
   var close = document.getElementById('ebanx-one-click-close-button');
+  var elements = document.getElementsByName('payment[selected_card]');
+
+  if (elements) {
+    elements[0].checked = true;
+  }
 
   if (button) {
     button.addEventListener('click', function (e) {

@@ -62,3 +62,31 @@
 
   font-size: 14px;
 }
+
+#ebanx-one-click-close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  width: 20px;
+  height: 20px;
+  padding: 0;
+
+  border: 0;
+  background: url(../images/close-button.png) no-repeat center;
+  background-size: 20px;
+  border-radius: 50%;
+}
+
+#ebanx-one-click-close-button:hover {
+  background: url(../images/close-button.png) no-repeat center;
+  background-size: 20px;
+  border-radius: 50%;
+  opacity: .5;
+}
+
+.save-card,
+.new-card { display: none; }
+
+input[type=radio]:checked ~ .save-card { display: block; }
+input[type=radio]:checked ~ .new-card { display: block; }

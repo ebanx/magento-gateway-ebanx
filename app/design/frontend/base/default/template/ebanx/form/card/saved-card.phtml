@@ -2,6 +2,7 @@
 /**
  * @var Ebanx_Gateway_Model_Usercard $card
  */
+$skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 ?>
 <li class="ebanx-credit-card-option">
   <input id="card[<?= $card->getEbanxCardId() ?>]" type="radio" name="payment[selected_card]"
