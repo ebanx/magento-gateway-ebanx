@@ -1,5 +1,8 @@
 <?php
-$helper = $helper = Mage::helper('ebanx');
+/**
+ * @var Ebanx_Gateway_Helper_Data $helper
+ */
+$helper = Mage::helper('ebanx');
 
 if ($helper->hasComplianceFieldFromSettings($this->getMethodCode())) return;
 
