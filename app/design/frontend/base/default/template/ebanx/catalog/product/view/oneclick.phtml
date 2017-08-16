@@ -1,14 +1,26 @@
 <?php
 $savedCards = $this->usercards;
+$text = $this->getText();
 ?>
 <?php if ($this->canShowOneclickButton()): ?>
 <div id="ebanx-one-click-container" class="clearfix">
-  <button type="button" title="Pague com um clique" id="product-oneclick-ebanx-button" class="button btn-cart btn-ebanx"><span><span>Pague com um clique</span></span></button>
+  <button type="button" title="Pague com um clique" id="product-oneclick-ebanx-button" class="button btn-cart btn-ebanx">Pague com um clique</button>
   <div class="ebanx-one-click-tooltip" id="ebanx-one-click-tooltip">
-    <?php foreach ($savedCards as $card): ?>
-      <?php include __DIR__ . '/../../../form/card/saved-card.phtml' ?>
-    <?php endforeach; ?>
     <button id="ebanx-one-click-close-button"></button>
+    <form method="POST" action="#">
+      <p>Endereço de entrega: </p>
+      <p><strong>Só loucura mano, 232</strong></p>
+      <br>
+      <p>Escolha o cartão: </p>
+      <ul id="ebanx-one-click-card-list">
+        <?php foreach ($savedCards as $card): ?>
+          <?php include __DIR__ . '/../../../form/card/saved-card.phtml' ?>
+        <?php endforeach; ?>
+        <li>
+          <button title="Pagar" id="ebanx-oneclick-pay-button" class="button btn-ebanx">Pagar</button>
+        </li>
+      </ul>
+    </form>
   </div>
 </div>
 <?php endif; ?>

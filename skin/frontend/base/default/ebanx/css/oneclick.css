@@ -85,8 +85,26 @@
   opacity: .5;
 }
 
-.save-card,
-.new-card { display: none; }
+.ebanx-credit-card-option > label > img {
+  float: left;
+}
 
-input[type=radio]:checked ~ .save-card { display: block; }
-input[type=radio]:checked ~ .new-card { display: block; }
+.ebanx-credit-card-option {
+  margin: 20px 0;
+}
+
+.ebanx-credit-card-option:last-child {
+  margin-bottom: 0;
+}
+
+#ebanx-oneclick-pay-button {
+  margin-bottom: 0;
+}
+
+.save-card {
+  display: none;
+}
+
+input[type=radio]:checked ~ .save-card {
+  display: block;
+}

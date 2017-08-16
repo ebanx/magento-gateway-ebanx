@@ -12,6 +12,15 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 		$this->initialize();
 	}
 
+	public function getText()
+	{
+		return [
+			'local-amount' => 'Total a pagar com IOF (0.38%): ',
+			'cvv' => 'Código de segurança',
+			'instalments' => 'Número de parcelas',
+		];
+	}
+
 	public function canShowOneclickButton()
 	{
 		return Mage::getSingleton('customer/session')->isLoggedIn()

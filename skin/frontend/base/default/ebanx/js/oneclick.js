@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var close = document.getElementById('ebanx-one-click-close-button');
   var elements = document.getElementsByName('payment[selected_card]');
 
-  if (elements) {
+  if (elements.length) {
     elements[0].checked = true;
   }
 

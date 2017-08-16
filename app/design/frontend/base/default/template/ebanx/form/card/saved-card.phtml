@@ -21,36 +21,6 @@ $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
                name="payment[cc_cid][<?= $card->getEbanxCardId() ?>]" value="" autocomplete="off">
       </div>
     </div>
-    <div id="<?php echo $_code ?>_cc_type_exp_div[<?= $card->getEbanxCardId() ?>]">
-      <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em><?= $text['duedate'] ?></label>
-      <div class="input-box">
-        <div class="v-fix">
-          <select id="<?php echo $_code ?>_expiration[<?= $card->getEbanxCardId() ?>]" name="payment[cc_exp_month][<?= $card->getEbanxCardId() ?>]"
-                  class="month validate-cc-exp">
-            <?php
-            $_ccMonths = $this->getCcMonths();
-            $_ccMonths[0] = $this->__('Mês');
-            ?>
-            <?php foreach ($_ccMonths as $k => $v): ?>
-              <option value="<?php echo $k ?>"><?php echo $v ?></option>
-            <?php endforeach ?>
-          </select>
-        </div>
-        <div class="v-fix">
-          <?php
-          $_ccExpYear = $this->getInfoData('cc_exp_year');
-
-          $_ccYears = $this->getCcYears();
-          $_ccYears[0] = $this->__('Ano');
-          ?>
-          <select id="<?php echo $_code ?>_expiration_yr[<?= $card->getEbanxCardId() ?>]" name="payment[cc_exp_year][<?= $card->getEbanxCardId() ?>]" class="year">
-            <?php foreach ($_ccYears as $k => $v): ?>
-              <option value="<?php echo $k ? $k : '' ?>"><?php echo $v ?></option>
-            <?php endforeach ?>
-          </select>
-        </div>
-      </div>
-    </div>
   </div>
 
   <input type="hidden" name="payment[cc_name][<?= $card->getEbanxCardId() ?>]" value="Ebanx Magento Plugin"/>
