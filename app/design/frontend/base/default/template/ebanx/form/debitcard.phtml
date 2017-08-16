@@ -72,7 +72,12 @@
             </div>
         </div>
     </li>
-    <li><p>Total a pagar en Peso mexicano: <?php echo $this->getLocalAmount('MXN') ?></p></li>
+    <li>
+      <div class="total-to-pay">
+        <p>Total a pagar en Peso mexicano: <strong><?php echo $this->getLocalAmount('MXN') ?></strong>
+      </div>
+    </li>
+
 
     <input type="hidden" name="payment[ebanx_token]" id="<?php echo $_code ?>_token"/>
     <input type="hidden" name="payment[ebanx_brand]" id="<?php echo $_code ?>_brand"/>
