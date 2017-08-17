@@ -5,6 +5,10 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	 * @var array|Ebanx_Gateway_Model_Resource_Usercard_Collection
 	 */
 	public $usercards;
+	/**
+	 * @var Mage_Customer_Model_Session
+	 */
+	public $customer;
 
 	public function __construct(array $args = [])
 	{
@@ -21,11 +25,22 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 		];
 	}
 
+	public function getAddress()
+	{
+		$addressId = $this->customer->getDefaultShipping();
+		if (!$addressId){
+			return '';
+		}
+		$address = Mage::getModel('customer/address')->load($addressId)->getData();
+		return $address['street'];
+	}
+
 	public function canShowOneclickButton()
 	{
 		return Mage::getSingleton('customer/session')->isLoggedIn()
-			   && $this->usercards
-			   && $this->usercards->getSize();
+				&& $this->usercards
+				&& $this->usercards->getSize()
+				&& $this->getAddress();
 	}
 
 	private function initialize()
@@ -33,8 +48,8 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 		if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
 			$this->usercards = [];
 		}
-		$customerId =  Mage::getSingleton('customer/session')->getCustomer()->getId();
+		$this->customer =  Mage::getSingleton('customer/session')->getCustomer();
 
-		$this->usercards = Mage::getModel('ebanx/usercard')->getCustomerSavedCards($customerId);
+		$this->usercards = Mage::getModel('ebanx/usercard')->getCustomerSavedCards($this->customer->getId());
 	}
 }
