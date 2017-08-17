@@ -17,5 +17,9 @@
             <?php include 'fields.phtml' ?>
         </div>
     </li>
-    <li><p>Total a pagar en Peso mexicano: <?php echo $this->getLocalAmount('MXN') ?></p></li>
+    <li>
+      <div class="total-to-pay">
+        <p>Total a pagar en Peso mexicano: <strong><?php echo $this->getLocalAmount('MXN') ?></strong>
+      </div>
+    </li>
 </ul>
