@@ -130,8 +130,7 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 	public function isAvailable($quote = null)
 	{
-		return parent::isAvailable()
-		       && Mage::getStoreConfig('payment/ebanx_settings/enabled')
+		return Mage::getStoreConfig('payment/ebanx_settings/enabled')
 		       && $this->helper->areKeysFilled();
 	}
 
