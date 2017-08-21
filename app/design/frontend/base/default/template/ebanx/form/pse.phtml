@@ -25,5 +25,9 @@
             </p>
         </div>
     </li>
-    <li><p>Total a pagar en Peso colombiano: <?php echo $this->getLocalAmount('COP') ?></p></li>
+    <li>
+      <div class="total-to-pay">
+        <p>Total a pagar en Peso colombiano: <strong><?php echo $this->getLocalAmount('COP') ?></strong>
+      </div>
+    </li>
 </ul>
