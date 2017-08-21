@@ -14,13 +14,6 @@ class Ebanx_Gateway_Model_Chile_Webpay extends Ebanx_Gateway_Model_Payment
 		$this->gateway = $this->ebanx->webpay();
 	}
 
-	public function initialize($paymentAction, $stateObject)
-	{
-		$this->gateway = $this->ebanx->webpay($this->flowType);
-
-		parent::initialize($paymentAction, $stateObject);
-	}
-
 	public function isAvailable($quote = null)
 	{
 		return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_chile']));
