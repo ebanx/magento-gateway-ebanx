@@ -40,16 +40,21 @@ $icon           = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx
   <?php endif; ?>
 
   <?php include 'instalments.phtml' ?>
-  <li><p><?= $text['local-amount'] ?><span id="cc-<?= $lowerCountry ?>-local-amount"><?php echo $this->getLocalAmount($localCurrency) ?></span>
-    </p></li>
+  <li>
+    <div class="total-to-pay">
+      <p>
+        <?= $text['local-amount'] ?><span id="cc-<?= $lowerCountry ?>-local-amount"><strong><?php echo $this->getLocalAmount($localCurrency) ?></strong></span>
+      </p>
+    </div>
+    <input type="hidden" name="payment[ebanx_mode]" id="<?php echo $_code ?>_mode"
+           value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
+    <input type="hidden" name="payment[ebanx_integration_key]" id="<?php echo $_code ?>_integration_key"
+           value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
+    <input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="<?= $lowerCountry ?>"/>
+    <input type="hidden" name="payment[grand_total]" id="grand_total" value="<?php echo $this->getTotal() ?>"/>
+  </li>
 </ul>
 
-<input type="hidden" name="payment[ebanx_mode]" id="<?php echo $_code ?>_mode"
-       value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
-<input type="hidden" name="payment[ebanx_integration_key]" id="<?php echo $_code ?>_integration_key"
-       value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
-<input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="<?= $lowerCountry ?>"/>
-<input type="hidden" name="payment[grand_total]" id="grand_total" value="<?php echo $this->getTotal() ?>"/>
 
 <script>
   handleEbanxForm('<?= $lowerCountry ?>', 'cc');

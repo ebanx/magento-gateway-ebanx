@@ -17,5 +17,9 @@
             <?php include 'fields.phtml' ?>
         </div>
     </li>
-    <li><p>Total a pagar en Sol peruano: <?php echo $this->getLocalAmount('PEN') ?></p></li>
+    <li>
+      <div class="total-to-pay">
+        <p>Total a pagar en Sol peruano: <strong><?php echo $this->getLocalAmount('PEN') ?></strong>
+      </div>
+    </li>
 </ul>
