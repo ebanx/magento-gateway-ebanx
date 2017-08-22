@@ -6,7 +6,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	 */
 	public $usercards;
 	/**
-	 * @var Mage_Customer_Model_Session
+	 * @var Mage_Customer_Model_Customer
 	 */
 	public $customer;
 
@@ -40,7 +40,8 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 		return Mage::getSingleton('customer/session')->isLoggedIn()
 				&& $this->usercards
 				&& $this->usercards->getSize()
-				&& $this->getAddress();
+				&& $this->getAddress()
+				&& $this->customer->getEbanxCustomerDocument();
 	}
 
 	private function initialize()
