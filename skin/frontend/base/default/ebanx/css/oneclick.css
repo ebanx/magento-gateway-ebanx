@@ -1,5 +1,7 @@
 #ebanx-one-click-container {
   position: relative;
+  float: left;
+  width: 100%;
 }
 
 .clearfix:after {

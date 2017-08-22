@@ -4,9 +4,9 @@ $text = $this->getText();
 ?>
 <?php if ($this->canShowOneclickButton()): ?>
 <div id="ebanx-one-click-container" class="clearfix">
-  <button type="button" title="Pague com um clique" id="product-oneclick-ebanx-button" class="button btn-cart btn-ebanx">Pague com um clique</button>
+  <span id="product-oneclick-ebanx-button" class="button btn-ebanx">Pague com um clique</span>
   <div class="ebanx-one-click-tooltip" id="ebanx-one-click-tooltip">
-    <button id="ebanx-one-click-close-button"></button
+    <span id="ebanx-one-click-close-button"></span>
       <p>Endereço de entrega: </p>
       <p><strong><?= $this->getAddress() ?></strong></p>
       <br>
@@ -16,7 +16,7 @@ $text = $this->getText();
           <?php include __DIR__ . '/../../../form/card/saved-card.phtml' ?>
         <?php endforeach; ?>
         <li>
-          <button type="button" title="Pagar" id="ebanx-oneclick-pay-button" class="button btn-ebanx">Pagar</button>
+          <span id="ebanx-oneclick-pay-button" class="button btn-ebanx">Pagar</span>
         </li>
       </ul>
   </div>
