@@ -155,6 +155,13 @@
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_servipag>
+            <ebanx_multicaja>
+                <active>1</active>
+                <model>ebanx/chile_multicaja</model>
+                <title>Multicaja</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_multicaja>
             <!-- Peru -->
             <ebanx_pagoefectivo>
                 <active>1</active>
@@ -198,7 +205,7 @@
                 <enabled>1</enabled>
                 <!-- Brazil Payment Methods -->
                 <payment_methods_brazil>ebanx_cc_br,ebanx_boleto,ebanx_tef,ebanx_wallet</payment_methods_brazil>
-                <payment_methods_chile>ebanx_sencillito,ebanx_servipag</payment_methods_chile>
+                <payment_methods_chile>ebanx_sencillito,ebanx_servipag,ebanx_multicaja</payment_methods_chile>
                 <payment_methods_colombia>ebanx_baloto,ebanx_pse</payment_methods_colombia>
                 <payment_methods_peru>ebanx_pagoefectivo,ebanx_safetypay</payment_methods_peru>
                 <payment_methods_mexico>ebanx_oxxo,ebanx_cc_mx,ebanx_dc_mx</payment_methods_mexico>
