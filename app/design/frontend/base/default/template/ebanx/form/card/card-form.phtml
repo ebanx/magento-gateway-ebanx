@@ -22,7 +22,7 @@
   <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em><?= $text['duedate'] ?></label>
   <div class="input-box">
     <div class="v-fix">
-      <select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month][newcard]"
+      <select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month]"
               class="month validate-cc-exp">
         <?php
         $_ccMonths    = $this->getCcMonths();
@@ -40,7 +40,7 @@
       $_ccYears    = $this->getCcYears();
       $_ccYears[0] = $this->__('Ano');
       ?>
-      <select id="<?php echo $_code ?>_expiration_yr" name="payment[cc_exp_year][newcard]" class="year">
+      <select id="<?php echo $_code ?>_expiration_yr" name="payment[cc_exp_year]" class="year">
         <?php foreach ($_ccYears as $k => $v): ?>
           <option value="<?php echo $k ? $k : '' ?>"><?php echo $v ?></option>
         <?php endforeach ?>

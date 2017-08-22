@@ -70,8 +70,8 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 	public function persistPayment()
 	{
 		parent::persistPayment();
-
-		$last4 = substr($this->gatewayFields['ebanx_masked_card_number'], -4);
+		$selectedCard = $this->gatewayFields['selected_card'];
+		$last4 = substr($this->gatewayFields['ebanx_masked_card_number'][$selectedCard], -4);
 		$instalments = array_key_exists('instalments', $this->gatewayFields) ? $this->gatewayFields['instalments'] : 1;
 		$this->payment->setInstalments($instalments)
 			->setCcLast4($last4)
