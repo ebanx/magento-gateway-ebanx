@@ -68,16 +68,29 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
 		$this->customer = Mage::getSingleton('customer/session')->getCustomer();
 		$this->product  = Mage::getModel('catalog/product')->load($this->request['product']);
 
+		if (!$this->isCardFromCustomer()) {
+			return $this->_redirect('/');
+		}
+
 		$this->createOrder([$this->request], 'ebanx_cc_br');
 
 		return $this->_redirect('sales/order/view', ['order_id' => $this->order->getId()]);
+	}
+
+	private function isCardFromCustomer()
+	{
+		$selectedCard = $this->request['payment']['selected_card'];
+		$cardToken = $this->request['payment']['ebanx_token'][$selectedCard];
+		$customerId = $this->customer->getId();
+
+		return Mage::getModel('ebanx/usercard')->doesCardBelongsToCustomer($cardToken, $customerId);
 	}
 
 	/**
 	 * @param array  $products
 	 * @param string $paymentMethod
 	 */
-	public function createOrder($products, $paymentMethod)
+	private function createOrder($products, $paymentMethod)
 	{
 		$this->transaction = Mage::getModel('core/resource_transaction');
 		$this->storeId     = $this->customer->getStoreId();
@@ -183,7 +196,7 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
 		$this->transaction->save();
 	}
 
-	protected function addProduct($requestData)
+	private function addProduct($requestData)
 	{
 		$request = new Varien_Object();
 		$request->setData($requestData);
@@ -242,7 +255,7 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
 		return $items;
 	}
 
-	function productToOrderItem(Mage_Catalog_Model_Product $product, $qty = 1)
+	private function productToOrderItem(Mage_Catalog_Model_Product $product, $qty = 1)
 	{
 		$rowTotal = $product->getFinalPrice() * $qty;
 
