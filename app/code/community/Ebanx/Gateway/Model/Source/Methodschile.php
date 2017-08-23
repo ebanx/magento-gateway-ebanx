@@ -4,7 +4,6 @@ class Ebanx_Gateway_Model_Source_Methodschile
 {
 	const SENCILLITO = 'ebanx_sencillito';
 	const SERVIPAG = 'ebanx_servipag';
-	const WEBPAY = 'ebanx_webpay';
 
 	public function toOptionArray()
 	{
@@ -16,10 +15,6 @@ class Ebanx_Gateway_Model_Source_Methodschile
 			array(
 				'value' => self::SERVIPAG,
 				'label' => Mage::helper('ebanx')->__('Servipag')
-			),
-			array(
-				'value' => self::WEBPAY,
-				'label' => Mage::helper('ebanx')->__('Webpay')
 			),
 		);
 	}
