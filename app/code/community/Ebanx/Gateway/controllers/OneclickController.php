@@ -72,7 +72,7 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
 			return $this->_redirect('/');
 		}
 
-		$this->createOrder([$this->request], 'ebanx_cc_br');
+		$this->createOrder([$this->request], $this->getPaymentMethod());
 
 		return $this->_redirect('sales/order/view', ['order_id' => $this->order->getId()]);
 	}
@@ -80,10 +80,18 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
 	private function isCardFromCustomer()
 	{
 		$selectedCard = $this->request['payment']['selected_card'];
-		$cardToken = $this->request['payment']['ebanx_token'][$selectedCard];
-		$customerId = $this->customer->getId();
+		$cardToken    = $this->request['payment']['ebanx_token'][$selectedCard];
+		$customerId   = $this->customer->getId();
 
 		return Mage::getModel('ebanx/usercard')->doesCardBelongsToCustomer($cardToken, $customerId);
+	}
+
+	private function getPaymentMethod()
+	{
+		$selectedCard = $this->request['payment']['selected_card'];
+		$cardToken    = $this->request['payment']['ebanx_token'][$selectedCard];
+
+		return Mage::getModel('ebanx/usercard')->getPaymentMethodByToken($cardToken);
 	}
 
 	/**

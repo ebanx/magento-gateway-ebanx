@@ -1,4 +1,5 @@
 <?php
+
 class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_Template
 {
 	/**
@@ -20,28 +21,30 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	{
 		return [
 			'local-amount' => 'Total a pagar com IOF (0.38%): ',
-			'cvv' => 'Código de segurança',
-			'instalments' => 'Número de parcelas',
+			'cvv'          => 'Código de segurança',
+			'instalments'  => 'Número de parcelas',
 		];
 	}
 
 	public function getAddress()
 	{
 		$addressId = $this->customer->getDefaultShipping();
-		if (!$addressId){
+		if (!$addressId) {
 			return '';
 		}
 		$address = Mage::getModel('customer/address')->load($addressId)->getData();
-		return $address['street'];
+
+		return $address;
 	}
 
 	public function canShowOneclickButton()
 	{
 		return Mage::getSingleton('customer/session')->isLoggedIn()
-				&& $this->usercards
-				&& $this->usercards->getSize()
-				&& $this->getAddress()
-				&& $this->customer->getEbanxCustomerDocument();
+			   && $this->usercards
+			   && $this->usercards->getSize()
+			   && $this->getAddress()['street']
+			   && ($this->customer->getEbanxCustomerDocument()
+				   || $this->getAddress()['country_id'] === 'MX');
 	}
 
 	private function initialize()
@@ -49,7 +52,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 		if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
 			$this->usercards = [];
 		}
-		$this->customer =  Mage::getSingleton('customer/session')->getCustomer();
+		$this->customer = Mage::getSingleton('customer/session')->getCustomer();
 
 		$this->usercards = Mage::getModel('ebanx/usercard')->getCustomerSavedCards($this->customer->getId());
 	}
