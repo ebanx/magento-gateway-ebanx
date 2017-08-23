@@ -14,7 +14,7 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
 	 * Remove the cards from array cards
 	 *
 	 * @param array $cards
-	 * @param int $userId
+	 * @param int   $userId
 	 * @return Varien_Object
 	 */
 	public function removeCardsFromUser($cards, $userId)
@@ -29,7 +29,7 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
 	/**
 	 * Returns the registry by user id and masked number
 	 *
-	 * @param int $userId
+	 * @param int    $userId
 	 * @param string $maskedNumber
 	 * @return Varien_Object
 	 */
@@ -42,7 +42,7 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
 	 * Returns if a Card is already saved for the customer
 	 *
 	 * @param string $maskedNumber
-	 * @param int $userId
+	 * @param int    $userId
 	 * @return bool
 	 */
 	public function isCardAlreadySavedForCustomer($maskedNumber, $userId)
@@ -54,7 +54,7 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
 	 * Returns if the Card belongs to the customer
 	 *
 	 * @param string $token
-	 * @param int $userId
+	 * @param int    $userId
 	 * @return bool
 	 */
 	public function doesCardBelongsToCustomer($token, $userId)
@@ -65,13 +65,21 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
 	public function getCustomerSavedCards($userId)
 	{
 		return $this->getCollection()
-			->addFieldToFilter('user_id', $userId);
+					->addFieldToFilter('user_id', $userId);
+	}
+
+	public function getPaymentMethodByToken($token)
+	{
+		$collection = $this->getCollection()
+						   ->addFieldToFilter('token', $token);
+
+		return $collection->getFirstItem()->getPaymentMethod();
 	}
 
 	/**
 	 * Returns a collection by customer ID and Masked Number
 	 *
-	 * @param int $userId
+	 * @param int    $userId
 	 * @param string $maskedNumber
 	 * @return Ebanx_Gateway_Model_Resource_Usercard_Collection
 	 */
@@ -85,7 +93,7 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
 	/**
 	 * Returns a collection by customer ID and Card ID
 	 *
-	 * @param int $userId
+	 * @param int   $userId
 	 * @param array $cardId
 	 * @return Ebanx_Gateway_Model_Resource_Usercard_Collection
 	 */
@@ -99,7 +107,7 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
 	/**
 	 * Returns a collection by customer ID and Token
 	 *
-	 * @param int $userId
+	 * @param int    $userId
 	 * @param string $token
 	 * @return Ebanx_Gateway_Model_Resource_Usercard_Collection
 	 */
