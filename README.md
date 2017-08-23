@@ -41,8 +41,8 @@ If you have getting trouble to set up Docker, make sure you've changed the exter
 - [X] Checkout Manager and Compliance Fields
 - [X] Debug Log
 - [X] Sandbox mode
-- [ ] Save credit card data
-- [ ] One Click Payment
+- [X] Save credit card data
+- [X] One Click Payment
 - [X] Instalments
 - [X] Minimum Instalment Values
 - [X] Interest Rates
