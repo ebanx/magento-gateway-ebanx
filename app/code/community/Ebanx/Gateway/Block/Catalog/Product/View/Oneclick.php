@@ -44,7 +44,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 			   && $this->usercards->getSize()
 			   && $this->getAddress()['street']
 			   && ($this->customer->getEbanxCustomerDocument()
-				   || $this->getAddress()['country_id'] === 'MX');
+				   || $this->getCountry() === 'MX');
 	}
 
 	private function initialize()
@@ -55,5 +55,60 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 		$this->customer = Mage::getSingleton('customer/session')->getCustomer();
 
 		$this->usercards = Mage::getModel('ebanx/usercard')->getCustomerSavedCards($this->customer->getId());
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getCountry()
+	{
+		return $this->getAddress()['country_id'];
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLocalCurrency()
+	{
+		return $this->getAddress()['country_id'] === 'MX' ? 'MXN' : 'BRL';
+	}
+
+	public function getLocalAmount($currency, $formatted = true)
+	{
+		$amount = round(Mage::helper('ebanx')->getLocalAmountWithTax($currency, $this->getTotal()), 2);
+
+		return $formatted ? $this->formatPriceWithLocalCurrency($currency, $amount) : $amount;
+	}
+
+	private function formatPriceWithLocalCurrency($currency, $price)
+	{
+		return Mage::app()->getLocale()->currency($currency)->toCurrency($price);
+	}
+
+	public function getTotal()
+	{
+		return Mage::registry('current_product')->getPrice();
+	}
+
+	public function getInstalmentTerms()
+	{
+		return $this->getMethod()->getInstalmentTerms($this->getTotal());
+	}
+
+	/**
+	 * @return Ebanx_Gateway_Model_Payment_Creditcard
+	 */
+	private function getMethod()
+	{
+		return $this->getAddress()['country_id'] === 'MX' ? new Ebanx_Gateway_Model_Mexico_Creditcard() : new Ebanx_Gateway_Model_Brazil_Creditcard();
+	}
+
+	public function formatInstalment($instalment)
+	{
+		$amount = Mage::helper('core')->formatPrice($instalment->baseAmount, false);
+		$instalmentNumber = $instalment->instalmentNumber;
+		$interestMessage = $this->getInterestMessage($instalment->hasInterests);
+		$message = sprintf('%sx de %s %s', $instalmentNumber, $amount, $interestMessage);
+		return $message;
 	}
 }
