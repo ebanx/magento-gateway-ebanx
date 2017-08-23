@@ -75,7 +75,7 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Mode
 		$instalments = array_key_exists('instalments', $this->gatewayFields) ? $this->gatewayFields['instalments'] : 1;
 		$this->payment->setInstalments($instalments)
 			->setCcLast4($last4)
-			->setCcType($this->gatewayFields['ebanx_brand']);
+			->setCcType($this->gatewayFields['ebanx_brand'][$selectedCard]);
 
 		$this->persistCreditCardData();
 	}
