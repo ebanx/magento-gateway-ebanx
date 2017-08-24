@@ -30,7 +30,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	{
 		$addressId = $this->customer->getDefaultShipping();
 		if (!$addressId) {
-			return '';
+			return [];
 		}
 		$address = Mage::getModel('customer/address')->load($addressId)->getData();
 
@@ -62,7 +62,12 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	 */
 	private function getCountry()
 	{
-		return $this->getAddress()['country_id'];
+		$address = $this->getAddress();
+		if (!array_key_exists('country_id', $address)) {
+			return '';
+		}
+
+		return $address['country_id'];
 	}
 
 	/**
@@ -70,7 +75,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	 */
 	public function getLocalCurrency()
 	{
-		return $this->getAddress()['country_id'] === 'MX' ? 'MXN' : 'BRL';
+		return $this->getCountry() === 'MX' ? 'MXN' : 'BRL';
 	}
 
 	public function getLocalAmount($currency, $formatted = true)
@@ -100,15 +105,16 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	 */
 	private function getMethod()
 	{
-		return $this->getAddress()['country_id'] === 'MX' ? new Ebanx_Gateway_Model_Mexico_Creditcard() : new Ebanx_Gateway_Model_Brazil_Creditcard();
+		return $this->getCountry() === 'MX' ? new Ebanx_Gateway_Model_Mexico_Creditcard() : new Ebanx_Gateway_Model_Brazil_Creditcard();
 	}
 
 	public function formatInstalment($instalment)
 	{
-		$amount = Mage::helper('core')->formatPrice($instalment->baseAmount, false);
+		$amount           = Mage::helper('core')->formatPrice($instalment->baseAmount, false);
 		$instalmentNumber = $instalment->instalmentNumber;
-		$interestMessage = $this->getInterestMessage($instalment->hasInterests);
-		$message = sprintf('%sx de %s %s', $instalmentNumber, $amount, $interestMessage);
+		$interestMessage  = $this->getInterestMessage($instalment->hasInterests);
+		$message          = sprintf('%sx de %s %s', $instalmentNumber, $amount, $interestMessage);
+
 		return $message;
 	}
 }
