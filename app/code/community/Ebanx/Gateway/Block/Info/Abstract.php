@@ -18,4 +18,8 @@ abstract class Ebanx_Gateway_Block_Info_Abstract extends Mage_Payment_Block_Info
 
 		return $formatted ? $this->formatPriceWithLocalCurrency($currency, $amount) : $amount;
 	}
+
+	public function getLocalAmountWithoutTax($currency, $formatted = true){
+		return $formatted ? $this->formatPriceWithLocalCurrency($currency, $this->getTotal()) : $this->getTotal();
+	}
 }
