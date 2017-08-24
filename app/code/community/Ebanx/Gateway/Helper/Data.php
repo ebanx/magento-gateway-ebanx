@@ -111,6 +111,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			// Chile
 			'ebanx_sencillito' => ['rut_field'],
 			'ebanx_servipag' => ['rut_field'],
+			'ebanx_webpay' => ['rut_field'],
+			'ebanx_multicaja' => ['rut_field'],
 			// Colombia
 			'ebanx_baloto' => ['dni_field'],
 			'ebanx_pse' => ['dni_field'],
