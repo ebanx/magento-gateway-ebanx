@@ -144,6 +144,9 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 	public function getTotal()
 	{
 		$quote = $this->getInfoInstance()->getQuote();
+		if (!$quote) {
+			return $this->getInfoInstance()->getOrder()->getPayment()->getEbanxLocalAmount();
+		}
 		return $quote->getGrandTotal();
 	}
 }
