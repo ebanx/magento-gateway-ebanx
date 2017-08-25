@@ -42,9 +42,9 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
 		return $formatted ? $this->formatPriceWithLocalCurrency($currency, $amount) : $amount;
 	}
 
-	public function formatInstalment($instalment)
+	public function formatInstalment($instalment, $localCurrency)
 	{
-		$amount = Mage::helper('core')->formatPrice($instalment->baseAmount, false);
+		$amount = Mage::app()->getLocale()->currency($localCurrency)->toCurrency($instalment->localAmountWithTax);
 		$instalmentNumber = $instalment->instalmentNumber;
 		$interestMessage = $this->getInterestMessage($instalment->hasInterests);
 		$message = sprintf('%sx de %s %s', $instalmentNumber, $amount, $interestMessage);
