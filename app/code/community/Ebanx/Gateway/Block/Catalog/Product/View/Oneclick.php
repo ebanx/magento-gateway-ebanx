@@ -40,6 +40,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	public function canShowOneclickButton()
 	{
 		return Mage::getSingleton('customer/session')->isLoggedIn()
+		       && Mage::getStoreConfig('payment/ebanx_settings/one_click_payment')
 			   && $this->usercards
 			   && $this->usercards->getSize()
 			   && $this->getAddress()['street']
