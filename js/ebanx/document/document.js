@@ -40,7 +40,7 @@ var changeTaxVatLabel = function () {
     }
 
   if (country === 'BR' && taxVatInput) {
-    var taxVatMask = newLabel.indexOf('CNPJ') !== -1 ? ['999.999.999-999', '99.999.999/9999-99'] : ['999.999.999-999', '999.999.999-999'];
+    var taxVatMask = newLabel.indexOf('CNPJ') !== -1 ? ['999.999.999-99', '99.999.999/9999-99'] : ['999.999.999-99', '999.999.999-99'];
     VMasker(taxVatInput).maskPattern(taxVatMask[0]);
     taxVatInput.addEventListener('input', inputHandler.bind(undefined, taxVatMask, 14), false);
   }
