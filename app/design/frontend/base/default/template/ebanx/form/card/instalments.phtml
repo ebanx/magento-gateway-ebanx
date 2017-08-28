@@ -11,7 +11,7 @@
             value="<?php echo $_instalmentTerm->instalmentNumber ?>"
             data-local-amount="<?php echo Mage::app()->getLocale()->currency($localCurrency)->toCurrency($_instalmentTerm->localAmountWithTax * $_instalmentTerm->instalmentNumber) ?>"
           >
-            <?php echo $this->formatInstalment($_instalmentTerm); ?>
+            <?php echo $this->formatInstalment($_instalmentTerm, $localCurrency); ?>
           </option>
         <?php endforeach ?>
       </select>

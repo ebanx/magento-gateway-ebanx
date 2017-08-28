@@ -108,9 +108,9 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 		return $this->getCountry() === 'MX' ? new Ebanx_Gateway_Model_Mexico_Creditcard() : new Ebanx_Gateway_Model_Brazil_Creditcard();
 	}
 
-	public function formatInstalment($instalment)
+	public function formatInstalment($instalment, $localCurrency)
 	{
-		$amount           = Mage::helper('core')->formatPrice($instalment->baseAmount, false);
+		$amount           = Mage::app()->getLocale()->currency($localCurrency)->toCurrency($instalment->localAmountWithTax);
 		$instalmentNumber = $instalment->instalmentNumber;
 		$interestMessage  = $this->getInterestMessage($instalment->hasInterests);
 		$message          = sprintf('%sx de %s %s', $instalmentNumber, $amount, $interestMessage);
