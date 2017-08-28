@@ -21,8 +21,9 @@
                 <type>skin_js</type>
                 <name>ebanx/js/checkout.js</name>
             </action>
-            <action method="addJs">
-                <script>ebanx/document/document.js</script>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/document.js</name>
             </action>
             <action method="addJs">
                 <script>ebanx/vanilla-masker/vanilla-masker.min.js</script>
