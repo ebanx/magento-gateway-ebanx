@@ -219,7 +219,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </save_card_data>
-                        <!--<one_click_payment translate="label">
+                        <one_click_payment translate="label">
                             <label>One-Click Payment</label>
                             <comment>Allow your customer to complete payments in one-click using credit cards saved.
                             </comment>
