@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Model_Brazil_Boleto extends Ebanx_Gateway_Model_Payment
+class Ebanx_Gateway_Model_Brazil_Boleto extends Ebanx_Gateway_Payment
 {
 	protected $_code = 'ebanx_boleto';
 
