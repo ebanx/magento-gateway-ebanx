@@ -38,24 +38,27 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 	{
 		$this->helper = Mage::helper('ebanx/order');
 		$this->validateEbanxPaymentRequest();
-		$this->hash = $this->getRequest()->getParam('hash');
+		$this->hash = $this->getRequest()->getParam('hash_codes');
 		$this->loadOrder();
 	}
 
 	private function validateEbanxPaymentRequest()
 	{
 		$request = $this->getRequest();
+		$operation = $request->getParam('operation');
+		$notification_type = $request->getParam('notification_type');
+		$hash_codes = $request->getParam('hash_codes');
 
-		if (empty($request->getParam('hash'))) {
+		if (empty($operation) && $operation === 'payment_status_change') {
+			throw new Ebanx_Gateway_Exception($this->helper->__('EBANX: Invalid operation parameter.'));
+		}
+
+		if (empty($notification_type)) {
+			throw new Ebanx_Gateway_Exception($this->helper->__('EBANX: Invalid notification type parameter.'));
+		}
+
+		if (empty($hash_codes)) {
 			throw new Ebanx_Gateway_Exception($this->helper->__('EBANX: Invalid hash parameter.'));
-		}
-
-		if (empty($request->getParam('merchant_payment_code'))) {
-			throw new Ebanx_Gateway_Exception($this->helper->__('EBANX: Invalid merchant code parameter.'));
-		}
-
-		if (empty($request->getParam('payment_type_code'))) {
-			throw new Ebanx_Gateway_Exception($this->helper->__('EBANX: Invalid payment code parameter.'));
 		}
 	}
 
