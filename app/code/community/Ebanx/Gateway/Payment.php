@@ -1,6 +1,6 @@
 <?php
 
-abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abstract
+abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 {
 	static protected $redirect_url;
 
