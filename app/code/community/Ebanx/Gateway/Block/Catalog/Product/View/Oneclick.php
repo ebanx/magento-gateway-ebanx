@@ -19,11 +19,21 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 
 	public function getText()
 	{
-		return [
-			'local-amount' => 'Total a pagar com IOF (0.38%): ',
-			'cvv'          => 'Código de segurança',
+		$country = $this->getCountry();
+		$text = [
+			'local-amount' => 'Total a pagar en Peso mexicano: ',
+			'cvv'          => 'Código de verificación',
 			'instalments'  => 'Número de parcelas',
 		];
+		switch ($country) {
+			case 'BR':
+				$text['local-amount'] = 'Total a pagar com IOF (0.38%): ';
+				$text['cvv'] = 'Código de segurança';
+				break;
+			case 'MX':
+				break;
+		}
+		return $text;
 	}
 
 	public function getAddress()
@@ -40,6 +50,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	public function canShowOneclickButton()
 	{
 		return Mage::getSingleton('customer/session')->isLoggedIn()
+		       && Mage::getStoreConfig('payment/ebanx_settings/one_click_payment')
 			   && $this->usercards
 			   && $this->usercards->getSize()
 			   && $this->getAddress()['street']
@@ -108,9 +119,9 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 		return $this->getCountry() === 'MX' ? new Ebanx_Gateway_Model_Mexico_Creditcard() : new Ebanx_Gateway_Model_Brazil_Creditcard();
 	}
 
-	public function formatInstalment($instalment)
+	public function formatInstalment($instalment, $localCurrency)
 	{
-		$amount           = Mage::helper('core')->formatPrice($instalment->baseAmount, false);
+		$amount           = Mage::app()->getLocale()->currency($localCurrency)->toCurrency($instalment->localAmountWithTax);
 		$instalmentNumber = $instalment->instalmentNumber;
 		$interestMessage  = $this->getInterestMessage($instalment->hasInterests);
 		$message          = sprintf('%sx de %s %s', $instalmentNumber, $amount, $interestMessage);
