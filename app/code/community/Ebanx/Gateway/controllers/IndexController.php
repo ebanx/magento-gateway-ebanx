@@ -49,7 +49,7 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 		$notification_type = $request->getParam('notification_type');
 		$hash_codes = $request->getParam('hash_codes');
 
-		if (empty($operation) && $operation === 'payment_status_change') {
+		if (empty($operation)) {
 			throw new Ebanx_Gateway_Exception($this->helper->__('EBANX: Invalid operation parameter.'));
 		}
 
