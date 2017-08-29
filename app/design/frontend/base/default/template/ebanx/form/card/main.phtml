@@ -14,9 +14,13 @@ $icon           = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx
 
   <?= $showInlineIcon ? null : $icon ?>
 
-  <p class="ebanx-payment-method-desc"><?= $text['method-desc'] ?></p>
+  <li>
+    <p class="ebanx-payment-method-desc"><?= $text['method-desc'] ?></p>
+  </li>
 
-  <?php include __DIR__ . '/../fields.phtml' ?>
+  <li>
+    <?php include __DIR__ . '/../fields.phtml' ?>
+  </li>
 
   <?php
   $savedCards = $this->getSavedCards();

@@ -109,3 +109,11 @@
   background-image: url(/skin/frontend/base/default/ebanx/ebanx-pagando.png);
 }
 
+.ebanx-payment-method__block {
+  display: block;
+  width: 100%;
+}
+
+.total-to-pay {
+  padding: 10px 0;
+}

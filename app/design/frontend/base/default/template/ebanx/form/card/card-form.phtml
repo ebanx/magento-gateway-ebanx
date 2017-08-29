@@ -2,7 +2,7 @@
   <input type="hidden" name="payment[cc_name][newcard]" id="<?php echo $_code ?>_cc_name" value="Ebanx Magento Plugin"/>
 <?php else: ?>
   <div>
-    <label for="<?php echo $_code ?>_cc_name" class="required"><em>*</em><?= $text['name'] ?></label>
+    <label for="<?php echo $_code ?>_cc_name" class="required ebanx-payment-method__block"><em>*</em><?= $text['name'] ?></label>
     <div class="input-box">
       <input type="text" id="<?php echo $_code ?>_cc_name"
              title="<?php echo Mage::helper('core')->jsQuoteEscape('Número do Cartão') ?>"
@@ -11,7 +11,7 @@
   </div>
 <?php endif; ?>
 <div>
-  <label for="<?php echo $_code ?>_cc_number" class="required"><em>*</em><?= $text['card-number'] ?></label>
+  <label for="<?php echo $_code ?>_cc_number" class="required ebanx-payment-method__block"><em>*</em><?= $text['card-number'] ?></label>
   <div class="input-box">
     <input type="text" id="<?php echo $_code ?>_cc_number"
            title="<?php echo Mage::helper('core')->jsQuoteEscape('Número do Cartão') ?>"
@@ -19,7 +19,7 @@
   </div>
 </div>
 <div id="<?php echo $_code ?>_cc_type_exp_div">
-  <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em><?= $text['duedate'] ?></label>
+  <label for="<?php echo $_code ?>_expiration" class="required ebanx-payment-method__block"><em>*</em><?= $text['duedate'] ?></label>
   <div class="input-box">
     <div class="v-fix">
       <select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month]"
@@ -50,7 +50,7 @@
 </div>
 <?php echo $this->getChildHtml() ?>
 <div id="<?php echo $_code ?>_cc_type_cvv_div">
-  <label for="<?php echo $_code ?>_cc_cid" class="required"><em>*</em><?= $text['cvv'] ?></label>
+  <label for="<?php echo $_code ?>_cc_cid" class="required ebanx-payment-method__block"><em>*</em><?= $text['cvv'] ?></label>
   <div class="input-box">
     <div class="v-fix">
       <input type="text" title="<?php echo Mage::helper('core')->jsQuoteEscape('Código de segurança') ?>"
