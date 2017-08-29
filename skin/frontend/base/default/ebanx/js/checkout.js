@@ -63,7 +63,7 @@ function handleEbanxForm(countryCode, paymentType) {
       ebanxDeviceFingerprint.value = responseData.deviceId;
 
       var placeOrderButton = document.querySelector('#review-buttons-container > button');
-      if (typeof placeOrderButton !== 'undefined') {
+      if (typeof placeOrderButton !== 'undefined' && placeOrderButton) {
         placeOrderButton.disabled = false;
       }
       return;
