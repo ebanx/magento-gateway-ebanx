@@ -19,11 +19,21 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 
 	public function getText()
 	{
-		return [
-			'local-amount' => 'Total a pagar com IOF (0.38%): ',
-			'cvv'          => 'Código de segurança',
+		$country = $this->getCountry();
+		$text = [
+			'local-amount' => 'Total a pagar en Peso mexicano: ',
+			'cvv'          => 'Código de verificación',
 			'instalments'  => 'Número de parcelas',
 		];
+		switch ($country) {
+			case 'BR':
+				$text['local-amount'] = 'Total a pagar com IOF (0.38%): ';
+				$text['cvv'] = 'Código de segurança';
+				break;
+			case 'MX':
+				break;
+		}
+		return $text;
 	}
 
 	public function getAddress()
