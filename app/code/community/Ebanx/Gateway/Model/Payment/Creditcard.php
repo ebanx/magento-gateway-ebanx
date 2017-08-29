@@ -1,6 +1,6 @@
 <?php
 
-abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Model_Payment
+abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Payment
 {
 	protected $_canSaveCc = false;
 	private $gatewayFields;
