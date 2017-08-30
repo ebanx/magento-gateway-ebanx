@@ -37,10 +37,12 @@ $icon           = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx
     </li>
 
   <?php else: ?>
-    <input id="card[newcard]" type="hidden" name="payment[selected_card]" value="newcard"/>
-    <div>
-      <?php include 'card-form.phtml' ?>
-    </div>
+    <li>
+      <input id="card[newcard]" type="hidden" name="payment[selected_card]" value="newcard"/>
+      <div>
+        <?php include 'card-form.phtml' ?>
+      </div>
+    </li>
   <?php endif; ?>
 
   <?php include 'instalments.phtml' ?>

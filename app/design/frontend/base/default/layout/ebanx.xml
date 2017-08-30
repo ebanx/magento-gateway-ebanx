@@ -71,7 +71,7 @@
     </firecheckout_index_index>
 
 
-    <!-- Succes Page -->
+    <!-- Success Page -->
     <ebanx_checkout_success_handle>
         <reference name="head">
             <action method="addCss">
