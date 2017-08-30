@@ -109,6 +109,12 @@
   background-image: url(/skin/frontend/base/default/ebanx/ebanx-pagando.png);
 }
 
+.ebanx-credit-card-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .ebanx-payment-method__block {
   display: block;
   width: 100%;
