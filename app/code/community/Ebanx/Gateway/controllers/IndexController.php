@@ -23,6 +23,13 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 			$statusEbanx = $this->loadEbanxPaymentStatus();
 			$this->updateOrder($statusEbanx);
 
+			if (Mage::helper('ebanx')->isEbanxMethod($this->_getPaymentMethod($this->order))
+			    && Mage::getStoreConfig('payment/ebanx_settings/create_invoice')
+			    && strtoupper($statusEbanx) === 'CO'
+			    && $this->order->canInvoice()) {
+				$this->createInvoice();
+			}
+
 			$this->setResponseToJson([
 				'success' => true,
 				'order' => $this->order->getIncrementId()
@@ -68,6 +75,11 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 		$this->order = $order;
 	}
 
+	private function _getPaymentMethod($order)
+	{
+		return $order->getPayment()->getMethodInstance()->getCode();
+	}
+
 	private function setResponseToJson($data)
 	{
 		$this->getResponse()->clearHeaders()->setHeader(
@@ -104,5 +116,16 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 		$this->order->setData('status', $statusMagento);
 		$this->order->addStatusHistoryComment($this->helper->__('EBANX: The payment has been updated to: %s.', $this->helper->getTranslatedOrderStatus($statusEbanx)));
 		$this->order->save();
+	}
+
+	private function createInvoice() {
+
+		$invoice = $this->order->prepareInvoice();
+
+		$invoice->register();
+		Mage::getModel('core/resource_transaction')
+		    ->addObject($invoice)
+		    ->addObject($invoice->getOrder())
+		    ->save();
 	}
 }

@@ -93,6 +93,18 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </debug_log>
+
+                        <create_invoice translate="label">
+                            <label>Create invoices</label>
+                            <comment>Create an invoice when payment is confirmed</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </create_invoice>
+
                         <brazil_taxes translate="label">
                             <label>Checkout for</label>
                             <comment>In order to process with the EBANX Plugin in Brazil there a few mandatory fields
