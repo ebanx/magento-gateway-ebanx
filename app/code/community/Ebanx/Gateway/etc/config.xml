@@ -222,6 +222,7 @@
                 <save_card_data>1</save_card_data>
                 <one_click_payment>1</one_click_payment>
                 <min_instalment_value>0</min_instalment_value>
+                <create_invoice>0</create_invoice>
 
                 <payment_co_status>processing</payment_co_status>
                 <payment_pe_status>holded</payment_pe_status>

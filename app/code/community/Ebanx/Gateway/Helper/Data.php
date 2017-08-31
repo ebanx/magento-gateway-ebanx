@@ -399,4 +399,25 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 	{
 		return Mage::getStoreConfig('payment/ebanx_settings/payment_methods_visualization');
 	}
+
+	public function isEbanxMethod($code) {
+		$ebanxMethods = [
+			'ebanx_cc_br',
+			'ebanx_boleto',
+			'ebanx_tef',
+			'ebanx_wallet',
+			'ebanx_sencillito',
+			'ebanx_servipag',
+			'ebanx_webpay',
+			'ebanx_multicaja',
+			'ebanx_pse',
+			'ebanx_baloto',
+			'ebanx_cc_mx',
+			'ebanx_dc_mx',
+			'ebanx_oxxo',
+			'ebanx_safetypay',
+			'ebanx_pagoefectivo'
+		];
+		return in_array($code, $ebanxMethods);
+	}
 }
