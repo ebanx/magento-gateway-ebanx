@@ -34,8 +34,12 @@ var changeTaxVatLabel = function () {
   var country = this.value;
   var newLabel = getLabelByCountry(country, defaultLabel);
 
+  OSCRequire(country);
+
+  setTimeout(function(){taxVatInput.placeholder = '';}, 10);
+
   taxVatLabel.innerHTML = newLabel;
-    if(taxVatInput) {
+  if(taxVatInput && (country === 'BR' || country === 'CO' || country === 'CL')) {
       setTimeout(function(){taxVatInput.placeholder = newLabel;}, 10)
     }
 
@@ -56,6 +60,12 @@ var init = function () {
 
     countrySelect.addEventListener('change', changeTaxVatLabel);
     countrySelect.dispatchEvent(new Event('change'));
+  }
+};
+
+var OSCRequire = function (country) {
+  if (typeof ebanxRemoveOSCRequireDocument !== 'undefined') {
+    ebanxRemoveOSCRequireDocument(country);
   }
 };
 
