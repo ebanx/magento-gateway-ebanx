@@ -122,7 +122,7 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 
 		$invoice = $this->order->prepareInvoice();
 
-		$invoice->register();
+		$invoice->register()->pay();
 		Mage::getModel('core/resource_transaction')
 		    ->addObject($invoice)
 		    ->addObject($invoice->getOrder())
