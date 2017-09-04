@@ -119,14 +119,15 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 	 * @return bool|DateTime
 	 */
 	private function transformDueDate($gatewayFields, $code) {
+		$selectedCard = $gatewayFields['selected_card'];
 		$month = 1;
-		if (array_key_exists($code . '_exp_month', $gatewayFields)) {
-			$month = $gatewayFields[$code . '_exp_month'] ?: 1;
+		if (array_key_exists($code . '_exp_month', $gatewayFields) && array_key_exists($selectedCard, $gatewayFields[$code . '_exp_month'])) {
+			$month = $gatewayFields[$code . '_exp_month'][$selectedCard] ?: 1;
 		}
 
 		$year = 2120;
-		if (array_key_exists($code . '_exp_month', $gatewayFields)) {
-			$year = $gatewayFields[$code . '_exp_year'] ?: 2120;
+		if (array_key_exists($code . '_exp_year', $gatewayFields) && array_key_exists($selectedCard, $gatewayFields[$code . '_exp_year'])) {
+			$year = $gatewayFields[$code . '_exp_year'][$selectedCard] ?: 2120;
 		}
 
 		return DateTime::createFromFormat( 'n-Y', $month . '-' . $year );
