@@ -123,3 +123,12 @@
 .total-to-pay {
   padding: 10px 0;
 }
+
+/*Classes to AMSCheckout*/
+.amscheckout input[type="text"]:hover,
+.amscheckout input[type="text"]:focus,
+.amscheckout input[type="text"]:focus:hover{
+  background-repeat: no-repeat !important;
+  background-size: auto 70% !important;
+  background-position: center right 7px !important;
+}
