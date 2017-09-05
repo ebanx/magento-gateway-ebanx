@@ -55,6 +55,10 @@ var init = function () {
   taxVatLabel = qs('label[for="billing\\:taxvat"]');
   taxVatInput = document.getElementById('billing:taxvat');
 
+  if (!taxVatLabel && typeof amsCheckoutHandler() !== 'undefined') {
+    taxVatLabel = amsCheckoutHandler();
+  }
+
   if (taxVatLabel && countrySelect) {
     defaultLabel = taxVatLabel.innerHTML;
 

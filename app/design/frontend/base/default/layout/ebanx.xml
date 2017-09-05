@@ -49,6 +49,14 @@
             </action>
         </reference>
     </ebanx_onestepcheckout_handle>
+    <ebanx_amscheckout_handle>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/amscheckout.js</name>
+            </action>
+        </reference>
+    </ebanx_amscheckout_handle>
     <checkout_onepage_index>
         <update handle="ebanx_checkout_handle"/>
     </checkout_onepage_index>
@@ -59,6 +67,10 @@
         <update handle="ebanx_checkout_handle"/>
         <update handle="ebanx_onestepcheckout_handle"/>
     </onestepcheckout_index_index>
+    <amscheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+        <update handle="ebanx_amscheckout_handle"/>
+    </amscheckout_index_index>
     <typostores_onestepcheckout_index_index>
         <update handle="ebanx_checkout_handle"/>
     </typostores_onestepcheckout_index_index>
