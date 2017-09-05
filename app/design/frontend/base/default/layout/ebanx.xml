@@ -53,7 +53,7 @@
         <reference name="head">
             <action method="addItem">
                 <type>skin_js</type>
-                <name>ebanx/js/amscheckout.js</name>
+                <name>ebanx/js/amscheckout-inputs.js</name>
             </action>
         </reference>
     </ebanx_amscheckout_handle>
