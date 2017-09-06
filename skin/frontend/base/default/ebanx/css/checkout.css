@@ -36,35 +36,35 @@
 }
 
 .ebanx-payment-method input.input-text.visa.identified {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/visa.png) !important;
+  background-image: url(/skin/frontend/base/default/ebanx/icons/visa.png);
 }
 
 .ebanx-payment-method input.input-text.mastercard.identified {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/mastercard.png) !important;
+  background-image: url(/skin/frontend/base/default/ebanx/icons/mastercard.png);
 }
 
 .ebanx-payment-method input.input-text.amex.identified {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/amex.png) !important;
+  background-image: url(/skin/frontend/base/default/ebanx/icons/amex.png);
 }
 
 .ebanx-payment-method input.input-text.discover.identified {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/discover.png) !important;
+  background-image: url(/skin/frontend/base/default/ebanx/icons/discover.png);
 }
 
 .ebanx-payment-method input.input-text.dinersclub.identified {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/dinersclub.png) !important;
+  background-image: url(/skin/frontend/base/default/ebanx/icons/dinersclub.png);
 }
 
 .ebanx-payment-method input.input-text.maestro.identified {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/maestro.png) !important;
+  background-image: url(/skin/frontend/base/default/ebanx/icons/maestro.png);
 }
 
 .ebanx-payment-method input.input-text.elo.identified {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/elo.png) !important;
+  background-image: url(/skin/frontend/base/default/ebanx/icons/elo.png);
 }
 
 .ebanx-payment-method input.input-text.unknown {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/unknown.png) !important;
+  background-image: url(/skin/frontend/base/default/ebanx/icons/unknown.png);
 }
 
 .ebanx-payment-method {
@@ -99,14 +99,14 @@
   width: 168px;
   height: 22px;
 
-  background-image: url(/skin/frontend/base/default/ebanx/ebanx-estas-pagando.png) !important;
+  background-image: url(/skin/frontend/base/default/ebanx/ebanx-estas-pagando.png);
 }
 
 .ebanx-payment-method.ebanx-br-method:after {
   width: 136px;
   height: 22px;
 
-  background-image: url(/skin/frontend/base/default/ebanx/ebanx-pagando.png) !important;
+  background-image: url(/skin/frontend/base/default/ebanx/ebanx-pagando.png);
 }
 
 .ebanx-credit-card-row:after {
@@ -124,11 +124,3 @@
   padding: 10px 0;
 }
 
-/*Classes to AMSCheckout*/
-.amscheckout input[type="text"]:hover,
-.amscheckout input[type="text"]:focus,
-.amscheckout input[type="text"]:focus:hover{
-  background-repeat: no-repeat !important;
-  background-size: auto 70% !important;
-  background-position: center right 7px !important;
-}

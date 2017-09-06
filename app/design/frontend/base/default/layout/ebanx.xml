@@ -55,6 +55,9 @@
                 <type>skin_js</type>
                 <name>ebanx/js/amscheckout-inputs.js</name>
             </action>
+            <action method="addCss">
+                <stylesheet>ebanx/css/amscheckout.css</stylesheet>
+            </action>
         </reference>
     </ebanx_amscheckout_handle>
     <checkout_onepage_index>
