@@ -11,7 +11,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	 */
 	public $customer;
 
-	public function __construct(array $args = [])
+	public function __construct(array $args = array())
 	{
 		parent::__construct($args);
 		$this->initialize();
@@ -20,11 +20,11 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	public function getText()
 	{
 		$country = $this->getCountry();
-		$text = [
+		$text = array(
 			'local-amount' => 'Total a pagar en Peso mexicano: ',
 			'cvv'          => 'Código de verificación',
 			'instalments'  => 'Número de parcelas',
-		];
+		);
 		switch ($country) {
 			case 'BR':
 				$text['local-amount'] = 'Total a pagar com IOF (0.38%): ';
@@ -40,7 +40,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	{
 		$addressId = $this->customer->getDefaultShipping();
 		if (!$addressId) {
-			return [];
+			return array();
 		}
 		$address = Mage::getModel('customer/address')->load($addressId)->getData();
 
@@ -61,7 +61,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	private function initialize()
 	{
 		if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
-			$this->usercards = [];
+			$this->usercards = array();
 		}
 		$this->customer = Mage::getSingleton('customer/session')->getCustomer();
 

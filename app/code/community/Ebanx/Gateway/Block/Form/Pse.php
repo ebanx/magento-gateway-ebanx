@@ -4,7 +4,7 @@ class Ebanx_Gateway_Block_Form_Pse extends Ebanx_Gateway_Block_Form_Abstract
 {
 	public function getBanksList()
 	{
-		return [
+		return array(
 			'banco_agrario' => 'Banco Agrario',
 			'banco_av_villas' => 'Banco AV Villas',
 			'banco_bbva_colombia_s.a.' => 'Banco BBVA Colombia',
@@ -24,7 +24,7 @@ class Ebanx_Gateway_Block_Form_Pse extends Ebanx_Gateway_Block_Form_Abstract
 			'bancoomeva_s.a.' => 'Bancoomeva',
 			'citibank_' => 'Citibank',
 			'helm_bank_s.a.' => 'Helm Bank'
-		];
+		);
 	}
 
 	protected function _construct()

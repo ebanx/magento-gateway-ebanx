@@ -11,7 +11,7 @@ class Ebanx_Gateway_Model_Source_Customerfields
 	{
 		$type = Mage::getSingleton('eav/config')->getEntityType($entity);
 		$attributes = Mage::getResourceModel('eav/entity_attribute_collection')->setEntityTypeFilter($type->getId())->getItems();
-		$data = [];
+		$data = array();
 
 		foreach ($attributes as $attribute) {
 			if ($attribute->getIsVisible() && $attribute->getAttributeCode() !== '') {

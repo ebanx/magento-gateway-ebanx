@@ -24,7 +24,7 @@ class Ebanx_Gateway_Block_Form_Creditcard_Br extends Ebanx_Gateway_Block_Form_Cr
 
 	public function getText()
 	{
-		return [
+		return array(
 			'method-desc' => 'Pagar com Cartão de Crédito.',
 			'newcard' => 'Novo cartão',
 			'local-amount' => 'Total a pagar com IOF (0.38%): ',
@@ -34,6 +34,6 @@ class Ebanx_Gateway_Block_Form_Creditcard_Br extends Ebanx_Gateway_Block_Form_Cr
 			'save' => 'Salvar este cartão para compras futuras',
 			'instalments' => 'Número de parcelas',
 			'name' => '',
-		];
+		);
 	}
 }

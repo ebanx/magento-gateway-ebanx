@@ -13,10 +13,10 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 		} catch (Ebanx_Gateway_Exception $e) {
 			$this->helper->errorLog($e->getMessage());
 
-			return $this->setResponseToJson([
+			return $this->setResponseToJson(array(
 				'success' => false,
 				'message' => $e->getMessage()
-			]);
+			));
 		}
 
 		try {
@@ -30,10 +30,10 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 				$this->createInvoice();
 			}
 
-			$this->setResponseToJson([
+			$this->setResponseToJson(array(
 				'success' => true,
 				'order' => $this->order->getIncrementId()
-			]);
+			));
 		} catch (Exception $e) {
 			$this->order->addStatusHistoryComment($this->helper->__('EBANX: We could not update the order status. Error message: %s.', $e->getMessage()));
 			$this->helper->errorLog($e->getMessage());
