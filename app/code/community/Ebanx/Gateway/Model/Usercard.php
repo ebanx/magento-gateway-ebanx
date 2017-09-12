@@ -101,7 +101,7 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
 	{
 		return $this->getCollection()
 					->addFieldToFilter('user_id', $userId)
-					->addFieldToFilter('ebanx_card_id', ['in' => $cardId]);
+					->addFieldToFilter('ebanx_card_id', array('in' => $cardId));
 	}
 
 	/**

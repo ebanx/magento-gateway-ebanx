@@ -36,9 +36,9 @@ class Ebanx_Gateway_Block_Checkout_Success_Cashpayment extends Ebanx_Gateway_Blo
 
 	public function getVoucherUrl()
 	{
-		return Mage::getUrl('ebanx/voucher', [
+		return Mage::getUrl('ebanx/voucher', array(
 			'hash' => $this->getEbanxPaymentHash()
-		]);
+		));
 	}
 
 	protected function _construct()

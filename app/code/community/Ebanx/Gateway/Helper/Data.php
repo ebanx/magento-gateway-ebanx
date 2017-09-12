@@ -90,40 +90,40 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 	public function transformTefToBankName($bankCode)
 	{
-		$banks = [
+		$banks = array(
 			'itau' => Bank::ITAU,
 			'bradesco' => Bank::BRADESCO,
 			'bancodobrasil' => Bank::BANCO_DO_BRASIL,
 			'banrisul' => Bank::BANRISUL
-		];
+		);
 
 		return $banks[strtolower($bankCode)];
 	}
 
 	public function hasComplianceFieldFromSettings($code)
 	{
-		$methodsToFields = [
+		$methodsToFields = array(
 			// Brazil
-			'ebanx_boleto' => ['cpf_field', 'cnpj_field'],
-			'ebanx_tef' => ['cpf_field', 'cnpj_field'],
-			'ebanx_wallet' => ['cpf_field', 'cnpj_field'],
-			'ebanx_cc_br' => ['cpf_field', 'cnpj_field'],
+			'ebanx_boleto' => array('cpf_field', 'cnpj_field'),
+			'ebanx_tef' => array('cpf_field', 'cnpj_field'),
+			'ebanx_wallet' => array('cpf_field', 'cnpj_field'),
+			'ebanx_cc_br' => array('cpf_field', 'cnpj_field'),
 			// Chile
-			'ebanx_sencillito' => ['rut_field'],
-			'ebanx_servipag' => ['rut_field'],
-			'ebanx_webpay' => ['rut_field'],
-			'ebanx_multicaja' => ['rut_field'],
+			'ebanx_sencillito' => array('rut_field'),
+			'ebanx_servipag' => array('rut_field'),
+			'ebanx_webpay' => array('rut_field'),
+			'ebanx_multicaja' => array('rut_field'),
 			// Colombia
-			'ebanx_baloto' => ['dni_field'],
-			'ebanx_pse' => ['dni_field'],
+			'ebanx_baloto' => array('dni_field'),
+			'ebanx_pse' => array('dni_field'),
 			// Mexico
-			'ebanx_oxxo' => [],
-			'ebanx_cc_mx' => [],
-			'ebanx_dc_mx' => [],
+			'ebanx_oxxo' => array(),
+			'ebanx_cc_mx' => array(),
+			'ebanx_dc_mx' => array(),
 			// Peru
-			'ebanx_pagoefectivo' => [],
-			'ebanx_safetypay' => []
-		];
+			'ebanx_pagoefectivo' => array(),
+			'ebanx_safetypay' => array()
+		);
 
 		$fields = $methodsToFields[$code];
 
@@ -164,7 +164,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 	public function getBrazilianDocumentLabel()
 	{
-		$label = [];
+		$label = array();
 		$taxes = explode(',', Mage::getStoreConfig('payment/ebanx_settings/brazil_taxes'));
 
 		return strtoupper(implode(' / ', $taxes));
@@ -217,13 +217,13 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			return false;
 		}
 
-		$countries = [
+		$countries = array(
 			'cl' => Country::CHILE,
 			'br' => Country::BRAZIL,
 			'co' => Country::COLOMBIA,
 			'mx' => Country::MEXICO,
 			'pe' => Country::PERU,
-		];
+		);
 
 		$countryIndex = strtolower($countryCode);
 		if (!array_key_exists($countryIndex, $countries)) {
@@ -297,7 +297,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 	public function getPersonType($document)
 	{
-		$document = str_replace(['.', '-', '/'], '', $document);
+		$document = str_replace(array('.', '-', '/'), '', $document);
 
 		if ($this->getCustomerData()['country_id'] !== 'BR' || strlen($document) < 14) {
 			return Person::TYPE_PERSONAL;
@@ -401,7 +401,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 	}
 
 	public function isEbanxMethod($code) {
-		$ebanxMethods = [
+		$ebanxMethods = array(
 			'ebanx_cc_br',
 			'ebanx_boleto',
 			'ebanx_tef',
@@ -417,7 +417,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_oxxo',
 			'ebanx_safetypay',
 			'ebanx_pagoefectivo'
-		];
+		);
 		return in_array($code, $ebanxMethods);
 	}
 }

@@ -23,7 +23,7 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
 	protected function getSavedCards()
 	{
 		if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
-			return [];
+			return array();
 		}
 		$customerId =  Mage::getSingleton('customer/session')->getCustomer()->getId();
 

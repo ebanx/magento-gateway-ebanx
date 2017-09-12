@@ -72,9 +72,9 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
 			return $this->_redirect('/');
 		}
 
-		$this->createOrder([$this->request], $this->getPaymentMethod());
+		$this->createOrder(array($this->request), $this->getPaymentMethod());
 
-		return $this->_redirect('sales/order/view', ['order_id' => $this->order->getId()]);
+		return $this->_redirect('sales/order/view', array('order_id' => $this->order->getId()));
 	}
 
 	private function isCardFromCustomer()
@@ -173,7 +173,7 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
 													   ->setFax($shipping->getFax())
 													   ->setVatId($billing->getVatId());
 		Mage::app()->getRequest()->setPost('ebanx-document',
-			[$paymentMethod => $this->customer->getEbanxCustomerDocument()]);
+			array($paymentMethod => $this->customer->getEbanxCustomerDocument()));
 		$this->customer = $this->customer->setCountryId('br');
 
 		$this->order->setShippingAddress($this->shippingAddress)
@@ -199,8 +199,8 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
 					->setBaseGrandTotal($this->subTotal);
 
 		$this->transaction->addObject($this->order);
-		$this->transaction->addCommitCallback([$this->order, 'place']);
-		$this->transaction->addCommitCallback([$this->order, 'save']);
+		$this->transaction->addCommitCallback(array($this->order, 'place'));
+		$this->transaction->addCommitCallback(array($this->order, 'save'));
 		$this->transaction->save();
 	}
 
@@ -219,12 +219,12 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
 		}
 
 		if (!is_array($cartCandidates)) {
-			$cartCandidates = [$cartCandidates];
+			$cartCandidates = array($cartCandidates);
 		}
 
 		$parentItem = null;
-		$errors     = [];
-		$items      = [];
+		$errors     = array();
+		$items      = array();
 		foreach ($cartCandidates as $candidate) {
 			$item = $this->productToOrderItem($candidate, $candidate->getCartQty());
 
@@ -269,7 +269,7 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
 
 		$options = $product->getCustomOptions();
 
-		$optionsByCode = [];
+		$optionsByCode = array();
 
 		foreach ($options as $option) {
 			$quoteOption = Mage::getModel('sales/quote_item_option')->setData($option->getData())
@@ -298,7 +298,7 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
 						 ->setOriginalPrice($product->getFinalPrice())
 						 ->setRowTotal($rowTotal)
 						 ->setBaseRowTotal($rowTotal)
-						 ->setWeeeTaxApplied(serialize([]))
+						 ->setWeeeTaxApplied(serialize(array()))
 						 ->setBaseWeeeTaxDisposition(0)
 						 ->setWeeeTaxDisposition(0)
 						 ->setBaseWeeeTaxRowDisposition(0)

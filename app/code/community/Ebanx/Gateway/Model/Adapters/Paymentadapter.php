@@ -34,14 +34,14 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 
 		$code = $data->getPaymentType();
 
-		$payment->card = new Card([
+		$payment->card = new Card(array(
 			'autoCapture' => true,
 			'cvv' => $gatewayFields[$code . '_cid'][$selectedCard],
 			'dueDate' => $this->transformDueDate($gatewayFields, $code),
 			'name' => $gatewayFields[$code . '_name'][$selectedCard],
 			'token' => $gatewayFields['ebanx_token'][$selectedCard],
 			'type' => $gatewayFields['ebanx_brand'][$selectedCard],
-		]);
+		));
 
 		return $payment;
 	}
@@ -52,7 +52,7 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 	 */
 	public function transform(Varien_Object $data)
 	{
-		return new Payment([
+		return new Payment(array(
 			'type' => $data->getEbanxMethod(),
 			'amountTotal' => $data->getAmountTotal(),
 			'merchantPaymentCode' => $data->getMerchantPaymentCode(),
@@ -62,14 +62,14 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 			'person' => $this->transformPerson($data->getPerson(), $data),
 			'responsible' => $this->transformPerson($data->getPerson(), $data),
 			'items' => $this->transformItems($data->getItems(), $data)
-		]);
+		));
 	}
 
 	public function transformAddress($address, $data)
 	{
 		$street = $this->helper->split_street($address->getStreet1());
 
-		return new Address([
+		return new Address(array(
 			'address' => $street['streetName'],
 			'streetNumber' => $street['houseNumber'],
 			'city' => $address->getCity(),
@@ -77,36 +77,36 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 			'state' => $address->getRegion(),
 			'streetComplement' => $address->getStreet2(),
 			'zipcode' => $address->getPostcode()
-		]);
+		));
 	}
 
 	public function transformPerson($person, $data)
 	{
 		$document = $this->helper->getDocumentNumber($data->getOrder(), $data);
 
-		return new Person([
+		return new Person(array(
 			'type' => $this->helper->getPersonType($document),
 			'document' => $document,
 			'email' => $person->getCustomerEmail(),
 			'ip' => $data->getRemoteIp(),
 			'name' => $person->getCustomerFirstname() . ' ' . $person->getCustomerLastname(),
 			'phoneNumber' => $data->getBillingAddress()->getTelephone()
-		]);
+		));
 	}
 
 	public function transformItems($items, $data)
 	{
-		$itemsData = [];
+		$itemsData = array();
 
 		foreach ($items as $item) {
 			$product = $item->getProduct();
 
-			$itemsData[] = new Item([
+			$itemsData[] = new Item(array(
 				'sku' => $item->getSku(),
 				'name' => $item->getName(),
 				'unitPrice' => $product->getPrice(),
 				'quantity' => $item->getQtyToInvoice()
-			]);
+			));
 		}
 
 		return $itemsData;

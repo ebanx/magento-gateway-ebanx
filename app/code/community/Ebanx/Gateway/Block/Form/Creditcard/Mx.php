@@ -24,7 +24,7 @@ class Ebanx_Gateway_Block_Form_Creditcard_Mx extends Ebanx_Gateway_Block_Form_Cr
 
 	public function getText()
 	{
-		return [
+		return array(
 			'method-desc' => 'Pagar con Tarjeta de Crédito.',
 			'newcard' => 'Nueva tarjeta',
 			'local-amount' => 'Total a pagar en Peso mexicano: ',
@@ -34,6 +34,6 @@ class Ebanx_Gateway_Block_Form_Creditcard_Mx extends Ebanx_Gateway_Block_Form_Cr
 			'save' => 'Salvar este cartão para compras futuras',
 			'instalments' => 'Número de parcelas',
 			'name' => 'Titular de la tarjeta',
-		];
+		);
 	}
 }

@@ -9,7 +9,9 @@ class Ebanx_Gateway_VoucherController extends Mage_Core_Controller_Front_Action
 		$url = Mage::helper('ebanx')->getVoucherUrlByHash($hash);
 
 		if (!in_array('curl', get_loaded_extensions())) {
-			echo file_get_contents($url);
+			$this->getResponse()
+			     ->setHeader('Content-Type', 'text/html')
+			     ->setBody(file_get_contents($url));
 		}
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -18,6 +20,8 @@ class Ebanx_Gateway_VoucherController extends Mage_Core_Controller_Front_Action
 			return;
 		}
 		curl_close($curl);
-		echo $html;
+		$this->getResponse()
+		     ->setHeader('Content-Type', 'text/html')
+		     ->setBody($html);
 	}
 }
