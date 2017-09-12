@@ -34,6 +34,7 @@ class Ebanx_Gateway_Model_Quote_Total extends Mage_Sales_Model_Quote_Address_Tot
 			return $this;
 		}
 
+		$grandTotal = $grandTotal ?: $instalmentTerms[0]->baseAmount;
 		$instalmentAmount = $instalmentTerms[$instalments - 1]->baseAmount;
 		$interestAmount = ($instalmentAmount * $instalments) - $grandTotal;
 
