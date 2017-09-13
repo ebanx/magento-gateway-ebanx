@@ -36,35 +36,35 @@
 }
 
 .ebanx-payment-method input.input-text.visa.identified {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/visa.png);
+  background-image: url(../icons/visa.png);
 }
 
 .ebanx-payment-method input.input-text.mastercard.identified {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/mastercard.png);
+  background-image: url(../icons/mastercard.png);
 }
 
 .ebanx-payment-method input.input-text.amex.identified {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/amex.png);
+  background-image: url(../icons/amex.png);
 }
 
 .ebanx-payment-method input.input-text.discover.identified {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/discover.png);
+  background-image: url(../icons/discover.png);
 }
 
 .ebanx-payment-method input.input-text.dinersclub.identified {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/dinersclub.png);
+  background-image: url(../icons/dinersclub.png);
 }
 
 .ebanx-payment-method input.input-text.maestro.identified {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/maestro.png);
+  background-image: url(../icons/maestro.png);
 }
 
 .ebanx-payment-method input.input-text.elo.identified {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/elo.png);
+  background-image: url(../icons/elo.png);
 }
 
 .ebanx-payment-method input.input-text.unknown {
-  background-image: url(/skin/frontend/base/default/ebanx/icons/unknown.png);
+  background-image: url(../icons/unknown.png);
 }
 
 .ebanx-payment-method {
@@ -99,14 +99,14 @@
   width: 168px;
   height: 22px;
 
-  background-image: url(/skin/frontend/base/default/ebanx/ebanx-estas-pagando.png);
+  background-image: url(../ebanx-estas-pagando.png);
 }
 
 .ebanx-payment-method.ebanx-br-method:after {
   width: 136px;
   height: 22px;
 
-  background-image: url(/skin/frontend/base/default/ebanx/ebanx-pagando.png);
+  background-image: url(../ebanx-pagando.png);
 }
 
 .ebanx-credit-card-row:after {
