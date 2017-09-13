@@ -63,6 +63,9 @@
     <checkout_onepage_index>
         <update handle="ebanx_checkout_handle"/>
     </checkout_onepage_index>
+    <oscheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </oscheckout_index_index>
     <onepagecheckout_index_index>
         <update handle="ebanx_checkout_handle"/>
     </onepagecheckout_index_index>
