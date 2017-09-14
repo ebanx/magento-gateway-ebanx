@@ -148,6 +148,7 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 
 		return $itemsData;
 	}
+
 	/**
 	 * @param array $gatewayFields
 	 * @param string $code
