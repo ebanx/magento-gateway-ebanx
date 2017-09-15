@@ -11,6 +11,35 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 {
 	private $helper;
 
+	private $states = array(
+		'alagoas' => 'AL',
+		'amapa' => 'AP',
+		'amazonas' => 'AM',
+		'bahia' => 'BA',
+		'ceara' => 'CE',
+		'distrito federal' => 'DF',
+		'espirito santo' => 'ES',
+		'goias' => 'GO',
+		'maranhao' => 'MA',
+		'mato grosso' => 'MT',
+		'mato grosso do sul' => 'MS',
+		'minas gerais' => 'MG',
+		'para' => 'PA',
+		'paraiba' => 'PB',
+		'parana' => 'PR',
+		'pernambuco' => 'PE',
+		'piaui' => 'PI',
+		'rio de janeiro' => 'RJ',
+		'rio grande do norte' => 'RN',
+		'rio grande do sul' => 'RS',
+		'rondonia' => 'RO',
+		'roraima' => 'RR',
+		'santa catarina' => 'SC',
+		'sao paulo' => 'SP',
+		'sergipe' => 'SE',
+		'tocantins' => 'TO',
+	);
+
 	public function __construct()
 	{
 		$this->helper = Mage::helper('ebanx');
@@ -68,13 +97,21 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 	public function transformAddress($address, $data)
 	{
 		$street = $this->helper->split_street($address->getStreet1());
+		$state = $address->getRegion();
+
+		if ($address->getCountry() === 'BR') {
+			$state = preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml|caron);~i', '$1', htmlentities($state, ENT_QUOTES, 'UTF-8'));
+			if (array_key_exists(strtolower($state), $this->states)){
+				$state = $this->states[strtolower($state)];
+			}
+		}
 
 		return new Address(array(
 			'address' => $street['streetName'],
 			'streetNumber' => $street['houseNumber'],
 			'city' => $address->getCity(),
 			'country' => $this->helper->transformCountryCodeToName($address->getCountry()),
-			'state' => $address->getRegion(),
+			'state' => $state,
 			'streetComplement' => $address->getStreet2(),
 			'zipcode' => $address->getPostcode()
 		));
