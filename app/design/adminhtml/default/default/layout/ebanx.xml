@@ -17,4 +17,9 @@
             </action>
         </reference>
     </adminhtml_system_config_edit>
+    <adminhtml_sales_order_view>
+        <reference name="order_tab_info">
+            <block type="ebanx/test" name="test-1" template="test.phtml"/>
+        </reference>
+    </adminhtml_sales_order_view>
 </layout>
