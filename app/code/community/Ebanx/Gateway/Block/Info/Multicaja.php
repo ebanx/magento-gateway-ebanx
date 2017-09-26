@@ -6,5 +6,8 @@ class Ebanx_Gateway_Block_Info_Multicaja extends Ebanx_Gateway_Block_Info_Abstra
 	{
 		parent::_construct();
 		$this->setTemplate('ebanx/info/multicaja.phtml');
+		if ($this->isAdmin()) {
+			$this->setTemplate('ebanx/info/default.phtml');
+		}
 	}
 }
