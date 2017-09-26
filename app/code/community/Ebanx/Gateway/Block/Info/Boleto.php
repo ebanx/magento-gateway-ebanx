@@ -6,5 +6,8 @@ class Ebanx_Gateway_Block_Info_Boleto extends Ebanx_Gateway_Block_Info_Abstract
 	{
 		parent::_construct();
 		$this->setTemplate('ebanx/info/boleto.phtml');
+		if ($this->isAdmin()) {
+			$this->setTemplate('ebanx/info/default.phtml');
+		}
 	}
 }

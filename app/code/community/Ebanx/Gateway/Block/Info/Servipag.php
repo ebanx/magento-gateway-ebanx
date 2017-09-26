@@ -6,5 +6,8 @@ class Ebanx_Gateway_Block_Info_Servipag extends Ebanx_Gateway_Block_Info_Abstrac
 	{
 		parent::_construct();
 		$this->setTemplate('ebanx/info/servipag.phtml');
+		if ($this->isAdmin()) {
+			$this->setTemplate('ebanx/info/default.phtml');
+		}
 	}
 }

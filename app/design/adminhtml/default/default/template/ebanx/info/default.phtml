@@ -1,0 +1,16 @@
+<table class="form-list" style="margin-bottom: 10px;">
+  <tbody>
+  <tr>
+    <td class="label"><?= $this->__('EBANX Dashboard') ?></td>
+    <td class="value"><a href="<?= $this->getDashboardUrl()?>"><strong><?= $this->__('Open Payment Page') ?></strong></a></td>
+  </tr>
+  <tr>
+    <td class="label"><?= $this->__('EBANX Payment Hash') ?></td>
+    <td class="value"><strong><?= $this->getInfo()->getEbanxPaymentHash() ?></strong></td>
+  </tr>
+  <tr>
+    <td class="label"><?= $this->__('EBANX Payment Method') ?></td>
+    <td class="value"><strong><?= $this->getInfo()->getMethodInstance()->getTitle() ?></strong></td>
+  </tr>
+  </tbody>
+</table>
