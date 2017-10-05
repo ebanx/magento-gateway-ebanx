@@ -3,7 +3,7 @@
     <!-- Checkout Page -->
     <ebanx_checkout_handle>
         <reference name="head">
-            <block type="page/html" name="ebanx.custom.data" template="ebanx/checkout/checkout.phtml"/>
+            <block type="core/template" name="ebanx.custom.data" template="ebanx/checkout/checkout.phtml"/>
             <action method="addCss">
                 <stylesheet>ebanx/css/checkout.css</stylesheet>
             </action>
