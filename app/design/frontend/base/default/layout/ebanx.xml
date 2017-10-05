@@ -3,7 +3,7 @@
     <!-- Checkout Page -->
     <ebanx_checkout_handle>
         <reference name="head">
-            <block type="page/html" name="custom-javascript" template="ebanx/checkout/checkout.phtml"/>
+            <block type="core/template" name="ebanx.custom.data" template="ebanx/checkout/checkout.phtml"/>
             <action method="addCss">
                 <stylesheet>ebanx/css/checkout.css</stylesheet>
             </action>
@@ -27,9 +27,6 @@
             </action>
             <action method="addJs">
                 <script>ebanx/vanilla-masker/vanilla-masker.min.js</script>
-            </action>
-            <action method="setText">
-                <text>olar</text>
             </action>
         </reference>
     </ebanx_checkout_handle>
