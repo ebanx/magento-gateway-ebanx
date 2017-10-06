@@ -100,40 +100,29 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return $banks[strtolower($bankCode)];
 	}
 
-	public function hasComplianceFieldFromSettings($code)
+	public function hasDocumentFieldAlreadyForMethod($methodCode)
 	{
-		$methodsToFields = array(
-			// Brazil
-			'ebanx_boleto' => array('cpf_field', 'cnpj_field'),
-			'ebanx_tef' => array('cpf_field', 'cnpj_field'),
-			'ebanx_wallet' => array('cpf_field', 'cnpj_field'),
-			'ebanx_cc_br' => array('cpf_field', 'cnpj_field'),
-			// Chile
-			'ebanx_sencillito' => array('rut_field'),
-			'ebanx_servipag' => array('rut_field'),
-			'ebanx_webpay' => array('rut_field'),
-			'ebanx_multicaja' => array('rut_field'),
-			// Colombia
-			'ebanx_baloto' => array('dni_field'),
-			'ebanx_pse' => array('dni_field'),
-			// Mexico
-			'ebanx_oxxo' => array(),
-			'ebanx_cc_mx' => array(),
-			'ebanx_dc_mx' => array(),
-			// Peru
-			'ebanx_pagoefectivo' => array(),
-			'ebanx_safetypay' => array()
-		);
-
-		$fields = $methodsToFields[$code];
+		$fields = $this->getDocumentFieldsRequiredForMethod($methodCode);
 
 		if (empty($fields)) {
 			return true;
 		}
 
 		foreach ($fields as $field) {
-			if (Mage::getStoreConfig('payment/ebanx_settings/' . $field)) {
-				return true;
+			$documentFieldName = Mage::getStoreConfig('payment/ebanx_settings/' . $field);
+			if ($documentFieldName) {
+				if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
+					return true;
+				}
+
+				$customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
+				$customer = Mage::getModel('customer/customer')->load($customerId);
+
+				$customerHasSavedAddress = $customer->getDefaultShipping();
+				$customerHasSavedDocument = $customer->getData($documentFieldName);
+				if ($customerHasSavedAddress && $customerHasSavedDocument) {
+					return true;
+				}
 			}
 		}
 
@@ -236,6 +225,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 	public function getBrazilianDocumentNumber($methodCode)
 	{
 		$customer = $this->getCustomerData();
+
+		if (array_key_exists('ebanx-document', $customer) && isset($customer['ebanx-document'][$methodCode])) {
+			return $customer['ebanx-document'][$methodCode];
+		}
 
 		if ($cpfField = Mage::getStoreConfig('payment/ebanx_settings/cpf_field')) {
 			if ($cpfField === 'taxvat') {
@@ -419,5 +412,37 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_pagoefectivo'
 		);
 		return in_array($code, $ebanxMethods);
+	}
+
+	/**
+	 * @param $methodCode
+	 * @return mixed
+	 */
+	public function getDocumentFieldsRequiredForMethod($methodCode)
+	{
+		$methodsToFields = [
+			// Brazil
+			'ebanx_boleto'       => ['cpf_field', 'cnpj_field'],
+			'ebanx_tef'          => ['cpf_field', 'cnpj_field'],
+			'ebanx_wallet'       => ['cpf_field', 'cnpj_field'],
+			'ebanx_cc_br'        => ['cpf_field', 'cnpj_field'],
+			// Chile
+			'ebanx_sencillito'   => ['rut_field'],
+			'ebanx_servipag'     => ['rut_field'],
+			'ebanx_webpay'       => ['rut_field'],
+			'ebanx_multicaja'    => ['rut_field'],
+			// Colombia
+			'ebanx_baloto'       => ['dni_field'],
+			'ebanx_pse'          => ['dni_field'],
+			// Mexico
+			'ebanx_oxxo'         => [],
+			'ebanx_cc_mx'        => [],
+			'ebanx_dc_mx'        => [],
+			// Peru
+			'ebanx_pagoefectivo' => [],
+			'ebanx_safetypay'    => []
+		];
+
+		return $methodsToFields[$methodCode];
 	}
 }
