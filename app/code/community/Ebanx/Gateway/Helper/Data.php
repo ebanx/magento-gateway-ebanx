@@ -109,7 +109,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		}
 
 		foreach ($fields as $field) {
-			if (Mage::getStoreConfig('payment/ebanx_settings/' . $field)) {
+			$fieldIsAlreadyOnBillingAddress = Mage::getStoreConfig('payment/ebanx_settings/' . $field);
+			if ($fieldIsAlreadyOnBillingAddress) {
 				return true;
 			}
 		}
