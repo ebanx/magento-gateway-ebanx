@@ -100,7 +100,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		return $banks[strtolower($bankCode)];
 	}
 
-	public function hasComplianceFieldFromSettings($code)
+	public function hasDocumentFieldAlreadyForMethod($methodCode)
 	{
 		$methodsToFields = array(
 			// Brazil
@@ -125,7 +125,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_safetypay' => array()
 		);
 
-		$fields = $methodsToFields[$code];
+		$fields = $methodsToFields[$methodCode];
 
 		if (empty($fields)) {
 			return true;

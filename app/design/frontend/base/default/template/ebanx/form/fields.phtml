@@ -4,7 +4,7 @@
  */
 $helper = Mage::helper('ebanx');
 
-if ($helper->hasComplianceFieldFromSettings($this->getMethodCode())) return;
+if ($helper->hasDocumentFieldAlreadyForMethod($this->getMethodCode())) return;
 
 $ebanxCustomerDocument = '';
 if (Mage::getSingleton('customer/session')->isLoggedIn()) {
