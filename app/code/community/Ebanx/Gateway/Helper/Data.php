@@ -226,6 +226,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 	{
 		$customer = $this->getCustomerData();
 
+		if (array_key_exists('ebanx-document', $customer) && isset($customer['ebanx-document'][$methodCode])) {
+			return $customer['ebanx-document'][$methodCode];
+		}
+
 		if ($cpfField = Mage::getStoreConfig('payment/ebanx_settings/cpf_field')) {
 			if ($cpfField === 'taxvat') {
 				return $this->order->getCustomerTaxvat();
