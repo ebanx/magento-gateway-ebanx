@@ -109,9 +109,20 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		}
 
 		foreach ($fields as $field) {
-			$fieldIsAlreadyOnBillingAddress = Mage::getStoreConfig('payment/ebanx_settings/' . $field);
-			if ($fieldIsAlreadyOnBillingAddress) {
-				return true;
+			$documentFieldName = Mage::getStoreConfig('payment/ebanx_settings/' . $field);
+			if ($documentFieldName) {
+				if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
+					return true;
+				}
+
+				$customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
+				$customer = Mage::getModel('customer/customer')->load($customerId);
+
+				$customerHasSavedAddress = $customer->getDefaultShipping();
+				$customerHasSavedDocument = $customer->getData($documentFieldName);
+				if ($customerHasSavedAddress && $customerHasSavedDocument) {
+					return true;
+				}
 			}
 		}
 
