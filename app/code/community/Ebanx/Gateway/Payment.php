@@ -117,9 +117,17 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 			->setEbanxLocalAmount($this->result['payment']['amount_br']);
 
 		if ($this->order->getCustomerId()) {
-			Mage::getModel('customer/customer')->load($this->order->getCustomerId())
-				->setEbanxCustomerDocument($this->helper->getDocumentNumber($this->order, $this->data))
-				->save();
+			$documentNumber = $this->helper->getDocumentNumber($this->order, $this->data);
+			$customer = Mage::getModel('customer/customer')->load($this->order->getCustomerId())
+				->setEbanxCustomerDocument($documentNumber);
+
+			$methodCode = $this->order->getPayment()->getMethodInstance()->getCode();
+			$documentFields = $this->helper->getDocumentFieldsRequiredForMethod($methodCode);
+			foreach ($documentFields as $field) {
+				$fieldValue = Mage::getStoreConfig('payment/ebanx_settings/' . $field) ?: 'taxvat';
+				$customer->setData($fieldValue,$documentNumber);
+			}
+			$customer->save();
 		}
 	}
 
