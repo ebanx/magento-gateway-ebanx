@@ -102,30 +102,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 	public function hasDocumentFieldAlreadyForMethod($methodCode)
 	{
-		$methodsToFields = array(
-			// Brazil
-			'ebanx_boleto' => array('cpf_field', 'cnpj_field'),
-			'ebanx_tef' => array('cpf_field', 'cnpj_field'),
-			'ebanx_wallet' => array('cpf_field', 'cnpj_field'),
-			'ebanx_cc_br' => array('cpf_field', 'cnpj_field'),
-			// Chile
-			'ebanx_sencillito' => array('rut_field'),
-			'ebanx_servipag' => array('rut_field'),
-			'ebanx_webpay' => array('rut_field'),
-			'ebanx_multicaja' => array('rut_field'),
-			// Colombia
-			'ebanx_baloto' => array('dni_field'),
-			'ebanx_pse' => array('dni_field'),
-			// Mexico
-			'ebanx_oxxo' => array(),
-			'ebanx_cc_mx' => array(),
-			'ebanx_dc_mx' => array(),
-			// Peru
-			'ebanx_pagoefectivo' => array(),
-			'ebanx_safetypay' => array()
-		);
-
-		$fields = $methodsToFields[$methodCode];
+		$fields = $this->getDocumentFieldsRequiredForMethod($methodCode);
 
 		if (empty($fields)) {
 			return true;
@@ -419,5 +396,37 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_pagoefectivo'
 		);
 		return in_array($code, $ebanxMethods);
+	}
+
+	/**
+	 * @param $methodCode
+	 * @return mixed
+	 */
+	private function getDocumentFieldsRequiredForMethod($methodCode)
+	{
+		$methodsToFields = [
+			// Brazil
+			'ebanx_boleto'       => ['cpf_field', 'cnpj_field'],
+			'ebanx_tef'          => ['cpf_field', 'cnpj_field'],
+			'ebanx_wallet'       => ['cpf_field', 'cnpj_field'],
+			'ebanx_cc_br'        => ['cpf_field', 'cnpj_field'],
+			// Chile
+			'ebanx_sencillito'   => ['rut_field'],
+			'ebanx_servipag'     => ['rut_field'],
+			'ebanx_webpay'       => ['rut_field'],
+			'ebanx_multicaja'    => ['rut_field'],
+			// Colombia
+			'ebanx_baloto'       => ['dni_field'],
+			'ebanx_pse'          => ['dni_field'],
+			// Mexico
+			'ebanx_oxxo'         => [],
+			'ebanx_cc_mx'        => [],
+			'ebanx_dc_mx'        => [],
+			// Peru
+			'ebanx_pagoefectivo' => [],
+			'ebanx_safetypay'    => []
+		];
+
+		return $methodsToFields[$methodCode];
 	}
 }
