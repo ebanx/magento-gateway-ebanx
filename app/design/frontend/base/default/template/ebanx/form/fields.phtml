@@ -6,8 +6,12 @@ $helper = Mage::helper('ebanx');
 
 if ($helper->hasComplianceFieldFromSettings($this->getMethodCode())) return;
 
-$customer_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
-$customer = Mage::getModel('customer/customer')->load($customer_id);
+$ebanxCustomerDocument = '';
+if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+  $customer_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
+  $customer = Mage::getModel('customer/customer')->load($customer_id);
+  $ebanxCustomerDocument = $customer->getEbanxCustomerDocument();
+}
 
 $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 ?>
@@ -20,7 +24,7 @@ $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
             <input
                 type="text"
                 name="ebanx-document[<?= $this->getMethodCode() ?>]"
-                value="<?= $customer->getEbanxCustomerDocument() ?>"
+                value="<?= $ebanxCustomerDocument ?>"
                 class="input-text"
                 id="ebanx-document-<?= $this->getMethodCode() ?>"
             />
