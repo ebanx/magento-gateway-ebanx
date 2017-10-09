@@ -157,6 +157,10 @@
     <!-- Edit Account -->
     <customer_account_edit>
         <reference name="head">
+            <action method="addJs">
+                <script>ebanx/vanilla-masker/vanilla-masker.min.js</script>
+            </action>
+
             <block type="core/template" name="ebanx.customer.account.edit" template="ebanx/customer/account/edit.phtml"/>
         </reference>
     </customer_account_edit>

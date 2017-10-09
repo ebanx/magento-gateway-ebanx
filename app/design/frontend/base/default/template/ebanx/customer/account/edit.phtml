@@ -9,11 +9,10 @@ $taxvatDocumentFields = array_filter($documentFields, function($field) {
   return $field === 'taxvat';
 });
 
-if (!empty($taxvatDocumentFields)):
-  $session = Mage::getSingleton('customer/session');
-  if ($session->isLoggedIn()) {
-    $countryCode = $session->getCustomer()->getDefaultBillingAddress()->getCountry();
-  }
+$session = Mage::getSingleton('customer/session');
+
+if (!empty($taxvatDocumentFields) && $session->isLoggedIn() && $session->getCustomer()->getDefaultBillingAddress()):
+  $countryCode = $session->getCustomer()->getDefaultBillingAddress()->getCountry();
 
   if ($countryCode) {
     $label = Mage::helper('ebanx')->getLabelForComplianceFieldByCountry($countryCode);
@@ -27,7 +26,24 @@ if (!empty($taxvatDocumentFields)):
         if(taxvatLabel) {
           taxvatLabel.innerHTML = '<?php echo $label;?>';
         }
+
+        <?php if (strtolower($countryCode) === 'br'): ?>
+          function inputHandler(masks, max, event) {
+            var c = event.target;
+            var v = c.value.replace(/\D/g, '');
+            var m = c.value.length > max ? 1 : 0;
+            VMasker(c).unMask();
+            VMasker(c).maskPattern(masks[m]);
+            c.value = VMasker.toPattern(v, masks[m]);
+          }
+
+          var docMask = ['999.999.999-999', '99.999.999/9999-99'];
+          var doc = document.getElementById('taxvat');
+          VMasker(doc).maskPattern(docMask[0]);
+          doc.addEventListener('input', inputHandler.bind(undefined, docMask, 14), false);
+        <?php endif; ?>
       };
+
     })();
     //]]>
   </script>
