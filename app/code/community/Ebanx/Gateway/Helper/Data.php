@@ -151,6 +151,20 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		}
 	}
 
+	public function getLabelForComplianceFieldByCountry($countryCode)
+	{
+		switch (strtolower($countryCode)) {
+			case 'br':
+				return $this->getBrazilianDocumentLabel();
+			case 'cl':
+				return $this->__('RUT Document');
+			case 'co':
+				return $this->__('DNI Document');
+			default:
+				return $this->__('Document Number');
+		}
+	}
+
 	public function getBrazilianDocumentLabel()
 	{
 		$label = array();
