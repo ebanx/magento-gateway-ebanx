@@ -1,0 +1,35 @@
+<?php
+$documentFields = array(
+  Mage::getStoreConfig('payment/ebanx_settings/cpf_field'),
+  Mage::getStoreConfig('payment/ebanx_settings/cnpj_field'),
+  Mage::getStoreConfig('payment/ebanx_settings/rut_field'),
+  Mage::getStoreConfig('payment/ebanx_settings/dni_field')
+);
+$taxvatDocumentFields = array_filter($documentFields, function($field) {
+  return $field === 'taxvat';
+});
+
+if (!empty($taxvatDocumentFields)):
+  $session = Mage::getSingleton('customer/session');
+  if ($session->isLoggedIn()) {
+    $countryCode = $session->getCustomer()->getDefaultBillingAddress()->getCountry();
+  }
+
+  if ($countryCode) {
+    $label = Mage::helper('ebanx')->getLabelForComplianceFieldByCountry($countryCode);
+  }
+  ?>
+  <script>
+    //<![CDATA[
+    (function(){
+      window.onload = function () {
+        var taxvatLabel = document.querySelector('label[for="taxvat"]');
+        if(taxvatLabel) {
+          taxvatLabel.innerHTML = '<?php echo $label;?>';
+        }
+      };
+    })();
+    //]]>
+  </script>
+  <?php
+endif;
