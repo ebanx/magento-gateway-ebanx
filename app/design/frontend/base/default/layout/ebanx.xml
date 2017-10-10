@@ -186,4 +186,11 @@
             <action method="setHeaderTitle" translate="title" module="ebanx"><title>Credit Cards list</title></action>
         </reference>
     </ebanx_customer_usercards>
+
+    <!-- Create Account -->
+    <customer_account_create>
+        <reference name="head">
+            <block type="core/template" name="ebanx.customer.account.create" template="ebanx/customer/account/create.phtml"/>
+        </reference>
+    </customer_account_create>
 </layout>
