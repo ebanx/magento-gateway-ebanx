@@ -111,7 +111,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		foreach ($fields as $field) {
 			$documentFieldName = Mage::getStoreConfig('payment/ebanx_settings/' . $field);
 			if ($documentFieldName) {
-				if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
+				if (!Mage::getSingleton('customer/session')->isLoggedIn() || Mage::getSingleton('checkout/session')->getQuote()->getCheckoutMethod() === 'register') {
 					return true;
 				}
 
