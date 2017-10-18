@@ -67,6 +67,13 @@ $icon           = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx
 
   EBANXCreditCard.formatCardNumber(document.querySelector('input#<?= $_code ?>_cc_number'));
   EBANXCreditCard.formatCardCVC(document.querySelector('input#<?= $_code ?>_cc_cid'));
+
+  var selectInstalment = document.getElementById('<?= $_code ?>_instalments');
+
+  selectInstalment.onchange = function (){
+    var text = document.getElementById('cc-<?= $lowerCountry ?>-local-amount');
+    text.innerHTML = '<strong>' + selectInstalment.options[selectInstalment.selectedIndex].getAttribute('data-local-amount') + '</strong>';
+  };
 </script>
 
 <style rel="stylesheet" type="text/css">
