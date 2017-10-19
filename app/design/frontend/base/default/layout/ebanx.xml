@@ -3,7 +3,7 @@
     <!-- Checkout Page -->
     <ebanx_checkout_handle>
         <reference name="head">
-            <block type="page/html" name="custom-javascript" template="ebanx/checkout/checkout.phtml"/>
+            <block type="core/template" name="ebanx.custom.data" template="ebanx/checkout/checkout.phtml"/>
             <action method="addCss">
                 <stylesheet>ebanx/css/checkout.css</stylesheet>
             </action>
@@ -21,14 +21,12 @@
                 <type>skin_js</type>
                 <name>ebanx/js/checkout.js</name>
             </action>
-            <action method="addJs">
-                <script>ebanx/document/document.js</script>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/document.js</name>
             </action>
             <action method="addJs">
                 <script>ebanx/vanilla-masker/vanilla-masker.min.js</script>
-            </action>
-            <action method="setText">
-                <text>olar</text>
             </action>
         </reference>
     </ebanx_checkout_handle>
@@ -40,15 +38,42 @@
             </action>
         </reference>
     </ebanx_firecheckout_handle>
+    <ebanx_onestepcheckout_handle>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/onestepcheckout.js</name>
+            </action>
+        </reference>
+    </ebanx_onestepcheckout_handle>
+    <ebanx_amscheckout_handle>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/amscheckout-inputs.js</name>
+            </action>
+            <action method="addCss">
+                <stylesheet>ebanx/css/amscheckout.css</stylesheet>
+            </action>
+        </reference>
+    </ebanx_amscheckout_handle>
     <checkout_onepage_index>
         <update handle="ebanx_checkout_handle"/>
     </checkout_onepage_index>
+    <oscheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </oscheckout_index_index>
     <onepagecheckout_index_index>
         <update handle="ebanx_checkout_handle"/>
     </onepagecheckout_index_index>
     <onestepcheckout_index_index>
         <update handle="ebanx_checkout_handle"/>
+        <update handle="ebanx_onestepcheckout_handle"/>
     </onestepcheckout_index_index>
+    <amscheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+        <update handle="ebanx_amscheckout_handle"/>
+    </amscheckout_index_index>
     <typostores_onestepcheckout_index_index>
         <update handle="ebanx_checkout_handle"/>
     </typostores_onestepcheckout_index_index>
@@ -70,7 +95,7 @@
     </firecheckout_index_index>
 
 
-    <!-- Succes Page -->
+    <!-- Success Page -->
     <ebanx_checkout_success_handle>
         <reference name="head">
             <action method="addCss">
@@ -84,9 +109,8 @@
                 <name>ebanx/js/success.js</name>
             </action>
         </reference>
-        <reference name="checkout.success">
-            <block type="ebanx/checkout_success_payment" name="ebanx.success.payment" as="ebanx_success"
-                   template="ebanx/checkout/success.phtml">
+        <reference name="content">
+            <block type="ebanx/checkout_success_payment" after="checkout.success" name="ebanx.success.payment" as="ebanx_success" template="ebanx/checkout/success.phtml">
                 <!-- Brazil -->
                 <block type="ebanx/checkout_success_payment_boleto" name="ebanx.success.payment.boleto"
                        as="ebanx_boleto" template="ebanx/checkout/success/boleto.phtml"/>
@@ -114,4 +138,59 @@
     <onepagecheckout_index_success>
         <update handle="ebanx_checkout_success_handle"/>
     </onepagecheckout_index_success>
+
+    <catalog_product_view>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>ebanx/css/oneclick.css</stylesheet>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/oneclick.js</name>
+            </action>
+        </reference>
+        <reference name="product.info.addtocart">
+            <block type="ebanx/catalog_product_view_oneclick" name="ebanx_catalog_product_view_oneclick" template="ebanx/catalog/product/view/oneclick.phtml" after="-"/>
+        </reference>
+    </catalog_product_view>
+
+    <!-- Edit Account -->
+    <customer_account_edit>
+        <reference name="head">
+            <action method="addJs">
+                <script>ebanx/vanilla-masker/vanilla-masker.min.js</script>
+            </action>
+
+            <block type="core/template" name="ebanx.customer.account.edit" template="ebanx/customer/account/edit.phtml"/>
+        </reference>
+    </customer_account_edit>
+
+    <!-- My Account - Saved Credit Card -->
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="ebanx" ifconfig="payment/ebanx_settings/save_card_data">
+                <name>customer_usercards</name>
+                <path>ebanx/customer/usercards</path>
+                <label>Saved Credit Cards</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <ebanx_customer_usercards translate="label">
+        <label>Customer My Account credit cards list</label>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="ebanx/customer_usercards_list" name="ebanx_customer_usercards_list" template="ebanx/customer/usercards/list.phtml" />
+        </reference>
+        <reference name="root">
+            <action method="setHeaderTitle" translate="title" module="ebanx"><title>Credit Cards list</title></action>
+        </reference>
+    </ebanx_customer_usercards>
+
+    <!-- Create Account -->
+    <customer_account_create>
+        <reference name="head">
+            <block type="core/template" name="ebanx.customer.account.create" template="ebanx/customer/account/create.phtml"/>
+        </reference>
+    </customer_account_create>
 </layout>

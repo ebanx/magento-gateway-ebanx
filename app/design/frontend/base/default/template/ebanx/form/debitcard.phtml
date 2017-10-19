@@ -1,11 +1,15 @@
 <?php
     $_code = $this->getMethodCode();
     $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+    $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
+    $icon = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx-debit-card.png" width="141" /></div>';
 ?>
+
+<?= !$showInlineIcon ? null : $icon?>
+
 <ul class="form-list ebanx-payment-method ebanx-es-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
-    <div>
-        <img src="<?= $skin . 'frontend/base/default/ebanx/ebanx-debit-card.png' ?>" width="141" />
-    </div>
+
+    <?= $showInlineIcon ? null : $icon?>
 
     <p class="ebanx-payment-method-desc">Pagar con Tarjeta de Débito.</p>
 
@@ -68,6 +72,13 @@
             </div>
         </div>
     </li>
+    <li>
+      <div class="total-to-pay">
+        <p>Total a pagar en Peso mexicano: <strong><?php echo $this->getLocalAmount('MXN') ?></strong>
+      </div>
+    </li>
+
+
     <input type="hidden" name="payment[ebanx_token]" id="<?php echo $_code ?>_token"/>
     <input type="hidden" name="payment[ebanx_brand]" id="<?php echo $_code ?>_brand"/>
     <input type="hidden" name="payment[ebanx_masked_card_number]" id="<?php echo $_code ?>_masked_card_number"/>
@@ -75,11 +86,12 @@
     <input type="hidden" name="payment[ebanx_billing_instalments]" id="ebanx_billing_instalments"/>
     <input type="hidden" name="payment[ebanx_billing_cvv]" id="ebanx_billing_cvv"/>
     <input type="hidden" name="payment[ebanx_mode]" id="<?php echo $_code ?>_mode"
-           value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
+            value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
     <input type="hidden" name="payment[ebanx_integration_key]" id="<?php echo $_code ?>_integration_key"
-           value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
+            value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
     <input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="mx"/>
 </ul>
+
 
 <script>
     handleEbanxForm('mx', 'dc');

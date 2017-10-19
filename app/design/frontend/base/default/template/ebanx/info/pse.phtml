@@ -1,3 +1,12 @@
-PSE - Pago Seguros en Línea
+<p>PSE - Pago Seguros en Línea</p>
+<br>
+<p>Total a pagar en Peso colombiano: <?php
+
+  if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
+    echo $this->getLocalAmount('COP');
+  } else {
+    echo $this->getLocalAmountWithoutTax('COP');
+  }
+  ?></p>
 
 <?php echo $this->getChildHtml() ?>

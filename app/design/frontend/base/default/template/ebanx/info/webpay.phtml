@@ -1,0 +1,12 @@
+<p>Webpay</p>
+<br>
+<p>Total a pagar en Peso chileno: <?php
+
+  if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
+    echo $this->getLocalAmount('CLP');
+  } else {
+    echo $this->getLocalAmountWithoutTax('CLP');
+  }
+  ?></p>
+
+<?php echo $this->getChildHtml() ?>

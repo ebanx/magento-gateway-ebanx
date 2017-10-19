@@ -11,6 +11,35 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 {
 	private $helper;
 
+	private $states = array(
+		'alagoas' => 'AL',
+		'amapa' => 'AP',
+		'amazonas' => 'AM',
+		'bahia' => 'BA',
+		'ceara' => 'CE',
+		'distrito federal' => 'DF',
+		'espirito santo' => 'ES',
+		'goias' => 'GO',
+		'maranhao' => 'MA',
+		'mato grosso' => 'MT',
+		'mato grosso do sul' => 'MS',
+		'minas gerais' => 'MG',
+		'para' => 'PA',
+		'paraiba' => 'PB',
+		'parana' => 'PR',
+		'pernambuco' => 'PE',
+		'piaui' => 'PI',
+		'rio de janeiro' => 'RJ',
+		'rio grande do norte' => 'RN',
+		'rio grande do sul' => 'RS',
+		'rondonia' => 'RO',
+		'roraima' => 'RR',
+		'santa catarina' => 'SC',
+		'sao paulo' => 'SP',
+		'sergipe' => 'SE',
+		'tocantins' => 'TO',
+	);
+
 	public function __construct()
 	{
 		$this->helper = Mage::helper('ebanx');
@@ -22,7 +51,10 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 		$instalmentTerms = $data->getInstalmentTerms();
 
 		$payment = $this->transform($data);
-		$payment->deviceId = $gatewayFields['ebanx_device_fingerprint'];
+
+		$selectedCard = $gatewayFields['selected_card'];
+		$payment->deviceId = $gatewayFields['ebanx_device_fingerprint'][$selectedCard];
+
 		if (isset($gatewayFields['instalments'])) {
 			$payment->instalments = $gatewayFields['instalments'];
 			$term = $instalmentTerms[$gatewayFields['instalments'] - 1];
@@ -31,14 +63,14 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 
 		$code = $data->getPaymentType();
 
-		$payment->card = new Card([
+		$payment->card = new Card(array(
 			'autoCapture' => true,
-			'cvv' => $gatewayFields[$code . '_cid'],
-			'dueDate' => DateTime::createFromFormat('n-Y', $gatewayFields[$code . '_exp_month'] . '-' . $gatewayFields[$code . '_exp_year']),
-			'name' => $gatewayFields[$code . '_name'],
-			'token' => $gatewayFields['ebanx_token'],
-			'type' => $gatewayFields['ebanx_brand'],
-		]);
+			'cvv' => $gatewayFields[$code . '_cid'][$selectedCard],
+			'dueDate' => $this->transformDueDate($gatewayFields, $code),
+			'name' => $gatewayFields[$code . '_name'][$selectedCard],
+			'token' => $gatewayFields['ebanx_token'][$selectedCard],
+			'type' => $gatewayFields['ebanx_brand'][$selectedCard],
+		));
 
 		return $payment;
 	}
@@ -49,7 +81,7 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 	 */
 	public function transform(Varien_Object $data)
 	{
-		return new Payment([
+		return new Payment(array(
 			'type' => $data->getEbanxMethod(),
 			'amountTotal' => $data->getAmountTotal(),
 			'merchantPaymentCode' => $data->getMerchantPaymentCode(),
@@ -59,53 +91,82 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 			'person' => $this->transformPerson($data->getPerson(), $data),
 			'responsible' => $this->transformPerson($data->getPerson(), $data),
 			'items' => $this->transformItems($data->getItems(), $data)
-		]);
+		));
 	}
 
 	public function transformAddress($address, $data)
 	{
 		$street = $this->helper->split_street($address->getStreet1());
+		$state = $address->getRegion();
 
-		return new Address([
+		if ($address->getCountry() === 'BR') {
+			$state = preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml|caron);~i', '$1', htmlentities($state, ENT_QUOTES, 'UTF-8'));
+			if (array_key_exists(strtolower($state), $this->states)){
+				$state = $this->states[strtolower($state)];
+			}
+		}
+
+		return new Address(array(
 			'address' => $street['streetName'],
 			'streetNumber' => $street['houseNumber'],
 			'city' => $address->getCity(),
 			'country' => $this->helper->transformCountryCodeToName($address->getCountry()),
-			'state' => $address->getRegion(),
+			'state' => $state,
 			'streetComplement' => $address->getStreet2(),
 			'zipcode' => $address->getPostcode()
-		]);
+		));
 	}
 
 	public function transformPerson($person, $data)
 	{
 		$document = $this->helper->getDocumentNumber($data->getOrder(), $data);
 
-		return new Person([
+		return new Person(array(
 			'type' => $this->helper->getPersonType($document),
 			'document' => $document,
 			'email' => $person->getCustomerEmail(),
 			'ip' => $data->getRemoteIp(),
 			'name' => $person->getCustomerFirstname() . ' ' . $person->getCustomerLastname(),
 			'phoneNumber' => $data->getBillingAddress()->getTelephone()
-		]);
+		));
 	}
 
 	public function transformItems($items, $data)
 	{
-		$itemsData = [];
+		$itemsData = array();
 
 		foreach ($items as $item) {
 			$product = $item->getProduct();
 
-			$itemsData[] = new Item([
+			$itemsData[] = new Item(array(
 				'sku' => $item->getSku(),
 				'name' => $item->getName(),
 				'unitPrice' => $product->getPrice(),
 				'quantity' => $item->getQtyToInvoice()
-			]);
+			));
 		}
 
 		return $itemsData;
+	}
+
+	/**
+	 * @param array $gatewayFields
+	 * @param string $code
+	 *
+	 * @return bool|DateTime
+	 */
+	private function transformDueDate($gatewayFields, $code) {
+		$selectedCard = $gatewayFields['selected_card'];
+		$month = 1;
+		if (array_key_exists($code . '_exp_month', $gatewayFields) && is_array($gatewayFields[$code . '_exp_month']) && array_key_exists($selectedCard, $gatewayFields[$code . '_exp_month'])) {
+			$month = $gatewayFields[$code . '_exp_month'][$selectedCard] ?: 1;
+		}
+
+		$year = 2120;
+		if (array_key_exists($code . '_exp_year', $gatewayFields) && is_array($gatewayFields[$code . '_exp_year']) && array_key_exists($selectedCard, $gatewayFields[$code . '_exp_year'])) {
+			$year = $gatewayFields[$code . '_exp_year'][$selectedCard] ?: 2120;
+		}
+
+		return DateTime::createFromFormat( 'n-Y', $month . '-' . $year );
 	}
 }

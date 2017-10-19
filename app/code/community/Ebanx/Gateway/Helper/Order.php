@@ -22,24 +22,24 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
 
 	public function getEbanxMagentoOrder($ebanxStatus)
 	{
-		$status = [
+		$status = array(
 			'CO' => Mage::getStoreConfig('payment/ebanx_settings/payment_co_status'),
 			'PE' => Mage::getStoreConfig('payment/ebanx_settings/payment_pe_status'),
 			'OP' => Mage::getStoreConfig('payment/ebanx_settings/payment_op_status'),
 			'CA' => Mage::getStoreConfig('payment/ebanx_settings/payment_ca_status')
-		];
+		);
 
 		return $status[strtoupper($ebanxStatus)];
 	}
 
 	public function getTranslatedOrderStatus($ebanxStatus)
 	{
-		$status = [
+		$status = array(
 			'CO' => 'Confirmed',
 			'PE' => 'Pending',
 			'OP' => 'Open',
 			'CA' => 'Canceled'
-		];
+		);
 
 		return $status[strtoupper($ebanxStatus)];
 	}

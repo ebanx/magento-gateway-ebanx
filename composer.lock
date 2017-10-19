@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5e7f69f48dc0ec4357710a98b4bc868f",
+    "hash": "d2eb023bb6be291025e225b9859a1bc0",
     "content-hash": "8d5cc83ea22ac4a5902cf2165e47e6a7",
     "packages": [
         {
@@ -12,8 +12,14 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com//ebanx/benjamin",
-                "reference": "b5f533df2bdb4c501cf2b353f6473f940d985fae"
+                "url": "https://github.com/ebanx/benjamin.git",
+                "reference": "0d2a2e1d5d24fe923dd88592c459ed53e6ac7e13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/0d2a2e1d5d24fe923dd88592c459ed53e6ac7e13",
+                "reference": "0d2a2e1d5d24fe923dd88592c459ed53e6ac7e13",
+                "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^5.3.1",
@@ -38,10 +44,10 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "Apache-2.0"
             ],
             "description": "Business rule provider lib for plugin implementations",
-            "time": "2017-06-23 19:58:49"
+            "time": "2017-10-03 20:56:39"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -203,12 +209,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/promise.git",
-                "reference": "ec953894782a0366a5533677c68972eea848d848"
+                "reference": "179520ec0b25cf4c742d9653be9f4964d64d4a6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise/zipball/ec953894782a0366a5533677c68972eea848d848",
-                "reference": "ec953894782a0366a5533677c68972eea848d848",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/179520ec0b25cf4c742d9653be9f4964d64d4a6e",
+                "reference": "179520ec0b25cf4c742d9653be9f4964d64d4a6e",
                 "shasum": ""
             },
             "require": {
@@ -241,7 +247,7 @@
                 "promise",
                 "promises"
             ],
-            "time": "2017-05-08 18:49:20"
+            "time": "2017-09-19 13:02:44"
         }
     ],
     "packages-dev": [],

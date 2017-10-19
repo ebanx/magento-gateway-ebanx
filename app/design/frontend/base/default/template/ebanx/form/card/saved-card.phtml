@@ -1,0 +1,31 @@
+<?php
+/**
+ * @var Ebanx_Gateway_Model_Usercard $card
+ */
+$skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+?>
+<li class="ebanx-credit-card-option">
+  <input id="card[<?= $card->getEbanxCardId() ?>]" type="radio" name="payment[selected_card]"
+         value="<?= $card->getEbanxCardId() ?>">
+  <label for="card[<?= $card->getEbanxCardId() ?>]">
+    <img src="<?= $skin ?>frontend/base/default/ebanx/icons/<?= $card->getBrand() ?>.png" width="30"/>
+    <span style="margin-left: 10px;">&bull;&bull;&bull;&bull; <?= substr($card->getMaskedNumber(), -4) ?></span>
+  </label>
+
+  <div class="save-card">
+    <label for="<?php echo $_code ?>_cc_cid" class="required"><em>*</em><?= $text['cvv'] ?></label>
+    <div class="input-box">
+      <div class="v-fix">
+        <input type="text" title="Código de segurança"
+               class="input-text cvv validate-cc-cvn ebanx-format-cvc-number" id="<?php echo $_code ?>_cc_cid[<?= $card->getEbanxCardId() ?>]"
+               name="payment[cc_cid][<?= $card->getEbanxCardId() ?>]" value="" autocomplete="off">
+      </div>
+    </div>
+  </div>
+
+  <input type="hidden" name="payment[cc_name][<?= $card->getEbanxCardId() ?>]" value="Ebanx Magento Plugin"/>
+  <input type="hidden" name="payment[ebanx_token][<?= $card->getEbanxCardId() ?>]" value="<?= $card->getToken() ?>"/>
+  <input type="hidden" name="payment[ebanx_brand][<?= $card->getEbanxCardId() ?>]" value="<?= $card->getBrand() ?>"/>
+  <input type="hidden" name="payment[ebanx_masked_card_number][<?= $card->getEbanxCardId() ?>]" value="<?= $card->getMaskedNumber() ?>"/>
+  <input type="hidden" name="payment[ebanx_device_fingerprint][<?= $card->getEbanxCardId() ?>]" value=""/>
+</li>

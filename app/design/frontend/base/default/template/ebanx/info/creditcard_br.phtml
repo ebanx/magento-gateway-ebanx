@@ -1,3 +1,12 @@
-Cartão de Crédito
+<p>Cartão de Crédito</p>
+<br>
+<p>Total a pagar com IOF (0.38%): <?php
+
+  if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
+    echo $this->getLocalAmount('BRL');
+  } else {
+    echo $this->getLocalAmountWithoutTax('BRL');
+  }
+  ?></p>
 
 <?php echo $this->getChildHtml() ?>

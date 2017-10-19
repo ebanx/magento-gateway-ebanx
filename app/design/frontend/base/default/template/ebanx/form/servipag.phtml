@@ -1,15 +1,25 @@
-<?php $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN); ?>
+<?php
+    $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+    $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
+    $icon = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx-servipag.png" width="40" /></div>';
+?>
+
+<?= !$showInlineIcon ? null : $icon?>
 
 <ul class="form-list ebanx-payment-method ebanx-es-method" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
     <li>
         <div class="<?php echo $this->getMethodCode() ?>-instructions-content">
-            <div>
-                <img src="<?= $skin . 'frontend/base/default/ebanx/ebanx-servipag.png' ?>" width="40" />
-            </div>
+
+        	<?= $showInlineIcon ? null : $icon?>
 
             <p class="ebanx-payment-method-desc">Paga con Servipag.</p>
 
             <?php include 'fields.phtml' ?>
         </div>
+    </li>
+    <li>
+      <div class="total-to-pay">
+        <p>Total a pagar en Peso chileno: <strong><?php echo $this->getLocalAmount('CLP') ?></strong>
+      </div>
     </li>
 </ul>

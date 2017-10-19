@@ -40,6 +40,11 @@ function handleEbanxForm(countryCode, paymentType) {
 
   var generateToken = function () {
     if (!responseData) {
+      var placeOrderButton = document.querySelector('#review-buttons-container > button');
+      if (typeof placeOrderButton !== 'undefined' && placeOrderButton) {
+        placeOrderButton.disabled = true;
+      }
+
       EBANX.card.createToken({
         card_number: parseInt(cardNumber.value.replace(/ /g, '')),
         card_name: cardName.value,
@@ -56,6 +61,11 @@ function handleEbanxForm(countryCode, paymentType) {
       ebanxBrand.value = responseData.payment_type_code;
       ebanxMaskedCardNumber.value = responseData.masked_card_number;
       ebanxDeviceFingerprint.value = responseData.deviceId;
+
+      var placeOrderButton = document.querySelector('#review-buttons-container > button');
+      if (typeof placeOrderButton !== 'undefined' && placeOrderButton) {
+        placeOrderButton.disabled = false;
+      }
       return;
     }
   };

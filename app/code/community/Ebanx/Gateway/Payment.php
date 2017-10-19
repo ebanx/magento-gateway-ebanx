@@ -1,6 +1,6 @@
 <?php
 
-abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abstract
+abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 {
 	static protected $redirect_url;
 
@@ -117,9 +117,17 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 			->setEbanxLocalAmount($this->result['payment']['amount_br']);
 
 		if ($this->order->getCustomerId()) {
-			Mage::getModel('customer/customer')->load($this->order->getCustomerId())
-				->setEbanxCustomerDocument($this->helper->getDocumentNumber($this->order, $this->data))
-				->save();
+			$documentNumber = $this->helper->getDocumentNumber($this->order, $this->data);
+			$customer = Mage::getModel('customer/customer')->load($this->order->getCustomerId())
+				->setEbanxCustomerDocument($documentNumber);
+
+			$methodCode = $this->order->getPayment()->getMethodInstance()->getCode();
+			$documentFields = $this->helper->getDocumentFieldsRequiredForMethod($methodCode);
+			foreach ($documentFields as $field) {
+				$fieldValue = Mage::getStoreConfig('payment/ebanx_settings/' . $field) ?: 'taxvat';
+				$customer->setData($fieldValue,$documentNumber);
+			}
+			$customer->save();
 		}
 	}
 
@@ -130,7 +138,8 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 
 	public function isAvailable($quote = null)
 	{
-		return parent::isAvailable() && $this->helper->areKeysFilled();
+		return Mage::getStoreConfig('payment/ebanx_settings/enabled')
+		       && $this->helper->areKeysFilled();
 	}
 
 	public function canUseForCountry($country)
@@ -138,5 +147,14 @@ abstract class Ebanx_Gateway_Model_Payment extends Mage_Payment_Model_Method_Abs
 		$countryName = $this->helper->transformCountryCodeToName($country);
 
 		return $this->gateway->isAvailableForCountry($countryName);
+	}
+
+	public function getTotal()
+	{
+		$quote = $this->getInfoInstance()->getQuote();
+		if (!$quote) {
+			return $this->getInfoInstance()->getOrder()->getPayment()->getEbanxLocalAmount();
+		}
+		return $quote->getGrandTotal();
 	}
 }
