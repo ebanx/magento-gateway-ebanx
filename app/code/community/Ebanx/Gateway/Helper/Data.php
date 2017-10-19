@@ -435,7 +435,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 	 */
 	public function getDocumentFieldsRequiredForMethod($methodCode)
 	{
-		$methodsToFields = [
+		$methodsToFields = array(
 			// Brazil
 			'ebanx_boleto'       => array('cpf_field', 'cnpj_field'),
 			'ebanx_tef'          => array('cpf_field', 'cnpj_field'),
@@ -456,7 +456,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			// Peru
 			'ebanx_pagoefectivo' => array(),
 			'ebanx_safetypay'    => array()
-		];
+		);
 
 		return $methodsToFields[$methodCode];
 	}
