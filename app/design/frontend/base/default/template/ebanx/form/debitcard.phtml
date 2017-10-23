@@ -78,6 +78,8 @@
       </div>
     </li>
 
+    <input type="hidden" name="payment[ebanx_mode]" id="<?php echo $_code ?>_mode"
+            value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
     <input id="card[newcard]" type="hidden" name="payment[selected_card]" value="newcard">
     <input type="hidden" name="payment[ebanx_token][newcard]" id="<?php echo $_code ?>_token"/>
     <input type="hidden" name="payment[ebanx_brand][newcard]" id="<?php echo $_code ?>_brand"/>
