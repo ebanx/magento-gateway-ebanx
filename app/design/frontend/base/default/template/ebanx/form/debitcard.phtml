@@ -18,7 +18,7 @@
     <li>
         <label for="<?php echo $_code ?>_dc_name" class="required"><em>*</em>Titular de la tarjeta</label>
         <div class="input-box">
-            <input type="text" id="<?php echo $_code ?>_dc_name" name="payment[dc_name]"
+            <input type="text" id="<?php echo $_code ?>_dc_name" name="payment[dc_name][newcard]"
                    title="<?php echo Mage::helper('core')->jsQuoteEscape('Titular de la tarjeta') ?>"
                    class="input-text validate-dc-name" value=""/>
         </div>
@@ -26,7 +26,7 @@
     <li>
         <label for="<?php echo $_code ?>_dc_number" class="required"><em>*</em>Número de la tarjeta</label>
         <div class="input-box">
-            <input type="text" id="<?php echo $_code ?>_dc_number" name="payment[dc_number]"
+            <input type="text" id="<?php echo $_code ?>_dc_number"
                    title="<?php echo Mage::helper('core')->jsQuoteEscape('Número de la tarjeta') ?>"
                    class="input-text validate-dc-number ebanx-format-cc-number required-entry" value=""/>
         </div>
@@ -68,7 +68,7 @@
             <div class="v-fix">
                 <input type="text" title="<?php echo Mage::helper('core')->jsQuoteEscape('Código de verificación') ?>"
                        class="input-text cvv required-entry validate-dc-cvn ebanx-format-cvc-number" id="<?php echo $_code ?>_dc_cid"
-                       name="payment[dc_cid]" value=""/>
+                       name="payment[dc_cid][newcard]" value=""/>
             </div>
         </div>
     </li>
@@ -78,17 +78,11 @@
       </div>
     </li>
 
-
-    <input type="hidden" name="payment[ebanx_token]" id="<?php echo $_code ?>_token"/>
-    <input type="hidden" name="payment[ebanx_brand]" id="<?php echo $_code ?>_brand"/>
-    <input type="hidden" name="payment[ebanx_masked_card_number]" id="<?php echo $_code ?>_masked_card_number"/>
-    <input type="hidden" name="payment[ebanx_device_fingerprint]" id="<?php echo $_code ?>_device_fingerprint"/>
-    <input type="hidden" name="payment[ebanx_billing_instalments]" id="ebanx_billing_instalments"/>
-    <input type="hidden" name="payment[ebanx_billing_cvv]" id="ebanx_billing_cvv"/>
-    <input type="hidden" name="payment[ebanx_mode]" id="<?php echo $_code ?>_mode"
-            value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
-    <input type="hidden" name="payment[ebanx_integration_key]" id="<?php echo $_code ?>_integration_key"
-            value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
+    <input id="card[newcard]" type="hidden" name="payment[selected_card]" value="newcard">
+    <input type="hidden" name="payment[ebanx_token][newcard]" id="<?php echo $_code ?>_token"/>
+    <input type="hidden" name="payment[ebanx_brand][newcard]" id="<?php echo $_code ?>_brand"/>
+    <input type="hidden" name="payment[ebanx_masked_card_number][newcard]" id="<?php echo $_code ?>_masked_card_number"/>
+    <input type="hidden" name="payment[ebanx_device_fingerprint][newcard]" id="<?php echo $_code ?>_device_fingerprint"/>
     <input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="mx"/>
 </ul>
 
