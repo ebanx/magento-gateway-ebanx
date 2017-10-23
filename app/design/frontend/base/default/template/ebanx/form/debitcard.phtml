@@ -86,6 +86,10 @@
     <input type="hidden" name="payment[ebanx_masked_card_number][newcard]" id="<?php echo $_code ?>_masked_card_number"/>
     <input type="hidden" name="payment[ebanx_device_fingerprint][newcard]" id="<?php echo $_code ?>_device_fingerprint"/>
     <input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="mx"/>
+
+    <input type="hidden" name="payment[ebanx_integration_key]" id="<?php echo $_code ?>_integration_key"
+            value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
+    <input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="mx"/>
 </ul>
 
 
