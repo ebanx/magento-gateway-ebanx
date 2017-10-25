@@ -384,6 +384,9 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			case 'baloto':
 				$url = $payment['baloto_url'];
 				break;
+			case 'spei':
+				$url = $payment['spei_url'];
+				break;
 		}
 
 		return "{$url}&format={$format}";
@@ -423,6 +426,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_cc_mx',
 			'ebanx_dc_mx',
 			'ebanx_oxxo',
+			'ebanx_spei',
 			'ebanx_safetypay',
 			'ebanx_pagoefectivo'
 		);
