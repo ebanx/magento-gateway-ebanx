@@ -70,10 +70,12 @@ $icon           = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx
 
   var selectInstalment = document.getElementById('<?= $_code ?>_instalments');
 
-  selectInstalment.onchange = function (){
-    var text = document.getElementById('cc-<?= $lowerCountry ?>-local-amount');
-    text.innerHTML = '<strong>' + selectInstalment.options[selectInstalment.selectedIndex].getAttribute('data-local-amount') + '</strong>';
-  };
+  if (selectInstalment) {
+    selectInstalment.onchange = function (){
+      var text = document.getElementById('cc-<?= $lowerCountry ?>-local-amount');
+      text.innerHTML = '<strong>' + selectInstalment.options[selectInstalment.selectedIndex].getAttribute('data-local-amount') + '</strong>';
+    };
+  }
 </script>
 
 <style rel="stylesheet" type="text/css">
