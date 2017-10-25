@@ -451,6 +451,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_pse'          => array('dni_field'),
 			// Mexico
 			'ebanx_oxxo'         => array(),
+			'ebanx_spei'         => array(),
 			'ebanx_cc_mx'        => array(),
 			'ebanx_dc_mx'        => array(),
 			// Peru

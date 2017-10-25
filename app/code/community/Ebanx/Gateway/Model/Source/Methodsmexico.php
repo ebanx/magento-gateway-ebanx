@@ -21,6 +21,10 @@ class Ebanx_Gateway_Model_Source_Methodsmexico
 				'value' => self::OXXO,
 				'label' => Mage::helper('ebanx')->__('OXXO')
 			),
+			array(
+				'value' => self::SPEI,
+				'label' => Mage::helper('ebanx')->__('SPEI')
+			),
 		);
 	}
 }
