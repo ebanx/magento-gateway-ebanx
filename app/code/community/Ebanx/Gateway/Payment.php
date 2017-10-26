@@ -131,6 +131,17 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 		}
 	}
 
+	public function refund(Varien_Object $payment, $amount)
+	{
+		$hash = $payment->getEbanxPaymentHash();
+		$result = $this->ebanx->refund()->requestByHash($hash, $amount, $this->helper->__('Refund requested by Magento Admin Panel'));
+		if($result['status'] === 'ERROR') {
+			$errorMsg = $this->helper->__('Error processing refund: '.$result['status_message'].' ('.$result['status_code'].')');
+			Mage::throwException($errorMsg);
+		}
+		return $this;
+	}
+
 	public function getOrderPlaceRedirectUrl()
 	{
 		return self::$redirect_url;
