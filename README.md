@@ -36,7 +36,7 @@ If you have getting trouble to set up Docker, make sure you've changed the exter
 
 - [X] Benjamin Integration
 - [X] Settings Page
-- [ ] Refunds
+- [X] Refunds
 - [ ] Payment by link
 - [X] Checkout Manager and Compliance Fields
 - [X] Debug Log
@@ -55,19 +55,25 @@ If you have getting trouble to set up Docker, make sure you've changed the exter
     - [X] Credit Card
     - [X] TEF
     - [X] EBANX Wallet
-  - [X] Mexico
+  - [ ] Mexico
     - [X] OXXO
     - [X] Debit Card
     - [X] Credit Card
+    - [ ] SPEI
   - [X] Peru
     - [X] Pago Efectivo
     - [X] SafetyPay
   - [X] Chile
     - [X] Sencillito
     - [X] ServiPag
-  - [X] Colombia
+  - [ ] Colombia
     - [X] Baloto
     - [X] PSE
+    - [ ] Credit Card
+  - [ ] Argentina
+    - [ ] Rapipago
+    - [ ] PagoFacil
+    - [ ] Otros
 
 ## License
 
