@@ -91,7 +91,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 			$code = $res['status_code'];
 
 			$this->helper->errorLog($res);
-			Mage::throwException($error->getError($code, $country));
+			Mage::throwException($error->getError($code, $country)." ($code)");
 		}
 
 		if ($res['payment']['status'] === 'CA') {
@@ -139,7 +139,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 	public function isAvailable($quote = null)
 	{
 		return Mage::getStoreConfig('payment/ebanx_settings/enabled')
-		       && $this->helper->areKeysFilled();
+			&& $this->helper->areKeysFilled();
 	}
 
 	public function canUseForCountry($country)
