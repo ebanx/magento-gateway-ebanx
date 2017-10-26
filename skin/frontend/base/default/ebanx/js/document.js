@@ -39,18 +39,17 @@ var changeTaxVatLabel = function () {
   setTimeout(function(){taxVatInput.placeholder = '';}, 10);
 
   taxVatLabel.innerHTML = newLabel;
-  if(taxVatInput && (country === 'BR' || country === 'CO' || country === 'CL')) {
+  if(country === 'BR' || country === 'CO' || country === 'CL') {
       setTimeout(function(){taxVatInput.placeholder = newLabel;}, 10)
-    }
-
-  if (country === 'BR' && taxVatInput) {
-    var taxVatMask = newLabel.indexOf('CNPJ') !== -1 ? ['999.999.999-99', '99.999.999/9999-99'] : ['999.999.999-99', '999.999.999-99'];
-    VMasker(taxVatInput).maskPattern(taxVatMask[0]);
-    taxVatInput.addEventListener('input', inputHandler.bind(undefined, taxVatMask, 14), false);
-    return true;
   }
 
   VMasker(taxVatInput).unMask();
+
+  if (country === 'BR') {
+    var taxVatMask = newLabel.indexOf('CNPJ') !== -1 ? ['999.999.999-99', '99.999.999/9999-99'] : ['999.999.999-99', '999.999.999-99'];
+    VMasker(taxVatInput).maskPattern(taxVatMask[0]);
+    taxVatInput.addEventListener('input', inputHandler.bind(undefined, taxVatMask, 14), false);
+  }
 };
 
 var init = function () {
@@ -62,7 +61,7 @@ var init = function () {
     taxVatLabel = amsCheckoutHandler();
   }
 
-  if (taxVatLabel && countrySelect) {
+  if (taxVatLabel && countrySelect && taxVatInput) {
     defaultLabel = taxVatLabel.innerHTML;
 
     countrySelect.addEventListener('change', changeTaxVatLabel);
