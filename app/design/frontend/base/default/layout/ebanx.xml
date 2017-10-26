@@ -59,6 +59,7 @@
     </ebanx_amscheckout_handle>
     <checkout_onepage_index>
         <update handle="ebanx_checkout_handle"/>
+        <update handle="ebanx_amscheckout_handle"/>
     </checkout_onepage_index>
     <oscheckout_index_index>
         <update handle="ebanx_checkout_handle"/>
@@ -70,10 +71,6 @@
         <update handle="ebanx_checkout_handle"/>
         <update handle="ebanx_onestepcheckout_handle"/>
     </onestepcheckout_index_index>
-    <amscheckout_index_index>
-        <update handle="ebanx_checkout_handle"/>
-        <update handle="ebanx_amscheckout_handle"/>
-    </amscheckout_index_index>
     <typostores_onestepcheckout_index_index>
         <update handle="ebanx_checkout_handle"/>
     </typostores_onestepcheckout_index_index>
