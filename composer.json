@@ -9,5 +9,12 @@
   "minimum-stability": "dev",
   "require": {
     "ebanx/benjamin": "master"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "*",
+    "magento-ecg/coding-standard": "dev-master"
+  },
+  "scripts": {
+    "style": "phpcs --standard=./lib/Ebanx/vendor/magento-ecg/coding-standard/Ecg . --ignore=./lib --extensions=php"
   }
 }
