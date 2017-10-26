@@ -424,7 +424,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_dc_mx',
 			'ebanx_oxxo',
 			'ebanx_safetypay',
-			'ebanx_pagoefectivo'
+			'ebanx_pagoefectivo',
+			'ebanx_rapipago',
 		);
 		return in_array($code, $ebanxMethods);
 	}
@@ -435,7 +436,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 	 */
 	public function getDocumentFieldsRequiredForMethod($methodCode)
 	{
-		$methodsToFields = [
+		$methodsToFields = array(
 			// Brazil
 			'ebanx_boleto'       => array('cpf_field', 'cnpj_field'),
 			'ebanx_tef'          => array('cpf_field', 'cnpj_field'),
@@ -455,8 +456,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_dc_mx'        => array(),
 			// Peru
 			'ebanx_pagoefectivo' => array(),
-			'ebanx_safetypay'    => array()
-		];
+			'ebanx_safetypay'    => array(),
+			//Argentina
+			'ebanx_rapipago'     => array(),
+		);
 
 		return $methodsToFields[$methodCode];
 	}
