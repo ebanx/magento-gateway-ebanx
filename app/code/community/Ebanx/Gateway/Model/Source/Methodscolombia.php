@@ -4,6 +4,7 @@ class Ebanx_Gateway_Model_Source_Methodscolombia
 {
 	const EFT = 'ebanx_pse';
 	const BALOTO = 'ebanx_baloto';
+	const CREDIT_CARD = 'ebanx_cc_co';
 
 	public function toOptionArray()
 	{
@@ -15,6 +16,10 @@ class Ebanx_Gateway_Model_Source_Methodscolombia
 			array(
 				'value' => self::BALOTO,
 				'label' => Mage::helper('ebanx')->__('Baloto')
+			),
+			array(
+				'value' => self::CREDIT_CARD,
+				'label' => Mage::helper('ebanx')->__('Credit Card')
 			),
 		);
 	}
