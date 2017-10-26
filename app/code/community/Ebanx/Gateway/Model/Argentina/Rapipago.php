@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Model_Mexico_Rapipago extends Ebanx_Gateway_Payment
+class Ebanx_Gateway_Model_Argentina_Rapipago extends Ebanx_Gateway_Payment
 {
 	protected $_code = 'ebanx_rapipago';
 

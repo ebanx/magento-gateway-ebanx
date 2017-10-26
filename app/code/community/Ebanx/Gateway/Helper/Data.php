@@ -227,6 +227,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'co' => Country::COLOMBIA,
 			'mx' => Country::MEXICO,
 			'pe' => Country::PERU,
+			'ar' => Country::ARGENTINA,
 		);
 
 		$countryIndex = strtolower($countryCode);
