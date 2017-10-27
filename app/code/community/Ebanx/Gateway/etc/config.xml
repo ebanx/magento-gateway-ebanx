@@ -235,6 +235,13 @@
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_pagofacil>
+            <ebanx_otroscupones>
+                <active>1</active>
+                <model>ebanx/argentina_otroscupones</model>
+                <title>Otros Cupones</title>
+                <payment_action>sale</payment_action>
+                <sort_order>2</sort_order>
+            </ebanx_otroscupones>
             <!-- Settings -->
             <ebanx_settings>
                 <brazil_taxes>cpf</brazil_taxes>
@@ -247,6 +254,7 @@
                 <payment_methods_peru>ebanx_pagoefectivo,ebanx_safetypay</payment_methods_peru>
                 <payment_methods_mexico>ebanx_oxxo,ebanx_spei,ebanx_cc_mx,ebanx_dc_mx</payment_methods_mexico>
                 <payment_methods_argentina>ebanx_rapipago,ebanx_pagofacil</payment_methods_argentina>
+                <payment_methods_argentina>ebanx_rapipago,ebanx_otroscupones</payment_methods_argentina>
 
                 <payment_methods_visualization>1</payment_methods_visualization>
                 <save_card_data>1</save_card_data>

@@ -135,6 +135,8 @@
                        as="ebanx_rapipago" template="ebanx/checkout/success/rapipago.phtml"/>
                 <block type="ebanx/checkout_success_payment_pagofacil" name="ebanx.success.payment.pagofacil"
                        as="ebanx_pagofacil" template="ebanx/checkout/success/pagofacil.phtml"/>
+                <block type="ebanx/checkout_success_payment_otroscupones" name="ebanx.success.payment.rapipago"
+                       as="ebanx_otroscupones" template="ebanx/checkout/success/otroscupones.phtml"/>
             </block>
         </reference>
     </ebanx_checkout_success_handle>
