@@ -435,6 +435,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_safetypay',
 			'ebanx_pagoefectivo',
 			'ebanx_rapipago',
+			'ebanx_pagofacil',
 		);
 		return in_array($code, $ebanxMethods);
 	}
@@ -470,6 +471,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_safetypay'    => array(),
 			//Argentina
 			'ebanx_rapipago'     => array(),
+			'ebanx_pagofacil'     => array(),
 		);
 
 		return $methodsToFields[$methodCode];
