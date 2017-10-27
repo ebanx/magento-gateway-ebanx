@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d2eb023bb6be291025e225b9859a1bc0",
-    "content-hash": "8d5cc83ea22ac4a5902cf2165e47e6a7",
+    "content-hash": "dd85cbd6177d077ba1bbb4ad29d429fb",
     "packages": [
         {
             "name": "ebanx/benjamin",
@@ -13,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ebanx/benjamin.git",
-                "reference": "0d2a2e1d5d24fe923dd88592c459ed53e6ac7e13"
+                "reference": "fce00e647bb1752de3dfaff0bebc3fed27100de6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/0d2a2e1d5d24fe923dd88592c459ed53e6ac7e13",
-                "reference": "0d2a2e1d5d24fe923dd88592c459ed53e6ac7e13",
+                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/fce00e647bb1752de3dfaff0bebc3fed27100de6",
+                "reference": "fce00e647bb1752de3dfaff0bebc3fed27100de6",
                 "shasum": ""
             },
             "require": {
@@ -47,7 +46,7 @@
                 "Apache-2.0"
             ],
             "description": "Business rule provider lib for plugin implementations",
-            "time": "2017-10-03 20:56:39"
+            "time": "2017-10-17 21:17:09"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -250,10 +249,97 @@
             "time": "2017-09-19 13:02:44"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "magento-ecg/coding-standard",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/magento-ecg/coding-standard.git",
+                "reference": "7ead7cecf35e3dc583a7a35b4257ba85317b4b26"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/magento-ecg/coding-standard/zipball/7ead7cecf35e3dc583a7a35b4257ba85317b4b26",
+                "reference": "7ead7cecf35e3dc583a7a35b4257ba85317b4b26",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Magento Expert Consulting Group",
+                    "homepage": "http://magentocommerce.com/consulting",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "A set of PHP_CodeSniffer rules and sniffs.",
+            "homepage": "https://github.com/magento-ecg/coding-standard",
+            "time": "2017-08-08T21:48:13+00:00"
+        },
+        {
+            "name": "squizlabs/php_codesniffer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
+                "reference": "d667e245d5dcd4d7bf80f26f2c947d476b66213e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/d667e245d5dcd4d7bf80f26f2c947d476b66213e",
+                "reference": "d667e245d5dcd4d7bf80f26f2c947d476b66213e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "ext-tokenizer": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0"
+            },
+            "bin": [
+                "bin/phpcs",
+                "bin/phpcbf"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Greg Sherwood",
+                    "role": "lead"
+                }
+            ],
+            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
+            "homepage": "http://www.squizlabs.com/php-codesniffer",
+            "keywords": [
+                "phpcs",
+                "standards"
+            ],
+            "time": "2017-10-16T22:40:25+00:00"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "magento-ecg/coding-standard": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

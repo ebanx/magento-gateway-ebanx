@@ -424,6 +424,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_multicaja',
 			'ebanx_pse',
 			'ebanx_baloto',
+			'ebanx_cc_co',
 			'ebanx_cc_mx',
 			'ebanx_dc_mx',
 			'ebanx_oxxo',
@@ -454,6 +455,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			// Colombia
 			'ebanx_baloto'       => array('dni_field'),
 			'ebanx_pse'          => array('dni_field'),
+			'ebanx_cc_co'        => array('dni_field'),
 			// Mexico
 			'ebanx_oxxo'         => array(),
 			'ebanx_cc_mx'        => array(),

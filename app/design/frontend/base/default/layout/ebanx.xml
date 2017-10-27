@@ -59,6 +59,7 @@
     </ebanx_amscheckout_handle>
     <checkout_onepage_index>
         <update handle="ebanx_checkout_handle"/>
+        <update handle="ebanx_amscheckout_handle"/>
     </checkout_onepage_index>
     <oscheckout_index_index>
         <update handle="ebanx_checkout_handle"/>
@@ -70,10 +71,6 @@
         <update handle="ebanx_checkout_handle"/>
         <update handle="ebanx_onestepcheckout_handle"/>
     </onestepcheckout_index_index>
-    <amscheckout_index_index>
-        <update handle="ebanx_checkout_handle"/>
-        <update handle="ebanx_amscheckout_handle"/>
-    </amscheckout_index_index>
     <typostores_onestepcheckout_index_index>
         <update handle="ebanx_checkout_handle"/>
     </typostores_onestepcheckout_index_index>
@@ -119,6 +116,8 @@
                 <!-- Colombia -->
                 <block type="ebanx/checkout_success_payment_baloto" name="ebanx.success.payment.baloto"
                        as="ebanx_baloto" template="ebanx/checkout/success/baloto.phtml"/>
+                <block type="ebanx/checkout_success_payment_creditcardco" name="ebanx.success.payment.creditcardco"
+                       as="ebanx_cc_co" template="ebanx/checkout/success/creditcardco.phtml"/>
                 <!-- Mexico -->
                 <block type="ebanx/checkout_success_payment_oxxo" name="ebanx.success.payment.oxxo" as="ebanx_oxxo"
                        template="ebanx/checkout/success/oxxo.phtml"/>

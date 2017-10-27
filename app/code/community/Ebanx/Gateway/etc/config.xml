@@ -133,6 +133,13 @@
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_baloto>
+            <ebanx_cc_co>
+                <active>1</active>
+                <model>ebanx/colombia_creditcard</model>
+                <title>Tarjeta de Credito</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_cc_co>
             <ebanx_pse>
                 <active>1</active>
                 <model>ebanx/colombia_pse</model>
@@ -222,7 +229,7 @@
                 <payment_methods_brazil>ebanx_cc_br,ebanx_boleto,ebanx_tef,ebanx_wallet</payment_methods_brazil>
                 <payment_methods_chile>ebanx_sencillito,ebanx_servipag,ebanx_webpay</payment_methods_chile>
                 <payment_methods_chile>ebanx_sencillito,ebanx_servipag,ebanx_multicaja,ebanx_webpay</payment_methods_chile>
-                <payment_methods_colombia>ebanx_baloto,ebanx_pse</payment_methods_colombia>
+                <payment_methods_colombia>ebanx_baloto,ebanx_pse,ebanx_cc_co</payment_methods_colombia>
                 <payment_methods_peru>ebanx_pagoefectivo,ebanx_safetypay</payment_methods_peru>
                 <payment_methods_mexico>ebanx_oxxo,ebanx_cc_mx,ebanx_dc_mx</payment_methods_mexico>
                 <payment_methods_argentina>ebanx_rapipago</payment_methods_argentina>
