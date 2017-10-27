@@ -199,6 +199,13 @@
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_oxxo>
+            <ebanx_spei>
+                <active>1</active>
+                <model>ebanx/mexico_spei</model>
+                <title>SPEI</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_spei>
             <ebanx_cc_mx>
                 <active>1</active>
                 <model>ebanx/mexico_creditcard</model>
@@ -231,7 +238,7 @@
                 <payment_methods_chile>ebanx_sencillito,ebanx_servipag,ebanx_multicaja,ebanx_webpay</payment_methods_chile>
                 <payment_methods_colombia>ebanx_baloto,ebanx_pse,ebanx_cc_co</payment_methods_colombia>
                 <payment_methods_peru>ebanx_pagoefectivo,ebanx_safetypay</payment_methods_peru>
-                <payment_methods_mexico>ebanx_oxxo,ebanx_cc_mx,ebanx_dc_mx</payment_methods_mexico>
+                <payment_methods_mexico>ebanx_oxxo,ebanx_spei,ebanx_cc_mx,ebanx_dc_mx</payment_methods_mexico>
                 <payment_methods_argentina>ebanx_rapipago</payment_methods_argentina>
 
                 <payment_methods_visualization>1</payment_methods_visualization>

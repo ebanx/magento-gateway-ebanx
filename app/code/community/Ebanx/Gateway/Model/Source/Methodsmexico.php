@@ -5,6 +5,7 @@ class Ebanx_Gateway_Model_Source_Methodsmexico
 	const CREDIT_CARD = 'ebanx_cc_mx';
 	const DEBIT_CARD = 'ebanx_dc_mx';
 	const OXXO = 'ebanx_oxxo';
+	const SPEI = 'ebanx_spei';
 
 	public function toOptionArray()
 	{
@@ -20,6 +21,10 @@ class Ebanx_Gateway_Model_Source_Methodsmexico
 			array(
 				'value' => self::OXXO,
 				'label' => Mage::helper('ebanx')->__('OXXO')
+			),
+			array(
+				'value' => self::SPEI,
+				'label' => Mage::helper('ebanx')->__('SPEI')
 			),
 		);
 	}
