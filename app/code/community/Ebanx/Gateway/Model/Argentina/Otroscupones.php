@@ -1,8 +1,8 @@
 <?php
 
-class Ebanx_Gateway_Model_Argentina_Rapipago extends Ebanx_Gateway_Payment
+class Ebanx_Gateway_Model_Argentina_Otroscupones extends Ebanx_Gateway_Payment
 {
-	protected $_code = 'ebanx_otros_cupones';
+	protected $_code = 'ebanx_otroscupones';
 
 	protected $_formBlockType = 'ebanx/form_otroscupones';
 	protected $_infoBlockType = 'ebanx/info_otroscupones';

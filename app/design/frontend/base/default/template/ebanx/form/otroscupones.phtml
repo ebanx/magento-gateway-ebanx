@@ -1,7 +1,7 @@
 <?php
     $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
     $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
-    $icon = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx-rapipago.png" heigth="30" /></div>';
+    $icon = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx-cupon.png" heigth="30" /></div>';
 ?>
 
 <?= !$showInlineIcon ? null : $icon?>
@@ -12,7 +12,7 @@
 
         	<?= $showInlineIcon ? null : $icon?>
 
-            <p class="ebanx-payment-method-desc">Paga con Rapipago.</p>
+            <p class="ebanx-payment-method-desc">Paga con Otros Cupones.</p>
 
             <?php include 'fields.phtml' ?>
         </div>

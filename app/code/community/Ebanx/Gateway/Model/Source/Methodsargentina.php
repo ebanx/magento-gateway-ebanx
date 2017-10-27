@@ -3,7 +3,7 @@
 class Ebanx_Gateway_Model_Source_Methodsargentina
 {
 	const RAPIPAGO = 'ebanx_rapipago';
-	const OTROS_CUPONES = 'ebanx_otros_cupones';
+	const OTROS_CUPONES = 'ebanx_otroscupones';
 
 	public function toOptionArray()
 	{
