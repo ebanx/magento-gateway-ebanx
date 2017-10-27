@@ -227,6 +227,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'co' => Country::COLOMBIA,
 			'mx' => Country::MEXICO,
 			'pe' => Country::PERU,
+			'ar' => Country::ARGENTINA,
 		);
 
 		$countryIndex = strtolower($countryCode);
@@ -387,6 +388,9 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			case 'spei':
 				$url = $payment['spei_url'];
 				break;
+			case 'rapipago':
+				$url = $payment['voucher_url'];
+				break;
 		}
 
 		return "{$url}&format={$format}";
@@ -429,7 +433,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_oxxo',
 			'ebanx_spei',
 			'ebanx_safetypay',
-			'ebanx_pagoefectivo'
+			'ebanx_pagoefectivo',
+			'ebanx_rapipago',
 		);
 		return in_array($code, $ebanxMethods);
 	}
@@ -440,7 +445,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 	 */
 	public function getDocumentFieldsRequiredForMethod($methodCode)
 	{
-		$methodsToFields = [
+		$methodsToFields = array(
 			// Brazil
 			'ebanx_boleto'       => array('cpf_field', 'cnpj_field'),
 			'ebanx_tef'          => array('cpf_field', 'cnpj_field'),
@@ -462,8 +467,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_dc_mx'        => array(),
 			// Peru
 			'ebanx_pagoefectivo' => array(),
-			'ebanx_safetypay'    => array()
-		];
+			'ebanx_safetypay'    => array(),
+			//Argentina
+			'ebanx_rapipago'     => array(),
+		);
 
 		return $methodsToFields[$methodCode];
 	}

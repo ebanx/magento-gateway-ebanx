@@ -130,6 +130,9 @@
                 <!-- Peru -->
                 <block type="ebanx/checkout_success_payment_pagoefectivo" name="ebanx.success.payment.pagoefectivo"
                        as="ebanx_pagoefectivo" template="ebanx/checkout/success/pagoefectivo.phtml"/>
+                <!-- Argentina -->
+                <block type="ebanx/checkout_success_payment_rapipago" name="ebanx.success.payment.rapipago"
+                       as="ebanx_rapipago" template="ebanx/checkout/success/rapipago.phtml"/>
             </block>
         </reference>
     </ebanx_checkout_success_handle>
