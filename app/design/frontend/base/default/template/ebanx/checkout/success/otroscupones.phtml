@@ -1,0 +1,31 @@
+<?php
+$order = $this->getOrder();
+$payment = $this->getPayment();
+$dueDate = $this->helper->getDueDate($order->getEbanxDueDate(), 'dd/MM');
+?>
+<div class="ebanx-details">
+    <p>¡Listo <?= $order->getBillingAddress()->getFirstname() ?>! Tu cupon EBANX de pago ha sido generada.</p>
+
+    <p>Enviamos una copia a <strong><?= $order->getBillingAddress()->getEmail() ?></strong>.</p>
+
+    <p>No lo olvides: tu boleta vence el día <strong><?= $dueDate; ?></strong>. Después de esa fecha no será posible
+        realizar el pago y la boleta será cancelada automáticamente.</p>
+
+    <p>Si tienes dudas, por favor escribe a <a href="mailto:soporte@ebanx.com">soporte@ebanx.com</a>.</p>
+
+    <div class="ebanx-groups">
+        <div class="ebanx-group">
+            <a href="<?= $this->getEbanxUrlPdf() ?>" target="_blank" class="button">Guardar como PDF</a>
+        </div>
+        <div class="ebanx-group">
+            <a href="<?= $this->getEbanxUrlPrint() ?>" target="_blank" class="button">Imprimir Voucher</a>
+        </div>
+    </div>
+
+    <div class="ebanx-cash-payment">
+        <iframe id="ebanx-cupon-frame" src="<?php echo $this->getVoucherUrl(); ?>"
+                style="width: 100%; border: 0px; height: 600px"></iframe>
+    </div>
+
+    <?php include 'apps.phtml' ?>
+</div>

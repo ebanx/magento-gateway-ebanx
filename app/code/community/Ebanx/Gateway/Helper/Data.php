@@ -391,6 +391,11 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			case 'rapipago':
 				$url = $payment['voucher_url'];
 				break;
+			case 'cupon':
+				$url = $payment['voucher_url'];
+				break;
+			default:
+				$url = '';
 		}
 
 		return "{$url}&format={$format}";
