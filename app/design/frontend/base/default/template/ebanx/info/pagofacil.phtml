@@ -1,0 +1,13 @@
+<p>Pago Facil</p>
+<br>
+<p>Total a pagar en Peso argentino: <?php
+
+  if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
+    echo $this->getLocalAmount('ARS');
+  } else {
+    echo $this->getLocalAmountWithoutTax('ARS');
+  }
+  ?></p>
+
+<?php echo $this->getChildHtml() ?>
+
