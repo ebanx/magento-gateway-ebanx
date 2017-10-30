@@ -5,7 +5,7 @@ $localCurrency  = $this->localCurrency;
 $skin           = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 $_code          = $this->getMethodCode();
 $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
-$icon           = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx-credit-card-' . $lowerCountry . '.png" height="30" /></div>';
+$icon           = '<div><img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-credit-card-' . $lowerCountry . '.png" /></div>';
 ?>
 
 <?= !$showInlineIcon ? null : $icon ?>
