@@ -255,7 +255,7 @@
                         <auto_capture translate="label">
                             <label>Auto-Capture</label>
                             <comment>Automatically capture payments from your customers, just for credit card. Otherwise
-                                you will need to capture the payment manually. Not captured payments will be cancelled
+                                you will need to capture the payment manually by creating an invoice for each order. Not captured payments will be cancelled
                                 in 4 days.
                             </comment>
                             <frontend_type>select</frontend_type>
