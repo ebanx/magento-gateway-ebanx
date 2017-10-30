@@ -2,7 +2,7 @@
     $_code = $this->getMethodCode();
     $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
     $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
-    $icon = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx-debit-card.png" width="141" /></div>';
+    $icon = '<div><img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-debit-card.png" /></div>';
 ?>
 
 <?= !$showInlineIcon ? null : $icon?>
