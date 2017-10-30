@@ -94,10 +94,20 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 		));
 	}
 
+	/**
+	 * @param Varien_Object $address
+	 * @param Varien_Object $data
+	 * @return Address
+	 */
 	public function transformAddress($address, $data)
 	{
 		$street = $this->helper->split_street($address->getStreet1());
 		$state = $address->getRegion();
+
+		$streetNumberField = Mage::getStoreConfig('payment/ebanx_settings/street_number_field');
+		if ($streetNumberField && isset($address->getData()[$streetNumberField])) {
+			$street['houseNumber'] = $address->getData()[$streetNumberField];
+		}
 
 		if ($address->getCountry() === 'BR') {
 			$state = preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml|caron);~i', '$1', htmlentities($state, ENT_QUOTES, 'UTF-8'));
