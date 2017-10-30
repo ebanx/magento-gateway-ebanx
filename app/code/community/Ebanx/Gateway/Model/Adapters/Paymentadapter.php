@@ -64,7 +64,7 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 		$code = $data->getPaymentType();
 
 		$payment->card = new Card(array(
-			'autoCapture' => true,
+			'autoCapture' => $this->shouldAutoCapture(),
 			'cvv' => $gatewayFields[$code . '_cid'][$selectedCard],
 			'dueDate' => $this->transformDueDate($gatewayFields, $code),
 			'name' => $gatewayFields[$code . '_name'][$selectedCard],
@@ -73,6 +73,13 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 		));
 
 		return $payment;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	private function shouldAutoCapture() {
+		return Mage::getStoreConfig('payment/ebanx_settings/auto_capture') === '1';
 	}
 
 	/**
