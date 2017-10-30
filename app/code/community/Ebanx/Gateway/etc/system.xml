@@ -416,6 +416,22 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </dni_field>
+                        <optional_fields_title translate="label">
+                            <label>Optional Fields</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>420</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </optional_fields_title>
+                        <street_number_field translate="label">
+                            <label>Street Number</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>421</sort_order>
+                            <comment>EBANX uses the number typed on Address field as street number. If you use a custom field for it you can type its name here.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </street_number_field>
                     </fields>
                 </ebanx_settings>
             </groups>
