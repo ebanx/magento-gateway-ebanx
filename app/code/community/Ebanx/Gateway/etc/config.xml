@@ -70,11 +70,11 @@
         <sales>
             <quote>
                 <totals>
-                    <ebanx>
-                        <class>ebanx/quote_total</class>
+                    <ebanx_interest>
+                        <class>ebanx/quote_interest</class>
                         <after>discount</after>
                         <before>tax</before>
-                    </ebanx>
+                    </ebanx_interest>
                     <ebanx_local_tax>
                         <class>ebanx/quote_localtax</class>
                         <after>discount</after>
