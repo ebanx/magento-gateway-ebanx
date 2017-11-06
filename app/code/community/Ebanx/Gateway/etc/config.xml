@@ -75,6 +75,11 @@
                         <after>discount</after>
                         <before>tax</before>
                     </ebanx>
+                    <ebanx_local_tax>
+                        <class>ebanx/quote_localtax</class>
+                        <after>discount</after>
+                        <before>tax</before>
+                    </ebanx_local_tax>
                 </totals>
             </quote>
         </sales>
