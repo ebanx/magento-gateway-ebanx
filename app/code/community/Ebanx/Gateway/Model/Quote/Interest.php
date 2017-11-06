@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Model_Quote_Total extends Mage_Sales_Model_Quote_Address_Total_Abstract
+class Ebanx_Gateway_Model_Quote_Interest extends Mage_Sales_Model_Quote_Address_Total_Abstract
 {
 	public function __construct()
 	{
