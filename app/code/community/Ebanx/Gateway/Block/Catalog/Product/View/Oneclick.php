@@ -116,7 +116,15 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	 */
 	private function getMethod()
 	{
-		return $this->getCountry() === 'MX' ? new Ebanx_Gateway_Model_Mexico_Creditcard() : new Ebanx_Gateway_Model_Brazil_Creditcard();
+		switch ($this->getCountry()) {
+			case 'BR':
+				return new Ebanx_Gateway_Model_Mexico_Creditcard();
+			case 'CO':
+				return new Ebanx_Gateway_Model_Colombia_Creditcard();
+			case 'MX':
+			default:
+				return new Ebanx_Gateway_Model_Mexico_Creditcard();
+		}
 	}
 
 	public function formatInstalment($instalment, $localCurrency)
