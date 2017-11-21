@@ -107,7 +107,7 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
 		$this->reservedOrderId = $this->reservedOrderId->getEntityType('order')
 													   ->fetchNewIncrementId($this->storeId);
 
-		$currencyCode = Mage::app()->getBaseCurrencyCode();
+		$currencyCode = Mage::app()->getCurrentCurrencyCode();
 		$this->order  = Mage::getModel('sales/order');
 		$this->order  = $this->order->setIncrementId($this->reservedOrderId)
 									->setStoreId($this->storeId)
