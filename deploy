@@ -28,7 +28,7 @@ if ($phpversion !== '5.4') {
 echo "Removing old vendor..." . PHP_EOL;
 system("rm -rf lib/Ebanx/vendor");
 echo "Downloading dependencies..." . PHP_EOL;
-system("composer install");
+system("composer install --no-dev");
 
 system("rm -f magento-gateway-ebanx.zip");
 echo "Creating zip file..." . PHP_EOL;
