@@ -32,8 +32,6 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 
 			if (strtoupper($statusEbanx) === 'CO'
 			    && Mage::helper('ebanx')->isEbanxMethod($this->_getPaymentMethod($this->order))) {
-				$this->order->setEmailSent(true);
-				$this->order->sendNewOrderEmail();
 			}
 
 			$this->setResponseToJson(array(

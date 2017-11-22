@@ -98,6 +98,9 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 			Mage::throwException($error->getError('GENERAL', $country));
 		}
 
+		$this->order->setEmailSent(true);
+		$this->order->sendNewOrderEmail();
+
 		// Set the URL for redirect
 		if (!empty($res['redirect_url'])) {
 			self::$redirect_url = $res['redirect_url'];
