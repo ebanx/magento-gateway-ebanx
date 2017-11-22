@@ -362,7 +362,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		);
 	}
 
-	public function getVoucherUrlByHash($hash, $format = 'basic')
+	public function getVoucherUrlByHash($hash, $format = '')
 	{
 		$res = $this->getPaymentByHash($hash);
 
