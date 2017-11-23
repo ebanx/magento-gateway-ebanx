@@ -14,14 +14,11 @@ class Ebanx_Gateway_Model_Import extends Mage_Directory_Model_Currency_Import_Ab
 	 * @param   string $currencyFrom
 	 * @param   string $currencyTo
 	 *
-	 * @return  float
+	 * @return  float|null
 	 */
 	protected function _convert( $currencyFrom, $currencyTo ) {
 		$this->ebanx = Mage::getSingleton('ebanx/api')->ebanx();
 		$rate = $this->ebanx->exchange()->fetchRate($currencyFrom, $currencyTo);
-		if ($rate === 0) {
-			return null;
-		}
-		return $rate;
+		return $rate ?: null;
 	}
 }
