@@ -302,10 +302,5 @@
                 <dni_field>taxvat</dni_field>
             </ebanx_settings>
         </payment>
-        <currency>
-            <ebanx_rates>
-                <timeout>60</timeout>
-            </ebanx_rates>
-        </currency>
     </default>
 </config>
