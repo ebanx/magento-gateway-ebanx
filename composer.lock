@@ -4,6 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+    "hash": "d413dcd5db64fa8a583976524b4907a5",
     "content-hash": "dd85cbd6177d077ba1bbb4ad29d429fb",
     "packages": [
         {
@@ -12,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ebanx/benjamin.git",
-                "reference": "fce00e647bb1752de3dfaff0bebc3fed27100de6"
+                "reference": "6a251f5289d583998e9947e3c3b49ffc744cbee0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/fce00e647bb1752de3dfaff0bebc3fed27100de6",
-                "reference": "fce00e647bb1752de3dfaff0bebc3fed27100de6",
+                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/6a251f5289d583998e9947e3c3b49ffc744cbee0",
+                "reference": "6a251f5289d583998e9947e3c3b49ffc744cbee0",
                 "shasum": ""
             },
             "require": {
@@ -46,7 +47,7 @@
                 "Apache-2.0"
             ],
             "description": "Business rule provider lib for plugin implementations",
-            "time": "2017-10-17 21:17:09"
+            "time": "2017-11-22 21:10:12"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -281,7 +282,7 @@
             ],
             "description": "A set of PHP_CodeSniffer rules and sniffs.",
             "homepage": "https://github.com/magento-ecg/coding-standard",
-            "time": "2017-08-08T21:48:13+00:00"
+            "time": "2017-08-08 21:48:13"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -289,12 +290,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "d667e245d5dcd4d7bf80f26f2c947d476b66213e"
+                "reference": "be6850fd6b51b97c1ad1407cd2130f1307c23112"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/d667e245d5dcd4d7bf80f26f2c947d476b66213e",
-                "reference": "d667e245d5dcd4d7bf80f26f2c947d476b66213e",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/be6850fd6b51b97c1ad1407cd2130f1307c23112",
+                "reference": "be6850fd6b51b97c1ad1407cd2130f1307c23112",
                 "shasum": ""
             },
             "require": {
@@ -332,7 +333,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2017-10-16T22:40:25+00:00"
+            "time": "2017-11-22 04:50:53"
         }
     ],
     "aliases": [],
