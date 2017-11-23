@@ -95,7 +95,13 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 		}
 
 		if ($res['payment']['status'] === 'CA') {
-			Mage::throwException($error->getError('GENERAL', $country));
+			$errorType = 'GENERAL';
+
+			if (isset($res['payment']['transaction_status'])) {
+				$errorType = 'CC-'.$res['payment']['transaction_status']['code'];
+			}
+
+			Mage::throwException($error->getError($errorType, $country));
 		}
 
 		$this->order->setEmailSent(true);
