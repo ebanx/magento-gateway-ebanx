@@ -12,6 +12,17 @@
             </ebanx>
         </helpers>
 
+        <currency>
+            <import>
+                <services>
+                    <ebanx_rates>
+                        <name>EBANX</name>
+                        <model>Ebanx_Gateway_Model_Import</model>
+                    </ebanx_rates>
+                </services>
+            </import>
+        </currency>
+
         <blocks>
             <ebanx>
                 <class>Ebanx_Gateway_Block</class>
