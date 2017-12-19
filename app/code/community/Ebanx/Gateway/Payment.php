@@ -81,6 +81,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 
 	public function processPayment()
 	{
+		$this->helper->log(Mage::getSingleton('ebanx/api')->getConfig(), $this->getCode());
 		$this->helper->log($this->paymentData, $this->getCode());
 
 		$res = $this->gateway->create($this->paymentData);
