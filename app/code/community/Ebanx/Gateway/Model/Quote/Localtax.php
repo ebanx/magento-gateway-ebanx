@@ -11,8 +11,8 @@ class Ebanx_Gateway_Model_Quote_Localtax extends Mage_Sales_Model_Quote_Address_
 	{
 		$isBrazilLocalAmount = Mage::app()->getStore()->getCurrentCurrencyCode() === 'BRL';
 		if ($isBrazilLocalAmount) {
-			$baseGrandTotal = Mage::getModel('checkout/session')->getQuote()->getData()['base_grand_total'];
-			$localTaxAmount = $baseGrandTotal*1.0038 - $baseGrandTotal;
+			$grandTotal     = Mage::getModel('checkout/session')->getQuote()->getData()['grand_total'];
+			$localTaxAmount = $grandTotal * 1.0038 - $grandTotal;
 
 			$address->setEbanxLocalTaxAmount($localTaxAmount / 2);
 			$address->setGrandTotal($address->getGrandTotal() + $localTaxAmount / 2);
