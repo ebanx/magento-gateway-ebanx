@@ -10,13 +10,13 @@ class Ebanx_Gateway_Model_Quote_Localtax extends Mage_Sales_Model_Quote_Address_
 	public function collect(Mage_Sales_Model_Quote_Address $address)
 	{
 		if ($address->getAddressType() !== Mage_Sales_Model_Quote_Address::TYPE_BILLING) {
-			return $this;
+			return;
 		}
 
 		$payment = $address->getQuote()->getPayment();
 
 		if (!$payment->hasMethodInstance() || Mage::app()->getRequest()->getActionName() !== 'savePayment') {
-			return $this;
+			return;
 		}
 
 		$gatewayFields = Mage::app()->getRequest()->getPost('payment');
