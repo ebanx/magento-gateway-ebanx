@@ -10,13 +10,20 @@ class Ebanx_Gateway_Model_Quote_Localtax extends Mage_Sales_Model_Quote_Address_
 	public function collect(Mage_Sales_Model_Quote_Address $address)
 	{
 		if ($address->getAddressType() !== Mage_Sales_Model_Quote_Address::TYPE_BILLING) {
-			return;
+			return $this;
 		}
 
+		$payment = $address->getQuote()->getPayment();
+
+		if (!$payment->hasMethodInstance() || Mage::app()->getRequest()->getActionName() !== 'savePayment') {
+			return $this;
+		}
+
+		$gatewayFields = Mage::app()->getRequest()->getPost('payment');
+		$grandTotal = $gatewayFields['grand_total'];
+
 		$isBrazilLocalAmount = Mage::app()->getStore()->getCurrentCurrencyCode() === 'BRL';
-		$grandTotal = Mage::getModel('checkout/session')->getQuote()->getGrandTotal();
-//		$grandTotal = $address->getGrandTotal();
-//		var_dump($grandTotal);
+
 		if ($isBrazilLocalAmount && $grandTotal > 0) {
 			$localTaxAmount = $grandTotal * 0.0038;
 
