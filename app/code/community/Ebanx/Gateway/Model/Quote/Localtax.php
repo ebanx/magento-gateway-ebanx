@@ -1,7 +1,5 @@
 <?php
 
-use Ebanx\Benjamin\Models\Configs\Config;
-
 class Ebanx_Gateway_Model_Quote_Localtax extends Mage_Sales_Model_Quote_Address_Total_Abstract
 {
 	public function __construct()
@@ -11,13 +9,19 @@ class Ebanx_Gateway_Model_Quote_Localtax extends Mage_Sales_Model_Quote_Address_
 
 	public function collect(Mage_Sales_Model_Quote_Address $address)
 	{
-		$isBrazilLocalAmount = Mage::app()->getStore()->getCurrentCurrencyCode() === 'BRL';
-		if ($isBrazilLocalAmount && $address->getGrandTotal() > 0) {
-			$grandTotal = $address->getGrandTotal();
-			$localTaxAmount = $grandTotal * Config::IOF;
+		if ($address->getAddressType() !== Mage_Sales_Model_Quote_Address::TYPE_BILLING) {
+			return;
+		}
 
-			$address->setEbanxLocalTaxAmount($localTaxAmount / 2);
-			$address->setGrandTotal($address->getGrandTotal() + $localTaxAmount / 2);
+		$isBrazilLocalAmount = Mage::app()->getStore()->getCurrentCurrencyCode() === 'BRL';
+		$grandTotal = Mage::getModel('checkout/session')->getQuote()->getGrandTotal();
+//		$grandTotal = $address->getGrandTotal();
+//		var_dump($grandTotal);
+		if ($isBrazilLocalAmount && $grandTotal > 0) {
+			$localTaxAmount = $grandTotal * 0.0038;
+
+			$address->setEbanxLocalTaxAmount($localTaxAmount);
+			$address->setGrandTotal($address->getGrandTotal() + $localTaxAmount);
 		}
 	}
 
