@@ -9,6 +9,10 @@ class Ebanx_Gateway_Model_Quote_Interest extends Mage_Sales_Model_Quote_Address_
 
 	public function collect(Mage_Sales_Model_Quote_Address $address)
 	{
+		if ($address->getAddressType() !== Mage_Sales_Model_Quote_Address::TYPE_BILLING) {
+			return $this;
+		}
+
 		$payment = $address->getQuote()->getPayment();
 
 		if (!$payment->hasMethodInstance() || Mage::app()->getRequest()->getActionName() !== 'savePayment') {
@@ -39,8 +43,8 @@ class Ebanx_Gateway_Model_Quote_Interest extends Mage_Sales_Model_Quote_Address_
 		$interestAmount = ($instalmentAmount * $instalments) - $grandTotal;
 
 		if ($interestAmount > 0) {
-			$address->setEbanxInterestAmount($interestAmount / 2);
-			$address->setGrandTotal($address->getGrandTotal() + ($interestAmount / 2));
+			$address->setEbanxInterestAmount($interestAmount);
+			$address->setGrandTotal($address->getGrandTotal() + $interestAmount);
 		}
 
 		return $this;
