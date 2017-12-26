@@ -59,6 +59,7 @@
     </ebanx_amscheckout_handle>
     <checkout_onepage_index>
         <update handle="ebanx_checkout_handle"/>
+        <update handle="ebanx_amscheckout_handle"/>
     </checkout_onepage_index>
     <oscheckout_index_index>
         <update handle="ebanx_checkout_handle"/>
@@ -70,10 +71,6 @@
         <update handle="ebanx_checkout_handle"/>
         <update handle="ebanx_onestepcheckout_handle"/>
     </onestepcheckout_index_index>
-    <amscheckout_index_index>
-        <update handle="ebanx_checkout_handle"/>
-        <update handle="ebanx_amscheckout_handle"/>
-    </amscheckout_index_index>
     <typostores_onestepcheckout_index_index>
         <update handle="ebanx_checkout_handle"/>
     </typostores_onestepcheckout_index_index>
@@ -119,9 +116,13 @@
                 <!-- Colombia -->
                 <block type="ebanx/checkout_success_payment_baloto" name="ebanx.success.payment.baloto"
                        as="ebanx_baloto" template="ebanx/checkout/success/baloto.phtml"/>
+                <block type="ebanx/checkout_success_payment_creditcardco" name="ebanx.success.payment.creditcardco"
+                       as="ebanx_cc_co" template="ebanx/checkout/success/creditcardco.phtml"/>
                 <!-- Mexico -->
                 <block type="ebanx/checkout_success_payment_oxxo" name="ebanx.success.payment.oxxo" as="ebanx_oxxo"
                        template="ebanx/checkout/success/oxxo.phtml"/>
+                <block type="ebanx/checkout_success_payment_spei" name="ebanx.success.payment.spei" as="ebanx_spei"
+                       template="ebanx/checkout/success/spei.phtml"/>
                 <block type="ebanx/checkout_success_payment_creditcardmx" name="ebanx.success.payment.creditcardmx"
                        as="ebanx_cc_mx" template="ebanx/checkout/success/creditcardmx.phtml"/>
                 <block type="ebanx/checkout_success_payment_debitcard" name="ebanx.success.payment.debitcard"
@@ -129,6 +130,13 @@
                 <!-- Peru -->
                 <block type="ebanx/checkout_success_payment_pagoefectivo" name="ebanx.success.payment.pagoefectivo"
                        as="ebanx_pagoefectivo" template="ebanx/checkout/success/pagoefectivo.phtml"/>
+                <!-- Argentina -->
+                <block type="ebanx/checkout_success_payment_rapipago" name="ebanx.success.payment.rapipago"
+                       as="ebanx_rapipago" template="ebanx/checkout/success/rapipago.phtml"/>
+                <block type="ebanx/checkout_success_payment_pagofacil" name="ebanx.success.payment.pagofacil"
+                       as="ebanx_pagofacil" template="ebanx/checkout/success/pagofacil.phtml"/>
+                <block type="ebanx/checkout_success_payment_otroscupones" name="ebanx.success.payment.rapipago"
+                       as="ebanx_otroscupones" template="ebanx/checkout/success/otroscupones.phtml"/>
             </block>
         </reference>
     </ebanx_checkout_success_handle>

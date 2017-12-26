@@ -12,6 +12,17 @@
             </ebanx>
         </helpers>
 
+        <currency>
+            <import>
+                <services>
+                    <ebanx_rates>
+                        <name>EBANX</name>
+                        <model>Ebanx_Gateway_Model_Import</model>
+                    </ebanx_rates>
+                </services>
+            </import>
+        </currency>
+
         <blocks>
             <ebanx>
                 <class>Ebanx_Gateway_Block</class>
@@ -32,6 +43,18 @@
                 </entities>
             </ebanx_resource>
         </models>
+
+        <events>
+            <sales_order_invoice_pay>
+                <observers>
+                    <ebanx_gateway_model_capture>
+                        <type>singleton</type>
+                        <class>Ebanx_Gateway_Model_Capture</class>
+                        <method>capture_payment</method>
+                    </ebanx_gateway_model_capture>
+                </observers>
+            </sales_order_invoice_pay>
+        </events>
 
         <resources>
             <ebanx_magento_setup>
@@ -58,11 +81,16 @@
         <sales>
             <quote>
                 <totals>
-                    <ebanx>
-                        <class>ebanx/quote_total</class>
+                    <ebanx_interest>
+                        <class>ebanx/quote_interest</class>
                         <after>discount</after>
                         <before>tax</before>
-                    </ebanx>
+                    </ebanx_interest>
+                    <ebanx_local_tax>
+                        <class>ebanx/quote_localtax</class>
+                        <after>discount</after>
+                        <before>tax</before>
+                    </ebanx_local_tax>
                 </totals>
             </quote>
         </sales>
@@ -133,6 +161,13 @@
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_baloto>
+            <ebanx_cc_co>
+                <active>1</active>
+                <model>ebanx/colombia_creditcard</model>
+                <title>Tarjeta de Credito</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_cc_co>
             <ebanx_pse>
                 <active>1</active>
                 <model>ebanx/colombia_pse</model>
@@ -192,6 +227,13 @@
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_oxxo>
+            <ebanx_spei>
+                <active>1</active>
+                <model>ebanx/mexico_spei</model>
+                <title>SPEI</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_spei>
             <ebanx_cc_mx>
                 <active>1</active>
                 <model>ebanx/mexico_creditcard</model>
@@ -206,6 +248,28 @@
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_dc_mx>
+            <!-- Argentina -->
+            <ebanx_rapipago>
+                <active>1</active>
+                <model>ebanx/argentina_rapipago</model>
+                <title>Rapipago</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_rapipago>
+            <ebanx_pagofacil>
+                <active>1</active>
+                <model>ebanx/argentina_pagofacil</model>
+                <title>Pago Facil</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_pagofacil>
+            <ebanx_otroscupones>
+                <active>1</active>
+                <model>ebanx/argentina_otroscupones</model>
+                <title>Otros Cupones</title>
+                <payment_action>sale</payment_action>
+                <sort_order>2</sort_order>
+            </ebanx_otroscupones>
             <!-- Settings -->
             <ebanx_settings>
                 <brazil_taxes>cpf</brazil_taxes>
@@ -214,15 +278,18 @@
                 <payment_methods_brazil>ebanx_cc_br,ebanx_boleto,ebanx_tef,ebanx_wallet</payment_methods_brazil>
                 <payment_methods_chile>ebanx_sencillito,ebanx_servipag,ebanx_webpay</payment_methods_chile>
                 <payment_methods_chile>ebanx_sencillito,ebanx_servipag,ebanx_multicaja,ebanx_webpay</payment_methods_chile>
-                <payment_methods_colombia>ebanx_baloto,ebanx_pse</payment_methods_colombia>
+                <payment_methods_colombia>ebanx_baloto,ebanx_pse,ebanx_cc_co</payment_methods_colombia>
                 <payment_methods_peru>ebanx_pagoefectivo,ebanx_safetypay</payment_methods_peru>
-                <payment_methods_mexico>ebanx_oxxo,ebanx_cc_mx,ebanx_dc_mx</payment_methods_mexico>
+                <payment_methods_mexico>ebanx_oxxo,ebanx_spei,ebanx_cc_mx,ebanx_dc_mx</payment_methods_mexico>
+                <payment_methods_argentina>ebanx_rapipago,ebanx_pagofacil</payment_methods_argentina>
+                <payment_methods_argentina>ebanx_rapipago,ebanx_pagofacil,ebanx_otroscupones</payment_methods_argentina>
 
                 <payment_methods_visualization>1</payment_methods_visualization>
                 <save_card_data>1</save_card_data>
                 <one_click_payment>1</one_click_payment>
                 <min_instalment_value>0</min_instalment_value>
                 <create_invoice>0</create_invoice>
+                <auto_capture>1</auto_capture>
 
                 <payment_co_status>processing</payment_co_status>
                 <payment_pe_status>holded</payment_pe_status>

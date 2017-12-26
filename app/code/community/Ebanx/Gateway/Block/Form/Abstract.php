@@ -2,7 +2,7 @@
 
 abstract class Ebanx_Gateway_Block_Form_Abstract extends Mage_Payment_Block_Form
 {
-	private function getTotal()
+	public function getTotal()
 	{
 		return $this->getMethod()->getTotal();
 	}

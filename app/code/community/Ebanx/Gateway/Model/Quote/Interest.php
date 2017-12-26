@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Model_Quote_Total extends Mage_Sales_Model_Quote_Address_Total_Abstract
+class Ebanx_Gateway_Model_Quote_Interest extends Mage_Sales_Model_Quote_Address_Total_Abstract
 {
 	public function __construct()
 	{
@@ -9,29 +9,33 @@ class Ebanx_Gateway_Model_Quote_Total extends Mage_Sales_Model_Quote_Address_Tot
 
 	public function collect(Mage_Sales_Model_Quote_Address $address)
 	{
+		if ($address->getAddressType() !== Mage_Sales_Model_Quote_Address::TYPE_BILLING) {
+			return;
+		}
+
 		$payment = $address->getQuote()->getPayment();
 
 		if (!$payment->hasMethodInstance() || Mage::app()->getRequest()->getActionName() !== 'savePayment') {
-			return $this;
+			return;
 		}
 
 		$isCardPayment = substr($payment->getMethodInstance()->getCode(), 0, 8) === 'ebanx_cc';
 		if (!$isCardPayment) {
-			return $this;
+			return;
 		}
 
 		$paymentInstance = $payment->getMethodInstance();
 
 		$gatewayFields = Mage::app()->getRequest()->getPost('payment');
 		if (!array_key_exists('instalments', $gatewayFields)) {
-			return $this;
+			return;
 		}
 		$instalments = $gatewayFields['instalments'];
 		$grandTotal = $gatewayFields['grand_total'];
 		$instalmentTerms = $paymentInstance->getInstalmentTerms($grandTotal);
 
 		if (!array_key_exists($instalments - 1, $instalmentTerms)) {
-			return $this;
+			return;
 		}
 
 		$grandTotal = $grandTotal ?: $instalmentTerms[0]->baseAmount;
@@ -39,11 +43,9 @@ class Ebanx_Gateway_Model_Quote_Total extends Mage_Sales_Model_Quote_Address_Tot
 		$interestAmount = ($instalmentAmount * $instalments) - $grandTotal;
 
 		if ($interestAmount > 0) {
-			$address->setEbanxInterestAmount($interestAmount / 2);
-			$address->setGrandTotal($address->getGrandTotal() + ($interestAmount / 2));
+			$address->setEbanxInterestAmount($interestAmount);
+			$address->setGrandTotal($address->getGrandTotal() + $interestAmount);
 		}
-
-		return $this;
 	}
 
 	public function fetch(Mage_Sales_Model_Quote_Address $address)

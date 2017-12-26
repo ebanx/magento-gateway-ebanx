@@ -8,6 +8,13 @@
   },
   "minimum-stability": "dev",
   "require": {
-    "ebanx/benjamin": "master"
+    "ebanx/benjamin": "^1.3.0"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "*",
+    "magento-ecg/coding-standard": "dev-master"
+  },
+  "scripts": {
+    "style": "phpcs --standard=./lib/Ebanx/vendor/magento-ecg/coding-standard/Ecg . --ignore=./lib --extensions=php"
   }
 }

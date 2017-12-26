@@ -5,7 +5,7 @@ $localCurrency  = $this->localCurrency;
 $skin           = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 $_code          = $this->getMethodCode();
 $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
-$icon           = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx-credit-card-' . $lowerCountry . '.png" width="200" /></div>';
+$icon           = '<div><img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-credit-card-' . $lowerCountry . '.png" /></div>';
 ?>
 
 <?= !$showInlineIcon ? null : $icon ?>
@@ -70,10 +70,12 @@ $icon           = '<div><img src="' . $skin . 'frontend/base/default/ebanx/ebanx
 
   var selectInstalment = document.getElementById('<?= $_code ?>_instalments');
 
-  selectInstalment.onchange = function (){
-    var text = document.getElementById('cc-<?= $lowerCountry ?>-local-amount');
-    text.innerHTML = '<strong>' + selectInstalment.options[selectInstalment.selectedIndex].getAttribute('data-local-amount') + '</strong>';
-  };
+  if (selectInstalment) {
+    selectInstalment.onchange = function (){
+      var text = document.getElementById('cc-<?= $lowerCountry ?>-local-amount');
+      text.innerHTML = '<strong>' + selectInstalment.options[selectInstalment.selectedIndex].getAttribute('data-local-amount') + '</strong>';
+    };
+  }
 </script>
 
 <style rel="stylesheet" type="text/css">
