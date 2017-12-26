@@ -1,0 +1,13 @@
+<p>SPEI</p>
+<br>
+<p>Total a pagar en Peso mexicano: <?php
+
+  if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
+    echo $this->getLocalAmount('MXN');
+  } else {
+    echo $this->getLocalAmountWithoutTax('MXN');
+  }
+  ?></p>
+
+<?php echo $this->getChildHtml() ?>
+

@@ -1,0 +1,25 @@
+<?php
+    $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+    $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
+    $icon = '<div><img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-rapipago.png" /></div>';
+?>
+
+<?= !$showInlineIcon ? null : $icon?>
+
+<ul class="form-list ebanx-payment-method ebanx-es-method" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+    <li>
+        <div class="<?php echo $this->getMethodCode() ?>-instructions-content">
+
+        	<?= $showInlineIcon ? null : $icon?>
+
+            <p class="ebanx-payment-method-desc">Paga con Rapipago.</p>
+
+            <?php include 'fields.phtml' ?>
+        </div>
+    </li>
+    <li>
+      <div class="total-to-pay">
+        <p>Total a pagar en Peso argentino: <strong><?php echo $this->getLocalAmount('ARS') ?></strong>
+      </div>
+    </li>
+</ul>

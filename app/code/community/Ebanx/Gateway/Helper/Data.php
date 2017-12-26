@@ -227,6 +227,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'co' => Country::COLOMBIA,
 			'mx' => Country::MEXICO,
 			'pe' => Country::PERU,
+			'ar' => Country::ARGENTINA,
 		);
 
 		$countryIndex = strtolower($countryCode);
@@ -384,6 +385,20 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			case 'baloto':
 				$url = $payment['baloto_url'];
 				break;
+			case 'spei':
+				$url = $payment['spei_url'];
+				break;
+			case 'rapipago':
+				$url = $payment['voucher_url'];
+				break;
+			case 'pagofacil':
+				$url = $payment['voucher_url'];
+				break;
+			case 'cupon':
+				$url = $payment['voucher_url'];
+				break;
+			default:
+				$url = '';
 		}
 
 		return "{$url}&format={$format}";
@@ -420,11 +435,16 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_multicaja',
 			'ebanx_pse',
 			'ebanx_baloto',
+			'ebanx_cc_co',
 			'ebanx_cc_mx',
 			'ebanx_dc_mx',
 			'ebanx_oxxo',
+			'ebanx_spei',
 			'ebanx_safetypay',
-			'ebanx_pagoefectivo'
+			'ebanx_pagoefectivo',
+			'ebanx_rapipago',
+			'ebanx_pagofacil',
+			'ebanx_otroscupones',
 		);
 		return in_array($code, $ebanxMethods);
 	}
@@ -449,13 +469,19 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			// Colombia
 			'ebanx_baloto'       => array('dni_field'),
 			'ebanx_pse'          => array('dni_field'),
+			'ebanx_cc_co'        => array('dni_field'),
 			// Mexico
 			'ebanx_oxxo'         => array(),
+			'ebanx_spei'         => array(),
 			'ebanx_cc_mx'        => array(),
 			'ebanx_dc_mx'        => array(),
 			// Peru
 			'ebanx_pagoefectivo' => array(),
-			'ebanx_safetypay'    => array()
+			'ebanx_safetypay'    => array(),
+			//Argentina
+			'ebanx_rapipago'     => array(),
+			'ebanx_pagofacil'     => array(),
+			'ebanx_otroscupones'     => array(),
 		);
 
 		return $methodsToFields[$methodCode];

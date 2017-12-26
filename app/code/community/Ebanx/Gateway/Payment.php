@@ -81,6 +81,9 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 
 	public function processPayment()
 	{
+		$this->helper->log(Mage::getSingleton('ebanx/api')->getConfig(), $this->getCode());
+		$this->helper->log($this->paymentData, $this->getCode());
+
 		$res = $this->gateway->create($this->paymentData);
 		$error = Mage::helper('ebanx/error');
 
@@ -91,12 +94,21 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 			$code = $res['status_code'];
 
 			$this->helper->errorLog($res);
-			Mage::throwException($error->getError($code, $country));
+			Mage::throwException($error->getError($code, $country)." ($code)");
 		}
 
 		if ($res['payment']['status'] === 'CA') {
-			Mage::throwException($error->getError('GENERAL', $country));
+			$errorType = 'GENERAL';
+
+			if (isset($res['payment']['transaction_status'])) {
+				$errorType = 'CC-'.$res['payment']['transaction_status']['code'];
+			}
+
+			Mage::throwException($error->getError($errorType, $country));
 		}
+
+		$this->order->setEmailSent(true);
+		$this->order->sendNewOrderEmail();
 
 		// Set the URL for redirect
 		if (!empty($res['redirect_url'])) {
@@ -131,6 +143,17 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 		}
 	}
 
+	public function refund(Varien_Object $payment, $amount)
+	{
+		$hash = $payment->getEbanxPaymentHash();
+		$result = $this->ebanx->refund()->requestByHash($hash, $amount, $this->helper->__('Refund requested by Magento Admin Panel'));
+		if($result['status'] === 'ERROR') {
+			$errorMsg = $this->helper->__('Error processing refund: '.$result['status_message'].' ('.$result['status_code'].')');
+			Mage::throwException($errorMsg);
+		}
+		return $this;
+	}
+
 	public function getOrderPlaceRedirectUrl()
 	{
 		return self::$redirect_url;
@@ -139,7 +162,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 	public function isAvailable($quote = null)
 	{
 		return Mage::getStoreConfig('payment/ebanx_settings/enabled')
-		       && $this->helper->areKeysFilled();
+			&& $this->helper->areKeysFilled();
 	}
 
 	public function canUseForCountry($country)

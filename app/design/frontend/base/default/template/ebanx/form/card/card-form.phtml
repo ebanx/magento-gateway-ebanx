@@ -5,6 +5,7 @@
     <label for="<?php echo $_code ?>_cc_name" class="required ebanx-payment-method__block"><em>*</em><?= $text['name'] ?></label>
     <div class="input-box">
       <input type="text" id="<?php echo $_code ?>_cc_name"
+             name="payment[cc_name][newcard]"
              title="<?php echo Mage::helper('core')->jsQuoteEscape('Número do Cartão') ?>"
              class="input-text validate-cc-name ebanx-format-cc-name" value=""/>
     </div>
