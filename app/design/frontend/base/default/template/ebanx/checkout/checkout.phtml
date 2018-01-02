@@ -1,12 +1,14 @@
 <?php
   $brazilAllowedDocumentFields = explode(',', Mage::getStoreConfig('payment/ebanx_settings/brazil_taxes'));
+  $maskTaxvat = Mage::getStoreConfig('payment/ebanx_settings/mask_taxvat_field');
 ?>
 
 <!-- EBANX Custom Variables -->
 <script>
 //<![CDATA[
   var EBANXData = {
-    brazilAllowedDocumentFields: <?= json_encode($brazilAllowedDocumentFields) ?>
+    brazilAllowedDocumentFields: <?= json_encode($brazilAllowedDocumentFields) ?>,
+    maskTaxVat: <?= $maskTaxvat ? 'true' : 'false' ?>
   };
 //]]>
 </script>
