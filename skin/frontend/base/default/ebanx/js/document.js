@@ -53,6 +53,10 @@ var changeTaxVatLabel = function () {
 };
 
 var init = function () {
+  if (!EBANXData.maskTaxVat) {
+    return;
+  }
+
   var countrySelect = qs('#billing\\:country_id');
   taxVatLabel = qs('label[for="billing\\:taxvat"]');
   taxVatInput = document.getElementById('billing:taxvat');

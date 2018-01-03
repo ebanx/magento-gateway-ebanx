@@ -383,6 +383,15 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                         </compliance_fields_title>
+                        <mask_taxvat_field translate="label">
+                            <label>Mask taxvat field</label>
+                            <comment>When enabled will morph taxvat field label and mask to match the country's document.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>404</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </mask_taxvat_field>
                         <cpf_field translate="label">
                             <label>CPF Document</label>
                             <frontend_type>text</frontend_type>

@@ -296,6 +296,7 @@
                 <payment_op_status>pending</payment_op_status>
                 <payment_ca_status>canceled</payment_ca_status>
                 <!-- Compliance Fields -->
+                <mask_taxvat_field>1</mask_taxvat_field>
                 <cpf_field>taxvat</cpf_field>
                 <cnpj_field>taxvat</cnpj_field>
                 <rut_field>taxvat</rut_field>
