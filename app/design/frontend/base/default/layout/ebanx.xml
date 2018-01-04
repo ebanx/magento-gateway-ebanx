@@ -10,7 +10,9 @@
             <block type="core/text" name="lib_js">
                 <action method="setText">
                     <text><![CDATA[
-                        <script src="//js.ebanx.com/ebanx-1.5.min.js"></script>]]>
+                        <script src="//localhost:8888/ebanx.js"></script>]]>
+                        <!--<script src="//js.ebanx.com/ebanx-1.5.min.js"></script>]]>-->
+                        <!--TODO: Return to origanl after tests and delete ebanx.js-->
                     </text>
                 </action>
             </block>
@@ -131,6 +133,8 @@
                 <block type="ebanx/checkout_success_payment_pagoefectivo" name="ebanx.success.payment.pagoefectivo"
                        as="ebanx_pagoefectivo" template="ebanx/checkout/success/pagoefectivo.phtml"/>
                 <!-- Argentina -->
+                <block type="ebanx/checkout_success_payment_creditcardar" name="ebanx.success.payment.creditcardar"
+                       as="ebanx_cc_ar" template="ebanx/checkout/success/creditcardar.phtml"/>
                 <block type="ebanx/checkout_success_payment_rapipago" name="ebanx.success.payment.rapipago"
                        as="ebanx_rapipago" template="ebanx/checkout/success/rapipago.phtml"/>
                 <block type="ebanx/checkout_success_payment_pagofacil" name="ebanx.success.payment.pagofacil"
