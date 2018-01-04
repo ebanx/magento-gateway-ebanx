@@ -442,6 +442,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_spei',
 			'ebanx_safetypay',
 			'ebanx_pagoefectivo',
+			'ebanx_cc_ar',
 			'ebanx_rapipago',
 			'ebanx_pagofacil',
 			'ebanx_otroscupones',
@@ -479,6 +480,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_pagoefectivo' => array(),
 			'ebanx_safetypay'    => array(),
 			//Argentina
+			'ebanx_cc_ar'     => array(),
 			'ebanx_rapipago'     => array(),
 			'ebanx_pagofacil'     => array(),
 			'ebanx_otroscupones'     => array(),
