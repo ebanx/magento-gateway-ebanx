@@ -61,7 +61,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 			   && $this->usercards->getSize()
 			   && $this->getAddress()['street']
 			   && ($this->customer->getEbanxCustomerDocument()
-				   || $this->countryHasOneClick($this->getCountry()));
+				   || $this->countryDocumentIsOptional($this->getCountry()));
 	}
 
 	private function initialize()
@@ -74,14 +74,14 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 		$this->usercards = Mage::getModel('ebanx/usercard')->getCustomerSavedCards($this->customer->getId());
 	}
 
-	private function countryHasOneClick($country) {
-		$hasOneClick = [
+	private function countryDocumentIsOptional($country) {
+		$isOptional = [
 			'MX',
 			'CO',
 			'AR',
 		];
 
-		return in_array($country, $hasOneClick);
+		return in_array($country, $isOptional);
 	}
 
 	/**
@@ -143,15 +143,15 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	private function getMethod()
 	{
 		switch ($this->getCountry()) {
-			case 'BR':
-				return new Ebanx_Gateway_Model_Brazil_Creditcard();
+			case 'MX':
+				return new Ebanx_Gateway_Model_Mexico_Creditcard();
 			case 'CO':
 				return new Ebanx_Gateway_Model_Colombia_Creditcard();
 			case 'AR':
 				return new Ebanx_Gateway_Model_Argentina_Creditcard();
-			case 'MX':
+			case 'BR':
 			default:
-				return new Ebanx_Gateway_Model_Mexico_Creditcard();
+				return new Ebanx_Gateway_Model_Brazil_Creditcard();
 		}
 	}
 
