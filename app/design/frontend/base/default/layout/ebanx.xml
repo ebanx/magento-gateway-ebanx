@@ -9,10 +9,10 @@
             </action>
             <block type="core/text" name="lib_js">
                 <action method="setText">
-                    <text><![CDATA[
-                        <script src="//localhost:8888/ebanx.js"></script>]]>
-                        <!--<script src="//js.ebanx.com/ebanx-1.5.min.js"></script>]]>-->
-                        <!--TODO: Return to origanl after tests and delete ebanx.js-->
+                    <text>
+                        <![CDATA[
+                            <script src="//js.ebanx.com/ebanx-1.5.min.js"></script>
+                        ]]>
                     </text>
                 </action>
             </block>
