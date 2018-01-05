@@ -67,6 +67,10 @@
   background-image: url(../icons/unknown.png);
 }
 
+.ebanx-payment-method input.input-text#ebanx_cc_ar_cc_number {
+  background-image: none;
+}
+
 .ebanx-payment-method {
   position: relative;
 
