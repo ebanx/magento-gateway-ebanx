@@ -72,6 +72,10 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 			'type' => $gatewayFields['ebanx_brand'][$selectedCard],
 		));
 
+		if ($data->getBillingAddress()->getCountry() === 'AR') {
+			$payment->card->type = 'mastercard';
+		}
+
 		return $payment;
 	}
 
