@@ -273,7 +273,7 @@
             <!-- Ecuador -->
             <ebanx_safetypay_ec>
                 <active>1</active>
-                <model>ebanx/peru_safetypay</model>
+                <model>ebanx/ecuador_safetypay</model>
                 <title>SafetyPay</title>
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
