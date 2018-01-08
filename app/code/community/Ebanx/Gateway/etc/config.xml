@@ -270,6 +270,14 @@
                 <payment_action>sale</payment_action>
                 <sort_order>2</sort_order>
             </ebanx_otroscupones>
+            <!-- Ecuador -->
+            <ebanx_safetypay_ec>
+                <active>1</active>
+                <model>ebanx/peru_safetypay</model>
+                <title>SafetyPay</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_safetypay_ec>
             <!-- Settings -->
             <ebanx_settings>
                 <brazil_taxes>cpf</brazil_taxes>
@@ -281,8 +289,8 @@
                 <payment_methods_colombia>ebanx_baloto,ebanx_pse,ebanx_cc_co</payment_methods_colombia>
                 <payment_methods_peru>ebanx_pagoefectivo,ebanx_safetypay</payment_methods_peru>
                 <payment_methods_mexico>ebanx_oxxo,ebanx_spei,ebanx_cc_mx,ebanx_dc_mx</payment_methods_mexico>
-                <payment_methods_argentina>ebanx_rapipago,ebanx_pagofacil</payment_methods_argentina>
                 <payment_methods_argentina>ebanx_rapipago,ebanx_pagofacil,ebanx_otroscupones</payment_methods_argentina>
+                <payment_methods_ecuador>ebanx_safetypay_ec</payment_methods_ecuador>
 
                 <payment_methods_visualization>1</payment_methods_visualization>
                 <save_card_data>1</save_card_data>
