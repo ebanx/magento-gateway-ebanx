@@ -1,0 +1,12 @@
+<p>SafetyPay</p>
+<br>
+<p>Total a pagar en dolar: <?php
+
+  if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
+    echo $this->getLocalAmount('USD');
+  } else {
+    echo $this->getLocalAmountWithoutTax('USD');
+  }
+  ?></p>
+
+<?php echo $this->getChildHtml() ?>
