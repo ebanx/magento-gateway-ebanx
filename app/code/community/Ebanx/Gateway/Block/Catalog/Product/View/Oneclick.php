@@ -30,7 +30,13 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 				$text['local-amount'] = 'Total a pagar com IOF (0.38%): ';
 				$text['cvv'] = 'Código de segurança';
 				break;
-			case 'MX':
+			case 'CO':
+				$text['local-amount'] = 'Total a pagar en Peso mexicano: ';
+				break;
+			case 'AR':
+				$text['local-amount'] = 'Total a pagar en Peso argentino: ';
+				break;
+			default:
 				break;
 		}
 		return $text;
@@ -55,7 +61,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 			   && $this->usercards->getSize()
 			   && $this->getAddress()['street']
 			   && ($this->customer->getEbanxCustomerDocument()
-				   || $this->getCountry() === 'MX');
+				   || $this->countryDocumentIsOptional($this->getCountry()));
 	}
 
 	private function initialize()
@@ -66,6 +72,16 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 		$this->customer = Mage::getSingleton('customer/session')->getCustomer();
 
 		$this->usercards = Mage::getModel('ebanx/usercard')->getCustomerSavedCards($this->customer->getId());
+	}
+
+	private function countryDocumentIsOptional($country) {
+		$isOptional = [
+			'MX',
+			'CO',
+			'AR',
+		];
+
+		return in_array($country, $isOptional);
 	}
 
 	/**
@@ -86,7 +102,17 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	 */
 	public function getLocalCurrency()
 	{
-		return $this->getCountry() === 'MX' ? 'MXN' : 'BRL';
+		switch ($this->getCountry()) {
+			case 'MX':
+				return 'MXN';
+			case 'CO':
+				return 'COP';
+			case 'AR':
+				return 'ARS';
+			case 'BR':
+			default:
+				return 'BRL';
+		}
 	}
 
 	public function getLocalAmount($currency, $formatted = true)
@@ -117,13 +143,15 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	private function getMethod()
 	{
 		switch ($this->getCountry()) {
-			case 'BR':
-				return new Ebanx_Gateway_Model_Brazil_Creditcard();
+			case 'MX':
+				return new Ebanx_Gateway_Model_Mexico_Creditcard();
 			case 'CO':
 				return new Ebanx_Gateway_Model_Colombia_Creditcard();
-			case 'MX':
+			case 'AR':
+				return new Ebanx_Gateway_Model_Argentina_Creditcard();
+			case 'BR':
 			default:
-				return new Ebanx_Gateway_Model_Mexico_Creditcard();
+				return new Ebanx_Gateway_Model_Brazil_Creditcard();
 		}
 	}
 

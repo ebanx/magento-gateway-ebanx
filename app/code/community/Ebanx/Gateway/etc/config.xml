@@ -249,6 +249,13 @@
                 <sort_order>1</sort_order>
             </ebanx_dc_mx>
             <!-- Argentina -->
+            <ebanx_cc_ar>
+                <active>1</active>
+                <model>ebanx/argentina_creditcard</model>
+                <title>Tarjeta de Credito</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_cc_ar>
             <ebanx_rapipago>
                 <active>1</active>
                 <model>ebanx/argentina_rapipago</model>
@@ -289,7 +296,7 @@
                 <payment_methods_colombia>ebanx_baloto,ebanx_pse,ebanx_cc_co</payment_methods_colombia>
                 <payment_methods_peru>ebanx_pagoefectivo,ebanx_safetypay</payment_methods_peru>
                 <payment_methods_mexico>ebanx_oxxo,ebanx_spei,ebanx_cc_mx,ebanx_dc_mx</payment_methods_mexico>
-                <payment_methods_argentina>ebanx_rapipago,ebanx_pagofacil,ebanx_otroscupones</payment_methods_argentina>
+                <payment_methods_argentina>ebanx_cc_ar,ebanx_rapipago,ebanx_pagofacil,ebanx_otroscupones</payment_methods_argentina>
                 <payment_methods_ecuador>ebanx_safetypay_ec</payment_methods_ecuador>
 
                 <payment_methods_visualization>1</payment_methods_visualization>
