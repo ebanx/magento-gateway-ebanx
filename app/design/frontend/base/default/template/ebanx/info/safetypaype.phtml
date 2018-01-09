@@ -1,0 +1,12 @@
+<p>SafetyPay</p>
+<br>
+<p>Total a pagar en Sol peruano: <?php
+
+  if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
+    echo $this->getLocalAmount('PEN');
+  } else {
+    echo $this->getLocalAmountWithoutTax('PEN');
+  }
+  ?></p>
+
+<?php echo $this->getChildHtml() ?>
