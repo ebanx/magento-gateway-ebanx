@@ -1,6 +1,6 @@
 <?php
 
-class Ebanx_Gateway_Block_Info_Safetypay extends Ebanx_Gateway_Block_Info_Abstract
+class Ebanx_Gateway_Block_Info_Safetypaype extends Ebanx_Gateway_Block_Info_Abstract
 {
 	protected function _construct()
 	{

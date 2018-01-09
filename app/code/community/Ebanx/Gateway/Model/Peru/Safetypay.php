@@ -6,8 +6,8 @@ class Ebanx_Gateway_Model_Peru_Safetypay extends Ebanx_Gateway_Model_Payment_Saf
 {
 	protected $_code = 'ebanx_safetypay';
 
-	protected $_infoBlockType = 'ebanx/info_safetypay_pe';
-	protected $_formBlockType = 'ebanx/form_safetypaype';
+	protected $_formBlockType = 'ebanx/form_safetypay_pe';
+	protected $_infoBlockType = 'ebanx/info_safetypaype';
 
 	public function isAvailable($quote = null)
 	{
