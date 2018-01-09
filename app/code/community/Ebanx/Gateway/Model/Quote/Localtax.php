@@ -13,6 +13,11 @@ class Ebanx_Gateway_Model_Quote_Localtax extends Mage_Sales_Model_Quote_Address_
 			return;
 		}
 
+		$isBrazilLocalAmount = Mage::app()->getStore()->getCurrentCurrencyCode() === 'BRL';
+		if (!$isBrazilLocalAmount) {
+			return;
+		}
+
 		$payment = $address->getQuote()->getPayment();
 
 		if (!$payment->hasMethodInstance() || Mage::app()->getRequest()->getActionName() !== 'savePayment') {
@@ -22,14 +27,14 @@ class Ebanx_Gateway_Model_Quote_Localtax extends Mage_Sales_Model_Quote_Address_
 		$gatewayFields = Mage::app()->getRequest()->getPost('payment');
 		$grandTotal = $gatewayFields['grand_total'];
 
-		$isBrazilLocalAmount = Mage::app()->getStore()->getCurrentCurrencyCode() === 'BRL';
-
-		if ($isBrazilLocalAmount && $grandTotal > 0) {
-			$localTaxAmount = $grandTotal * 0.0038;
-
-			$address->setEbanxLocalTaxAmount($localTaxAmount);
-			$address->setGrandTotal($address->getGrandTotal() + $localTaxAmount);
+		if ($grandTotal <= 0) {
+			return;
 		}
+
+		$localTaxAmount = $grandTotal * 0.0038;
+
+		$address->setEbanxLocalTaxAmount($localTaxAmount);
+		$address->setGrandTotal($address->getGrandTotal() + $localTaxAmount);
 	}
 
 	public function fetch(Mage_Sales_Model_Quote_Address $address)
