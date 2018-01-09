@@ -221,21 +221,13 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			return false;
 		}
 
-		$countries = array(
-			'cl' => Country::CHILE,
-			'br' => Country::BRAZIL,
-			'co' => Country::COLOMBIA,
-			'mx' => Country::MEXICO,
-			'pe' => Country::PERU,
-			'ar' => Country::ARGENTINA,
-		);
+		$country = Country::fromIso($countryCode);
 
-		$countryIndex = strtolower($countryCode);
-		if (!array_key_exists($countryIndex, $countries)) {
-			return null;
+		if (!$country) {
+			return false;
 		}
 
-		return $countries[$countryIndex];
+		return $country;
 	}
 
 	public function getBrazilianDocumentNumber($methodCode)
@@ -445,6 +437,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_rapipago',
 			'ebanx_pagofacil',
 			'ebanx_otroscupones',
+			'ebanx_safetypay_ec',
 		);
 		return in_array($code, $ebanxMethods);
 	}
@@ -478,10 +471,12 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			// Peru
 			'ebanx_pagoefectivo' => array(),
 			'ebanx_safetypay'    => array(),
-			//Argentina
+			// Argentina
 			'ebanx_rapipago'     => array(),
 			'ebanx_pagofacil'     => array(),
 			'ebanx_otroscupones'     => array(),
+			// Ecuador
+			'ebanx_safetypay_ec' => array(),
 		);
 
 		return $methodsToFields[$methodCode];
