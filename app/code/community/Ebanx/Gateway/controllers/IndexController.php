@@ -5,6 +5,12 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 	private $helper;
 	private $order;
 	private $hash;
+	private $statusEbanx;
+	private $ebanxStatusToState = array(
+		'CO' => Mage_Sales_Model_Order::STATE_PROCESSING,
+		'PE' => Mage_Sales_Model_Order::STATE_PENDING_PAYMENT,
+		'CA' => Mage_Sales_Model_Order::STATE_CANCELED,
+	);
 
 	public function notificationAction()
 	{
@@ -20,17 +26,16 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 		}
 
 		try {
-			$statusEbanx = $this->loadEbanxPaymentStatus();
-			$this->updateOrder($statusEbanx);
+			$this->updateOrder($this->statusEbanx);
 
 			if (Mage::helper('ebanx')->isEbanxMethod($this->_getPaymentMethod($this->order))
 			    && Mage::getStoreConfig('payment/ebanx_settings/create_invoice')
-			    && strtoupper($statusEbanx) === 'CO'
+			    && strtoupper($this->statusEbanx) === 'CO'
 			    && $this->order->canInvoice()) {
 				$this->createInvoice();
 			}
 
-			if (strtoupper($statusEbanx) === 'CO'
+			if (strtoupper($this->statusEbanx) === 'CO'
 			    && Mage::helper('ebanx')->isEbanxMethod($this->_getPaymentMethod($this->order))) {
 			}
 
@@ -51,6 +56,8 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 		$this->validateEbanxPaymentRequest();
 		$this->hash = $this->getRequest()->getParam('hash_codes');
 		$this->loadOrder();
+		$this->statusEbanx = $this->loadEbanxPaymentStatus();
+		$this->validateStatus();
 	}
 
 	private function validateEbanxPaymentRequest()
@@ -118,6 +125,7 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 		$statusMagento = $this->helper->getEbanxMagentoOrder($statusEbanx);
 
 		$this->order->setData('status', $statusMagento);
+		$this->order->setState($this->ebanxStatusToState[$statusEbanx]);
 		$this->order->addStatusHistoryComment($this->helper->__('EBANX: The payment has been updated to: %s.', $this->helper->getTranslatedOrderStatus($statusEbanx)));
 		$this->order->save();
 	}
@@ -132,5 +140,18 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 		    ->addObject($invoice)
 		    ->addObject($invoice->getOrder())
 		    ->save();
+	}
+
+	private function validateStatus() {
+		if (array_key_exists($this->statusEbanx, $this->ebanxStatusToState)) {
+			return;
+		}
+
+		throw new Ebanx_Gateway_Exception(
+			$this->helper->__(
+				'EBANX: Invalid payment status: %s.',
+				$this->statusEbanx
+			)
+		);
 	}
 }
