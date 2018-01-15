@@ -30,8 +30,8 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 			$this->updateOrder($this->statusEbanx);
 
 			if (Mage::helper('ebanx')->isEbanxMethod($this->_getPaymentMethod($this->order))
-			    && Mage::getStoreConfig('payment/ebanx_settings/create_invoice')
-			    && strtoupper($this->statusEbanx) === 'CO'
+				&& Mage::getStoreConfig('payment/ebanx_settings/create_invoice')
+				&& strtoupper($this->statusEbanx) === 'CO'
 				&& $this->order->canInvoice()) {
 				$this->createInvoice();
 			}
@@ -43,7 +43,7 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 		} catch (Exception $e) {
 			$this->order->addStatusHistoryComment($this->helper->__('EBANX: We could not update the order status. Error message: %s.', $e->getMessage()));
 			$this->helper->errorLog($e->getMessage());
-			Mage::throwException($e->getMessage());
+			Mage::throwException(get_class($e).': '.$e->getMessage());
 		}
 	}
 
@@ -102,16 +102,28 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 	private function loadEbanxPaymentStatus()
 	{
 		$api = Mage::getSingleton('ebanx/api')->ebanx();
-		$isSandbox = $this->order->getPayment()->getEbanxEnvironment() === 'sandbox';
+		$isSandbox = $this->loadOrderEnv() === 'sandbox';
 		$payment = $api->paymentInfo()->findByHash($this->hash, $isSandbox);
 
 		$this->helper->log($payment, 'ebanx_payment_notification');
 
 		if ($payment['status'] !== 'SUCCESS') {
-			throw new Ebanx_Gateway_Exception($this->helper->__('EBANX: Payment doesn\'t exist.'));
+			throw new Ebanx_Gateway_Exception($this->helper->__('EBANX: Payment doesn\'t exist. ' . ($isSandbox ? 'sand' : 'live')));
 		}
 
 		return $payment['payment']['status'];
+	}
+
+	private function loadOrderEnv()
+	{
+		$env = $this->order->getPayment()->getEbanxEnvironment();
+
+		// Fallback in case of legacy orders that don't save environment
+		if (!$env) {
+			$env = Mage::getSingleton('ebanx/api')->getConfig()->isSandbox ? 'sandbox' : 'live';
+		}
+
+		return $env;
 	}
 
 	// Actions
