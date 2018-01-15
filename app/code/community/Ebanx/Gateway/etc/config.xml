@@ -318,20 +318,20 @@
                 <dni_field>taxvat</dni_field>
             </ebanx_settings>
             <!-- Legacy -->
-            <ebanx_legacy_standard>
+            <ebanx_standard>
                 <active>0</active>
-                <model>ebanx/ebanx_standard</model>
+                <model>ebanx/legacy_standard</model>
                 <title>Ebanx Standard</title>
                 <payment_action>sale</payment_action>
                 <sort_order>2</sort_order>
-            </ebanx_legacy_standard>
-            <ebanx_legacy_express>
+            </ebanx_standard>
+            <ebanx_express>
                 <active>0</active>
-                <model>ebanx/ebanx_express</model>
+                <model>ebanx/legacy_express</model>
                 <title>Ebanx Express</title>
                 <payment_action>sale</payment_action>
                 <sort_order>2</sort_order>
-            </ebanx_legacy_express>
+            </ebanx_express>
         </payment>
     </default>
 </config>

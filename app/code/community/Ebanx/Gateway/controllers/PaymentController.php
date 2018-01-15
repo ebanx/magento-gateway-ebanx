@@ -1,6 +1,8 @@
 <?php
 
-class Ebanx_Ebanx_PaymentController extends Ebanx_Gateway_IndexController
+require_once(__DIR__.'/IndexController.php');
+
+class Ebanx_Gateway_PaymentController extends Ebanx_Gateway_IndexController
 {
     /**
      * Legacy notification route support
@@ -8,8 +10,8 @@ class Ebanx_Ebanx_PaymentController extends Ebanx_Gateway_IndexController
      * @return void
      */
     public function notifyAction()
-	{
-		parent::notificationAction();
+    {
+        parent::notificationAction();
     }
 
     protected function loadOrder()
