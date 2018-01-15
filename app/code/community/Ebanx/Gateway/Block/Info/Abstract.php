@@ -37,11 +37,13 @@ abstract class Ebanx_Gateway_Block_Info_Abstract extends Mage_Payment_Block_Info
 		return false;
 	}
 
-	protected function getDashboardUrl() {
+	protected function getDashboardUrl($hash) {
 		return sprintf(
 			'https://dashboard.ebanx.com%s/payments/?hash=%s',
-			$this->getInfo()->getEbanxEnvironment() === 'sandbox' ? '/test' : '',
-			$this->getInfo()->getEbanxPaymentHash()
+			$this->getInfo()->getEbanxEnvironment() === 'sandbox'
+				? '/test'
+				: '',
+			$hash
 		);
 	}
 }
