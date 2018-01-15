@@ -2,9 +2,9 @@
 
 class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 {
-	private $helper;
-	private $order;
-	private $hash;
+	protected $helper;
+	protected $order;
+	protected $hash;
 
 	public function notificationAction()
 	{
@@ -26,7 +26,8 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 			if (Mage::helper('ebanx')->isEbanxMethod($this->_getPaymentMethod($this->order))
 			    && Mage::getStoreConfig('payment/ebanx_settings/create_invoice')
 			    && strtoupper($statusEbanx) === 'CO'
-			    && $this->order->canInvoice()) {
+				&& $this->order->canInvoice()
+			) {
 				$this->createInvoice();
 			}
 
@@ -43,6 +44,11 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 			$this->helper->errorLog($e->getMessage());
 			Mage::throwException($e->getMessage());
 		}
+	}
+
+	protected function loadOrder()
+	{
+		$this->order = $this->helper->getOrderByHash($this->hash);
 	}
 
 	private function initialize()
@@ -71,12 +77,6 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 		if (empty($hash_codes)) {
 			throw new Ebanx_Gateway_Exception($this->helper->__('EBANX: Invalid hash parameter.'));
 		}
-	}
-
-	private function loadOrder()
-	{
-		$order = $this->helper->getOrderByHash($this->hash);
-		$this->order = $order;
 	}
 
 	private function _getPaymentMethod($order)
