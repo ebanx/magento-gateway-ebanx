@@ -4,11 +4,21 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
 {
 	public function getOrderByHash($hash)
 	{
+		return $this->getOrderBy('ebanx_payment_hash', $hash);
+	}
+
+	public function getLegacyOrderByHash($hash)
+	{
+		return $this->getOrderBy('ebanx_hash', $hash);
+	}
+
+	public function getOrderBy($field, $value)
+	{
 		$model = Mage::getModel('sales/order_payment')
 			->getCollection()
 			->setPageSize(1)
 			->setCurPage(1)
-			->addFieldToFilter('ebanx_payment_hash', $hash)
+			->addFieldToFilter($field, $value)
 			->load();
 
 		if ($model->count() !== 1) {
