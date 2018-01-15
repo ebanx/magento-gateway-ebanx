@@ -5,14 +5,14 @@ $localCurrency  = $this->localCurrency;
 $skin           = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 $_code          = $this->getMethodCode();
 $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
-$icon           = '<div><img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-credit-card-' . $lowerCountry . '.png" /></div>';
+$icon           = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-credit-card-' . $lowerCountry . '.png" />';
 ?>
 
-<?= !$showInlineIcon ? null : $icon ?>
+<?= !$showInlineIcon ? null : '<div class="ebanx-method-icon-box">' . $icon . '</div>' ?>
 
 <ul class="form-list ebanx-payment-method ebanx-<?= $lowerCountry ?>-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
 
-  <?= $showInlineIcon ? null : $icon ?>
+  <?= $showInlineIcon ? null : '<li class="ebanx-method-icon-box">' . $icon . '</li>' ?>
 
   <li>
     <p class="ebanx-payment-method-desc"><?= $text['method-desc'] ?></p>
