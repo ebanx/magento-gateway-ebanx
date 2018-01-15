@@ -5,6 +5,7 @@ class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 	protected $helper;
 	protected $order;
 	protected $hash;
+
 	private $statusEbanx;
 	private $ebanxStatusToState = array(
 		'CO' => Mage_Sales_Model_Order::STATE_PROCESSING,
