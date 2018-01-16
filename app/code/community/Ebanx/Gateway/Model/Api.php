@@ -21,7 +21,7 @@ class Ebanx_Gateway_Model_Api
 			'sandboxIntegrationKey' => Mage::helper('ebanx')->getSandboxIntegrationKey(),
 			'isSandbox' => Mage::helper('ebanx')->isSandboxMode(),
 			'baseCurrency' => Mage::app()->getStore()->getCurrentCurrencyCode(),
-			'notificationUrl' => Mage::getUrl('ebanx/index/notification/'),
+			'notificationUrl' => Mage::getUrl('ebanx/payment/notify/'),
 			'redirectUrl' => Mage::getUrl('checkout/onepage/success'),
 			'userValues' => array(
 				1 => 'from_magento',
