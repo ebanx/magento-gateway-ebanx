@@ -1,9 +1,9 @@
 <?php
 class Ebanx_Gateway_Model_Legacy_Standard extends Ebanx_Gateway_Payment
 {
-    protected $_code = 'ebanx_standard';
-    protected $_isGateway          = true;
-    protected $_isInitializeNeeded = false;
+	protected $_code = 'ebanx_standard';
+	protected $_isGateway          = true;
+	protected $_isInitializeNeeded = false;
 
-    protected $_infoBlockType = 'ebanx/info_legacy';
+	protected $_infoBlockType = 'ebanx/info_legacy';
 }
