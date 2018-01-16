@@ -17,19 +17,10 @@ $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 ?>
 
 <div class="ebanx-compliance-fields">
-    <label class="ebanx-document-label">
-        <span class="ebanx-document-text required"><?= $helper->getLabelForComplianceField($this->getMethodCode()); ?>
-            <em>*</em></span>
-        <div>
-            <input
-                type="text"
-                name="ebanx-document[<?= $this->getMethodCode() ?>]"
-                value="<?= $ebanxCustomerDocument ?>"
-                class="input-text"
-                id="ebanx-document-<?= $this->getMethodCode() ?>"
-            />
-        </div>
-    </label>
+  <label for="ebanx-document-<?= $this->getMethodCode() ?>" class="required"><em>*</em><?= $helper->getLabelForComplianceField($this->getMethodCode()); ?></label>
+  <div class="input-box">
+    <input type="text" id="ebanx-document-<?= $this->getMethodCode() ?>" name="ebanx-document[<?= $this->getMethodCode() ?>]" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Purchase Order Number')) ?>" class="input-text required-entry" value="<?= $ebanxCustomerDocument ?>" />
+  </div>
 </div>
 
 <?php

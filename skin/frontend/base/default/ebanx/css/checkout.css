@@ -1,11 +1,3 @@
-.ebanx-compliance-fields {
-  overflow: hidden;
-}
-
-.ebanx-compliance-fields:not(:last-child) {
-  margin-bottom: 30px;
-}
-
 .ebanx-payment-method-desc {
   margin: 20px 0 !important;
 }
