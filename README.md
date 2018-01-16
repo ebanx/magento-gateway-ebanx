@@ -1,4 +1,4 @@
-# EBANX Payment Gateway for Magento 1.0.1
+# EBANX Payment Gateway for Magento 1.9.x
 
 This plugin enables you to integrate your Magento 1.x store with the EBANX payment gateway.
 
@@ -26,7 +26,7 @@ docker-compose up
 
 To access the project, go to http://localhost.
 
-The admin can be acessed by http://localhost/admin using the credentials `ebanx` usernamae and `ebanx123` password.
+The admin can be acessed by http://localhost/admin using the credentials `ebanx` username and `ebanx123` password.
 
 #### Issues
 
@@ -37,7 +37,6 @@ If you have getting trouble to set up Docker, make sure you've changed the exter
 - [X] Benjamin Integration
 - [X] Settings Page
 - [X] Refunds
-- [ ] Payment by link
 - [X] Checkout Manager and Compliance Fields
 - [X] Debug Log
 - [X] Sandbox mode
@@ -55,25 +54,26 @@ If you have getting trouble to set up Docker, make sure you've changed the exter
     - [X] Credit Card
     - [X] TEF
     - [X] EBANX Wallet
-  - [ ] Mexico
+  - [X] Mexico
     - [X] OXXO
     - [X] Debit Card
     - [X] Credit Card
-    - [ ] SPEI
+    - [X] SPEI
   - [X] Peru
     - [X] Pago Efectivo
     - [X] SafetyPay
   - [X] Chile
     - [X] Sencillito
     - [X] ServiPag
-  - [ ] Colombia
+  - [X] Colombia
     - [X] Baloto
     - [X] PSE
-    - [ ] Credit Card
-  - [ ] Argentina
-    - [ ] Rapipago
-    - [ ] PagoFacil
-    - [ ] Otros
+    - [X] Credit Card
+  - [X] Argentina
+    - [X] Credit Card
+    - [X] Rapipago
+    - [X] PagoFacil
+    - [X] Otros
 
 ## License
 
