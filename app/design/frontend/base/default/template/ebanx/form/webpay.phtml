@@ -16,5 +16,9 @@ $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' : nul
     <?php endif; ?>
   </li>
   <?php include 'fields.phtml' ?><li>
-  <li><p>Total a pagar en Peso chileno: <?php echo $this->getLocalAmount('CLP') ?></p></li>
+  <li>
+    <div class="total-to-pay">
+      <p>Total a pagar en Peso chileno: <strong><?php echo $this->getLocalAmount('CLP') ?></strong>
+    </div>
+  </li>
 </ul>
