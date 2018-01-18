@@ -1,26 +1,25 @@
 <?php
-    $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
-    $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
-    $icon = '<div><img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-banking-ticket.png" /></div>';
+$skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+$showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
+$icon = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-banking-ticket.png" />';
+
+$showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' : null;
 ?>
 
-<?= !$showInlineIcon ? null : $icon ?>
-
 <ul class="form-list ebanx-payment-method ebanx-br-method" id="payment_form_<?= $this->getMethodCode() ?>" style="display:none;">
-    <li>
-        <div class="<?= $this->getMethodCode() ?>-instructions-content">
-
-            <?= $showInlineIcon ? null : $icon?>
-
-            <p class="ebanx-payment-method-desc">Pague com boleto bancário.</p>
-
-            <?php include 'fields.phtml' ?>
-        </div>
-    </li>
-    <li>
-      <div class="total-to-pay">
-        <p>Total a pagar com IOF (0.38%): <strong><?php echo $this->getLocalAmount('BRL') ?></strong>
-          <input type="hidden" name="payment[grand_total]" id="grand_total_<?php echo $this->getMethodCode() ?>" value="<?php echo $this->getTotal() ?>"/>
+  <li class="centinel-logos">
+    <label class="ebanx-payment-method-desc">Pague com boleto bancário.</label>
+    <?php if(!$showInlineIcon): ?>
+      <div class="input-box">
+        <?= $icon; ?>
       </div>
-    </li>
+    <?php endif; ?>
+  </li>
+  <?php include 'fields.phtml' ?>
+  <li>
+    <div class="total-to-pay">
+      <p>Total a pagar com IOF (0.38%): <strong><?php echo $this->getLocalAmount('BRL') ?></strong>
+        <input type="hidden" name="payment[grand_total]" id="grand_total_<?php echo $this->getMethodCode() ?>" value="<?php echo $this->getTotal() ?>"/>
+    </div>
+  </li>
 </ul>
