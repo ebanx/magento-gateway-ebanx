@@ -1,7 +1,7 @@
 <?php
 $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
-$icon = '<div><img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-multicaja.png" /></div>';
+$icon = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-multicaja.png" />';
 
 $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' : null;
 ?>
