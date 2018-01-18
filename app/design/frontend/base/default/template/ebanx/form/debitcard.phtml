@@ -1,83 +1,83 @@
 <?php
-    $_code = $this->getMethodCode();
-    $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
-    $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
-    $icon = '<div><img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-debit-card.png" /></div>';
+$_code = $this->getMethodCode();
+$skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+$showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
+$icon = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-debit-card.png" />';
+
+!$showInlineIcon ? null : $icon;
 ?>
 
-<?= !$showInlineIcon ? null : $icon?>
-
 <ul class="form-list ebanx-payment-method ebanx-es-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
-
-    <?= $showInlineIcon ? null : $icon?>
-
-    <p class="ebanx-payment-method-desc">Pagar con Tarjeta de Débito.</p>
-
-    <?php include 'fields.phtml' ?>
-
-    <li>
-        <label for="<?php echo $_code ?>_dc_name" class="required"><em>*</em>Titular de la tarjeta</label>
-        <div class="input-box">
-            <input type="text" id="<?php echo $_code ?>_dc_name" name="payment[dc_name][newcard]"
-                   title="<?php echo Mage::helper('core')->jsQuoteEscape('Titular de la tarjeta') ?>"
-                   class="input-text validate-dc-name" value=""/>
-        </div>
-    </li>
-    <li>
-        <label for="<?php echo $_code ?>_dc_number" class="required"><em>*</em>Número de la tarjeta</label>
-        <div class="input-box">
-            <input type="text" id="<?php echo $_code ?>_dc_number"
-                   title="<?php echo Mage::helper('core')->jsQuoteEscape('Número de la tarjeta') ?>"
-                   class="input-text validate-dc-number ebanx-format-cc-number required-entry" value=""/>
-        </div>
-    </li>
-    <li id="<?php echo $_code ?>_dc_type_exp_div">
-        <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em>Fecha de expiración</label>
-        <div class="input-box">
-            <div class="v-fix">
-                <select id="<?php echo $_code ?>_expiration" name="payment[dc_exp_month]"
-                        class="month validate-dc-exp required-entry">
-                    <?php
-                    $_ccMonths = $this->getCcMonths();
-                    $_ccMonths[0] = $this->__('Mes');
-                    ?>
-                    <?php foreach ($_ccMonths as $k => $v): ?>
-                        <option value="<?php echo $k ?>"><?php echo $v ?></option>
-                    <?php endforeach ?>
-                </select>
-            </div>
-            <div class="v-fix">
-                <?php
-                $_ccExpYear = $this->getInfoData('cc_exp_year');
-
-                $_ccYears = $this->getCcYears();
-                $_ccYears[0] = $this->__('Año');
-                ?>
-                <select id="<?php echo $_code ?>_expiration_yr" name="payment[dc_exp_year]" class="year required-entry">
-                    <?php foreach ($_ccYears as $k => $v): ?>
-                        <option value="<?php echo $k ? $k : '' ?>"><?php echo $v ?></option>
-                    <?php endforeach ?>
-                </select>
-            </div>
-        </div>
-    </li>
-    <?php echo $this->getChildHtml() ?>
-    <li id="<?php echo $_code ?>_dc_type_cvv_div">
-        <label for="<?php echo $_code ?>_dc_cid" class="required"><em>*</em>Código de verificación</label>
-        <div class="input-box">
-            <div class="v-fix">
-                <input type="text" title="<?php echo Mage::helper('core')->jsQuoteEscape('Código de verificación') ?>"
-                       class="input-text cvv required-entry validate-dc-cvn ebanx-format-cvc-number" id="<?php echo $_code ?>_dc_cid"
-                       name="payment[dc_cid][newcard]" value=""/>
-            </div>
-        </div>
-    </li>
-    <li>
-      <div class="total-to-pay">
-        <p>Total a pagar en Peso mexicano: <strong><?php echo $this->getLocalAmount('MXN') ?></strong>
+  <li class="centinel-logos">
+    <label class="ebanx-payment-method-desc">Pagar con Tarjeta de Débito.</label>
+    <?php if(!$showInlineIcon): ?>
+      <div class="input-box">
+        <?= $icon; ?>
       </div>
-    </li>
+    <?php endif; ?>
+  </li>
+  <?php include 'fields.phtml' ?>
+  <li>
+    <label for="<?php echo $_code ?>_dc_name" class="required"><em>*</em>Titular de la tarjeta</label>
+    <div class="input-box">
+        <input type="text" id="<?php echo $_code ?>_dc_name" name="payment[dc_name][newcard]"
+               title="<?php echo Mage::helper('core')->jsQuoteEscape('Titular de la tarjeta') ?>"
+               class="input-text validate-dc-name" value=""/>
+    </div>
+  </li>
+  <li>
+      <label for="<?php echo $_code ?>_dc_number" class="required"><em>*</em>Número de la tarjeta</label>
+      <div class="input-box">
+          <input type="text" id="<?php echo $_code ?>_dc_number"
+                 title="<?php echo Mage::helper('core')->jsQuoteEscape('Número de la tarjeta') ?>"
+                 class="input-text validate-dc-number ebanx-format-cc-number required-entry" value=""/>
+      </div>
+  </li>
+  <li id="<?php echo $_code ?>_dc_type_exp_div">
+      <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em>Fecha de expiración</label>
+      <div class="input-box">
+          <div class="v-fix">
+              <select id="<?php echo $_code ?>_expiration" name="payment[dc_exp_month]"
+                      class="month validate-dc-exp required-entry">
+                  <?php
+                  $_ccMonths = $this->getCcMonths();
+                  $_ccMonths[0] = $this->__('Mes');
+                  ?>
+                  <?php foreach ($_ccMonths as $k => $v): ?>
+                      <option value="<?php echo $k ?>"><?php echo $v ?></option>
+                  <?php endforeach ?>
+              </select>
+          </div>
+          <div class="v-fix">
+              <?php
+              $_ccExpYear = $this->getInfoData('cc_exp_year');
 
+              $_ccYears = $this->getCcYears();
+              $_ccYears[0] = $this->__('Año');
+              ?>
+              <select id="<?php echo $_code ?>_expiration_yr" name="payment[dc_exp_year]" class="year required-entry">
+                  <?php foreach ($_ccYears as $k => $v): ?>
+                      <option value="<?php echo $k ? $k : '' ?>"><?php echo $v ?></option>
+                  <?php endforeach ?>
+              </select>
+          </div>
+      </div>
+  </li>
+  <?php echo $this->getChildHtml() ?>
+  <li id="<?php echo $_code ?>_dc_type_cvv_div">
+      <label for="<?php echo $_code ?>_dc_cid" class="required"><em>*</em>Código de verificación</label>
+      <div class="input-box">
+          <div class="v-fix">
+              <input type="text" title="<?php echo Mage::helper('core')->jsQuoteEscape('Código de verificación') ?>"
+                     class="input-text cvv required-entry validate-dc-cvn ebanx-format-cvc-number" id="<?php echo $_code ?>_dc_cid"
+                     name="payment[dc_cid][newcard]" value=""/>
+          </div>
+      </div>
+  </li>
+  <li>
+    <div class="total-to-pay">
+      <p>Total a pagar en Peso mexicano: <strong><?php echo $this->getLocalAmount('MXN') ?></strong>
+    </div>
     <input type="hidden" name="payment[ebanx_mode]" id="<?php echo $_code ?>_mode"
             value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
     <input id="card[newcard]" type="hidden" name="payment[selected_card]" value="newcard">
@@ -90,8 +90,8 @@
     <input type="hidden" name="payment[ebanx_integration_key]" id="<?php echo $_code ?>_integration_key"
             value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
     <input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="mx"/>
+  </li>
 </ul>
-
 
 <script>
     handleEbanxForm('mx', 'dc');
