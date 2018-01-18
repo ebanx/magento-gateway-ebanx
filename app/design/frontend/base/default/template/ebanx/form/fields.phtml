@@ -15,34 +15,43 @@ if (Mage::getSingleton('customer/session')->isLoggedIn()) {
 
 $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 ?>
-
-<div class="ebanx-compliance-fields">
-  <label for="ebanx-document-<?= $this->getMethodCode() ?>" class="required"><em>*</em><?= $helper->getLabelForComplianceField($this->getMethodCode()); ?></label>
+<li class="ebanx-compliance-fields">
+  <label class="ebanx-document-label required" for="ebanx-document-<?= $this->getMethodCode() ?>">
+    <em>*</em>
+    <?= $helper->getLabelForComplianceField($this->getMethodCode()); ?>
+  </label>
   <div class="input-box">
-    <input type="text" id="ebanx-document-<?= $this->getMethodCode() ?>" name="ebanx-document[<?= $this->getMethodCode() ?>]" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Purchase Order Number')) ?>" class="input-text required-entry" value="<?= $ebanxCustomerDocument ?>" />
+    <input
+      type="text"
+      id="ebanx-document-<?= $this->getMethodCode() ?>"
+      name="ebanx-document[<?= $this->getMethodCode() ?>]"
+      class="input-text required-entry"
+      value="<?= $ebanxCustomerDocument ?>"
+    />
   </div>
-</div>
 
-<?php
-$country = Mage::getSingleton('checkout/cart')->getQuote()
-    ->getShippingAddress()
-    ->getCountryId();
-if ($country === 'BR'):
-?>
-<script>
-    function inputHandler(masks, max, event) {
-        var c = event.target;
-        var v = c.value.replace(/\D/g, '');
-        var m = c.value.length > max ? 1 : 0;
-        VMasker(c).unMask();
-        VMasker(c).maskPattern(masks[m]);
-        c.value = VMasker.toPattern(v, masks[m]);
-    }
+  <?php
+  $country = Mage::getSingleton('checkout/cart')->getQuote()
+      ->getShippingAddress()
+      ->getCountryId();
+  if ($country === 'BR'):
+  ?>
+  <script>
+      function inputHandler(masks, max, event) {
+          var c = event.target;
+          var v = c.value.replace(/\D/g, '');
+          var m = c.value.length > max ? 1 : 0;
+          VMasker(c).unMask();
+          VMasker(c).maskPattern(masks[m]);
+          c.value = VMasker.toPattern(v, masks[m]);
+      }
 
-    var docMask = ['999.999.999-999', '99.999.999/9999-99'];
-    var doc = document.querySelector('#ebanx-document-<?= $this->getMethodCode() ?>');
-    VMasker(doc).maskPattern(docMask[0]);
-    doc.addEventListener('input', inputHandler.bind(undefined, docMask, 14), false);
-</script>
-<?php
-endif;
+      var docMask = ['999.999.999-999', '99.999.999/9999-99'];
+      var doc = document.querySelector('#ebanx-document-<?= $this->getMethodCode() ?>');
+      VMasker(doc).maskPattern(docMask[0]);
+      doc.addEventListener('input', inputHandler.bind(undefined, docMask, 14), false);
+  </script>
+  <?php
+  endif;
+  ?>
+</li>

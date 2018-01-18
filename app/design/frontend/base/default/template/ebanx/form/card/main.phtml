@@ -8,21 +8,21 @@ $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
 $icon           = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-credit-card-' . $lowerCountry . '.png" />';
 ?>
 
-<?= !$showInlineIcon ? null : '<div class="ebanx-method-icon-box">' . $icon . '</div>' ?>
+<?= $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' : null ?>
 
 <ul class="form-list ebanx-payment-method ebanx-<?= $lowerCountry ?>-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
-
-  <?= $showInlineIcon ? null : '<li class="ebanx-method-icon-box">' . $icon . '</li>' ?>
-
-  <li>
-    <p class="ebanx-payment-method-desc"><?= $text['method-desc'] ?></p>
-  </li>
-
-  <li>
-    <?php include __DIR__ . '/../fields.phtml' ?>
+  <li class="centinel-logos">
+    <label class="ebanx-payment-method-desc"><?= $text['method-desc'] ?></label>
+      <?php if(!$showInlineIcon): ?>
+        <div class="input-box">
+          <?= $icon; ?>
+        </div>
+      <?php endif; ?>
   </li>
 
   <?php
+  include __DIR__ . '/../fields.phtml';
+
   $savedCards = $this->getSavedCards();
   if (Mage::helper('ebanx')->saveCreditCardAllowed() && $savedCards && $savedCards->getSize()): ?>
     <?php foreach ($savedCards as $card): ?>
@@ -31,7 +31,7 @@ $icon           = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/bas
     <li class="ebanx-credit-card-option">
       <input id="card[newcard]" type="radio" name="payment[selected_card]" value="newcard">
       <label for="card[newcard]"><?= $text['newcard'] ?></label>
-      <div class="new-card">
+      <div class="container-new-saved-card">
         <?php include 'card-form.phtml' ?>
       </div>
     </li>
@@ -39,7 +39,7 @@ $icon           = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/bas
   <?php else: ?>
     <li>
       <input id="card[newcard]" type="hidden" name="payment[selected_card]" value="newcard"/>
-      <div>
+      <div class="container-new-card">
         <?php include 'card-form.phtml' ?>
       </div>
     </li>
