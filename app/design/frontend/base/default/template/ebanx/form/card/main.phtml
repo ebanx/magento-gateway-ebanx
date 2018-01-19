@@ -6,9 +6,9 @@ $skin           = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 $_code          = $this->getMethodCode();
 $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
 $icon           = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-credit-card-' . $lowerCountry . '.png" />';
-?>
 
-<?= $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' : null ?>
+echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' : null;
+?>
 
 <ul class="form-list ebanx-payment-method ebanx-<?= $lowerCountry ?>-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
   <li class="centinel-logos">
