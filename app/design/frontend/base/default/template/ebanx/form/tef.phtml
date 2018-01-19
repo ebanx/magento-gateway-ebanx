@@ -44,7 +44,7 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' 
   </li>
   <li>
     <div class="total-to-pay">
-      <p>Total a pagar com IOF (0.38%): <strong><?php echo $this->getLocalAmount('BRL') ?></strong>
+      <p>Total a pagar com IOF (0.38%): <strong><?php echo $this->getLocalAmount('BRL') ?></strong></p>
       <input type="hidden" name="payment[grand_total]" id="grand_total_<?php echo $this->getMethodCode() ?>" value="<?php echo $this->getTotal() ?>"/>
     </div>
   </li>
