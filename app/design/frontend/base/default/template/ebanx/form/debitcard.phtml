@@ -76,7 +76,7 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' 
   </li>
   <li>
     <div class="total-to-pay">
-      <p>Total a pagar en Peso mexicano: <strong><?php echo $this->getLocalAmount('MXN') ?></strong>
+      <p>Total a pagar en Peso mexicano: <strong><?php echo $this->getLocalAmount('MXN') ?></strong></p>
     </div>
     <input type="hidden" name="payment[ebanx_mode]" id="<?php echo $_code ?>_mode"
             value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
