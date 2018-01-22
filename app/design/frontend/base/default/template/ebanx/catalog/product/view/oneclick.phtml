@@ -11,8 +11,8 @@ $lowerCountry   = strtolower($this->getCountry());
   <div class="ebanx-one-click-tooltip" id="ebanx-one-click-tooltip">
     <span id="ebanx-one-click-close-button"></span>
       <p>Endereço de entrega: </p>
-      <p><strong><?= $this->getAddress()['street'] ?></strong></p>
-      <br>
+      <p class="ebanx-one-click-address"><?= $this->getAddress()['street'] ?></p>
+
       <p>Escolha o cartão: </p>
       <ul id="ebanx-one-click-card-list">
         <?php foreach ($savedCards as $card): ?>
@@ -20,11 +20,9 @@ $lowerCountry   = strtolower($this->getCountry());
         <?php endforeach; ?>
         <?php include __DIR__ . '/../../../form/card/instalments.phtml' ?>
         <li>
-          <div class="total-to-pay">
-            <p>
-              <?= $text['local-amount'] ?><span id="cc-<?= $lowerCountry ?>-local-amount"><strong><?php echo $this->getLocalAmount($localCurrency) ?></strong></span>
-            </p>
-          </div>
+          <p class="total-to-pay">
+            <?= $text['local-amount'] ?><span id="cc-<?= $lowerCountry ?>-local-amount"><strong><?php echo $this->getLocalAmount($localCurrency) ?></strong></span>
+          </p>
         </li>
         <li>
           <span id="ebanx-oneclick-pay-button" class="button btn-ebanx">Pagar</span>

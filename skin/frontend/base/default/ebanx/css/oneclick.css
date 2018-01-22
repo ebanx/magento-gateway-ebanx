@@ -58,13 +58,6 @@
   margin-left: -12px;
 }
 
-.ebanx-one-click-tooltip > h3 {
-  margin: 0 0 12px;
-  padding: 0;
-
-  font-size: 14px;
-}
-
 #ebanx-one-click-close-button {
   position: absolute;
   top: 15px;
@@ -85,6 +78,19 @@
   background-size: 20px;
   border-radius: 50%;
   opacity: .5;
+}
+
+.ebanx-one-click-tooltip p {
+  margin: 0;
+}
+
+.ebanx-one-click-tooltip p.ebanx-one-click-address {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#ebanx-one-click-card-list {
+  list-style: none;
 }
 
 .ebanx-credit-card-option > label > img {
