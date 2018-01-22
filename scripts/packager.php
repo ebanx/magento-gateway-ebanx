@@ -6,11 +6,11 @@ class PublishablePackage {
 		$this->config = $options;
 	}
 
-	public function pack($path) {
+	public function pack($gzpath, $zpath) {
 		$this->copyFiles();
 		$this->writeMetadata();
-		$this->gzipAll();
-		$this->moveResultingFile($path);
+		$this->gzipAll($gzpath);
+		$this->zipAll($zpath);
 		$this->clearTempFolder();
 	}
 
@@ -31,10 +31,6 @@ class PublishablePackage {
 		$metadata->save('.tmp/package.xml');
 	}
 
-	private function moveResultingFile($path) {
-		rename('scripts/packager_work.tar.gz', $path);
-	}
-
 	private function clearTempFolder() {
 		exec('rm -rf .tmp');
 	}
@@ -46,12 +42,21 @@ class PublishablePackage {
 		}
 	}
 
-	private function gzipAll() {
+	private function gzipAll($path) {
 		$name = 'scripts/packager_work.tmp';
 		$data = new PharData($name);
 		$data->buildFromDirectory(realpath('.tmp'));
 		$data->compress(Phar::GZ);
 		unlink($name);
+		$this->moveResultingFile($path);
+	}
+
+	private function moveResultingFile($path) {
+		rename('scripts/packager_work.tar.gz', $path);
+	}
+
+	private function zipAll($path) {
+		system("cd .tmp && zip -rq ../magento-gateway-ebanx.zip ./* && cd ..");
 	}
 }
 
