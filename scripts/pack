@@ -75,4 +75,4 @@ $options['contents'] = [
 ];
 
 $package = new PublishablePackage($options);
-$package->pack('ebanx_gateway-'.$argv[1].'.tgz');
+$package->pack('ebanx_gateway-'.$argv[1].'.tgz', 'magento-gateway-ebanx.zip');
