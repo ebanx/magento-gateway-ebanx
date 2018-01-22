@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.4.1
+* Fix - One-click Payment templates and blocks review [#230](https://github.com/ebanx/magento-gateway-ebanx/pull/230)
+* Fix - Front-end templates and blocks review [#228](https://github.com/ebanx/magento-gateway-ebanx/pull/228)
+* Fix - Invoice generation is on by default for new installations [#226](https://github.com/ebanx/magento-gateway-ebanx/pull/226)
+
 ## 2.4.0
 * Feature - Index controller deprecation and permanent redirect [#224](https://github.com/ebanx/magento-gateway-ebanx/pull/224)
 * Feature - Legacy support for old ebanx-magento extensions [#223](https://github.com/ebanx/magento-gateway-ebanx/pull/223)
