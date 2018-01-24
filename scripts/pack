@@ -1,0 +1,78 @@
+#!/usr/bin/env php
+<?php
+require 'packager.php';
+
+if ($argv[0] !== 'scripts/pack') {
+	echo "Run this script from magento folder as scripts/pack\n";
+	printUsage();
+	exit;
+}
+if ($argc != 3) {
+	printUsage();
+	exit;
+}
+
+function printUsage() {
+	echo "Usage:\n";
+	echo "scripts/pack <version> \"<release notes>\"\n";
+}
+
+$options = [
+	'name' => 'ebanx_gateway',
+	'version' => $argv[1],
+	'stability' => 'stable',
+	'license' => 'Apache Software License (ASL) 2.0',
+	'channel' => 'community',
+	'summary' => 'EBANX gateway',
+	'description' => 'EBANX payment gateway',
+	'notes' => $argv[2],
+	'authors' => [
+		[
+			'name' => 'EBANX',
+			'user' => 'ebanx_magento',
+			'email' => 'magento@ebanx.com',
+		],
+	],
+	'dependencies' => [
+		'required' => [
+			'php' => [
+				'min' => '5.4.0',
+				'max' => '7.1.0',
+			],
+		],
+	],
+];
+
+$code = new FileDomain(FileDomain::TYPE_COMMUNITY);
+$code->addDir('Ebanx');
+
+$design = new FileDomain(FileDomain::TYPE_DESIGN);
+$design->addFile('adminhtml/default/default/layout/ebanx.xml');
+$design->addDir('adminhtml/default/default/template/ebanx');
+$design->addFile('frontend/base/default/layout/ebanx.xml');
+$design->addDir('frontend/base/default/template/ebanx');
+
+$etc = new FileDomain(FileDomain::TYPE_ETC);
+$etc->addFile('modules/Ebanx_Gateway.xml');
+
+$web = new FileDomain(FileDomain::TYPE_OTHER_WEB);
+$web->addDir('js/ebanx');
+
+$lib = new FileDomain(FileDomain::TYPE_LIB);
+$lib->addDir('Ebanx');
+
+$skin = new FileDomain(FileDomain::TYPE_SKIN);
+$skin->addDir('adminhtml/default/default/ebanx');
+$skin->addDir('frontend/base/default/ebanx');
+
+$options['contents'] = [
+	$code,
+	$design,
+	$etc,
+	$web,
+	$lib,
+	$skin,
+];
+
+$package = new PublishablePackage($options);
+$package->pack('ebanx_gateway-'.$argv[1].'.tgz', 'magento-gateway-ebanx.zip');

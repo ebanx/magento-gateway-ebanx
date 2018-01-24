@@ -1,21 +1,5 @@
-.ebanx-payment-method-desc {
-  margin: 20px 0 !important;
-}
-
-.ebanx-document-text {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.ebanx-document-label {
-  width: 100%;
-  margin: 0 !important;
-}
-
-@media screen and (min-width: 1024px) {
-  .ebanx-document-label {
-    width: 50%;
-  }
+.sp-methods .container-new-card .form-list {
+  padding-left: 0;
 }
 
 .ebanx-payment-method input.input-text.identified,
@@ -63,63 +47,40 @@
   background-image: none;
 }
 
-.ebanx-payment-method {
-  position: relative;
-
-  padding: 1em 15px;
-  padding-bottom: 30px !important;
-}
-
-.ebanx-payment-method p {
-  overflow: hidden;
-  clear: both;
-}
-
-.ebanx-payment-method p:last-child {
-  margin: 0;
-}
-
-.ebanx-payment-method.ebanx-es-method:after,
-.ebanx-payment-method.ebanx-br-method:after {
-  content: '';
-  position: absolute;
-  bottom: 0px;
-  right: 15px;
-
-  background-size: 100%;
-  background-position: 0 0;
-  background-repeat: no-repeat;
-}
-
-.ebanx-payment-method.ebanx-es-method:after {
-  width: 168px;
-  height: 22px;
-
-  background-image: url(../ebanx-estas-pagando.png);
-}
-
-.ebanx-payment-method.ebanx-br-method:after {
-  width: 136px;
-  height: 22px;
-
-  background-image: url(../ebanx-pagando.png);
-}
-
 .ebanx-credit-card-row:after {
   content: "";
   display: table;
   clear: both;
 }
 
-.ebanx-payment-method__block {
-  display: block;
-  width: 100%;
+.sp-methods .form-list.ebanx-payment-method .total-to-pay {
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  padding: 10px 168px 10px 0;
 }
 
-.total-to-pay {
-  padding: 10px 0;
+.sp-methods .form-list.ebanx-es-method .total-to-pay {
+  background-image: url(../ebanx-estas-pagando.png);
+  background-size: 168px 22px;
+}
+
+.sp-methods .form-list.ebanx-br-method .total-to-pay {
+  background-image: url(../ebanx-pagando.png);
+  background-size: 136px 22px;
+  padding-right: 136px;
 }
 
 .ebanx-method-icon {
   height: 30px;
+}
+
+.save-card,
+.new-card { display: none; }
+
+input[type=radio]:checked ~ .save-card {
+  display: block;
+}
+
+input[type=radio]:checked ~ .new-card {
+  display: block;
 }
