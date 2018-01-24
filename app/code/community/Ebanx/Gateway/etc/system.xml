@@ -313,8 +313,10 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <depends>
+                                <use_interest_rates>1</use_interest_rates>
+                            </depends>
                         </interest_rate>
-
 
                         <heading_cash translate="label">
                             <label>Cash Payments</label>
