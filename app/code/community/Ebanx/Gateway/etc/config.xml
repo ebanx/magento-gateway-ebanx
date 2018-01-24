@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Ebanx_Gateway>
-            <version>2.4.0</version>
+            <version>2.4.1</version>
         </Ebanx_Gateway>
     </modules>
     <global>
@@ -303,7 +303,7 @@
                 <save_card_data>1</save_card_data>
                 <one_click_payment>1</one_click_payment>
                 <min_instalment_value>0</min_instalment_value>
-                <create_invoice>0</create_invoice>
+                <create_invoice>1</create_invoice>
                 <auto_capture>1</auto_capture>
 
                 <payment_co_status>processing</payment_co_status>
@@ -311,11 +311,11 @@
                 <payment_op_status>pending</payment_op_status>
                 <payment_ca_status>canceled</payment_ca_status>
                 <!-- Compliance Fields -->
-                <mask_taxvat_field>1</mask_taxvat_field>
-                <cpf_field>taxvat</cpf_field>
-                <cnpj_field>taxvat</cnpj_field>
-                <rut_field>taxvat</rut_field>
-                <dni_field>taxvat</dni_field>
+                <mask_taxvat_field>0</mask_taxvat_field>
+                <cpf_field></cpf_field>
+                <cnpj_field></cnpj_field>
+                <rut_field></rut_field>
+                <dni_field></dni_field>
             </ebanx_settings>
             <!-- Legacy -->
             <ebanx_standard>

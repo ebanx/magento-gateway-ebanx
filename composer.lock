@@ -4,7 +4,6 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "36a6ea219a735648c26a653cf1c87118",
     "content-hash": "b8376d47129a74e5b79f3c8bc6456c5d",
     "packages": [
         {
@@ -47,7 +46,7 @@
                 "Apache-2.0"
             ],
             "description": "Business rule provider lib for plugin implementations",
-            "time": "2018-01-09 16:00:43"
+            "time": "2018-01-09T16:00:43+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -55,12 +54,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "9c1d1e20a2ab54b9188198d96c7fab9252c770e2"
+                "reference": "f9acb4761844317e626a32259205bec1f1bc60d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/9c1d1e20a2ab54b9188198d96c7fab9252c770e2",
-                "reference": "9c1d1e20a2ab54b9188198d96c7fab9252c770e2",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/f9acb4761844317e626a32259205bec1f1bc60d2",
+                "reference": "f9acb4761844317e626a32259205bec1f1bc60d2",
                 "shasum": ""
             },
             "require": {
@@ -100,7 +99,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2017-05-01 09:23:13"
+            "time": "2018-01-15T07:18:01+00:00"
         },
         {
             "name": "guzzlehttp/ringphp",
@@ -151,7 +150,7 @@
                 }
             ],
             "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
-            "time": "2017-01-13 20:44:38"
+            "time": "2017-01-13T20:44:38+00:00"
         },
         {
             "name": "guzzlehttp/streams",
@@ -201,7 +200,7 @@
                 "Guzzle",
                 "stream"
             ],
-            "time": "2016-04-13 16:32:01"
+            "time": "2016-04-13T16:32:01+00:00"
         },
         {
             "name": "react/promise",
@@ -247,7 +246,7 @@
                 "promise",
                 "promises"
             ],
-            "time": "2017-09-19 13:02:44"
+            "time": "2017-09-19T13:02:44+00:00"
         }
     ],
     "packages-dev": [
@@ -282,7 +281,7 @@
             ],
             "description": "A set of PHP_CodeSniffer rules and sniffs.",
             "homepage": "https://github.com/magento-ecg/coding-standard",
-            "time": "2017-08-08 21:48:13"
+            "time": "2017-08-08T21:48:13+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -290,12 +289,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "8eee3c28936b255a0c1920d81bc7df5796ba592c"
+                "reference": "977feae69ad0323d2aed9407c665a552aea28632"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/8eee3c28936b255a0c1920d81bc7df5796ba592c",
-                "reference": "8eee3c28936b255a0c1920d81bc7df5796ba592c",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/977feae69ad0323d2aed9407c665a552aea28632",
+                "reference": "977feae69ad0323d2aed9407c665a552aea28632",
                 "shasum": ""
             },
             "require": {
@@ -333,7 +332,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2018-01-05 02:24:46"
+            "time": "2018-01-18T00:31:32+00:00"
         }
     ],
     "aliases": [],

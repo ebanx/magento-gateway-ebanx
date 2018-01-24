@@ -16,7 +16,7 @@ function handleEbanxForm(countryCode, paymentType) {
   var ebanxMode = getById('ebanx_' + paymentType + '_' + countryCode + '_mode');
   var ebanxIntegrationKey = getById('ebanx_' + paymentType + '_' + countryCode + '_integration_key');
   var ebanxCountry = getById('ebanx_' + paymentType + '_' + countryCode + '_country');
-  var errorDiv = document.querySelector('#ebanx-error-message');
+  var errorDiv = getById('#ebanx-error-message');
 
   var hasEbanxForm = typeof getById('payment_form_ebanx_' + paymentType + '_' + countryCode) !== 'undefined';
 
