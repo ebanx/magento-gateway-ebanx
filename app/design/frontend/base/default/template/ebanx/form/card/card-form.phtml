@@ -75,12 +75,6 @@
   <?php endif; ?>
 </ul>
 <input type="hidden" name="payment[ebanx_token][newcard]" id="<?php echo $_code ?>_token"/>
-<input type="hidden" name="payment[ebanx_brand][newcard]" id="<?php echo $_code ?>_brand" class="required-entry"/>
+<input type="hidden" name="payment[ebanx_brand][newcard]" id="<?php echo $_code ?>_brand" class="brand-required"/>
 <input type="hidden" name="payment[ebanx_masked_card_number][newcard]" id="<?php echo $_code ?>_masked_card_number"/>
 <input type="hidden" name="payment[ebanx_device_fingerprint][newcard]" id="<?php echo $_code ?>_device_fingerprint"/>
-
-<style>
-  #advice-required-entry-<?php echo $_code ?>_brand {
-    display: none;
-  }
-</style>
