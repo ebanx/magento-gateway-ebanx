@@ -1,4 +1,4 @@
-<div id="ebanx-error-message" style="color: red; margin-bottom: 10px;"></div>
+<p id="ebanx-error-message" class="validation-advice"></p>
 
 <?php if ($_code === 'ebanx_cc_br'): ?>
   <input type="hidden" name="payment[cc_name][newcard]" id="<?php echo $_code ?>_cc_name" value="Ebanx Magento Plugin"/>
@@ -77,3 +77,9 @@
 <input type="hidden" name="payment[ebanx_brand][newcard]" id="<?php echo $_code ?>_brand" class="required-entry"/>
 <input type="hidden" name="payment[ebanx_masked_card_number][newcard]" id="<?php echo $_code ?>_masked_card_number"/>
 <input type="hidden" name="payment[ebanx_device_fingerprint][newcard]" id="<?php echo $_code ?>_device_fingerprint"/>
+
+<style>
+  #advice-required-entry-<?php echo $_code ?>_brand {
+    display: none;
+  }
+</style>

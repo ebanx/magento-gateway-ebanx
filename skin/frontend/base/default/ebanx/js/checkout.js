@@ -16,6 +16,7 @@ function handleEbanxForm(countryCode, paymentType) {
   var ebanxMode = getById('ebanx_' + paymentType + '_' + countryCode + '_mode');
   var ebanxIntegrationKey = getById('ebanx_' + paymentType + '_' + countryCode + '_integration_key');
   var ebanxCountry = getById('ebanx_' + paymentType + '_' + countryCode + '_country');
+  var errorDiv = document.querySelector('#ebanx-error-message');
 
   var hasEbanxForm = typeof getById('payment_form_ebanx_' + paymentType + '_' + countryCode) !== 'undefined';
 
@@ -52,9 +53,6 @@ function handleEbanxForm(countryCode, paymentType) {
   };
 
   var saveToken = function (response) {
-    var errorDiv = document.querySelector('#ebanx-error-message');
-    var wow = document.querySelector('#advice-required-entry-ebanx_' + paymentType + '_' + countryCode + '_brand');
-
     if (!response.data.hasOwnProperty('status')) {
       var error = response.error.err;
       var errorMessage = error.message;
@@ -87,6 +85,7 @@ function handleEbanxForm(countryCode, paymentType) {
     ebanxBrand.value = '';
     ebanxMaskedCardNumber.value = '';
     ebanxDeviceFingerprint.value = '';
+    errorDiv.innerHTML = '';
   };
 
   if (hasEbanxForm) {
@@ -110,101 +109,4 @@ function handleEbanxForm(countryCode, paymentType) {
     }
   };
 
-  // TODO: use mutation observer to change empty brand validation message into a generic "check your card data" message
-
-  var MutationObserver = MutationObserver;
-  if (typeof MutationObserver === 'undefined') {
-    MutationObserver = function(){
-      var def = function(callback) {
-        this.listeners = [];
-        this.callback = callback;
-        this.initialized = false;
-        this.clock = -1;
-      };
-
-      function tryInitialize() {
-        if (this.initialized) return;
-        this.initialized = true;
-
-        var self = this;
-        this.clock = setInterval(function(){
-          for (var i in self.listeners) {
-            var mutation = self.listeners[i];
-            var newChildren = getTargetChildren(mutation.target);
-            var newAttributes = getTargetAttributes(mutation.target);
-
-            if (mutation.options.indexOf('childList') >= 0
-              && !areChildrenEqual(mutation.children, newChildren)) {
-              mutation.type = 'childList';
-              this.callback(mutation);
-            }
-
-            if (mutation.options.indexOf('attributes') >= 0
-              && !areAttributesEqual(mutation.attributes, newAttributes)) {
-              mutation.type = 'attributes';
-              this.callback(mutation);
-            }
-
-            mutation.children = newChildren;
-            mutation.attributes = newAttributes;
-          }
-        }, 500);
-      };
-
-      def.prototype.disconnect = function() {
-        this.initialized = false;
-        if (!this.initialized) return;
-        clearInterval(this.clock);
-      };
-
-      def.prototype.observe = function(target, options) {
-        var defaults = { attributes: false, childList: false };
-        for (var attr in defaults) {
-          if (typeof options[attr] === 'undefined')
-            options[attr] = defaults[attr];
-        }
-
-        var mutation = {
-          options: [],
-          target: target,
-          attributes: getTargetAttributes(target),
-          children: getTargetChildren(target)
-        };
-
-        if (options.childList)
-          mutation.options.push('childList');
-
-        if (options.attributes)
-          mutation.options.push('attributes');
-
-        this.listeners.push(mutation);
-
-        tryInitialize.call(this);
-      };
-
-      function areChildrenEqual(listA, listB) {
-        return listA.length === listB.length;
-      }
-
-      function areAttributesEqual(listA, listB) {
-        if (listA.length !== listB.length) return false;
-
-        for (var i in listA) {
-          if (listA[i] !== listB[i]) return false;
-        }
-
-        return true;
-      }
-
-      function getTargetChildren(target) {
-        return [].slice.apply(target.childNodes);
-      }
-
-      function getTargetAttributes(target) {
-        return [].slice.apply(target.attributes);
-      }
-
-      return def;
-    }
-  }
 }
