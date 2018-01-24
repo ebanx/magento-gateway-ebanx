@@ -1,3 +1,3 @@
-Validation.add('brand-required', '', function(v) {
+Validation.add('brand-required', ' ', function(v) {
   return !Validation.get('IsEmpty').test(v);
 });

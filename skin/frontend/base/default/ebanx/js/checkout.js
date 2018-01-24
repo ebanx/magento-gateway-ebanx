@@ -65,10 +65,12 @@ function handleEbanxForm(countryCode, paymentType) {
       errorDiv.innerHTML = errorMessage;
       disableBtnPlaceOrder(false);
 
+      setTimeout(function() {
+        Validation.showAdvice({advices: false}, errorDiv, 'ebanx-error-message');
+      }, 1000);
+
       return;
     }
-
-    errorDiv.innerHTML = '';
 
     responseData = response.data;
     ebanxToken.value = responseData.token;
@@ -85,7 +87,7 @@ function handleEbanxForm(countryCode, paymentType) {
     ebanxBrand.value = '';
     ebanxMaskedCardNumber.value = '';
     ebanxDeviceFingerprint.value = '';
-    errorDiv.innerHTML = '';
+    Validation.hideAdvice({advices: false}, errorDiv);
   };
 
   if (hasEbanxForm) {

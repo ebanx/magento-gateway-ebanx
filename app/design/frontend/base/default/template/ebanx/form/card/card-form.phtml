@@ -1,8 +1,10 @@
-<p id="ebanx-error-message" class="validation-advice"></p>
+<div id="ebanx-error-message" class="validation-advice"></div>
 
 <ul class="form-list ebanx-form-card">
   <?php if ($_code === 'ebanx_cc_br'): ?>
-    <input type="hidden" name="payment[cc_name][newcard]" id="<?php echo $_code ?>_cc_name" value="Ebanx Magento Plugin"/>
+    <li class="ebanx-credit-card-row">
+      <input type="hidden" name="payment[cc_name][newcard]" id="<?php echo $_code ?>_cc_name" value="Ebanx Magento Plugin"/>
+    </li>
   <?php else: ?>
     <li class="ebanx-credit-card-row">
       <label for="<?php echo $_code ?>_cc_name" class="required ebanx-payment-method__block"><em>*</em><?= $text['name'] ?></label>
