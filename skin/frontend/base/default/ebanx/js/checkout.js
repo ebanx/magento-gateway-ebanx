@@ -16,6 +16,7 @@ function handleEbanxForm(countryCode, paymentType) {
   var ebanxMode = getById('ebanx_' + paymentType + '_' + countryCode + '_mode');
   var ebanxIntegrationKey = getById('ebanx_' + paymentType + '_' + countryCode + '_integration_key');
   var ebanxCountry = getById('ebanx_' + paymentType + '_' + countryCode + '_country');
+  var errorDiv = getById('ebanx-error-message');
 
   var hasEbanxForm = typeof getById('payment_form_ebanx_' + paymentType + '_' + countryCode) !== 'undefined';
 
@@ -40,10 +41,7 @@ function handleEbanxForm(countryCode, paymentType) {
 
   var generateToken = function () {
     if (!responseData) {
-      var placeOrderButton = document.querySelector('#review-buttons-container > button');
-      if (typeof placeOrderButton !== 'undefined' && placeOrderButton) {
-        placeOrderButton.disabled = true;
-      }
+      disableBtnPlaceOrder(true);
 
       EBANX.card.createToken({
         card_number: parseInt(cardNumber.value.replace(/ /g, '')),
@@ -55,19 +53,32 @@ function handleEbanxForm(countryCode, paymentType) {
   };
 
   var saveToken = function (response) {
-    if (response.data.hasOwnProperty('status')) {
-      responseData = response.data;
-      ebanxToken.value = responseData.token;
-      ebanxBrand.value = responseData.payment_type_code;
-      ebanxMaskedCardNumber.value = responseData.masked_card_number;
-      ebanxDeviceFingerprint.value = responseData.deviceId;
+    if (!response.data.hasOwnProperty('status')) {
+      var error = response.error.err;
+      var errorMessage = error.message;
 
-      var placeOrderButton = document.querySelector('#review-buttons-container > button');
-      if (typeof placeOrderButton !== 'undefined' && placeOrderButton) {
-        placeOrderButton.disabled = false;
+      if (!error.message) {
+        EBANX.errors.InvalidValueFieldError( error.status_code );
+        errorMessage = EBANX.errors.message || 'Some error happened. Please, verify the data of your credit card and try again.';
       }
+
+      errorDiv.innerHTML = errorMessage;
+      disableBtnPlaceOrder(false);
+
+      setTimeout(function() {
+        Validation.showAdvice({advices: false}, errorDiv, 'ebanx-error-message');
+      }, 1000);
+
       return;
     }
+
+    responseData = response.data;
+    ebanxToken.value = responseData.token;
+    ebanxBrand.value = responseData.payment_type_code;
+    ebanxMaskedCardNumber.value = responseData.masked_card_number;
+    ebanxDeviceFingerprint.value = responseData.deviceId;
+
+    disableBtnPlaceOrder(false);
   };
 
   var clearResponseData = function () {
@@ -76,6 +87,7 @@ function handleEbanxForm(countryCode, paymentType) {
     ebanxBrand.value = '';
     ebanxMaskedCardNumber.value = '';
     ebanxDeviceFingerprint.value = '';
+    Validation.hideAdvice({advices: false}, errorDiv);
   };
 
   if (hasEbanxForm) {
@@ -91,4 +103,12 @@ function handleEbanxForm(countryCode, paymentType) {
     cardExpirationYear.addEventListener('change', clearResponseData, false);
     cardCvv.addEventListener('change', clearResponseData, false);
   }
+
+  var disableBtnPlaceOrder = function(shouldDisable) {
+    var placeOrderButton = document.querySelector('#review-buttons-container > button');
+    if (typeof placeOrderButton !== 'undefined' && placeOrderButton) {
+      placeOrderButton.disabled = shouldDisable;
+    }
+  };
+
 }
