@@ -66,10 +66,14 @@ class Ebanx_Gateway_Block_Adminhtml_System_Config_Form_Field_Interest
 	 */
 	protected function _toHtml()
 	{
-		$html = parent::_toHtml();
+		$fieldId = $this->getElement()->getId();
+
+		$html = "<div id=\"$fieldId\">";
+		$html .= parent::_toHtml();
 		$html .= Mage::helper('adminhtml/js')->getScript(
 			"$$('.select-instalments').each(function(el){ el.value = el.readAttribute('data-value'); });\n"
 		);
+		$html .= '</div>';
 
 		return $html;
 	}
