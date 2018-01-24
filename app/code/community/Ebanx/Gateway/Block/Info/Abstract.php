@@ -46,4 +46,15 @@ abstract class Ebanx_Gateway_Block_Info_Abstract extends Mage_Payment_Block_Info
 			$hash
 		);
 	}
+
+	protected function getNotificationUrl($hash) {
+		return $this->getUrl(
+			'ebanx/payment/notify',
+			[
+				'hash_codes' => $hash,
+				'operation' => 'update',
+				'notification_type' => 'forced',
+			]
+		);
+	}
 }
