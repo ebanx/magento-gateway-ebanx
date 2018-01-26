@@ -75,11 +75,11 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 	}
 
 	private function countryDocumentIsOptional($country) {
-		$isOptional = [
+		$isOptional = array(
 			'MX',
 			'CO',
 			'AR',
-		];
+		);
 
 		return in_array($country, $isOptional);
 	}
