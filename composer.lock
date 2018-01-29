@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "ebanx/benjamin",
-            "version": "1.7.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ebanx/benjamin.git",
-                "reference": "66d3f5a06d513907036641540ad3696cb9f4252b"
+                "reference": "f00b4c9071e5adb4964d60f82c2bc82284a0f149"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/66d3f5a06d513907036641540ad3696cb9f4252b",
-                "reference": "66d3f5a06d513907036641540ad3696cb9f4252b",
+                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/f00b4c9071e5adb4964d60f82c2bc82284a0f149",
+                "reference": "f00b4c9071e5adb4964d60f82c2bc82284a0f149",
                 "shasum": ""
             },
             "require": {
@@ -46,7 +46,7 @@
                 "Apache-2.0"
             ],
             "description": "Business rule provider lib for plugin implementations",
-            "time": "2018-01-09T16:00:43+00:00"
+            "time": "2018-01-23T14:16:43+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
