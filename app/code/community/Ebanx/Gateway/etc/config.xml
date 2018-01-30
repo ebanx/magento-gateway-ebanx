@@ -289,6 +289,7 @@
             <ebanx_settings>
                 <brazil_taxes>cpf</brazil_taxes>
                 <enabled>1</enabled>
+                <iof_local_amount>1</iof_local_amount>
                 <!-- Brazil Payment Methods -->
                 <payment_methods_brazil>ebanx_cc_br,ebanx_boleto,ebanx_tef,ebanx_wallet</payment_methods_brazil>
                 <payment_methods_chile>ebanx_sencillito,ebanx_servipag,ebanx_webpay</payment_methods_chile>
