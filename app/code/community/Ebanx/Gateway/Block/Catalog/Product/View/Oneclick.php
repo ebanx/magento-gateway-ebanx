@@ -27,7 +27,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 		);
 		switch ($country) {
 			case 'BR':
-				$text['local-amount'] = 'Total a pagar com IOF (0.38%): ';
+				$text['local-amount'] = $this->getLocalAmountText();
 				$text['cvv'] = 'Código de segurança';
 				break;
 			case 'CO':
@@ -153,6 +153,12 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 			default:
 				return new Ebanx_Gateway_Model_Brazil_Creditcard();
 		}
+	}
+
+	private function getLocalAmountText() {
+		return Mage::getStoreConfig('payment/ebanx_settings/iof_local_amount')
+			? 'Total a pagar com IOF (0.38%): '
+			: 'Total a pagar: ';
 	}
 
 	public function formatInstalment($instalment, $localCurrency)
