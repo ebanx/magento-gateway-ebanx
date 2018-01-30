@@ -123,7 +123,7 @@
                             <label>Apply IOF on local amount</label>
                             <comment>Apply IOF when calculating the price in BRL on the checkout.
                                 IOF is a federal tax levied on credit (including intercompany loans),
-                                foreign exchange, insurance and securities transactions.
+                                foreign exchange, insurance and securities transactions. This field default value is "Yes".
                             </comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
