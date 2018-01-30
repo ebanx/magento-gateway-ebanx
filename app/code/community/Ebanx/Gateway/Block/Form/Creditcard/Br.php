@@ -27,7 +27,7 @@ class Ebanx_Gateway_Block_Form_Creditcard_Br extends Ebanx_Gateway_Block_Form_Cr
 		return array(
 			'method-desc' => 'Pagar com Cartão de Crédito.',
 			'newcard' => 'Novo cartão',
-			'local-amount' => 'Total a pagar com IOF (0.38%): ',
+			'local-amount' => $this->getLocalAmountText(),
 			'card-number' => 'Número do Cartão',
 			'duedate' => 'Data de validade',
 			'cvv' => 'Código de segurança',
@@ -35,5 +35,11 @@ class Ebanx_Gateway_Block_Form_Creditcard_Br extends Ebanx_Gateway_Block_Form_Cr
 			'instalments' => 'Número de parcelas',
 			'name' => '',
 		);
+	}
+
+	private function getLocalAmountText() {
+		return Mage::getStoreConfig('payment/ebanx_settings/iof_local_amount')
+			? 'Total a pagar com IOF (0.38%): '
+			: 'Total a pagar: ';
 	}
 }
