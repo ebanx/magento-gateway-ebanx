@@ -408,7 +408,14 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		$ebanx = Mage::getSingleton('ebanx/api')->ebanx();
 
 		return $ebanx->exchange()->siteToLocalWithTax($currency, $value);
-  }
+	}
+
+	public function getLocalAmountWithoutTax($currency, $value)
+	{
+		$ebanx = Mage::getSingleton('ebanx/api')->ebanx();
+
+		return $ebanx->exchange()->siteToLocal($currency, $value);
+	}
 
 	public function hasToShowInlineIcon()
 	{
