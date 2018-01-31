@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.5.2
+* Fix - Option to disable IOF on local amount on checkout [#240](https://github.com/ebanx/magento-gateway-ebanx/pull/240)
+* Fix - Get customer data from billing address from checkouts that don't save it on customer model [#241](https://github.com/ebanx/magento-gateway-ebanx/pull/241)
+
 ## 2.5.0
 * Feature - One-click payment comes disabled by default [#233](https://github.com/ebanx/magento-gateway-ebanx/pull/233)
 * Feature - Hide interest rates configuration table when not using it [#234](https://github.com/ebanx/magento-gateway-ebanx/pull/234)
