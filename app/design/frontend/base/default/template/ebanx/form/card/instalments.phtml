@@ -1,5 +1,7 @@
-<?php $_instalmentOptions = $this->getInstalmentTerms() ?>
-<?php $_selected = $this->getInfoData('instalments') ?>
+<?php
+$_instalmentOptions = $this->getInstalmentTerms();
+$_selected = $this->getInfoData('instalments');
+?>
 <?php if (count($_instalmentOptions) > 1): ?>
   <li id="<?php echo $_code ?>-instalments-div">
     <label for="<?php echo $_code ?>_instalments" class="required"><em>*</em><?= $text['instalments'] ?></label>
