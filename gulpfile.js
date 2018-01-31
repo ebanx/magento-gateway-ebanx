@@ -11,6 +11,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const browserify = require('gulp-browserify');
 const eslint = require('gulp-eslint');
 const restrictedGlobals = require('eslint-restricted-globals');
+const prettier = require('gulp-prettier');
 
 // Compile SASS
 gulp.task('sass', function() {
@@ -42,14 +43,31 @@ gulp.task('scripts', function() {
   }));
 });
 
-// Compile JS
+// prettify Js
+gulp.task("prettify", () =>
+  gulp
+    .src("./src/**/*.js")
+    .pipe(
+      prettier({
+        singleQuote: true,
+        semi: true,
+        tabWidth: 2,
+        bracketSpacing: true,
+        arrowParens: 'avoid',
+        //proseWrap: 'preserve',
+      })
+    )
+    .pipe(gulp.dest(file => file.base))
+);
+
+// LINT JS
 gulp.task('lint', function() {
   return gulp.src(['./src/**/*.js'])
   .pipe(eslint({
     'rules': {
       'quotes': ['error', 'single'],
       'semi': ['error', 'always'],
-      'indent': [2, 2],
+      'indent': ["error", 2, { "SwitchCase": 1 }],
       'one-var-declaration-per-line': ['error', 'always'],
       'no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: true }],
       'no-use-before-define': ['error', { functions: true, classes: true, variables: true }],
@@ -61,6 +79,10 @@ gulp.task('lint', function() {
       'no-console': 'warn',
       'no-alert': 'warn',
       'eol-last': ["error", "always"],
+      //CUSTOM
+      'prefer-const': 'error',
+      'no-empty': 'error',
+      'consistent-return': 0,
     },
     'parserOptions': {
       'ecmaVersion': 6,

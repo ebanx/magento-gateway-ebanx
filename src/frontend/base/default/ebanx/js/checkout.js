@@ -1,60 +1,65 @@
-function handleEbanxForm(countryCode, paymentType) {
-  var getById = function (element) {
+/* global EBANX */
+
+var handleEbanxForm = (countryCode, paymentType) => { // eslint-disable-line no-unused-vars
+  let responseData = null;
+
+  const getById = element => {
     return document.getElementById(element);
   };
-  var responseData = null;
 
-  var cardName = getById('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_name');
-  var cardNumber = getById('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_number');
-  var cardExpirationMonth = getById('ebanx_' + paymentType + '_' + countryCode + '_expiration');
-  var cardExpirationYear = getById('ebanx_' + paymentType + '_' + countryCode + '_expiration_yr');
-  var cardCvv = getById('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_cid');
-  var ebanxToken = getById('ebanx_' + paymentType + '_' + countryCode + '_token');
-  var ebanxBrand = getById('ebanx_' + paymentType + '_' + countryCode + '_brand');
-  var ebanxMaskedCardNumber = getById('ebanx_' + paymentType + '_' + countryCode + '_masked_card_number');
-  var ebanxDeviceFingerprint = getById('ebanx_' + paymentType + '_' + countryCode + '_device_fingerprint');
-  var ebanxMode = getById('ebanx_' + paymentType + '_' + countryCode + '_mode');
-  var ebanxIntegrationKey = getById('ebanx_' + paymentType + '_' + countryCode + '_integration_key');
-  var ebanxCountry = getById('ebanx_' + paymentType + '_' + countryCode + '_country');
+  const ebanxMode = getById(`ebanx_${paymentType}_${countryCode}_mode`);
+  const mode = ebanxMode.value === 'sandbox' ? 'test' : 'production';
 
-  var hasEbanxForm = typeof getById('payment_form_ebanx_' + paymentType + '_' + countryCode) !== 'undefined';
+  const cardName = getById(
+    `ebanx_${paymentType}_${countryCode}_${paymentType}_name`
+  );
+  const cardNumber = getById(
+    `ebanx_${paymentType}_${countryCode}_${paymentType}_number`
+  );
+  const cardExpirationMonth = getById(
+    `ebanx_${paymentType}_${countryCode}_expiration`
+  );
+  const cardExpirationYear = getById(
+    `ebanx_${paymentType}_${countryCode}_expiration_yr`
+  );
+  const cardCvv = getById(
+    `ebanx_${paymentType}_${countryCode}_${paymentType}_cid`
+  );
 
-  var mode = ebanxMode.value === 'sandbox' ? 'test' : 'production';
+  const ebanxToken = getById(`ebanx_${paymentType}_${countryCode}_token`);
+  const ebanxBrand = getById(`ebanx_${paymentType}_${countryCode}_brand`);
+
+  const ebanxMaskedCardNumber = getById(
+    `ebanx_${paymentType}_${countryCode}_masked_card_number`
+  );
+
+  const ebanxDeviceFingerprint = getById(
+    `ebanx_${paymentType}_${countryCode}_device_fingerprint`
+  );
+
+  const ebanxIntegrationKey = getById(
+    `ebanx_${paymentType}_${countryCode}_integration_key`
+  );
+
+  const ebanxCountry = getById(`ebanx_${paymentType}_${countryCode}_country`);
+
+  const hasEbanxForm = typeof getById(
+    `payment_form_ebanx_${paymentType}_${countryCode}`
+  ) !==
+    'undefined';
+
   EBANX.config.setMode(mode);
   EBANX.config.setPublishableKey(ebanxIntegrationKey.value);
   EBANX.config.setCountry(ebanxCountry.value);
 
-  var handleToken = function () {
-    if (!isFormEmpty()) {
-      generateToken();
-    }
-  };
-
-  var isFormEmpty = function () {
-    return !cardNumber.value.length ||
-      !cardName.value.length ||
+  const isFormEmpty = () => {
+    return !cardNumber.value.length || !cardName.value.length ||
       !cardExpirationMonth.value.length ||
       !cardExpirationYear.value.length ||
       !cardCvv.value.length;
   };
 
-  var generateToken = function () {
-    if (!responseData) {
-      var placeOrderButton = document.querySelector('#review-buttons-container > button');
-      if (typeof placeOrderButton !== 'undefined' && placeOrderButton) {
-        placeOrderButton.disabled = true;
-      }
-
-      EBANX.card.createToken({
-        card_number: parseInt(cardNumber.value.replace(/ /g, '')),
-        card_name: cardName.value,
-        card_due_date: (parseInt(cardExpirationMonth.value) || 0) + '/' + (parseInt(cardExpirationYear.value) || 0),
-        card_cvv: cardCvv.value
-      }, saveToken);
-    }
-  };
-
-  var saveToken = function (response) {
+  const saveToken = response => {
     if (response.data.hasOwnProperty('status')) {
       responseData = response.data;
       ebanxToken.value = responseData.token;
@@ -62,15 +67,44 @@ function handleEbanxForm(countryCode, paymentType) {
       ebanxMaskedCardNumber.value = responseData.masked_card_number;
       ebanxDeviceFingerprint.value = responseData.deviceId;
 
-      var placeOrderButton = document.querySelector('#review-buttons-container > button');
+      const placeOrderButton = document.querySelector(
+        '#review-buttons-container > button'
+      );
       if (typeof placeOrderButton !== 'undefined' && placeOrderButton) {
         placeOrderButton.disabled = false;
       }
-      return;
+      return false;
     }
   };
 
-  var clearResponseData = function () {
+  const generateToken = () => {
+    if (!responseData) {
+      const placeOrderButton = document.querySelector(
+        '#review-buttons-container > button'
+      );
+      if (typeof placeOrderButton !== 'undefined' && placeOrderButton) {
+        placeOrderButton.disabled = true;
+      }
+
+      return EBANX.card.createToken(
+        {
+          card_number: parseInt(cardNumber.value.replace(/ /g, '')),
+          card_name: cardName.value,
+          card_due_date: `${(parseInt(cardExpirationMonth.value) || 0)}/${(parseInt(cardExpirationYear.value) || 0)}`,
+          card_cvv: cardCvv.value,
+        },
+        saveToken
+      );
+    }
+  };
+
+  const handleToken = () => {
+    if (!isFormEmpty()) {
+      generateToken();
+    }
+  };
+
+  const clearResponseData = () => {
     responseData = null;
     ebanxToken.value = '';
     ebanxBrand.value = '';
@@ -91,4 +125,4 @@ function handleEbanxForm(countryCode, paymentType) {
     cardExpirationYear.addEventListener('change', clearResponseData, false);
     cardCvv.addEventListener('change', clearResponseData, false);
   }
-}
+};

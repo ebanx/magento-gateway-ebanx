@@ -1,29 +1,32 @@
-document.addEventListener('DOMContentLoaded', function () {
-  var clipboard = new Clipboard('.ebanx-button--copy');
+/* global Clipboard */
 
-  clipboard.on('success', function (e) {
-    var text = e.trigger.innerText;
+document.addEventListener('DOMContentLoaded', () => {
+  const clipboard = new Clipboard('.ebanx-button--copy');
+  const iframe = document.querySelector('.ebanx-cash-payment iframe');
+
+  clipboard.on('success', e => {
+    const text = e.trigger.innerText;
 
     e.trigger.innerText = 'Copiado!';
 
-    setTimeout(function () {
-      e.trigger.innerText = text;
-    }, 2000);
+    setTimeout(
+      () => {
+        e.trigger.innerText = text;
+      },
+      2000
+    );
   });
 
-  // iFrame Resizer
-  var iframe = document.querySelector('.ebanx-cash-payment iframe');
+  const resizeIframe = iframe => {
+    iframe.style.height = `${iframe.contentWindow.document.body.parentElement.scrollHeight} px`;
+  };
 
   if (iframe) {
-    var resizeIframe = function resizeIframe(iframe) {
-      iframe.style.height = iframe.contentWindow.document.body.parentElement.scrollHeight + 'px';
-    }
-
-    window.addEventListener('load', function () {
+    window.addEventListener('load', () => {
       resizeIframe(iframe);
     });
 
-    iframe.contentWindow.addEventListener('resize', function () {
+    iframe.contentWindow.addEventListener('resize', () => {
       resizeIframe(iframe);
     });
   }
