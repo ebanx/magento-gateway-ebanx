@@ -142,12 +142,18 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 	{
 		$document = $this->helper->getDocumentNumber($data->getOrder(), $data);
 
+		$email = $person->getCustomerEmail() ?: $data->getBillingAddress()->getEmail();
+
+		$name = $person->getCustomerFirstname() && $person->getCustomerLastname()
+			? $person->getCustomerFirstname() . ' ' . $person->getCustomerLastname()
+			: $data->getBillingAddress()->getName();
+
 		return new Person(array(
 			'type' => $this->helper->getPersonType($document),
 			'document' => $document,
-			'email' => $person->getCustomerEmail(),
+			'email' => $email,
 			'ip' => $data->getRemoteIp(),
-			'name' => $person->getCustomerFirstname() . ' ' . $person->getCustomerLastname(),
+			'name' => $name,
 			'phoneNumber' => $data->getBillingAddress()->getTelephone()
 		));
 	}
