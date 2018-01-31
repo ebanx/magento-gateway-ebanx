@@ -1,23 +1,26 @@
-'use strict';
+/* global VMasker */
+/* global EBANXData */
+/* global amsCheckoutHandler */
+/* global ebanxRemoveOSCRequireDocument */
 
-var defaultLabel;
-var taxVatLabel;
-var taxVatInput;
+let defaultLabel;
+let taxVatLabel;
+let taxVatInput;
 
-var qs = function (el) {
+const qs = function(el) {
   return document.querySelector(el);
 };
 
 function inputHandler(masks, max, event) {
-  var c = event.target;
-  var v = c.value.replace(/\D/g, '');
-  var m = c.value.length > max ? 1 : 0;
+  const c = event.target;
+  const v = c.value.replace(/\D/g, '');
+  const m = c.value.length > max ? 1 : 0;
   VMasker(c).unMask();
   VMasker(c).maskPattern(masks[m]);
   c.value = VMasker.toPattern(v, masks[m]);
 }
 
-var getLabelByCountry = function (country, defaultLabel) {
+const getLabelByCountry = (country, defaultLabel) => {
   switch (country.toLowerCase()) {
     case 'br':
       return EBANXData.brazilAllowedDocumentFields.join(' / ').toUpperCase();
@@ -30,34 +33,56 @@ var getLabelByCountry = function (country, defaultLabel) {
   }
 };
 
-var changeTaxVatLabel = function () {
-  var country = this.value;
-  var newLabel = getLabelByCountry(country, defaultLabel);
+const OSCRequire = country => {
+  if (typeof ebanxRemoveOSCRequireDocument !== 'undefined') {
+    ebanxRemoveOSCRequireDocument(country);
+  }
+};
+
+const changeTaxVatLabel = () => {
+  const country = this.value;
+  const newLabel = getLabelByCountry(country, defaultLabel);
 
   OSCRequire(country);
 
-  setTimeout(function(){taxVatInput.placeholder = '';}, 10);
+  setTimeout(
+    function() {
+      taxVatInput.placeholder = '';
+    },
+    10
+  );
 
   taxVatLabel.innerHTML = newLabel;
-  if(country === 'BR' || country === 'CO' || country === 'CL') {
-      setTimeout(function(){taxVatInput.placeholder = newLabel;}, 10)
+  if (country === 'BR' || country === 'CO' || country === 'CL') {
+    setTimeout(
+      () => {
+        taxVatInput.placeholder = newLabel;
+      },
+      10
+    );
   }
 
   VMasker(taxVatInput).unMask();
 
   if (country === 'BR') {
-    var taxVatMask = newLabel.indexOf('CNPJ') !== -1 ? ['999.999.999-99', '99.999.999/9999-99'] : ['999.999.999-99', '999.999.999-99'];
+    const taxVatMask = newLabel.indexOf('CNPJ') !== -1
+      ? [ '999.999.999-99', '99.999.999/9999-99' ]
+      : [ '999.999.999-99', '999.999.999-99' ];
     VMasker(taxVatInput).maskPattern(taxVatMask[0]);
-    taxVatInput.addEventListener('input', inputHandler.bind(undefined, taxVatMask, 14), false);
+    taxVatInput.addEventListener(
+      'input',
+      inputHandler.bind(undefined, taxVatMask, 14),
+      false
+    );
   }
 };
 
-var init = function () {
+const init = () => {
   if (!EBANXData.maskTaxVat) {
     return;
   }
 
-  var countrySelect = qs('#billing\\:country_id');
+  const countrySelect = qs('#billing\\:country_id');
   taxVatLabel = qs('label[for="billing\\:taxvat"]');
   taxVatInput = document.getElementById('billing:taxvat');
 
@@ -70,12 +95,6 @@ var init = function () {
 
     countrySelect.addEventListener('change', changeTaxVatLabel);
     countrySelect.dispatchEvent(new Event('change'));
-  }
-};
-
-var OSCRequire = function (country) {
-  if (typeof ebanxRemoveOSCRequireDocument !== 'undefined') {
-    ebanxRemoveOSCRequireDocument(country);
   }
 };
 
