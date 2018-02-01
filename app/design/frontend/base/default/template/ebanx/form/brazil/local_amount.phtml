@@ -1,0 +1,5 @@
+<?php $showIof = Mage::getStoreConfig('payment/ebanx_settings/iof_local_amount'); ?>
+<div class="total-to-pay">
+  <p><?php echo $showIof ? 'Total a pagar com IOF (0.38%): ' : 'Total a pagar: '; ?><strong><?php echo $showIof ? $this->getLocalAmount('BRL') : $this->getLocalAmountWithoutTax('BRL') ?></strong></p>
+  <input type="hidden" name="payment[grand_total]" id="grand_total_<?php echo $this->getMethodCode() ?>" value="<?php echo $this->getTotal() ?>"/>
+</div>

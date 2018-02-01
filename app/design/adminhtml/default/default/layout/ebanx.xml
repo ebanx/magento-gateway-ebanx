@@ -15,6 +15,10 @@
             <action method="addCss">
                 <name>ebanx/css/chosen.overwrite.css</name>
             </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ebanx/js/iof-option.js</name>
+            </action>
         </reference>
     </adminhtml_system_config_edit>
 </layout>

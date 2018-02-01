@@ -42,6 +42,13 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
 		return $formatted ? $this->formatPriceWithLocalCurrency($currency, $amount) : $amount;
 	}
 
+	public function getLocalAmountWithoutTax($currency, $formatted = true)
+	{
+		$amount = round(Mage::helper('ebanx')->getLocalAmountWithoutTax($currency, $this->getTotal()), 2);
+
+		return $formatted ? $this->formatPriceWithLocalCurrency($currency, $amount) : $amount;
+	}
+
 	public function formatInstalment($instalment, $localCurrency)
 	{
 		$amount = Mage::app()->getLocale()->currency($localCurrency)->toCurrency($instalment->localAmountWithTax);

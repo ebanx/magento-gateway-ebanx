@@ -17,6 +17,7 @@ class Ebanx_Gateway_Model_Api
 	public function getConfig()
 	{
 		return new Config(array(
+			'taxesOnMerchant' => Mage::getStoreConfig('payment/ebanx_settings/iof_local_amount') === '0',
 			'integrationKey' => Mage::helper('ebanx')->getLiveIntegrationKey(),
 			'sandboxIntegrationKey' => Mage::helper('ebanx')->getSandboxIntegrationKey(),
 			'isSandbox' => Mage::helper('ebanx')->isSandboxMode(),
