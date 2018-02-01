@@ -119,6 +119,20 @@
                             <show_in_store>0</show_in_store>
                         </brazil_taxes>
 
+                        <iof_local_amount translate="label">
+                            <label>Apply IOF on local amount</label>
+                            <comment>Apply IOF when calculating the price in BRL on the checkout.
+                                IOF is a federal tax levied on credit (including intercompany loans),
+                                foreign exchange, insurance and securities transactions. This field default value is "Yes".
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>65</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </iof_local_amount>
+
                         <payment_methods_title translate="label">
                             <label>Payment Methods</label>
                             <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
@@ -313,8 +327,10 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <depends>
+                                <use_interest_rates>1</use_interest_rates>
+                            </depends>
                         </interest_rate>
-
 
                         <heading_cash translate="label">
                             <label>Cash Payments</label>

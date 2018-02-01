@@ -1,5 +1,7 @@
-<?php $_instalmentOptions = $this->getInstalmentTerms() ?>
-<?php $_selected = $this->getInfoData('instalments') ?>
+<?php
+$_instalmentOptions = $this->getInstalmentTerms();
+$_selected = $this->getInfoData('instalments');
+?>
 <?php if (count($_instalmentOptions) > 1): ?>
   <li id="<?php echo $_code ?>-instalments-div">
     <label for="<?php echo $_code ?>_instalments" class="required"><em>*</em><?= $text['instalments'] ?></label>
@@ -18,25 +20,27 @@
       <input type="hidden" id="<?php echo $_code ?>_instalment_description"
              name="payment[instalment_description]"
              value="<?php echo $this->escapeHtml($this->getInfoData('instalment_description')) ?>"/>
+
+      <script>
+        if (typeof ebanxUpdateFireInterest !== 'undefined') {
+          document.getElementById('<?php echo $_code ?>_instalments')
+            .addEventListener('change', function () {
+              ebanxUpdateFireInterest();
+            });
+        }
+
+        var selectInstalment = document.getElementById('<?= $_code ?>_instalments');
+
+        var updateInstalment = function (){
+          var text = document.getElementById('cc-<?= $lowerCountry ?>-local-amount');
+          text.innerHTML = '<strong>' + selectInstalment.options[selectInstalment.selectedIndex].getAttribute('data-local-amount') + '</strong>';
+        };
+
+        if (selectInstalment) {
+          updateInstalment();
+          selectInstalment.addEventListener('change', updateInstalment);
+        }
+      </script>
     </div>
   </li>
-
-  <script>
-    if (typeof ebanxUpdateFireInterest !== 'undefined') {
-      document.getElementById('<?php echo $_code ?>_instalments')
-        .addEventListener('change', function () {
-          ebanxUpdateFireInterest();
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      // Change Amount Local
-      var instalments = document.querySelector('#<?php echo $_code ?>_instalments');
-      var priceContainer = document.querySelector('#cc-<?= $lowerCountry ?>-local-amount > strong');
-
-      instalments.addEventListener('change', function (e) {
-        priceContainer.innerHTML = this.selectedOptions[0].getAttribute('data-local-amount');
-      });
-    });
-  </script>
 <?php endif ?>

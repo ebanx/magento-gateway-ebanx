@@ -4,6 +4,9 @@
   $hash = $isLegacy
     ? $this->getInfo()->getEbanxHash()
     : $this->getInfo()->getEbanxPaymentHash();
+
+  $orderState = $this->getInfo()->getOrder()->getState();
+  $notificationUrl = $this->getNotificationUrl($hash);
 ?>
 <table class="form-list" style="margin-bottom: 10px;">
   <tbody>
@@ -19,5 +22,43 @@
     <td class="label"><?= $this->__('EBANX Payment Method') ?></td>
     <td class="value"><strong><?= $this->getInfo()->getMethodInstance()->getTitle() ?></strong></td>
   </tr>
+  <?php if (in_array($orderState, array(Mage_Sales_Model_Order::STATE_PENDING_PAYMENT, Mage_Sales_Model_Order::STATE_NEW))): ?>
+  <tr>
+    <td class="label"><?= $this->__('EBANX Force Update Check') ?></td>
+    <td class="value">
+      <button id="update-now">Check Now</button>
+      <div id="update-error" style="color: red;"></div>
+    </td>
+    <script type="text/javascript">
+      (function(){
+        var updateButton = document.getElementById('update-now');
+        var errorMessage = document.getElementById('update-error');
+
+        updateButton.onclick = function() {
+          errorMessage.innerText = "";
+
+          disableButton();
+          new Ajax.Request('<?=$notificationUrl?>', {
+            onSuccess: function(response) {
+              document.location.reload();
+              console.log('reloading...');
+            },
+            onFailure: function() {
+              errorMessage.innerText = "<?= $this->__('An error occurred while checking for updates, please try again later.') ?>";
+              enableButton();
+            }
+          });
+        }
+
+        function enableButton() {
+          updateButton.removeAttribute('disabled');
+        }
+        function disableButton() {
+          updateButton.disabled = 'disabled';
+        }
+      })();
+    </script>
+  </tr>
+  <?php endif; ?>
   </tbody>
 </table>
