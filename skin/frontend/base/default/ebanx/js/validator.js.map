@@ -1,0 +1,1 @@
+{"version":3,"sources":["frontend/base/default/ebanx/js/validator.js"],"names":["Validation","add","v","get","test"],"mappings":"aAAAA,WAAAC,IAAA,iBAAA,IAAA,SAAAC,GAGE,OAAQF,WAAWG,IAAI,WAAWC,KAAKF","file":"validator.js","sourcesContent":["/* global Validation */\n\nValidation.add('brand-required', ' ', (v) => {\n  return !Validation.get('IsEmpty').test(v);\n});\n"]}

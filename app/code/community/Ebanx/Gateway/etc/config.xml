@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Ebanx_Gateway>
-            <version>2.4.1</version>
+            <version>2.5.2</version>
         </Ebanx_Gateway>
     </modules>
     <global>
@@ -289,6 +289,7 @@
             <ebanx_settings>
                 <brazil_taxes>cpf</brazil_taxes>
                 <enabled>1</enabled>
+                <iof_local_amount>1</iof_local_amount>
                 <!-- Brazil Payment Methods -->
                 <payment_methods_brazil>ebanx_cc_br,ebanx_boleto,ebanx_tef,ebanx_wallet</payment_methods_brazil>
                 <payment_methods_chile>ebanx_sencillito,ebanx_servipag,ebanx_webpay</payment_methods_chile>
@@ -301,7 +302,7 @@
 
                 <payment_methods_visualization>1</payment_methods_visualization>
                 <save_card_data>1</save_card_data>
-                <one_click_payment>1</one_click_payment>
+                <one_click_payment>0</one_click_payment>
                 <min_instalment_value>0</min_instalment_value>
                 <create_invoice>1</create_invoice>
                 <auto_capture>1</auto_capture>

@@ -1,6 +1,7 @@
 <p>Saldo EBANX</p>
 <br>
-<p>Total a pagar com IOF (0.38%): <?php
+<p><?php
+  echo $this->shouldntShowIof() ? 'Total a pagar: ' : 'Total a pagar com IOF (0.38%): ';
 
   if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
     echo $this->getLocalAmount('BRL');
