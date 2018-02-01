@@ -14,7 +14,7 @@ class Ebanx_Gateway_Model_Quote_Localtax extends Mage_Sales_Model_Quote_Address_
 		}
 
 		$isBrazilLocalAmount = Mage::app()->getStore()->getCurrentCurrencyCode() === 'BRL';
-		if (!$isBrazilLocalAmount) {
+		if (!$isBrazilLocalAmount || Mage::getStoreConfig('payment/ebanx_settings/iof_local_amount') === '0') {
 			return;
 		}
 

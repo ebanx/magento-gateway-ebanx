@@ -16,11 +16,19 @@ abstract class Ebanx_Gateway_Block_Info_Abstract extends Mage_Payment_Block_Info
 	{
 		$amount = round(Mage::helper('ebanx')->getLocalAmountWithTax($currency, $this->getTotal()), 2);
 
+		if ($this->shouldntShowIof()) {
+			$amount = round(Mage::helper('ebanx')->getLocalAmountWithoutTax($currency, $this->getTotal()), 2);
+		}
+
 		return $formatted ? $this->formatPriceWithLocalCurrency($currency, $amount) : $amount;
 	}
 
 	public function getLocalAmountWithoutTax($currency, $formatted = true){
 		return $formatted ? $this->formatPriceWithLocalCurrency($currency, $this->getTotal()) : $this->getTotal();
+	}
+
+	public function shouldntShowIof() {
+		return Mage::getStoreConfig('payment/ebanx_settings/iof_local_amount') === '0';
 	}
 
 	protected function isAdmin() {
@@ -44,6 +52,17 @@ abstract class Ebanx_Gateway_Block_Info_Abstract extends Mage_Payment_Block_Info
 				? '/test'
 				: '',
 			$hash
+		);
+	}
+
+	protected function getNotificationUrl($hash) {
+		return $this->getUrl(
+			'ebanx/payment/notify',
+			array(
+				'hash_codes' => $hash,
+				'operation' => 'update',
+				'notification_type' => 'forced',
+			)
 		);
 	}
 }
