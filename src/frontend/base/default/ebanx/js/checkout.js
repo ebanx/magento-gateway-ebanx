@@ -5,7 +5,7 @@ var handleEbanxForm = (countryCode, paymentType) => { // eslint-disable-line no-
   const getById = function(element) {
     return document.getElementById(element);
   };
-  const responseData = null;
+  let responseData = null;
 
   const cardName = getById('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_name');
   const cardNumber = getById('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_number');
@@ -47,7 +47,7 @@ var handleEbanxForm = (countryCode, paymentType) => { // eslint-disable-line no-
   const saveToken = (response) => {
     if (!response.data.hasOwnProperty('status')) {
       const error = response.error.err;
-      const errorMessage = error.message;
+      let errorMessage = error.message;
 
       if (!error.message) {
         EBANX.errors.InvalidValueFieldError(error.status_code);
