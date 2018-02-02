@@ -5,3 +5,4 @@ lib/Ebanx/vendor
 .idea
 .phpintel
 checkouttester.xml
+node_modules/
