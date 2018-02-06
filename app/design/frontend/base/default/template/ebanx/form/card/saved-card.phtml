@@ -17,7 +17,7 @@ $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
     <div class="input-box">
       <div class="v-fix">
         <input type="text" title="Código de segurança"
-               class="input-text cvv validate-cc-cvn ebanx-format-cvc-number" id="<?php echo $_code ?>_cc_cid[<?= $card->getEbanxCardId() ?>]"
+               class="input-text cvv validate-cc-cvn ebanx-format-cvc-number required-entry-input" id="<?php echo $_code ?>_cc_cid[<?= $card->getEbanxCardId() ?>]"
                name="payment[cc_cid][<?= $card->getEbanxCardId() ?>]" value="" autocomplete="off">
       </div>
     </div>
