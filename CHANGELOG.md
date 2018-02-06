@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.5.3
+* Fix - Make cash payments due date reflect admin configuration [#242](https://github.com/ebanx/magento-gateway-ebanx/pull/242)
+
 ## 2.5.2
 * Fix - Option to disable IOF on local amount on checkout [#240](https://github.com/ebanx/magento-gateway-ebanx/pull/240)
 * Fix - Get customer data from billing address from checkouts that don't save it on customer model [#241](https://github.com/ebanx/magento-gateway-ebanx/pull/241)
