@@ -32,49 +32,6 @@ The admin can be acessed by http://localhost/admin using the credentials `ebanx`
 
 If you have getting trouble to set up Docker, make sure you've changed the external port docker uses by following the above steps.
 
-## Tasks
-
-- [X] Benjamin Integration
-- [X] Settings Page
-- [X] Refunds
-- [X] Checkout Manager and Compliance Fields
-- [X] Debug Log
-- [X] Sandbox mode
-- [X] Save credit card data
-- [X] One Click Payment
-- [X] Instalments
-- [X] Minimum Instalment Values
-- [X] Interest Rates
-- [X] Days to Expiration
-- [X] Checkout for CPF and CNPJ
-- [X] Auto-capture payments
-- [X] Payment Methods
-  - [X] Brazil
-    - [X] Boleto
-    - [X] Credit Card
-    - [X] TEF
-    - [X] EBANX Wallet
-  - [X] Mexico
-    - [X] OXXO
-    - [X] Debit Card
-    - [X] Credit Card
-    - [X] SPEI
-  - [X] Peru
-    - [X] Pago Efectivo
-    - [X] SafetyPay
-  - [X] Chile
-    - [X] Sencillito
-    - [X] ServiPag
-  - [X] Colombia
-    - [X] Baloto
-    - [X] PSE
-    - [X] Credit Card
-  - [X] Argentina
-    - [X] Credit Card
-    - [X] Rapipago
-    - [X] PagoFacil
-    - [X] Otros
-
 ## License
 
 Copyright 2017 EBANX Payments
