@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8376d47129a74e5b79f3c8bc6456c5d",
+    "content-hash": "0ce6c5385b7f952dad7b8140e7735df5",
     "packages": [
         {
             "name": "ebanx/benjamin",
-            "version": "1.8.0",
+            "version": "1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ebanx/benjamin.git",
-                "reference": "f00b4c9071e5adb4964d60f82c2bc82284a0f149"
+                "reference": "de1ab9f75799a353f2d008e81cad56cb6bf0b664"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/f00b4c9071e5adb4964d60f82c2bc82284a0f149",
-                "reference": "f00b4c9071e5adb4964d60f82c2bc82284a0f149",
+                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/de1ab9f75799a353f2d008e81cad56cb6bf0b664",
+                "reference": "de1ab9f75799a353f2d008e81cad56cb6bf0b664",
                 "shasum": ""
             },
             "require": {
@@ -46,7 +46,7 @@
                 "Apache-2.0"
             ],
             "description": "Business rule provider lib for plugin implementations",
-            "time": "2018-01-23T14:16:43+00:00"
+            "time": "2018-02-06T13:04:32+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -289,12 +289,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "977feae69ad0323d2aed9407c665a552aea28632"
+                "reference": "2503b5aca573b6d4b9c4f92ab639183a663ff7c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/977feae69ad0323d2aed9407c665a552aea28632",
-                "reference": "977feae69ad0323d2aed9407c665a552aea28632",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/2503b5aca573b6d4b9c4f92ab639183a663ff7c7",
+                "reference": "2503b5aca573b6d4b9c4f92ab639183a663ff7c7",
                 "shasum": ""
             },
             "require": {
@@ -332,7 +332,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2018-01-18T00:31:32+00:00"
+            "time": "2018-02-04T22:33:35+00:00"
         }
     ],
     "aliases": [],
