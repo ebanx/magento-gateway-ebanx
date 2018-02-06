@@ -1,8 +1,53 @@
 /* global EBANX */
 /* global Validation */
 
-var handleEbanxForm = (countryCode, paymentType) => { // eslint-disable-line no-unused-vars
-  const getById = function(element) {
+const hasClass = (element, cls) => {
+  return (` ${element.className} `).indexOf(` ${cls} `) > -1;
+};
+
+const resetValidations = (form, selector) => {
+  Array.from(form.querySelectorAll(selector)).forEach((inputRequired) => {
+    inputRequired.classList.remove('required-entry', 'validation-failed', 'brand-required');
+    if (inputRequired.nextElementSibling && hasClass(inputRequired.nextElementSibling, 'validation-advice')) {
+      inputRequired.nextElementSibling.style.display = 'none';
+    }
+  });
+};
+
+const addRequiredClassToInputs = (inputNodeList, validationClass, form, selector) => {
+  resetValidations(form, selector);
+  Array.from(inputNodeList).forEach((inputToValidate) => {
+    inputToValidate.classList.add(validationClass);
+  });
+};
+
+const validationFormListener = (form, creditCardOptions) => {
+  const inputSelector = '.required-entry-input';
+  const selectSelector = '.required-entry-select';
+  Array.from(creditCardOptions).forEach((cardOption) => {
+    cardOption.querySelector('input[type=radio]').addEventListener('change', (event) => {
+      console.log(event.target);
+      addRequiredClassToInputs(event.target.parentElement.querySelectorAll(inputSelector), 'required-entry', form, inputSelector);
+      addRequiredClassToInputs(event.target.parentElement.querySelectorAll(selectSelector), 'validate-select', form, selectSelector);
+    });
+  });
+};
+
+const initCreditCardOption = (creditCardOption, form) => {
+  const element = creditCardOption.querySelector('input[type=radio]');
+  const inputSelector = '.required-entry-input';
+  element.checked = true;
+  addRequiredClassToInputs(element.parentElement.querySelectorAll(inputSelector), 'required-entry', form, inputSelector);
+};
+
+var handleEbanxForm = (countryCode, paymentType, formId) => { // eslint-disable-line no-unused-vars
+  const form = document.querySelector(`#${formId}`);
+  const creditCardOptions = form.querySelectorAll('.ebanx-credit-card-option');
+
+  validationFormListener(form, creditCardOptions);
+  initCreditCardOption(creditCardOptions[0], form);
+
+  const getById = function (element) {
     return document.getElementById(element);
   };
   let responseData = null;
