@@ -18,6 +18,10 @@ const addRequiredClassToInputs = (inputNodeList, validationClass, form, selector
   resetValidations(form, selector);
   Array.from(inputNodeList).forEach((inputToValidate) => {
     inputToValidate.classList.add(validationClass);
+    if(hasClass(inputToValidate, 'hidden-input-brand')){
+      inputToValidate.classList.add('brand-required');
+      inputToValidate.classList.remove('required-entry');
+    }
   });
 };
 
@@ -26,7 +30,6 @@ const validationFormListener = (form, creditCardOptions) => {
   const selectSelector = '.required-entry-select';
   Array.from(creditCardOptions).forEach((cardOption) => {
     cardOption.querySelector('input[type=radio]').addEventListener('change', (event) => {
-      console.log(event.target);
       addRequiredClassToInputs(event.target.parentElement.querySelectorAll(inputSelector), 'required-entry', form, inputSelector);
       addRequiredClassToInputs(event.target.parentElement.querySelectorAll(selectSelector), 'validate-select', form, selectSelector);
     });
@@ -40,12 +43,29 @@ const initCreditCardOption = (creditCardOption, form) => {
   addRequiredClassToInputs(element.parentElement.querySelectorAll(inputSelector), 'required-entry', form, inputSelector);
 };
 
+const initCreditCardWithoutSavedCards = (form) => {
+  form.querySelectorAll('.required-entry-input').forEach((inputToValidate) => {
+    inputToValidate.classList.add('required-entry');
+  });
+  form.querySelectorAll('.required-entry-select').forEach((inputToValidate) => {
+    inputToValidate.classList.add('validate-select');
+  });
+};
+
+const initCreditCardForm = (creditCardOptions, form) => {
+  if (creditCardOptions.length !== 0) {
+    validationFormListener(form, creditCardOptions);
+    initCreditCardOption(creditCardOptions[0], form);
+  } else {
+    initCreditCardWithoutSavedCards(form);
+  } 
+};
+
 var handleEbanxForm = (countryCode, paymentType, formId) => { // eslint-disable-line no-unused-vars
   const form = document.querySelector(`#${formId}`);
   const creditCardOptions = form.querySelectorAll('.ebanx-credit-card-option');
 
-  validationFormListener(form, creditCardOptions);
-  initCreditCardOption(creditCardOptions[0], form);
+  initCreditCardForm(creditCardOptions, form);
 
   const getById = function (element) {
     return document.getElementById(element);
@@ -106,7 +126,7 @@ var handleEbanxForm = (countryCode, paymentType, formId) => { // eslint-disable-
         Validation.showAdvice({
           advices: false,
         }, errorDiv, 'ebanx-error-message');
-      }, 1000);
+      }, 500);
 
       return false;
     }
