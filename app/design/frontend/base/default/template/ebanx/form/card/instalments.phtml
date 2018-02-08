@@ -42,7 +42,7 @@ $_selected = $this->getInfoData('instalments');
         };
 
         if (selectInstalment) {
-          updateInstalment();
+          document.addEventListener('DOMContentLoaded', updateInstalment);
           selectInstalment.addEventListener('change', updateInstalment);
         }
       </script>
