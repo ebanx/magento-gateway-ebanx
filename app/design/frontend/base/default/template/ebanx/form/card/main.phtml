@@ -1,14 +1,14 @@
 <?php
-$text           = $this->getText();
-$lowerCountry   = $this->country;
-$localCurrency  = $this->localCurrency;
-$skin           = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
-$_code          = $this->getMethodCode();
-$showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
-$icon           = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-credit-card-' . $lowerCountry . '.png" />';
-$showIof = Mage::getStoreConfig('payment/ebanx_settings/iof_local_amount');
+  $text           = $this->getText();
+  $lowerCountry   = $this->country;
+  $localCurrency  = $this->localCurrency;
+  $skin           = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+  $_code          = $this->getMethodCode();
+  $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
+  $icon           = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-credit-card-' . $lowerCountry . '.png" />';
+  $showIof = Mage::getStoreConfig('payment/ebanx_settings/iof_local_amount');
 
-echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' : null;
+  echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' : null;
 ?>
 
 <ul class="form-list ebanx-payment-method ebanx-<?= $lowerCountry ?>-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
@@ -22,20 +22,22 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' 
   </li>
 
   <?php
-  include __DIR__ . '/../fields.phtml';
+    include __DIR__ . '/../fields.phtml';
+    $savedCards = $this->getSavedCards();
+    if (Mage::helper('ebanx')->saveCreditCardAllowed() && $savedCards && $savedCards->getSize()): 
+  ?>
 
-  $savedCards = $this->getSavedCards();
-  if (Mage::helper('ebanx')->saveCreditCardAllowed() && $savedCards && $savedCards->getSize()): ?>
-    <?php foreach ($savedCards as $card): ?>
-      <?php include 'saved-card.phtml' ?>
-    <?php endforeach; ?>
-    <li class="ebanx-credit-card-option">
-      <input id="card[newcard]" type="radio" name="payment[selected_card]" value="newcard">
-      <label for="card[newcard]"><?= $text['newcard'] ?></label>
-      <div class="new-card">
-        <?php include 'card-form.phtml' ?>
-      </div>
-    </li>
+  <?php foreach ($savedCards as $card): ?>
+    <?php include 'saved-card.phtml' ?>
+  <?php endforeach; ?>
+
+  <li class="ebanx-credit-card-option">
+    <input id="card[newcard]" type="radio" name="payment[selected_card]" value="newcard">
+    <label for="card[newcard]"><?= $text['newcard'] ?></label>
+    <div class="new-card">
+      <?php include 'card-form.phtml' ?>
+    </div>
+  </li>
 
   <?php else: ?>
     <li>
@@ -47,6 +49,7 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' 
   <?php endif; ?>
 
   <?php include 'instalments.phtml' ?>
+
   <li>
     <div class="total-to-pay">
       <p>
@@ -64,7 +67,7 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' 
 
 
 <script>
-  handleEbanxForm('<?= $lowerCountry ?>', 'cc');
+  handleEbanxForm('<?= $lowerCountry ?>', 'cc', 'payment_form_<?php echo $_code ?>');
 
   EBANXCreditCard.formatCardNumber(document.querySelector('input#<?= $_code ?>_cc_number'));
   EBANXCreditCard.formatCardCVC(document.querySelector('input#<?= $_code ?>_cc_cid'));
