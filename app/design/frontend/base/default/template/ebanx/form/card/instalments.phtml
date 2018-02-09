@@ -33,11 +33,16 @@ $_selected = $this->getInfoData('instalments');
 
         var updateInstalment = function (){
           var text = document.getElementById('cc-<?= $lowerCountry ?>-local-amount');
-          text.innerHTML = '<strong>' + selectInstalment.options[selectInstalment.selectedIndex].getAttribute('data-local-amount') + '</strong>';
+          var instalmentOption=  selectInstalment.options[selectInstalment.selectedIndex];
+          var localAmount = instalmentOption && instalmentOption.getAttribute ? instalmentOption.getAttribute('data-local-amount') : false;
+
+          if (text && text.innerHTML && localAmount) {
+            text.innerHTML = '<strong>' + localAmount + '</strong>';
+          }
         };
 
         if (selectInstalment) {
-          updateInstalment();
+          document.addEventListener('DOMContentLoaded', updateInstalment);
           selectInstalment.addEventListener('change', updateInstalment);
         }
       </script>
