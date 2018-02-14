@@ -1,5 +1,8 @@
 document.observe("dom:loaded", function () {
   var iofLocalAmount = document.querySelector('#payment_ebanx_settings_iof_local_amount');
+  if (!iofLocalAmount) {
+    return;
+  }
   var confirmed;
 
   var renderIofAlert = function (el) {
@@ -11,5 +14,3 @@ document.observe("dom:loaded", function () {
   };
   iofLocalAmount.addEventListener('change', renderIofAlert);
 });
-
-
