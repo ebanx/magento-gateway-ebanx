@@ -316,6 +316,7 @@
                 <cpf_field></cpf_field>
                 <cnpj_field></cnpj_field>
                 <rut_field></rut_field>
+                <cdi_field>taxvat</cdi_field>
                 <dni_field></dni_field>
             </ebanx_settings>
             <!-- Legacy -->
