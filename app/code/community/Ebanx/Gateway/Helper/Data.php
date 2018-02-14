@@ -167,6 +167,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 				return $this->__('RUT Document');
 			case 'co':
 				return $this->__('DNI Document');
+			case 'ar':
+				return $this->__('Documento');
 			default:
 				return $this->__('Document Number');
 		}
