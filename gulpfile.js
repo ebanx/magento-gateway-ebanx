@@ -34,7 +34,7 @@ gulp.task('scripts', function() {
   return gulp.src('./src/**/*.js')
   .pipe(sourcemaps.init())
   .pipe(babel({
-    presets: ['env']
+    presets: ['es2015']
   }))
   .pipe(uglify())
   .pipe(sourcemaps.write('.'))
@@ -54,7 +54,6 @@ gulp.task("prettify", () =>
         tabWidth: 2,
         bracketSpacing: true,
         arrowParens: 'avoid',
-        //proseWrap: 'preserve',
       })
     )
     .pipe(gulp.dest(file => file.base))
@@ -86,6 +85,7 @@ gulp.task('lint', function() {
     },
     'parserOptions': {
       'ecmaVersion': 6,
+      "sourceType": "module",
     },
     'globals': [
       'browser',

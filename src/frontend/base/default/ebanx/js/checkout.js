@@ -1,6 +1,17 @@
 /* global EBANX */
 /* global Validation */
 
+const waitFor = (elementFinder, callback) => {
+  const waiter = setInterval(() => {
+    const element = elementFinder();
+    if (typeof element === 'undefined' || element === null) {
+      return false;
+    }
+    clearInterval(waiter);
+    callback(element);
+  }, 500);
+};
+
 const hasClass = (element, cls) => {
   return (` ${element.className} `).indexOf(` ${cls} `) > -1;
 };
@@ -61,15 +72,20 @@ const initCreditCardForm = (creditCardOptions, form) => {
   } 
 };
 
-var handleEbanxForm = (countryCode, paymentType, formId) => { // eslint-disable-line no-unused-vars
-  const form = document.querySelector(`#${formId}`);
-  const creditCardOptions = form.querySelectorAll('.ebanx-credit-card-option');
+var handleEbanxForm = (countryCode, paymentType, formListId) => { // eslint-disable-line no-unused-vars
+  const initCreditCardOptions = (formList) => {
+    const creditCardOptions = formList.querySelectorAll('.ebanx-credit-card-option');
+    initCreditCardForm(creditCardOptions, formList);
+  };
 
-  initCreditCardForm(creditCardOptions, form);
+  waitFor(() => {
+    return document.querySelector(`#${formListId}`);
+  }, initCreditCardOptions);
 
   const getById = function (element) {
     return document.getElementById(element);
   };
+  
   let responseData = null;
 
   const cardName = getById('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_name');
