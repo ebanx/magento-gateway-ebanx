@@ -142,8 +142,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			case 'ebanx_webpay':
 				return $this->__('RUT Document');
 
-			case 'ebanx_baloto':
-			case 'ebanx_pse':
+			case 'ebanx_cc_co':
 				return $this->__('DNI Document');
 
 			default:
@@ -467,8 +466,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_webpay'       => array('rut_field'),
 			'ebanx_multicaja'    => array(),
 			// Colombia
-			'ebanx_baloto'       => array('dni_field'),
-			'ebanx_pse'          => array('dni_field'),
+			'ebanx_baloto'       => array(),
+			'ebanx_pse'          => array(),
 			'ebanx_cc_co'        => array('dni_field'),
 			// Mexico
 			'ebanx_oxxo'         => array(),
