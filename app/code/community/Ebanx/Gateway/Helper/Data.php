@@ -147,6 +147,12 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			case 'ebanx_cc_co':
 				return $this->__('DNI Document');
 
+			case 'ebanx_pagofacil':
+			case 'ebanx_rapipago':
+			case 'ebanx_cupon':
+			case 'ebanx_cc_ar':
+				return 'Documento';
+
 			default:
 				return $this->__('Document Number');
 		}
@@ -162,6 +168,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			case 'pe':
 			case 'co':
 				return $this->__('DNI Document');
+			case 'ar':
+				return 'Documento';
 			default:
 				return $this->__('Document Number');
 		}
@@ -189,6 +197,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 				return $this->getChileanDocumentNumber($methodCode);
 			case Country::COLOMBIA:
 				return $this->getColombianDocumentNumber($methodCode);
+			case Country::ARGENTINA:
+				return $this->getArgetinianDocument($methodCode);
 			case Country::PERU:
 				return $this->getPeruvianDocumentNumber($methodCode);
 			default:
@@ -294,6 +304,23 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			if ($customer[$dniField]) {
 				return $customer[$dniField];
 			}
+		}
+
+		return $customer['ebanx-document'][$methodCode];
+	}
+
+	public function getArgetinianDocument($methodCode)
+	{
+		$customer = $this->getCustomerData();
+
+		if ($cdiField = Mage::getStoreConfig('payment/ebanx_settings/cdi_field')) {
+			if ($cdiField === 'taxvat') {
+				return $this->order->getCustomerTaxvat();
+			}
+
+			if ($customer[$cdiField]) {
+				return $customer[$cdiField];
+				}
 		}
 
 		return $customer['ebanx-document'][$methodCode];
@@ -500,10 +527,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_pagoefectivo' => array('dni_field_pe'),
 			'ebanx_safetypay'    => array('dni_field_pe'),
 			// Argentina
-			'ebanx_cc_ar'     => array(),
-			'ebanx_rapipago'     => array(),
-			'ebanx_pagofacil'     => array(),
-			'ebanx_otroscupones'     => array(),
+			'ebanx_cc_ar'     	 => array('cdi_field'),
+			'ebanx_rapipago'     => array('cdi_field'),
+			'ebanx_pagofacil'    => array('cdi_field'),
+			'ebanx_otroscupones' => array('cdi_field'),
 			// Ecuador
 			'ebanx_safetypay_ec' => array(),
 		);
