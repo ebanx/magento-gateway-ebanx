@@ -313,10 +313,10 @@
                 <payment_ca_status>canceled</payment_ca_status>
                 <!-- Compliance Fields -->
                 <mask_taxvat_field>0</mask_taxvat_field>
-                <cdi_field>taxvat</cdi_field>
                 <cpf_field>taxvat</cpf_field>
                 <cnpj_field>taxvat</cnpj_field>
                 <rut_field>taxvat</rut_field>
+                <cdi_field>taxvat</cdi_field>
                 <dni_field_pe>taxvat</dni_field_pe>
                 <dni_field>taxvat</dni_field>
             </ebanx_settings>
