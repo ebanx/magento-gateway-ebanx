@@ -279,6 +279,14 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			}
 		}
 
+		if(!is_array($customer)
+			|| in_array('ebanx-document', $customer)
+			|| is_array($customer['ebanx-document'])
+			|| in_array($methodCode, $customer['ebanx-document'])
+		) {
+			return '';
+		}
+
 		return $customer['ebanx-document'][$methodCode];
 	}
 
@@ -294,6 +302,14 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			if ($customer[$dniField]) {
 				return $customer[$dniField];
 			}
+		}
+
+		if(!is_array($customer)
+			|| in_array('ebanx-document', $customer)
+			|| is_array($customer['ebanx-document'])
+			|| in_array($methodCode, $customer['ebanx-document'])
+		) {
+			return '';
 		}
 
 		return $customer['ebanx-document'][$methodCode];
