@@ -94,7 +94,7 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' 
 </ul>
 
 <script>
-    handleEbanxForm('mx', 'dc');
+    handleEbanxForm('mx', 'dc', 'payment_form_<?= $_code ?>');
 
     EBANXCreditCard.formatCardNumber(document.querySelector('input#ebanx_dc_mx_dc_number'));
     EBANXCreditCard.formatCardCVC(document.querySelector('input#ebanx_dc_mx_dc_cid'));
