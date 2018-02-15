@@ -441,6 +441,14 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </rut_field>
+                        <cdi_field translate="label">
+                            <label>CDI Document</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>413</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </cdi_field>
                         <dni_field_pe translate="label">
                             <label>Peru DNI Document</label>
                             <frontend_type>text</frontend_type>
