@@ -142,6 +142,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			case 'ebanx_webpay':
 				return $this->__('RUT Document');
 
+			case 'ebanx_pagoefectivo':
+			case 'ebanx_safetypay':
 			case 'ebanx_cc_co':
 				return $this->__('DNI Document');
 
@@ -157,6 +159,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 				return $this->getBrazilianDocumentLabel();
 			case 'cl':
 				return $this->__('RUT Document');
+			case 'pe':
 			case 'co':
 				return $this->__('DNI Document');
 			default:
@@ -186,6 +189,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 				return $this->getChileanDocumentNumber($methodCode);
 			case Country::COLOMBIA:
 				return $this->getColombianDocumentNumber($methodCode);
+			case Country::PERU:
+				return $this->getPeruvianDocumentNumber($methodCode);
 			default:
 				return null;
 		}
@@ -282,6 +287,23 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		$customer = $this->getCustomerData();
 
 		if ($dniField = Mage::getStoreConfig('payment/ebanx_settings/dni_field')) {
+			if ($dniField === 'taxvat') {
+				return $this->order->getCustomerTaxvat();
+			}
+
+			if ($customer[$dniField]) {
+				return $customer[$dniField];
+			}
+		}
+
+		return $customer['ebanx-document'][$methodCode];
+	}
+
+	public function getPeruvianDocumentNumber($methodCode)
+	{
+		$customer = $this->getCustomerData();
+
+		if ($dniField = Mage::getStoreConfig('payment/ebanx_settings/dni_field_pe')) {
 			if ($dniField === 'taxvat') {
 				return $this->order->getCustomerTaxvat();
 			}
@@ -475,8 +497,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_cc_mx'        => array(),
 			'ebanx_dc_mx'        => array(),
 			// Peru
-			'ebanx_pagoefectivo' => array(),
-			'ebanx_safetypay'    => array(),
+			'ebanx_pagoefectivo' => array('dni_field_pe'),
+			'ebanx_safetypay'    => array('dni_field_pe'),
 			// Argentina
 			'ebanx_cc_ar'     => array(),
 			'ebanx_rapipago'     => array(),

@@ -441,11 +441,19 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </rut_field>
-                        <dni_field translate="label">
-                            <label>DNI Document</label>
+                        <dni_field_pe translate="label">
+                            <label>Peru DNI Document</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>413</sort_order>
-                            <comment>Processing with EBANX requires a few mandatory fields that need to be included in your checkout when processing to Brazil and Chile, such as: CPF, CNPJ, DNI and RUT. You can choose to: replace your TAX/VAT fields and name it as these mandatories field or add your own field.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </dni_field_pe>
+                        <dni_field translate="label">
+                            <label>Colombia DNI Document</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>415</sort_order>
+                            <comment>Processing with EBANX requires a few mandatory fields that need to be included in your checkout when processing to Brazil, Chile, Colombia, Peru and Argentina, such as: CPF, CNPJ, DNI and RUT. You can choose to: replace your TAX/VAT fields and name it as these mandatories field or add your own field.</comment>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
