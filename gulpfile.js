@@ -54,7 +54,6 @@ gulp.task("prettify", () =>
         tabWidth: 2,
         bracketSpacing: true,
         arrowParens: 'avoid',
-        //proseWrap: 'preserve',
       })
     )
     .pipe(gulp.dest(file => file.base))
@@ -86,6 +85,7 @@ gulp.task('lint', function() {
     },
     'parserOptions': {
       'ecmaVersion': 6,
+      'sourceType': 'module',
     },
     'globals': [
       'browser',
