@@ -139,19 +139,19 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			case 'ebanx_cc_br':
 				return $this->getBrazilianDocumentLabel();
 
-			case 'ebanx_sencillito':
-			case 'ebanx_servipag':
+			case 'ebanx_webpay':
 				return $this->__('RUT Document');
 
-			case 'ebanx_baloto':
-			case 'ebanx_pse':
+			case 'ebanx_pagoefectivo':
+			case 'ebanx_safetypay':
+			case 'ebanx_cc_co':
 				return $this->__('DNI Document');
 
 			case 'ebanx_pagofacil':
 			case 'ebanx_rapipago':
 			case 'ebanx_cupon':
 			case 'ebanx_cc_ar':
-				return $this->__('Documento');
+				return 'Documento';
 
 			default:
 				return $this->__('Document Number');
@@ -165,10 +165,11 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 				return $this->getBrazilianDocumentLabel();
 			case 'cl':
 				return $this->__('RUT Document');
+			case 'pe':
 			case 'co':
 				return $this->__('DNI Document');
 			case 'ar':
-				return $this->__('Documento');
+				return 'Documento';
 			default:
 				return $this->__('Document Number');
 		}
@@ -198,6 +199,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 				return $this->getColombianDocumentNumber($methodCode);
 			case Country::ARGENTINA:
 				return $this->getArgetinianDocument($methodCode);
+			case Country::PERU:
+				return $this->getPeruvianDocumentNumber($methodCode);
 			default:
 				return null;
 		}
@@ -317,6 +320,23 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 			if ($customer[$cdiField]) {
 				return $customer[$cdiField];
+				}
+		}
+
+		return $customer['ebanx-document'][$methodCode];
+	}
+
+	public function getPeruvianDocumentNumber($methodCode)
+	{
+		$customer = $this->getCustomerData();
+
+		if ($dniField = Mage::getStoreConfig('payment/ebanx_settings/dni_field_pe')) {
+			if ($dniField === 'taxvat') {
+				return $this->order->getCustomerTaxvat();
+			}
+
+			if ($customer[$dniField]) {
+				return $customer[$dniField];
 			}
 		}
 
@@ -490,13 +510,13 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_wallet'       => array('cpf_field', 'cnpj_field'),
 			'ebanx_cc_br'        => array('cpf_field', 'cnpj_field'),
 			// Chile
-			'ebanx_sencillito'   => array('rut_field'),
-			'ebanx_servipag'     => array('rut_field'),
+			'ebanx_sencillito'   => array(),
+			'ebanx_servipag'     => array(),
 			'ebanx_webpay'       => array('rut_field'),
-			'ebanx_multicaja'    => array('rut_field'),
+			'ebanx_multicaja'    => array(),
 			// Colombia
-			'ebanx_baloto'       => array('dni_field'),
-			'ebanx_pse'          => array('dni_field'),
+			'ebanx_baloto'       => array(),
+			'ebanx_pse'          => array(),
 			'ebanx_cc_co'        => array('dni_field'),
 			// Mexico
 			'ebanx_oxxo'         => array(),
@@ -504,8 +524,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			'ebanx_cc_mx'        => array(),
 			'ebanx_dc_mx'        => array(),
 			// Peru
-			'ebanx_pagoefectivo' => array(),
-			'ebanx_safetypay'    => array(),
+			'ebanx_pagoefectivo' => array('dni_field_pe'),
+			'ebanx_safetypay'    => array('dni_field_pe'),
 			// Argentina
 			'ebanx_cc_ar'     	 => array('cdi_field'),
 			'ebanx_rapipago'     => array('cdi_field'),
