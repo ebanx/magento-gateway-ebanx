@@ -85,7 +85,7 @@ gulp.task('lint', function() {
     },
     'parserOptions': {
       'ecmaVersion': 6,
-      "sourceType": "module",
+      'sourceType': 'module',
     },
     'globals': [
       'browser',
