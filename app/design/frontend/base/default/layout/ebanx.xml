@@ -21,7 +21,15 @@
             </action>
             <action method="addItem">
                 <type>skin_js</type>
+                <script>ebanx/js/input-handler.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
                 <name>ebanx/js/checkout.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>ebanx/js/instalments.js</script>
             </action>
             <action method="addItem">
                 <type>skin_js</type>
