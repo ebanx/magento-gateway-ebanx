@@ -14,21 +14,9 @@ $taxvatShow = Mage::getStoreConfig('customer/address/taxvat_show');
 if (!empty($taxvatDocumentFields) && ($taxvatShow === 'opt' || $taxvatShow === 1)):
 ?>
 <script>
-  //<![CDATA[
-  (function(){
-    window.onload = function () {
-      var taxvat = document.getElementById('taxvat');
-      if(taxvat) {
-        taxvat.style.display = 'none';
-      }
-
-      var taxvatLabel = document.querySelector('label[for="taxvat"]');
-      if(taxvatLabel) {
-        taxvatLabel.style.display = 'none';
-      }
-    };
-  })();
-  //]]>
+  window.onload = function () {
+    hideTaxVat();
+  };
 </script>
 <?php
 endif;

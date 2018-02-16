@@ -38,7 +38,9 @@ $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
       </tbody>
     </table>
 
-    <script type="text/javascript">decorateTable('my-credit-cards-table');</script>
+    <script>
+      decorateTable('my-credit-cards-table');
+    </script>
 
     <?= $this->getChildHtml('pager') ?>
 
