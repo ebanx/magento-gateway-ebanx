@@ -25,6 +25,10 @@
             </action>
             <action method="addItem">
                 <type>skin_js</type>
+                <script>ebanx/js/instalments.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
                 <name>ebanx/js/checkout.js</name>
             </action>
             <action method="addItem">
@@ -184,7 +188,10 @@
             <action method="addJs">
                 <script>ebanx/vanilla-masker/vanilla-masker.min.js</script>
             </action>
-
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>ebanx/js/input-handler.js</script>
+            </action>
             <block type="core/template" name="ebanx.customer.account.edit" template="ebanx/customer/account/edit.phtml"/>
         </reference>
     </customer_account_edit>
