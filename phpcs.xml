@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ruleset name="Magento PSR2">
+    <description>Magento Coding Standards using PSR2.</description>
+
+    <!-- Exclude paths -->
+    <exclude-pattern>*/lib/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+
+    <!-- Rules -->
+    <rule ref="./lib/Ebanx/vendor/magento-ecg/coding-standard/Ecg" />
+    <rule ref="PSR2" />
+</ruleset>
