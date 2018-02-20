@@ -29,7 +29,7 @@ const addRequiredClassToInputs = (inputNodeList, validationClass, form, selector
   resetValidations(form, selector);
   Array.from(inputNodeList).forEach((inputToValidate) => {
     inputToValidate.classList.add(validationClass);
-    if(hasClass(inputToValidate, 'hidden-input-brand')){
+    if (hasClass(inputToValidate, 'hidden-input-brand')) {
       inputToValidate.classList.add('brand-required');
       inputToValidate.classList.remove('required-entry');
     }
@@ -69,7 +69,7 @@ const initCreditCardForm = (creditCardOptions, form) => {
     initCreditCardOption(creditCardOptions[0], form);
   } else {
     initCreditCardWithoutSavedCards(form);
-  } 
+  }
 };
 
 var handleEbanxForm = (countryCode, paymentType, formListId) => { // eslint-disable-line no-unused-vars
@@ -85,7 +85,7 @@ var handleEbanxForm = (countryCode, paymentType, formListId) => { // eslint-disa
   const getById = function (element) {
     return document.getElementById(element);
   };
-  
+
   let responseData = null;
 
   const cardName = getById('ebanx_' + paymentType + '_' + countryCode + '_' + paymentType + '_name');

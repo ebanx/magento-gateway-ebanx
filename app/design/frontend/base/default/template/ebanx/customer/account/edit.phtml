@@ -18,34 +18,13 @@ if (!empty($taxvatDocumentFields) && $session->isLoggedIn() && $session->getCust
     $label = Mage::helper('ebanx')->getLabelForComplianceFieldByCountry($countryCode);
   }
   ?>
-  <script>
-    //<![CDATA[
-    (function(){
-      window.onload = function () {
-        var taxvatLabel = document.querySelector('label[for="taxvat"]');
-        if(taxvatLabel) {
-          taxvatLabel.innerHTML = '<?php echo $label;?>';
-        }
-
-        <?php if (strtolower($countryCode) === 'br'): ?>
-          function inputHandler(masks, max, event) {
-            var c = event.target;
-            var v = c.value.replace(/\D/g, '');
-            var m = c.value.length > max ? 1 : 0;
-            VMasker(c).unMask();
-            VMasker(c).maskPattern(masks[m]);
-            c.value = VMasker.toPattern(v, masks[m]);
-          }
-
-          var docMask = ['999.999.999-999', '99.999.999/9999-99'];
-          var doc = document.getElementById('taxvat');
-          VMasker(doc).maskPattern(docMask[0]);
-          doc.addEventListener('input', inputHandler.bind(undefined, docMask, 14), false);
-        <?php endif; ?>
-      };
-
-    })();
-    //]]>
+  <script type="text/javascript">
+  //<![CDATA[
+    window.onload = function () {
+      initTaxVatLabel('<?= $label;?>');
+      inputHandler(document.querySelector('#taxvat'), '<?= $countryCode ?>');
+    };
+  //]]>
   </script>
   <?php
 endif;

@@ -21,30 +21,8 @@ $_selected = $this->getInfoData('instalments');
              name="payment[instalment_description]"
              value="<?php echo $this->escapeHtml($this->getInfoData('instalment_description')) ?>"/>
 
-      <script>
-        if (typeof ebanxUpdateFireInterest !== 'undefined') {
-          document.getElementById('<?php echo $_code ?>_instalments')
-            .addEventListener('change', function () {
-              ebanxUpdateFireInterest();
-            });
-        }
-
-        var selectInstalment = document.getElementById('<?= $_code ?>_instalments');
-
-        var updateInstalment = function (){
-          var text = document.getElementById('cc-<?= $lowerCountry ?>-local-amount');
-          var instalmentOption=  selectInstalment.options[selectInstalment.selectedIndex];
-          var localAmount = instalmentOption && instalmentOption.getAttribute ? instalmentOption.getAttribute('data-local-amount') : false;
-
-          if (text && text.innerHTML && localAmount) {
-            text.innerHTML = '<strong>' + localAmount + '</strong>';
-          }
-        };
-
-        if (selectInstalment) {
-          document.addEventListener('DOMContentLoaded', updateInstalment);
-          selectInstalment.addEventListener('change', updateInstalment);
-        }
+      <script type="text/javascript">
+        initInstalments('<?= $_code ?>', '<?= $lowerCountry ?>');
       </script>
     </div>
   </li>

@@ -29,7 +29,7 @@
       <button id="update-now">Check Now</button>
       <div id="update-error" style="color: red;"></div>
     </td>
-    <script type="text/javascript">
+    <script>
       (function(){
         var updateButton = document.getElementById('update-now');
         var errorMessage = document.getElementById('update-error');
@@ -41,7 +41,6 @@
           new Ajax.Request('<?=$notificationUrl?>', {
             onSuccess: function(response) {
               document.location.reload();
-              console.log('reloading...');
             },
             onFailure: function() {
               errorMessage.innerText = "<?= $this->__('An error occurred while checking for updates, please try again later.') ?>";
