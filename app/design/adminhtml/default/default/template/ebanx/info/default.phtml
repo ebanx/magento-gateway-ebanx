@@ -43,7 +43,7 @@
               document.location.reload();
             },
             onFailure: function() {
-              errorMessage.innerText = 'An error occurred while checking for updates, please try again later.';
+              errorMessage.innerText = "<?= $this->__('An error occurred while checking for updates, please try again later.') ?>";
               enableButton();
             }
           });

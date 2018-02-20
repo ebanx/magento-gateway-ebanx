@@ -9,7 +9,7 @@ const handler = (masks, max, element) => {
 };
 
 const inputHandler = (inputDoc, country) => { // eslint-disable-line no-unused-vars
-  if (country.toLowerCase() === 'br') {
+  if (country.toLowerCase() === 'br' && inputDoc) {
     const docMask = ['999.999.999-999', '99.999.999/9999-99'];
     VMasker(inputDoc).maskPattern(docMask[0]);
     inputDoc.addEventListener('input', (e) => { handler(docMask, 14, e.target); }, false);

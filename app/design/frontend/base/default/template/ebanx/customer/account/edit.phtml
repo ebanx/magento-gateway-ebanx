@@ -18,11 +18,13 @@ if (!empty($taxvatDocumentFields) && $session->isLoggedIn() && $session->getCust
     $label = Mage::helper('ebanx')->getLabelForComplianceFieldByCountry($countryCode);
   }
   ?>
-  <script>
+  <script type="text/javascript">
+  //<![CDATA[
     window.onload = function () {
       initTaxVatLabel('<?= $label;?>');
       inputHandler(document.querySelector('#taxvat'), '<?= $countryCode ?>');
     };
+  //]]>
   </script>
   <?php
 endif;
