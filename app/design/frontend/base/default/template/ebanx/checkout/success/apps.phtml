@@ -4,6 +4,7 @@ $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 
 <div class="ebanx-details">
     <p class="text-center">Baixe o app para IOS ou Android da Conta EBANX.</p>
+    <input type="hidden" data-doraemon-hash="<?= $this->getPayment()->getEbanxPaymentHash() ?>" />
 
     <div class="ebanx-groups ebanx-badges">
         <div class="ebanx-group">
