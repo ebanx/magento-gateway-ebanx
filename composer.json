@@ -15,6 +15,6 @@
     "magento-ecg/coding-standard": "dev-master"
   },
   "scripts": {
-    "style": "phpcs --standard=./lib/Ebanx/vendor/magento-ecg/coding-standard/Ecg . --ignore=./lib --extensions=php"
+    "style": "phpcs -p ."
   }
 }
