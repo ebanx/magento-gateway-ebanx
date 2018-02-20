@@ -21,7 +21,7 @@ $_selected = $this->getInfoData('instalments');
              name="payment[instalment_description]"
              value="<?php echo $this->escapeHtml($this->getInfoData('instalment_description')) ?>"/>
 
-      <script>
+      <script type="text/javascript">
         initInstalments('<?= $_code ?>', '<?= $lowerCountry ?>');
       </script>
     </div>
