@@ -1,24 +1,12 @@
-/* global VMasker */
 /* global EBANXData */
 /* global amsCheckoutHandler */
 /* global ebanxRemoveOSCRequireDocument */
+/* global inputHandler */
 
-let defaultLabel;
-let taxVatLabel;
-let taxVatInput;
-
-const qs = function(el) {
-  return document.querySelector(el);
-};
-
-function inputHandler(masks, max, event) {
-  const c = event.target;
-  const v = c.value.replace(/\D/g, '');
-  const m = c.value.length > max ? 1 : 0;
-  VMasker(c).unMask();
-  VMasker(c).maskPattern(masks[m]);
-  c.value = VMasker.toPattern(v, masks[m]);
-}
+let defaultLabel = null;
+let taxVatLabel= document.querySelector('label[for="billing\\:taxvat"]');
+const taxVatInput = document.getElementById('billing:taxvat');
+const countrySelect = document.querySelector('#billing\\:country_id');
 
 const getLabelByCountry = (country, defaultLabel) => {
   switch (country.toLowerCase()) {
@@ -62,29 +50,13 @@ const changeTaxVatLabel = () => {
     );
   }
 
-  VMasker(taxVatInput).unMask();
-
-  if (country === 'BR') {
-    const taxVatMask = newLabel.indexOf('CNPJ') !== -1
-      ? [ '999.999.999-99', '99.999.999/9999-99' ]
-      : [ '999.999.999-99', '999.999.999-99' ];
-    VMasker(taxVatInput).maskPattern(taxVatMask[0]);
-    taxVatInput.addEventListener(
-      'input',
-      inputHandler.bind(undefined, taxVatMask, 14),
-      false
-    );
-  }
+  inputHandler(taxVatInput, country);
 };
 
 const init = () => {
   if (!EBANXData.maskTaxVat) {
     return;
   }
-
-  const countrySelect = qs('#billing\\:country_id');
-  taxVatLabel = qs('label[for="billing\\:taxvat"]');
-  taxVatInput = document.getElementById('billing:taxvat');
 
   if (!taxVatLabel && typeof amsCheckoutHandler === 'function') {
     taxVatLabel = amsCheckoutHandler();

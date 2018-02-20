@@ -3,17 +3,18 @@
  * @var Ebanx_Gateway_Helper_Data $helper
  */
 $helper = Mage::helper('ebanx');
+$ebanxCustomerDocument = '';
+$skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+$country = Mage::getSingleton('checkout/cart')->getQuote()->getShippingAddress()->getCountryId();
 
 if ($helper->hasDocumentFieldAlreadyForMethod($this->getMethodCode())) return;
 
-$ebanxCustomerDocument = '';
 if (Mage::getSingleton('customer/session')->isLoggedIn()) {
   $customer_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
   $customer = Mage::getModel('customer/customer')->load($customer_id);
   $ebanxCustomerDocument = $customer->getEbanxCustomerDocument();
 }
 
-$skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 ?>
 <li class="ebanx-compliance-fields">
   <label class="ebanx-document-label required" for="ebanx-document-<?= $this->getMethodCode() ?>">
@@ -30,28 +31,7 @@ $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
     />
   </div>
 
-  <?php
-  $country = Mage::getSingleton('checkout/cart')->getQuote()
-      ->getShippingAddress()
-      ->getCountryId();
-  if ($country === 'BR'):
-  ?>
-  <script>
-      function inputHandler(masks, max, event) {
-          var c = event.target;
-          var v = c.value.replace(/\D/g, '');
-          var m = c.value.length > max ? 1 : 0;
-          VMasker(c).unMask();
-          VMasker(c).maskPattern(masks[m]);
-          c.value = VMasker.toPattern(v, masks[m]);
-      }
-
-      var docMask = ['999.999.999-999', '99.999.999/9999-99'];
-      var doc = document.querySelector('#ebanx-document-<?= $this->getMethodCode() ?>');
-      VMasker(doc).maskPattern(docMask[0]);
-      doc.addEventListener('input', inputHandler.bind(undefined, docMask, 14), false);
+  <script type="text/javascript">
+      inputHandler(document.querySelector('#ebanx-document-<?= $this->getMethodCode() ?>'), '<?= $country ?>');
   </script>
-  <?php
-  endif;
-  ?>
 </li>
