@@ -1,0 +1,25 @@
+dist: trusty
+sudo: required
+
+language: php
+
+services:
+  - docker
+
+php:
+  - 5.5
+
+cache:
+  apt: true
+  directories:
+    - $TRAVIS_BUILD_DIR/vendor
+    - $HOME/.composer/cache
+
+before_script:
+  - sudo service mysql stop
+
+script:
+  - chmod +x $(pwd)/scripts/start.sh && $(pwd)/scripts/start.sh
+  - composer install
+  - curl http://localhost
+
