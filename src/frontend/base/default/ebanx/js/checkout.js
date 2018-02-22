@@ -106,6 +106,8 @@ var handleEbanxForm = (countryCode, paymentType, formListId) => { // eslint-disa
 
   const mode = ebanxMode.value === 'sandbox' ? 'test' : 'production';
 
+  let blurTargetElement = null;
+
   EBANX.config.setMode(mode);
   EBANX.config.setPublishableKey(ebanxIntegrationKey.value);
   EBANX.config.setCountry(ebanxCountry.value);
@@ -123,6 +125,12 @@ var handleEbanxForm = (countryCode, paymentType, formListId) => { // eslint-disa
     if (typeof placeOrderButton !== 'undefined' && placeOrderButton) {
       placeOrderButton.disabled = shouldDisable;
     }
+  };
+
+  const forceClickInPlaceOrder = (elem) => {
+    var event = document.createEvent('Event');
+    event.initEvent('click', true, true);
+    elem.dispatchEvent(event);
   };
 
   const saveToken = (response) => {
@@ -154,9 +162,14 @@ var handleEbanxForm = (countryCode, paymentType, formListId) => { // eslint-disa
     ebanxDeviceFingerprint.value = responseData.deviceId;
 
     disableBtnPlaceOrder(false);
+    forceClickInPlaceOrder(blurTargetElement);
   };
 
-  const generateToken = () => {
+  const generateToken = (blurTarget) => {
+    if (blurTarget && (blurTarget.type === 'button' || blurTarget.type === 'span')) {
+      blurTargetElement = blurTarget;
+    }
+
     if (!responseData) {
       disableBtnPlaceOrder(true);
 
@@ -169,9 +182,9 @@ var handleEbanxForm = (countryCode, paymentType, formListId) => { // eslint-disa
     }
   };
 
-  const handleToken = () => {
+  const handleToken = (ev) => {
     if (!isFormEmpty()) {
-      generateToken();
+      generateToken(ev.relatedTarget);
     }
   };
 
