@@ -80,9 +80,9 @@ describe('Shopping', () => {
             expiryYear: '2028',
             expiryMonth: '12',
             cvv: '123',
-            // save: true,
+            save: true,
           },
-          // password: Faker.internet.password(),
+          password: Faker.internet.password(),
         });
 
         magento.buyBlueHorizonsBraceletsWithCreditCardToPersonal(checkoutData, (resp) => {
@@ -96,7 +96,7 @@ describe('Shopping', () => {
 
             wrapOrderAssertations(payment, checkoutPayment, brPayCustomerData(checkoutData));
 
-            // magento.buyWonderWomansPurseByOneClick(checkoutData.card.cvv);
+            magento.buyBlueHorizonsBraceletsByOneClick(checkoutData.card.cvv);
           });
         });
       });

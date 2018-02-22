@@ -85,6 +85,10 @@ export default class BlueHorizonsBracelets {
     this[fillCvv](cvv);
     this[payNow]();
 
+    this.cy
+      .get('body.sales-order-view.customer-account', { timeout: 30000 })
+      .should('be.visible');
+
     return this;
   }
 }

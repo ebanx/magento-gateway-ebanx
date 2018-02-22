@@ -19,6 +19,7 @@ const fillPostcode = Symbol('fillPostcode');
 const fillLastName = Symbol('fillLastName');
 const selectCountry = Symbol('selectCountry');
 const fillFirstName = Symbol('fillFirstName');
+const fillCompliance = Symbol('fillCompliance');
 const chooseShipping = Symbol('chooseShipping');
 const fillInputWithJquery = Symbol('fillInputWithJquery');
 
@@ -134,9 +135,7 @@ export default class Checkout {
     this[clickElement]('#shipping-method-buttons-container > button');
   }
 
-  [fillBilling] (data) {
-    this[clickElement]('#onepage-guest-register-button');
-
+  [fillCompliance] (data) {
     this[selectCountry](data);
     this[fillFirstName](data);
     this[fillLastName](data);
@@ -148,6 +147,26 @@ export default class Checkout {
     this[fillPhone](data);
 
     this[clickElement]('#billing-buttons-container > button');
+  }
+
+  [fillBilling] (data) {
+    R.ifElse(
+      R.propSatisfies((x) => (x !== undefined), 'password'), () => {
+        this[clickElement]('#login\\3a register');
+        this[clickElement]('#onepage-guest-register-button');
+
+        this[fillInput](data, 'password', '#billing\\3a customer_password');
+        this[fillInput](data, 'password', '#billing\\3a confirm_password');
+
+        this[fillCompliance](data);
+      },
+      () => {
+        this[clickElement]('#login\\3a guest');
+        this[clickElement]('#onepage-guest-register-button');
+
+        this[fillCompliance](data);
+      }
+    )(data);
   }
 
   [fillCreditCardNumber] (country, data) {
@@ -209,12 +228,12 @@ export default class Checkout {
       this[fillCreditCardExpiryYear](lowerCountry, data.card);
       this[fillCreditCardCvv](lowerCountry, data.card);
 
-      // R.ifElse(
-      //   R.propSatisfies((x) => (x !== undefined), 'save'), () => {
-      //     this[clickElement]('#ebanx_save_credit_card');
-      //   },
-      //   R.always(null)
-      // )(data.card);
+      R.ifElse(
+        R.propSatisfies((x) => (x !== undefined), 'save'), () => {
+          this[clickElement]('#ebanx_save_credit_card');
+        },
+        R.always(null)
+      )(data.card);
 
       this.cy.get(this.inputs.creditCardCvv(lowerCountry)).focus().blur();
       this.cy.wait(10000);

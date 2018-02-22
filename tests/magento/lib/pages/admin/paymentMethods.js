@@ -16,6 +16,8 @@ export default class PaymentMethods {
       .get('#payment_ebanx_settings_integration_key_public_sandbox')
       .should('be.visible')
       .type(Cypress.env('DEMO_PUBLIC_INTEGRATION_KEY'))
+      .get('#payment_ebanx_settings_one_click_payment')
+      .select('Yes')
       .get('#content > div > div.content-header > table > tbody > tr > td.form-buttons .scalable.save')
       .should('be.visible')
       .click()
