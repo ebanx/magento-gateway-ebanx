@@ -1,6 +1,6 @@
 /* global expect */
 
-import { tryNext } from '../../../../utils';
+import { sanitizeMethod, tryNext } from '../../../../utils';
 
 const stillOn = Symbol('stillOn');
 const extractHash = Symbol('extractHash');
@@ -12,7 +12,7 @@ export default class ThankYou {
 
   [stillOn] () {
     this.cy
-      .get('body.checkout-onepage-success', { timeout: 15000 })
+      .get('body.checkout-onepage-success', { timeout: 30000 })
       .should('be.visible');
   }
 
@@ -22,6 +22,24 @@ export default class ThankYou {
       .then(($elm) => {
         next($elm.data('doraemon-hash'));
       });
+  }
+
+  stillOnEfectivo(method, next) {
+    this[stillOn]();
+
+    const elm = {
+      otroscupones: 'cupon',
+    };
+
+    this.cy
+      .get(`#ebanx-${elm[sanitizeMethod(method)] || sanitizeMethod(method)}-frame`)
+      .then(($efectivoIframe) => {
+        expect($efectivoIframe.contents().find('.barcode.img-responsive').length).to.equal(1);
+      });
+
+    this[extractHash]((hash) => {
+      tryNext(next, { hash });
+    });
   }
 
   stillOnBoleto(next) {
