@@ -1,10 +1,13 @@
-/* global Cypress, it, describe, before, context, cy */
+/* global it, describe, before, context, cy, Cypress */
 
 import R from 'ramda';
 import Faker from 'faker';
 import defaults from '../../../defaults';
-import { assertUrlStatus } from '../../../utils';
+import {
+  wrapOrderAssertations,
+} from '../../../utils';
 import Magento from '../../lib/operator';
+import Api from '../../../pay/lib/operator';
 
 Faker.locale = 'es';
 
@@ -26,45 +29,21 @@ const mock = (data) => (R.merge(
   }
 ));
 
+let api;
 let magento;
 
-describe('Magento', () => {
+describe('Shopping', () => {
   before(() => {
-    assertUrlStatus(Cypress.env('DEMO_URL'));
-
+    api = new Api(cy);
     magento = new Magento(cy);
+
+    magento.setupPlugin();
   });
 
   context('Argentina', () => {
-    context('Efectivo', () => {
-      it('can buy `wonder womans purse` using Rapipago to personal', () => {
-        magento.buyWonderWomansPurseWithEfectivoToPersonal(mock(
-          {
-            paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.ar.efectivo.types.rapipago,
-          }
-        ));
-      });
-
-      it('can buy `wonder womans purse` using Pagofacil to personal', () => {
-        magento.buyWonderWomansPurseWithEfectivoToPersonal(mock(
-          {
-            paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.ar.efectivo.types.pagofacil,
-          }
-        ));
-      });
-
-      it('can buy `wonder womans purse` using OtrosCupones to personal', () => {
-        magento.buyWonderWomansPurseWithEfectivoToPersonal(mock(
-          {
-            paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.ar.efectivo.types.otrosCupones,
-          }
-        ));
-      });
-    });
-
     context('Credit Card', () => {
       it('can buy `wonder womans purse` using credit card', () => {
-        const mockData = {
+        const checkoutData = mock({
           paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.ar.creditcard.id,
           card: {
             name: Faker.name.findName(),
@@ -73,10 +52,20 @@ describe('Magento', () => {
             expiryMonth: '12',
             cvv: '123',
           },
-        };
+        });
 
-        magento
-          .buyWonderWomansPurseWithCreditCardToPersonal(mock(mockData));
+        magento.buyBlueHorizonsBraceletsWithCreditCardToPersonal(checkoutData, (resp) => {
+          api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
+            const checkoutPayment = Api.paymentData({
+              amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
+              payment_type_code: 'mastercard',
+              instalments: '1',
+              status: 'CO',
+            });
+
+            wrapOrderAssertations(payment, checkoutPayment, Api.customerData(checkoutData));
+          });
+        });
       });
     });
   });

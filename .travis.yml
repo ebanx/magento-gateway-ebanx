@@ -23,16 +23,14 @@ before_script:
   - sleep 3
 
 env:
-  - TEST_COUNTRY=brazil
-  # - TEST_COUNTRY=chile
-  # - TEST_COUNTRY=ecuador
-  # - TEST_COUNTRY=argentina
-  # - TEST_COUNTRY=mexico
-  # - TEST_COUNTRY=colombia
-  # - TEST_COUNTRY=peru
+  matrix:
+    - TEST_COUNTRY=argentina
+    - TEST_COUNTRY=brazil
+    # - TEST_COUNTRY=chile
+    # - TEST_COUNTRY=ecuador
+    # - TEST_COUNTRY=mexico
+    # - TEST_COUNTRY=colombia
+    # - TEST_COUNTRY=peru
 
-jobs:
-  include:
-    - stage: test
-      script:
-        - bash ./tests/bin/test.sh
+script:
+  - bash ./tests/bin/test.sh
