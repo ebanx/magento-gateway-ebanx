@@ -19,10 +19,17 @@ const fillFirstName = Symbol('fillFirstName');
 const chooseShipping = Symbol('chooseShipping');
 const fillInputWithJquery = Symbol('fillInputWithJquery');
 
+const fillCreditCardCvv = Symbol('fillCreditCardCvv');
+const fillCreditCardName = Symbol('fillCreditCardName');
+const fillCreditCardNumber = Symbol('fillCreditCardNumber');
+const fillCreditCardExpiryYear = Symbol('fillCreditCardExpiryYear');
+const fillCreditCardExpiryMonth = Symbol('fillCreditCardExpiryMonth');
+
 export default class Checkout {
   constructor(cy) {
     this.cy = cy;
     this.inputs = {
+      creditCardCvv: (country) => `#ebanx_cc_${country}_cc_cid`,
       creditCardNumber: (country) => `#ebanx_cc_${country}_cc_number`,
     };
   }
@@ -138,6 +145,58 @@ export default class Checkout {
     this[fillPhone](data);
 
     this[clickElement]('#billing-buttons-container > button');
+  }
+
+  [fillCreditCardNumber] (country, data) {
+    this[fillInput](data, 'number', this.inputs.creditCardNumber(country));
+  }
+
+  [fillCreditCardExpiryMonth] (country, data) {
+    this[selectField](data, 'expiryMonth', 'expiryMonth', `#ebanx_cc_${country}_expiration`);
+  }
+
+  [fillCreditCardExpiryYear] (country, data) {
+    this[selectField](data, 'expiryYear', 'expiryYear', `#ebanx_cc_${country}_expiration_yr`);
+  }
+
+  [fillCreditCardCvv] (country, data) {
+    this[fillInput](data, 'cvv', this.inputs.creditCardCvv(country));
+  }
+
+  [fillCreditCardName] (country, data) {
+    this[fillInput](data, 'name', `#ebanx_cc_${country}_cc_name`);
+  }
+
+  placeWithCreditCard(data, next) {
+    const lowerCountry = data.countryId.toLowerCase();
+
+    validateSchema(CHECKOUT_SCHEMA[lowerCountry].creditcard(), data, () => {
+      this[fillBilling](data);
+      this[chooseShipping](data.shippingMethod);
+      this[clickElement](`#p_method_ebanx_cc_${lowerCountry}`);
+
+      this[fillInputWithJquery](data, 'document', `#ebanx-document-ebanx_cc_${lowerCountry}`);
+
+      this[fillCreditCardName](lowerCountry, data.card);
+      this[fillCreditCardNumber](lowerCountry, data.card);
+      this[fillCreditCardExpiryMonth](lowerCountry, data.card);
+      this[fillCreditCardExpiryYear](lowerCountry, data.card);
+      this[fillCreditCardCvv](lowerCountry, data.card);
+
+      // R.ifElse(
+      //   R.propSatisfies((x) => (x !== undefined), 'save'), () => {
+      //     this[clickElement]('#ebanx_save_credit_card');
+      //   },
+      //   R.always(null)
+      // )(data.card);
+
+      this.cy.get(this.inputs.creditCardCvv(lowerCountry)).focus().blur();
+      this.cy.wait(10000);
+
+      this[placeOrder]();
+
+      next();
+    });
   }
 
   placeWithBoleto(data, next) {

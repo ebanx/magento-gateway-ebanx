@@ -344,7 +344,7 @@ export const CHECKOUT_SCHEMA = {
             schema: 'BrazilCreditCard',
             card: Joi.object().keys({
               save: Joi.boolean().optional(),
-              number: Joi.number().required(),
+              number: Joi.string().required(),
               cvv: Joi.string().required(),
               expiryMonth: Joi.string().min(2).max(2).required(),
               expiryYear: Joi.string().min(4).max(4).required(),
