@@ -3,7 +3,11 @@
 import R from 'ramda';
 import { pay } from '../../../../defaults';
 import { CHECKOUT_SCHEMA } from '../../schemas/checkout';
-import { validateSchema, waitUrlHas } from '../../../../utils';
+import {
+  validateSchema,
+  waitUrlHas,
+  sanitizeMethod,
+} from '../../../../utils';
 
 const fillCity = Symbol('fillCity');
 const fillInput = Symbol('fillInput');
@@ -207,6 +211,19 @@ export default class Checkout {
         .click();
 
       waitUrlHas(`${Cypress.env('DEMO_URL')}/checkout/onepage/success`);
+
+      next();
+    });
+  }
+
+  placeWithEfectivo(data, next) {
+    validateSchema(CHECKOUT_SCHEMA.ar.efectivo(), data, () => {
+      this[fillBilling](data);
+      this[chooseShipping](data.shippingMethod);
+      this[clickElement](`#p_method_ebanx_${sanitizeMethod(data.paymentMethod)}`);
+      this[fillInputWithJquery](data, 'document', `#ebanx-document-ebanx_${sanitizeMethod(data.paymentMethod)}`);
+
+      this[placeOrder]();
 
       next();
     });
