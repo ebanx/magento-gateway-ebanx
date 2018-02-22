@@ -1,13 +1,17 @@
-import Home from './pages/home';
-import Cart from './pages/cart';
-import Checkout from './pages/checkout';
-import ThankYou from './pages/thankYou';
-import MyOrders from './pages/myOrders';
-import WonderWomansPurse from './pages/wonderWomansPurse';
+import Home from './pages/shopping/home';
+import Cart from './pages/shopping/cart';
+import Checkout from './pages/shopping/checkout';
+import ThankYou from './pages/shopping/thankYou';
+import BlueHorizonsBracelets from './pages/shopping/blueHorizonsBracelets';
+
+import AdminHome from './pages/admin/home';
+import AdminLogin from './pages/admin/login';
+import AdminConfigurations from './pages/admin/configurations';
+import AdminPaymentMethods from './pages/admin/paymentMethods';
 
 import { tryNext } from '../../utils';
 
-const buyWonderWomansPurse = Symbol('buyWonderWomansPurse');
+const buyBlueHorizonsBracelets = Symbol('buyBlueHorizonsBracelets');
 
 export default class Magento {
   constructor(cy) {
@@ -17,13 +21,18 @@ export default class Magento {
       cart: new Cart(cy),
       checkout: new Checkout(cy),
       thankYou: new ThankYou(cy),
-      myOrders: new MyOrders(cy),
-      wonderWomansPurse: new WonderWomansPurse(cy),
+      blueHorizonsBracelets: new BlueHorizonsBracelets(cy),
+      admin: {
+        home: new AdminHome(cy),
+        login: new AdminLogin(cy),
+        configurations: new AdminConfigurations(cy),
+        paymentMethods: new AdminPaymentMethods(cy),
+      },
     };
   }
 
-  [buyWonderWomansPurse]() {
-    this.pages.wonderWomansPurse
+  [buyBlueHorizonsBracelets]() {
+    this.pages.blueHorizonsBracelets
       .buy();
 
     this.pages.cart
@@ -37,129 +46,22 @@ export default class Magento {
     return this;
   }
 
-  buyWonderWomansPurseByOneClick(cvv) {
-    this.pages.wonderWomansPurse
-      .buyByOneClick(cvv);
+  setupPlugin() {
+    this.pages.admin.login
+      .login();
 
-    this.pages.myOrders
-      .stillOnView();
+    this.pages.admin.home
+      .goToConfigurations();
 
-    return this;
+    this.pages.admin.configurations
+      .goToPaymentMethods();
+
+    this.pages.admin.paymentMethods
+      .setupEbanxPlugin();
   }
 
-  buyWonderWomansPurseWithSpeiToPersonal(data) {
-    this[buyWonderWomansPurse]();
-
-    this.pages.checkout.placeWithSpei(data, () => {
-      this.pages.thankYou
-        .stillOnSpei();
-    });
-  }
-
-  buyWonderWomansPurseWithTefToPersonal(data, next) {
-    this[buyWonderWomansPurse]();
-
-    this.pages.checkout
-      .placeWithTef(data, (resp) => {
-        tryNext(next, resp);
-      });
-
-    // pages.thankYou
-    //   .stillOnTef();
-
-    return this;
-  }
-
-  buyWonderWomansPurseWithSafetyPayToPersonal(data) {
-    this[buyWonderWomansPurse]();
-
-    this.pages.checkout.placeWithSafetyPay(data);
-
-    // this.pages.thankYou
-    //   .stillOnSafetyPay();
-
-    return this;
-  }
-
-  buyWonderWomansPurseWithBalotoToPersonal(data) {
-    this[buyWonderWomansPurse]();
-
-    this.pages.checkout.placeWithBaloto(data, () => {
-      this.pages.thankYou
-        .stillOnBaloto();
-    });
-  }
-
-  buyWonderWomansPurseWithEfectivoToPersonal(data) {
-    this[buyWonderWomansPurse]();
-
-    this.pages.checkout
-      .placeWithEfectivo(data, () => {
-        this.pages.thankYou
-          .stillOnEfectivo(data.paymentMethod);
-      });
-
-
-    return this;
-  }
-
-  buyWonderWomansPurseWithPseToPersonal(data) {
-    this[buyWonderWomansPurse]();
-
-    this.pages.checkout.placeWithPse(data);
-
-    // this.pages.thankYou
-    //   .stillOnPse();
-
-    return this;
-  }
-
-  buyWonderWomansPurseWithOxxoToPersonal(data) {
-    this[buyWonderWomansPurse]();
-
-    this.pages.checkout.placeWithOxxo(data, () => {
-      this.pages.thankYou
-        .stillOnOxxo();
-    });
-
-    return this;
-  }
-
-  buyWonderWomansPurseWithCreditCardToPersonal(data, next) {
-    this[buyWonderWomansPurse]();
-
-    this.pages.checkout
-      .placeWithCreditCard(data, () => {
-        this.pages.thankYou
-          .stillOnCreditCard((resp) => {
-            tryNext(next, resp);
-          });
-      });
-  }
-
-  buyWonderWomansPurseWithPagoEfectivoToPersonal(data) {
-    this[buyWonderWomansPurse]();
-
-    this.pages.checkout.placeWithPagoEfectivo(data, () => {
-      this.pages.thankYou
-        .stillOnPagoEfectivo();
-    });
-  }
-
-  buyWonderWomansPurseWithDebitCardToPersonal(data, next) {
-    this[buyWonderWomansPurse]();
-
-    this.pages.checkout
-      .placeWithDebitCard(data, () => {
-        this.pages.thankYou
-          .stillOnDebitCard();
-
-        tryNext(next);
-      });
-  }
-
-  buyWonderWomansPurseWithBoletoToPersonal(data, next) {
-    this[buyWonderWomansPurse]();
+  buyBlueHorizonsBraceletsWithBoletoToPersonal(data, next) {
+    this[buyBlueHorizonsBracelets]();
 
     this.pages.checkout.placeWithBoleto(data, () => {
       this.pages.thankYou
@@ -167,53 +69,5 @@ export default class Magento {
           tryNext(next, resp);
         });
     });
-  }
-
-  buyWonderWomansPurseWithServiPagToPersonal(data) {
-    this[buyWonderWomansPurse]();
-
-    this.pages.checkout
-      .placeWithServiPag(data);
-
-    // pages.thankYou
-    //   .stillOnServiPag();
-
-    return this;
-  }
-
-  buyWonderWomansPurseWithMulticajaToPersonal(data) {
-    this[buyWonderWomansPurse]();
-
-    this.pages.checkout
-      .placeWithMulticaja(data);
-
-    // pages.thankYou
-    //   .stillOnMulticaja();
-
-    return this;
-  }
-
-  buyWonderWomansPurseWithWebpayToPersonal(data) {
-    this[buyWonderWomansPurse]();
-
-    this.pages.checkout
-      .placeWithWebpay(data);
-
-    // pages.thankYou
-    //   .stillOnWebpay();
-
-    return this;
-  }
-
-  buyWonderWomansPurseWithSencillitoToPersonal(data) {
-    this[buyWonderWomansPurse]();
-
-    this.pages.checkout
-      .placeWithSencillito(data);
-
-    // pages.thankYou
-    //   .stillOnSencillito();
-
-    return this;
   }
 }

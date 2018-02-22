@@ -9,18 +9,18 @@ const fillInput = Symbol('fillInput');
 const clickElement = Symbol('clickElement');
 const proceedTocheckout = Symbol('proceedTocheckout');
 
-export default class WonderWomansPurse {
+export default class BlueHorizonsBracelets {
   constructor(cy) {
     this.cy = cy;
   }
 
   [addToCart] () {
-    this[clickElement]('.add-to-box .add-to-cart .button.btn-cart');
+    this[clickElement]('#product_addtocart_form > div.add-to-cart-wrapper > div > div > div.add-to-cart-buttons > button');
   }
 
   [proceedTocheckout] () {
     this.cy
-      .get('.page-title.title-buttons .button.btn-proceed-checkout.btn-checkout', { timeout: 10000 })
+      .get('div.cart.display-single-price > div.page-title.title-buttons > ul > li > button', { timeout: 10000 })
       .should('be.visible');
   }
 
@@ -55,7 +55,7 @@ export default class WonderWomansPurse {
   }
 
   [url]() {
-    return `${Cypress.env('DEMO_URL')}/index.php/wonder-woman-s-purse.html`;
+    return `${Cypress.env('DEMO_URL')}/accessories/jewelry/blue-horizons-bracelets.html`;
   }
 
   visit() {

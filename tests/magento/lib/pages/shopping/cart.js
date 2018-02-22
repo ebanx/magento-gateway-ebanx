@@ -7,12 +7,13 @@ export default class Cart {
 
   [proceedTocheckout] () {
     return this.cy
-      .get('.page-title.title-buttons .button.btn-proceed-checkout.btn-checkout', { timeout: 10000 })
-      .should('be.visible');
+      .get('div.cart.display-single-price > div.page-title.title-buttons > ul > li > button', { timeout: 10000 })
+      .should('be.visible')
+      .click();
   }
 
   proceedToCheckoutWithOpened() {
-    this[proceedTocheckout]().click();
+    this[proceedTocheckout]();
 
     return this;
   }
