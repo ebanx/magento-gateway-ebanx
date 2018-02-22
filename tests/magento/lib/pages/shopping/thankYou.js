@@ -1,4 +1,5 @@
 /* global expect */
+
 import { tryNext } from '../../../../utils';
 
 const stillOn = Symbol('stillOn');
@@ -32,6 +33,14 @@ export default class ThankYou {
       .then(($boletoIframe) => {
         expect($boletoIframe.contents().find('table.table-boleto').length).to.equal(4);
       });
+
+    this[extractHash]((hash) => {
+      tryNext(next, { hash });
+    });
+  }
+
+  stillOnCreditCard(next) {
+    this[stillOn]();
 
     this[extractHash]((hash) => {
       tryNext(next, { hash });

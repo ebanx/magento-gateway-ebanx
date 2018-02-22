@@ -38,7 +38,7 @@ const brPayCustomerData = (checkoutData) => Api.customerData(
 let api;
 let magento;
 
-describe('Magento', () => {
+describe('Shopping', () => {
   before(() => {
     api = new Api(cy);
     magento = new Magento(cy);
@@ -55,7 +55,50 @@ describe('Magento', () => {
           }
         );
 
-        magento.buyBlueHorizonsBraceletsWithBoletoToPersonal(checkoutData);
+        magento.buyBlueHorizonsBraceletsWithBoletoToPersonal(checkoutData, (resp) => {
+          api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
+            const checkoutPayment = Api.paymentData({
+              payment_type_code: checkoutData.paymentMethod,
+              boleto_url: `${defaults.pay.url}/print/?hash=${resp.hash}`,
+              instalments: '1',
+              status: 'PE',
+              amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
+            });
+
+            wrapOrderAssertations(payment, checkoutPayment, brPayCustomerData(checkoutData));
+          });
+        });
+      });
+    });
+
+    context('Credit Card', () => {
+      it('can buy `wonder womans purse`, create account and can one-click', () => {
+        const checkoutData = mock({
+          paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.creditcard.id,
+          card: {
+            number: defaults._globals.cardsWhitelist.mastercard,
+            expiryYear: '2028',
+            expiryMonth: '12',
+            cvv: '123',
+            // save: true,
+          },
+          // password: Faker.internet.password(),
+        });
+
+        magento.buyBlueHorizonsBraceletsWithCreditCardToPersonal(checkoutData, (resp) => {
+          api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
+            const checkoutPayment = Api.paymentData({
+              amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
+              payment_type_code: 'mastercard',
+              instalments: '1',
+              status: 'CO',
+            });
+
+            wrapOrderAssertations(payment, checkoutPayment, brPayCustomerData(checkoutData));
+
+            // magento.buyWonderWomansPurseByOneClick(checkoutData.card.cvv);
+          });
+        });
       });
     });
   });
