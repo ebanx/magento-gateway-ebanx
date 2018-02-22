@@ -166,7 +166,7 @@ var handleEbanxForm = (countryCode, paymentType, formListId) => { // eslint-disa
   };
 
   const generateToken = (blurTarget) => {
-    if (blurTarget && blurTarget.type === 'button') {
+    if (blurTarget && (blurTarget.type === 'button' || blurTarget.type === 'span')) {
       blurTargetElement = blurTarget;
     }
 
