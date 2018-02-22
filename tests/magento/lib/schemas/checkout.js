@@ -82,7 +82,7 @@ export const CHECKOUT_SCHEMA = {
             document: Joi.string().required(),
             card: Joi.object().keys({
               save: Joi.boolean().optional(),
-              number: Joi.number().required(),
+              number: Joi.string().required(),
               name: Joi.string().required(),
               cvv: Joi.string().required(),
               expiryMonth: Joi.string().min(2).max(2).required(),
@@ -171,7 +171,7 @@ export const CHECKOUT_SCHEMA = {
             card: Joi.object().keys({
               save: Joi.boolean().optional(),
               name: Joi.string().required(),
-              number: Joi.number().required(),
+              number: Joi.string().required(),
               cvv: Joi.string().required(),
               expiryMonth: Joi.string().min(2).max(2).required(),
               expiryYear: Joi.string().min(4).max(4).required(),
@@ -190,7 +190,7 @@ export const CHECKOUT_SCHEMA = {
             card: Joi.object().keys({
               save: Joi.boolean().optional(),
               name: Joi.string().required(),
-              number: Joi.number().required(),
+              number: Joi.string().required(),
               cvv: Joi.string().required(),
               expiryMonth: Joi.string().min(2).max(2).required(),
               expiryYear: Joi.string().min(4).max(4).required(),
@@ -240,7 +240,7 @@ export const CHECKOUT_SCHEMA = {
             schema: 'ArgentinaCreditCard',
             card: Joi.object().keys({
               name: Joi.string().required(),
-              number: Joi.number().required(),
+              number: Joi.string().required(),
               cvv: Joi.string().required(),
               expiryMonth: Joi.string().min(2).max(2).required(),
               expiryYear: Joi.string().min(4).max(4).required(),
