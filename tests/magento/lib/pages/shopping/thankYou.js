@@ -46,4 +46,12 @@ export default class ThankYou {
       tryNext(next, { hash });
     });
   }
+
+  stillOnTef(next) {
+    this[stillOn]();
+
+    this.cy
+      .url()
+      .then(($url) => tryNext(next, {hash: $url.split('hash=')[1] }));
+  }
 }
