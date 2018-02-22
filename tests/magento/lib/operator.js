@@ -60,6 +60,18 @@ export default class Magento {
       .setupEbanxPlugin();
   }
 
+  buyBlueHorizonsBraceletsWithTefToPersonal(data, next) {
+    this[buyBlueHorizonsBracelets]();
+
+    this.pages.checkout
+      .placeWithTef(data, () => {
+        this.pages.thankYou
+          .stillOnTef((resp) => {
+            tryNext(next, resp);
+          });
+      });
+  }
+
   buyBlueHorizonsBraceletsWithCreditCardToPersonal(data, next) {
     this[buyBlueHorizonsBracelets]();
 

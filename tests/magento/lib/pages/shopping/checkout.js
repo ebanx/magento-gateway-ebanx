@@ -1,6 +1,9 @@
+/* global Cypress */
+
 import R from 'ramda';
+import { pay } from '../../../../defaults';
 import { CHECKOUT_SCHEMA } from '../../schemas/checkout';
-import { validateSchema } from '../../../../utils';
+import { validateSchema, waitUrlHas } from '../../../../utils';
 
 const fillCity = Symbol('fillCity');
 const fillInput = Symbol('fillInput');
@@ -38,7 +41,7 @@ export default class Checkout {
     R.ifElse(
       R.propSatisfies((x) => (x !== undefined), property), (data) => {
         this.cy
-          .get(input, { timeout: 15000 })
+          .get(input, { timeout: 30000 })
           .should('be.visible')
           .then(($input) => {
             $input.val(data[property]).trigger('input');
@@ -54,7 +57,7 @@ export default class Checkout {
     R.ifElse(
       R.propSatisfies((x) => (x !== undefined), property), (data) => {
         this.cy
-          .get(input, { timeout: 15000 })
+          .get(input, { timeout: 30000 })
           .should('be.visible')
           .type(data[property])
           .get(input)
@@ -100,7 +103,7 @@ export default class Checkout {
     R.ifElse(
       R.propSatisfies((x) => (x !== undefined), property), (data) => {
         this.cy
-          .get(input, { timeout: 15000 })
+          .get(input, { timeout: 30000 })
           .should('be.visible')
           .select(data[property])
           .get(input)
@@ -116,7 +119,7 @@ export default class Checkout {
 
   [clickElement] (element) {
     this.cy
-      .get(element, { timeout: 15000 })
+      .get(element, { timeout: 30000 })
       .should('be.visible')
       .click();
   }
@@ -165,6 +168,29 @@ export default class Checkout {
 
   [fillCreditCardName] (country, data) {
     this[fillInput](data, 'name', `#ebanx_cc_${country}_cc_name`);
+  }
+
+  placeWithTef(data, next) {
+    validateSchema(CHECKOUT_SCHEMA.br.tef(), data, () => {
+      this[fillBilling](data);
+      this[chooseShipping](data.shippingMethod);
+      this[clickElement]('#p_method_ebanx_tef');
+      this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_tef');
+      this[clickElement](`#ebanx_tef_${data.paymentType}`);
+
+      this[placeOrder]();
+
+      waitUrlHas(`${pay.api.url}/directtefredirect`);
+
+      this.cy
+        .get('#mestre > div > div > div > a:nth-child(1)', { timeout: 30000 })
+        .should('be.visible')
+        .click();
+
+      waitUrlHas(`${Cypress.env('DEMO_URL')}/checkout/onepage/success`);
+
+      next();
+    });
   }
 
   placeWithCreditCard(data, next) {

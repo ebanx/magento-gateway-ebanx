@@ -101,5 +101,29 @@ describe('Shopping', () => {
         });
       });
     });
+
+    context('Tef', () => {
+      it('can buy `wonder womans purse` using tef (Itaú) to personal', () => {
+        const checkoutData = mock(
+          {
+            paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.tef.id,
+            paymentType: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.tef.types.itau.id,
+          }
+        );
+
+        magento.buyBlueHorizonsBraceletsWithTefToPersonal(checkoutData, (resp) => {
+          api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
+            const checkoutPayment = Api.paymentData({
+              amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
+              payment_type_code: 'itau',
+              instalments: '1',
+              status: 'CO',
+            });
+
+            wrapOrderAssertations(payment, checkoutPayment, brPayCustomerData(checkoutData));
+          });
+        });
+      });
+    });
   });
 });
