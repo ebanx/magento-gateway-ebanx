@@ -60,6 +60,13 @@ export default class Magento {
       .setupEbanxPlugin();
   }
 
+  buyBlueHorizonsBraceletsByOneClick(cvv) {
+    this.pages.blueHorizonsBracelets
+      .buyByOneClick(cvv);
+
+    return this;
+  }
+
   buyBlueHorizonsBraceletsWithTefToPersonal(data, next) {
     this[buyBlueHorizonsBracelets]();
 
