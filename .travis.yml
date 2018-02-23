@@ -30,7 +30,7 @@ env:
     - TEST_COUNTRY=colombia
     - TEST_COUNTRY=ecuador
     - TEST_COUNTRY=mexico
-    # - TEST_COUNTRY=peru
+    - TEST_COUNTRY=peru
 
 script:
   - bash ./tests/bin/test.sh

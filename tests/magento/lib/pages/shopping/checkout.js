@@ -338,9 +338,17 @@ export default class Checkout {
   }
 
   placeWithSafetyPay(data, next) {
-    validateSchema(CHECKOUT_SCHEMA[data.countryId.toLowerCase()].safetyPay(), data, () => {
+    const elm = {
+      ec: '#p_method_ebanx_safetypay_ec',
+      pe: '#p_method_ebanx_safetypay',
+    };
+
+    const lowerCountry = data.countryId.toLowerCase();
+
+    validateSchema(CHECKOUT_SCHEMA[lowerCountry].safetyPay(), data, () => {
       this[fillBilling](data);
-      this[clickElement]('#p_method_ebanx_safetypay_ec');
+      this[clickElement](elm[lowerCountry]);
+      this[fillInput](data, 'document', '#ebanx-document-ebanx_safetypay');
       this[clickElement](`#ebanx_safetypay_type_${data.paymentType.toLowerCase()}`);
       this[placeOrder]();
 
@@ -358,6 +366,18 @@ export default class Checkout {
     validateSchema(CHECKOUT_SCHEMA.co.baloto(), data, () => {
       this[fillBilling](data);
       this[clickElement]('#p_method_ebanx_baloto');
+
+      this[placeOrder]();
+
+      next();
+    });
+  }
+
+  placeWithPagoEfectivo(data, next) {
+    validateSchema(CHECKOUT_SCHEMA.pe.pagoEfectivo(), data, () => {
+      this[fillBilling](data);
+      this[clickElement]('#p_method_ebanx_pagoefectivo');
+      this[fillInput](data, 'document', '#ebanx-document-ebanx_pagoefectivo');
 
       this[placeOrder]();
 

@@ -117,6 +117,20 @@ export default class ThankYou {
     });
   }
 
+  stillOnPagoEfectivo(next) {
+    this[stillOn]();
+
+    this.cy
+      .get('#ebanx-pagoefectivo-frame')
+      .then(($pagoEfectivoIframe) => {
+        expect($pagoEfectivoIframe.contents().find('.cip-code').length).to.equal(1);
+      });
+
+    this[extractHash]((hash) => {
+      tryNext(next, { hash });
+    });
+  }
+
   stillOnSafetyPay(next) {
     this[stillOnAndExtractHashFromUrl](next);
   }

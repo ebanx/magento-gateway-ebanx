@@ -1,9 +1,8 @@
-/* global Cypress, it, describe, before, context, cy */
+/* global it, describe, before, context, cy */
 
 import R from 'ramda';
 import Faker from 'faker';
 import defaults from '../../../defaults';
-import { assertUrlStatus } from '../../../utils';
 import Magento from '../../lib/operator';
 
 Faker.locale = 'es';
@@ -29,15 +28,15 @@ let magento;
 
 describe('Magento', () => {
   before(() => {
-    assertUrlStatus(Cypress.env('DEMO_URL'));
-
     magento = new Magento(cy);
+
+    magento.setupPlugin();
   });
 
   context('Peru', () => {
     context('PagoEfectivo', () => {
       it('can buy `blue horizons bracelets` using PagoEfectivo to personal', () => {
-        magento.buyWonderWomansPurseWithPagoEfectivoToPersonal(mock(
+        magento.buyBlueHorizonsBraceletsWithPagoEfectivoToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.pe.pagoEfectivo.id,
           }
@@ -47,7 +46,7 @@ describe('Magento', () => {
 
     context('SafetyPay', () => {
       it('can buy `blue horizons bracelets` using SafetyPay(CASH) to personal', () => {
-        magento.buyWonderWomansPurseWithSafetyPayToPersonal(mock(
+        magento.buyBlueHorizonsBraceletsWithSafetyPayToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.pe.safetyPay.id,
             paymentType: defaults.pay.api.DEFAULT_VALUES.paymentMethods.pe.safetyPay.types.cash,
@@ -56,7 +55,7 @@ describe('Magento', () => {
       });
 
       it('can buy `blue horizons bracelets` using SafetyPay(ONLINE) to personal', () => {
-        magento.buyWonderWomansPurseWithSafetyPayToPersonal(mock(
+        magento.buyBlueHorizonsBraceletsWithSafetyPayToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.pe.safetyPay.id,
             paymentType: defaults.pay.api.DEFAULT_VALUES.paymentMethods.pe.safetyPay.types.online,
