@@ -35,7 +35,7 @@ describe('Magento', () => {
 
   context('Mexico', () => {
     context('Oxxo', () => {
-      it('can buy `wonder womans purse` using oxxo to personal', () => {
+      it('can buy `blue horizons bracelets` using oxxo to personal', () => {
         magento.buyWonderWomansPurseWithOxxoToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.mx.oxxo.id,
@@ -45,7 +45,7 @@ describe('Magento', () => {
     });
 
     context('Debit Card', () => {
-      it('can buy `wonder womans purse`, using debit card', () => {
+      it('can buy `blue horizons bracelets`, using debit card', () => {
         const mockData = {
           paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.mx.debitcard.id,
           card: {
@@ -63,7 +63,7 @@ describe('Magento', () => {
     });
 
     context('Credit Card', () => {
-      it('can buy `wonder womans purse`, using credit card and create account without one-click', () => {
+      it('can buy `blue horizons bracelets`, using credit card and create account without one-click', () => {
         const mockData = {
           paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.mx.creditcard.id,
           card: {
@@ -81,7 +81,7 @@ describe('Magento', () => {
     });
 
     context('Spei', () => {
-      it('can buy `wonder womans purse`, using Spei to personal', () => {
+      it('can buy `blue horizons bracelets`, using Spei to personal', () => {
         const mockData = {
           paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.mx.spei.id,
         };

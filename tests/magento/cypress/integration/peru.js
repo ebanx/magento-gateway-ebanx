@@ -36,7 +36,7 @@ describe('Magento', () => {
 
   context('Peru', () => {
     context('PagoEfectivo', () => {
-      it('can buy `wonder womans purse` using PagoEfectivo to personal', () => {
+      it('can buy `blue horizons bracelets` using PagoEfectivo to personal', () => {
         magento.buyWonderWomansPurseWithPagoEfectivoToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.pe.pagoEfectivo.id,
@@ -46,7 +46,7 @@ describe('Magento', () => {
     });
 
     context('SafetyPay', () => {
-      it('can buy `wonder womans purse` using SafetyPay(CASH) to personal', () => {
+      it('can buy `blue horizons bracelets` using SafetyPay(CASH) to personal', () => {
         magento.buyWonderWomansPurseWithSafetyPayToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.pe.safetyPay.id,
@@ -55,7 +55,7 @@ describe('Magento', () => {
         ));
       });
 
-      it('can buy `wonder womans purse` using SafetyPay(ONLINE) to personal', () => {
+      it('can buy `blue horizons bracelets` using SafetyPay(ONLINE) to personal', () => {
         magento.buyWonderWomansPurseWithSafetyPayToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.pe.safetyPay.id,

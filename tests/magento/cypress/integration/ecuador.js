@@ -35,7 +35,7 @@ describe('Magento', () => {
 
   context('Ecuador', () => {
     context('SafetyPay', () => {
-      it('can buy `wonder womans purse` using SafetyPay(CASH) to personal', () => {
+      it('can buy `blue horizons bracelets` using SafetyPay(CASH) to personal', () => {
         magento.buyWonderWomansPurseWithSafetyPayToPersonal(mock(
           {
             paymentType: defaults.pay.api.DEFAULT_VALUES.paymentMethods.ec.safetyPay.types.cash,
@@ -43,7 +43,7 @@ describe('Magento', () => {
         ));
       });
 
-      it('can buy `wonder womans purse` using SafetyPay(ONLINE) to personal', () => {
+      it('can buy `blue horizons bracelets` using SafetyPay(ONLINE) to personal', () => {
         magento.buyWonderWomansPurseWithSafetyPayToPersonal(mock(
           {
             paymentType: defaults.pay.api.DEFAULT_VALUES.paymentMethods.ec.safetyPay.types.online,
