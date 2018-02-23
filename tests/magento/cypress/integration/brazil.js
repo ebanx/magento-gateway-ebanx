@@ -48,7 +48,7 @@ describe('Shopping', () => {
 
   context('Brazil', () => {
     context('Boleto', () => {
-      it('can buy `wonder womans purse` using boleto to personal', () => {
+      it('can buy `blue horizons bracelets` using boleto to personal', () => {
         const checkoutData = mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.boleto.id,
@@ -72,7 +72,7 @@ describe('Shopping', () => {
     });
 
     context('Credit Card', () => {
-      it('can buy `wonder womans purse`, create account and can one-click', () => {
+      it('can buy `blue horizons bracelets`, create account and can one-click', () => {
         const checkoutData = mock({
           paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.creditcard.id,
           card: {
@@ -103,7 +103,7 @@ describe('Shopping', () => {
     });
 
     context('Tef', () => {
-      it('can buy `wonder womans purse` using tef (Itaú) to personal', () => {
+      it('can buy `blue horizons bracelets` using tef (Itaú) to personal', () => {
         const checkoutData = mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.tef.id,

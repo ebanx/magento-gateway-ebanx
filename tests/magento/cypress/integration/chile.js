@@ -34,7 +34,7 @@ describe('Shopping', () => {
 
   context('Chile', () => {
     context('Sencillito', () => {
-      it('can buy `wonder womans purse` using Sencillito to personal', () => {
+      it('can buy `blue horizons bracelets` using Sencillito to personal', () => {
         magento.buyBlueHorizonsBraceletsWithSencillitoToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.cl.sencillito.id,
@@ -44,7 +44,7 @@ describe('Shopping', () => {
     });
 
     context('Servipag', () => {
-      it('can buy `wonder womans purse` using Servipag to personal', () => {
+      it('can buy `blue horizons bracelets` using Servipag to personal', () => {
         magento.buyBlueHorizonsBraceletsWithServipagToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.cl.servipag.id,
@@ -54,7 +54,7 @@ describe('Shopping', () => {
     });
 
     context('Webpay', () => {
-      it('can buy `wonder womans purse` using Webpay to personal', () => {
+      it('can buy `blue horizons bracelets` using Webpay to personal', () => {
         magento.buyBlueHorizonsBraceletsWithWebpayToPersonal(mock(
           {
             document: Faker.random.uuid(),
@@ -65,7 +65,7 @@ describe('Shopping', () => {
     });
 
     context('Multicaja', () => {
-      it('can buy `wonder womans purse` using Multicaja to personal', () => {
+      it('can buy `blue horizons bracelets` using Multicaja to personal', () => {
         magento.buyBlueHorizonsBraceletsWithMulticajaToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.cl.multicaja.id,
