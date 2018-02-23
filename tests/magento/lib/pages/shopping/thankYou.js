@@ -75,8 +75,26 @@ export default class ThankYou {
     });
   }
 
+  stillOnBaloto(next) {
+    this[stillOn]();
+
+    this.cy
+      .get('#ebanx-baloto-frame')
+      .then(($balotoIframe) => {
+        expect($balotoIframe.contents().find('.baloto-details__item .affiliation_code').length).to.equal(1);
+      });
+
+    this[extractHash]((hash) => {
+      tryNext(next, { hash });
+    });
+  }
+
   stillOnCreditCard(next) {
     this[stillOnAndExtractHash](next);
+  }
+
+  stillOnPse(next) {
+    this[stillOnAndExtractHashFromUrl](next);
   }
 
   stillOnWebpay(next) {

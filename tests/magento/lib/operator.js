@@ -157,4 +157,26 @@ export default class Magento {
         });
     });
   }
+
+  buyBlueHorizonsBraceletsWithPseToPersonal(data, next) {
+    this[buyBlueHorizonsBracelets]();
+
+    this.pages.checkout.placeWithPse(data, () => {
+      this.pages.thankYou
+        .stillOnPse((resp) => {
+          tryNext(next, resp);
+        });
+    });
+  }
+
+  buyBlueHorizonsBraceletsWithBalotoToPersonal(data, next) {
+    this[buyBlueHorizonsBracelets]();
+
+    this.pages.checkout.placeWithBaloto(data, () => {
+      this.pages.thankYou
+        .stillOnBaloto((resp) => {
+          tryNext(next, resp);
+        });
+    });
+  }
 }

@@ -27,9 +27,9 @@ env:
     - TEST_COUNTRY=argentina
     - TEST_COUNTRY=brazil
     - TEST_COUNTRY=chile
+    - TEST_COUNTRY=colombia
     # - TEST_COUNTRY=ecuador
     # - TEST_COUNTRY=mexico
-    # - TEST_COUNTRY=colombia
     # - TEST_COUNTRY=peru
 
 script:

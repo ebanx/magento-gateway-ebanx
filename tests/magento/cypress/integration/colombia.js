@@ -1,9 +1,8 @@
-/* global Cypress, it, describe, before, context, cy */
+/* global it, describe, before, context, cy */
 
 import R from 'ramda';
 import Faker from 'faker';
 import defaults from '../../../defaults';
-import { assertUrlStatus } from '../../../utils';
 import Magento from '../../lib/operator';
 
 Faker.locale = 'es';
@@ -26,28 +25,29 @@ const mock = (data) => (R.merge(
 
 let magento;
 
-describe('Magento', () => {
+describe('Shopping', () => {
   before(() => {
-    assertUrlStatus(Cypress.env('DEMO_URL'));
-
     magento = new Magento(cy);
+
+    magento.setupPlugin();
   });
 
   context('Colombia', () => {
     context('Pse', () => {
-      it('can buy `wonder womans purse` using Pse to personal', () => {
-        magento.buyWonderWomansPurseWithPseToPersonal(mock(
+      it('can buy `blue horizons bracelets` using Pse to personal', () => {
+        magento.buyBlueHorizonsBraceletsWithPseToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.co.pse.id,
-            paymentType: defaults.pay.api.DEFAULT_VALUES.paymentMethods.co.pse.types.agrario.id,
+            paymentType: defaults.pay.api.DEFAULT_VALUES.paymentMethods.co.pse.types.agrario.name,
+            paymentTypeId: defaults.pay.api.DEFAULT_VALUES.paymentMethods.co.pse.types.agrario.id,
           }
         ));
       });
     });
 
     context('Baloto', () => {
-      it('can buy `wonder womans purse` using Baloto to personal', () => {
-        magento.buyWonderWomansPurseWithBalotoToPersonal(mock(
+      it('can buy `blue horizons bracelets` using Baloto to personal', () => {
+        magento.buyBlueHorizonsBraceletsWithBalotoToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.co.baloto.id,
           }
@@ -56,7 +56,7 @@ describe('Magento', () => {
     });
 
     context('Credit Card', () => {
-      it('can buy `wonder womans purse`, using credit card', () => {
+      it('can buy `blue horizons bracelets`, using credit card', () => {
         const mockData = {
           paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.co.creditcard.id,
           document: Faker.random.uuid(),
@@ -70,7 +70,7 @@ describe('Magento', () => {
         };
 
         magento
-          .buyWonderWomansPurseWithCreditCardToPersonal(mock(mockData));
+          .buyBlueHorizonsBraceletsWithCreditCardToPersonal(mock(mockData));
       });
     });
   });
