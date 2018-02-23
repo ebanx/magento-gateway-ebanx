@@ -147,6 +147,17 @@ export default class Magento {
     });
   }
 
+  buyBlueHorizonsBraceletsWithSafetyPayToPersonal(data, next) {
+    this[buyBlueHorizonsBracelets]();
+
+    this.pages.checkout.placeWithSafetyPay(data, () => {
+      this.pages.thankYou
+        .stillOnSafetyPay((resp) => {
+          tryNext(next, resp);
+        });
+    });
+  }
+
   buyBlueHorizonsBraceletsWithMulticajaToPersonal(data, next) {
     this[buyBlueHorizonsBracelets]();
 

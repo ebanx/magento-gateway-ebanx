@@ -89,6 +89,10 @@ export default class ThankYou {
     });
   }
 
+  stillOnSafetyPay(next) {
+    this[stillOnAndExtractHashFromUrl](next);
+  }
+
   stillOnCreditCard(next) {
     this[stillOnAndExtractHash](next);
   }

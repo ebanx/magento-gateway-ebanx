@@ -1,9 +1,8 @@
-/* global Cypress, it, describe, before, context, cy */
+/* global it, describe, before, context, cy */
 
 import R from 'ramda';
 import Faker from 'faker';
 import defaults from '../../../defaults';
-import { assertUrlStatus } from '../../../utils';
 import Magento from '../../lib/operator';
 
 Faker.locale = 'es';
@@ -26,17 +25,17 @@ const mock = (data) => (R.merge(
 
 let magento;
 
-describe('Magento', () => {
+describe('Shopping', () => {
   before(() => {
-    assertUrlStatus(Cypress.env('DEMO_URL'));
-
     magento = new Magento(cy);
+
+    magento.setupPlugin();
   });
 
   context('Ecuador', () => {
     context('SafetyPay', () => {
       it('can buy `blue horizons bracelets` using SafetyPay(CASH) to personal', () => {
-        magento.buyWonderWomansPurseWithSafetyPayToPersonal(mock(
+        magento.buyBlueHorizonsBraceletsWithSafetyPayToPersonal(mock(
           {
             paymentType: defaults.pay.api.DEFAULT_VALUES.paymentMethods.ec.safetyPay.types.cash,
           }
@@ -44,7 +43,7 @@ describe('Magento', () => {
       });
 
       it('can buy `blue horizons bracelets` using SafetyPay(ONLINE) to personal', () => {
-        magento.buyWonderWomansPurseWithSafetyPayToPersonal(mock(
+        magento.buyBlueHorizonsBraceletsWithSafetyPayToPersonal(mock(
           {
             paymentType: defaults.pay.api.DEFAULT_VALUES.paymentMethods.ec.safetyPay.types.online,
           }

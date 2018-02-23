@@ -310,6 +310,23 @@ export default class Checkout {
     });
   }
 
+  placeWithSafetyPay(data, next) {
+    validateSchema(CHECKOUT_SCHEMA[data.countryId.toLowerCase()].safetyPay(), data, () => {
+      this[fillBilling](data);
+      this[clickElement]('#p_method_ebanx_safetypay_ec');
+      this[clickElement](`#ebanx_safetypay_type_${data.paymentType.toLowerCase()}`);
+      this[placeOrder]();
+
+      waitUrlHas(`${pay.api.url}/simulator/confirm`);
+
+      this.cy
+        .get(`.safetypay-${data.paymentType.toLowerCase()}`, { timeout: 15000 })
+        .should('be.visible');
+
+      this[confirmSimulator](next);
+    });
+  }
+
   placeWithBaloto(data, next) {
     validateSchema(CHECKOUT_SCHEMA.co.baloto(), data, () => {
       this[fillBilling](data);
