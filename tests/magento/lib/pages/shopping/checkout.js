@@ -25,6 +25,7 @@ const selectCountry = Symbol('selectCountry');
 const fillFirstName = Symbol('fillFirstName');
 const fillCompliance = Symbol('fillCompliance');
 const chooseShipping = Symbol('chooseShipping');
+const confirmSimulator = Symbol('confirmSimulator');
 const fillInputWithJquery = Symbol('fillInputWithJquery');
 
 const fillCreditCardCvv = Symbol('fillCreditCardCvv');
@@ -151,6 +152,7 @@ export default class Checkout {
     this[fillPhone](data);
 
     this[clickElement]('#billing-buttons-container > button');
+    this[chooseShipping](data.shippingMethod);
   }
 
   [fillBilling] (data) {
@@ -193,10 +195,20 @@ export default class Checkout {
     this[fillInput](data, 'name', `#ebanx_cc_${country}_cc_name`);
   }
 
+  [confirmSimulator] (next) {
+    this.cy
+      .get('#mestre > div > div > div > a:nth-child(1)', { timeout: 30000 })
+      .should('be.visible')
+      .click();
+
+    waitUrlHas(`${Cypress.env('DEMO_URL')}/checkout/onepage/success`);
+
+    next();
+  }
+
   placeWithTef(data, next) {
     validateSchema(CHECKOUT_SCHEMA.br.tef(), data, () => {
       this[fillBilling](data);
-      this[chooseShipping](data.shippingMethod);
       this[clickElement]('#p_method_ebanx_tef');
       this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_tef');
       this[clickElement](`#ebanx_tef_${data.paymentType}`);
@@ -205,23 +217,85 @@ export default class Checkout {
 
       waitUrlHas(`${pay.api.url}/directtefredirect`);
 
+      this[confirmSimulator](next);
+    });
+  }
+
+  placeWithSencillito(data, next) {
+    validateSchema(CHECKOUT_SCHEMA.cl.sencillito(), data, () => {
+      this[fillBilling](data);
+      this[clickElement]('#p_method_ebanx_sencillito');
+
+      this[placeOrder]();
+
+      waitUrlHas(`${pay.api.url}/simulator/confirm`);
+
       this.cy
-        .get('#mestre > div > div > div > a:nth-child(1)', { timeout: 30000 })
-        .should('be.visible')
-        .click();
+        .get('.via.sencillito img.logoPT', { timeout: 15000 })
+        .should('be.visible');
 
-      waitUrlHas(`${Cypress.env('DEMO_URL')}/checkout/onepage/success`);
+      this[confirmSimulator](next);
+    });
+  }
 
-      next();
+  placeWithServipag(data, next) {
+    validateSchema(CHECKOUT_SCHEMA.cl.servipag(), data, () => {
+      this[fillBilling](data);
+      this[clickElement]('#p_method_ebanx_servipag');
+
+      this[placeOrder]();
+
+      waitUrlHas(`${pay.api.url}/simulator/confirm`);
+
+      this.cy
+        .get('.via.servipag img.logoPT', { timeout: 15000 })
+        .should('be.visible');
+
+      this[confirmSimulator](next);
+    });
+  }
+
+  placeWithMulticaja(data, next) {
+    validateSchema(CHECKOUT_SCHEMA.cl.multicaja(), data, () => {
+      this[fillBilling](data);
+      this[clickElement]('#p_method_ebanx_multicaja');
+
+      this[placeOrder]();
+
+      waitUrlHas(`${pay.api.url}/simulator/confirm`);
+
+      this.cy
+        .get('.via.multicaja img.logoPT', { timeout: 15000 })
+        .should('be.visible');
+
+      this[confirmSimulator](next);
+    });
+  }
+
+  placeWithWebpay(data, next) {
+    validateSchema(CHECKOUT_SCHEMA.cl.webpay(), data, () => {
+      this[fillBilling](data);
+      this[clickElement]('#p_method_ebanx_webpay');
+
+      this[fillInput](data, 'document', '#ebanx-document-ebanx_webpay');
+
+      this[placeOrder]();
+
+      waitUrlHas(`${pay.api.url}/simulator/confirm`);
+
+      this.cy
+        .get('.via.webpay img.logoPT', { timeout: 15000 })
+        .should('be.visible');
+
+      this[confirmSimulator](next);
     });
   }
 
   placeWithEfectivo(data, next) {
     validateSchema(CHECKOUT_SCHEMA.ar.efectivo(), data, () => {
       this[fillBilling](data);
-      this[chooseShipping](data.shippingMethod);
       this[clickElement](`#p_method_ebanx_${sanitizeMethod(data.paymentMethod)}`);
-      this[fillInputWithJquery](data, 'document', `#ebanx-document-ebanx_${sanitizeMethod(data.paymentMethod)}`);
+      this[fillInput](data, 'document', `#ebanx-document-ebanx_${sanitizeMethod(data.paymentMethod)}`);
 
       this[placeOrder]();
 
@@ -234,7 +308,6 @@ export default class Checkout {
 
     validateSchema(CHECKOUT_SCHEMA[lowerCountry].creditcard(), data, () => {
       this[fillBilling](data);
-      this[chooseShipping](data.shippingMethod);
       this[clickElement](`#p_method_ebanx_cc_${lowerCountry}`);
 
       this[fillInputWithJquery](data, 'document', `#ebanx-document-ebanx_cc_${lowerCountry}`);
@@ -264,7 +337,6 @@ export default class Checkout {
   placeWithBoleto(data, next) {
     validateSchema(CHECKOUT_SCHEMA.br.boleto(), data, () => {
       this[fillBilling](data);
-      this[chooseShipping](data.shippingMethod);
       this[clickElement]('#p_method_ebanx_boleto');
       this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_boleto');
       this[placeOrder]();
