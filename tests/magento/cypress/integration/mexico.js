@@ -1,9 +1,8 @@
-/* global Cypress, it, describe, before, context, cy */
+/* global it, describe, before, context, cy */
 
 import R from 'ramda';
 import Faker from 'faker';
 import defaults from '../../../defaults';
-import { assertUrlStatus } from '../../../utils';
 import Magento from '../../lib/operator';
 
 Faker.locale = 'es_MX';
@@ -26,17 +25,17 @@ const mock = (data) => (R.merge(
 
 let magento;
 
-describe('Magento', () => {
+describe('Shopping', () => {
   before(() => {
-    assertUrlStatus(Cypress.env('DEMO_URL'));
-
     magento = new Magento(cy);
+
+    magento.setupPlugin();
   });
 
   context('Mexico', () => {
     context('Oxxo', () => {
       it('can buy `blue horizons bracelets` using oxxo to personal', () => {
-        magento.buyWonderWomansPurseWithOxxoToPersonal(mock(
+        magento.buyBlueHorizonsBraceletsWithOxxoToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.mx.oxxo.id,
           }
@@ -58,12 +57,12 @@ describe('Magento', () => {
         };
 
         magento
-          .buyWonderWomansPurseWithDebitCardToPersonal(mock(mockData));
+          .buyBlueHorizonsBraceletsWithDebitCardToPersonal(mock(mockData));
       });
     });
 
     context('Credit Card', () => {
-      it('can buy `blue horizons bracelets`, using credit card and create account without one-click', () => {
+      it('can buy `blue horizons bracelets`, using credit card', () => {
         const mockData = {
           paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.mx.creditcard.id,
           card: {
@@ -76,7 +75,7 @@ describe('Magento', () => {
         };
 
         magento
-          .buyWonderWomansPurseWithCreditCardToPersonal(mock(mockData));
+          .buyBlueHorizonsBraceletsWithCreditCardToPersonal(mock(mockData));
       });
     });
 
@@ -87,7 +86,7 @@ describe('Magento', () => {
         };
 
         magento
-          .buyWonderWomansPurseWithSpeiToPersonal(mock(mockData));
+          .buyBlueHorizonsBraceletsWithSpeiToPersonal(mock(mockData));
       });
     });
   });

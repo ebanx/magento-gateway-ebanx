@@ -34,10 +34,17 @@ const fillCreditCardNumber = Symbol('fillCreditCardNumber');
 const fillCreditCardExpiryYear = Symbol('fillCreditCardExpiryYear');
 const fillCreditCardExpiryMonth = Symbol('fillCreditCardExpiryMonth');
 
+const fillDebitCardCvv = Symbol('fillDebitCardCvv');
+const fillDebitCardName = Symbol('fillDebitCardName');
+const fillDebitCardNumber = Symbol('fillDebitCardNumber');
+const fillDebitCardExpiryYear = Symbol('fillDebitCardExpiryYear');
+const fillDebitCardExpiryMonth = Symbol('fillDebitCardExpiryMonth');
+
 export default class Checkout {
   constructor(cy) {
     this.cy = cy;
     this.inputs = {
+      debitCardCvv: (country) => `#ebanx_dc_${country}_dc_cid`,
       creditCardCvv: (country) => `#ebanx_cc_${country}_cc_cid`,
       creditCardNumber: (country) => `#ebanx_cc_${country}_cc_number`,
     };
@@ -193,6 +200,26 @@ export default class Checkout {
 
   [fillCreditCardName] (country, data) {
     this[fillInput](data, 'name', `#ebanx_cc_${country}_cc_name`);
+  }
+
+  [fillDebitCardName] (country, data) {
+    this[fillInput](data, 'name', `#ebanx_dc_${country}_dc_name`);
+  }
+
+  [fillDebitCardNumber] (country, data) {
+    this[fillInput](data, 'number', `#ebanx_dc_${country}_dc_number`);
+  }
+
+  [fillDebitCardExpiryMonth] (country, data) {
+    this[selectField](data, 'expiryMonth', 'expiryMonth', `#ebanx_dc_${country}_expiration`);
+  }
+
+  [fillDebitCardExpiryYear] (country, data) {
+    this[selectField](data, 'expiryYear', 'expiryYear', `#ebanx_dc_${country}_expiration_yr`);
+  }
+
+  [fillDebitCardCvv] (country, data) {
+    this[fillInput](data, 'cvv', this.inputs.debitCardCvv(country));
   }
 
   [confirmSimulator] (next) {
@@ -381,11 +408,53 @@ export default class Checkout {
     });
   }
 
+  placeWithDebitCard(data, next) {
+    const lowerCountry = data.countryId.toLowerCase();
+
+    validateSchema(CHECKOUT_SCHEMA[lowerCountry].debitcard(), data, () => {
+      this[fillBilling](data);
+      this[clickElement](`#p_method_ebanx_dc_${lowerCountry}`);
+
+      this[fillDebitCardName](lowerCountry, data.card);
+      this[fillDebitCardNumber](lowerCountry, data.card);
+      this[fillDebitCardExpiryMonth](lowerCountry, data.card);
+      this[fillDebitCardExpiryYear](lowerCountry, data.card);
+      this[fillDebitCardCvv](lowerCountry, data.card);
+
+      this.cy.get(this.inputs.debitCardCvv(lowerCountry)).focus().blur();
+      this.cy.wait(10000);
+
+      this[placeOrder]();
+
+      next();
+    });
+  }
+
+  placeWithSpei(data, next) {
+    validateSchema(CHECKOUT_SCHEMA.mx.spei(), data, () => {
+      this[fillBilling](data);
+      this[clickElement]('#p_method_ebanx_spei');
+      this[placeOrder]();
+
+      next();
+    });
+  }
+
   placeWithBoleto(data, next) {
     validateSchema(CHECKOUT_SCHEMA.br.boleto(), data, () => {
       this[fillBilling](data);
       this[clickElement]('#p_method_ebanx_boleto');
       this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_boleto');
+      this[placeOrder]();
+
+      next();
+    });
+  }
+
+  placeWithOxxo(data, next) {
+    validateSchema(CHECKOUT_SCHEMA.mx.oxxo(), data, () => {
+      this[fillBilling](data);
+      this[clickElement]('#p_method_ebanx_oxxo');
       this[placeOrder]();
 
       next();
