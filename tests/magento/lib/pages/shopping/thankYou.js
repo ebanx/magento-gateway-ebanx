@@ -4,6 +4,8 @@ import { sanitizeMethod, tryNext } from '../../../../utils';
 
 const stillOn = Symbol('stillOn');
 const extractHash = Symbol('extractHash');
+const stillOnAndExtractHash = Symbol('stillOnAndExtractHash');
+const stillOnAndExtractHashFromUrl = Symbol('stillOnAndExtractHashFromUrl');
 
 export default class ThankYou {
   constructor(cy) {
@@ -14,6 +16,22 @@ export default class ThankYou {
     this.cy
       .get('body.checkout-onepage-success', { timeout: 30000 })
       .should('be.visible');
+  }
+
+  [stillOnAndExtractHashFromUrl](next) {
+    this[stillOn]();
+
+    this.cy
+      .url()
+      .then(($url) => tryNext(next, {hash: $url.split('hash=')[1] }));
+  }
+
+  [stillOnAndExtractHash](next) {
+    this[stillOn]();
+
+    this[extractHash]((hash) => {
+      tryNext(next, { hash });
+    });
   }
 
   [extractHash](next) {
@@ -58,18 +76,26 @@ export default class ThankYou {
   }
 
   stillOnCreditCard(next) {
-    this[stillOn]();
+    this[stillOnAndExtractHash](next);
+  }
 
-    this[extractHash]((hash) => {
-      tryNext(next, { hash });
-    });
+  stillOnWebpay(next) {
+    this[stillOnAndExtractHashFromUrl](next);
+  }
+
+  stillOnMulticaja(next) {
+    this[stillOnAndExtractHashFromUrl](next);
+  }
+
+  stillOnSencillito(next) {
+    this[stillOnAndExtractHashFromUrl](next);
+  }
+
+  stillOnServipag(next) {
+    this[stillOnAndExtractHashFromUrl](next);
   }
 
   stillOnTef(next) {
-    this[stillOn]();
-
-    this.cy
-      .url()
-      .then(($url) => tryNext(next, {hash: $url.split('hash=')[1] }));
+    this[stillOnAndExtractHashFromUrl](next);
   }
 }

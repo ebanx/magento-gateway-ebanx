@@ -1,9 +1,8 @@
-/* global Cypress, it, describe, before, context, cy */
+/* global it, describe, before, context, cy */
 
 import R from 'ramda';
 import Faker from 'faker';
 import defaults from '../../../defaults';
-import { assertUrlStatus } from '../../../utils';
 import Magento from '../../lib/operator';
 
 Faker.locale = 'es';
@@ -26,17 +25,17 @@ const mock = (data) => (R.merge(
 
 let magento;
 
-describe('Magento', () => {
+describe('Shopping', () => {
   before(() => {
-    assertUrlStatus(Cypress.env('DEMO_URL'));
-
     magento = new Magento(cy);
+
+    magento.setupPlugin();
   });
 
   context('Chile', () => {
     context('Sencillito', () => {
       it('can buy `wonder womans purse` using Sencillito to personal', () => {
-        magento.buyWonderWomansPurseWithSencillitoToPersonal(mock(
+        magento.buyBlueHorizonsBraceletsWithSencillitoToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.cl.sencillito.id,
           }
@@ -44,9 +43,9 @@ describe('Magento', () => {
       });
     });
 
-    context('ServiPag', () => {
-      it('can buy `wonder womans purse` using ServiPag to personal', () => {
-        magento.buyWonderWomansPurseWithServiPagToPersonal(mock(
+    context('Servipag', () => {
+      it('can buy `wonder womans purse` using Servipag to personal', () => {
+        magento.buyBlueHorizonsBraceletsWithServipagToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.cl.servipag.id,
           }
@@ -56,7 +55,7 @@ describe('Magento', () => {
 
     context('Webpay', () => {
       it('can buy `wonder womans purse` using Webpay to personal', () => {
-        magento.buyWonderWomansPurseWithWebpayToPersonal(mock(
+        magento.buyBlueHorizonsBraceletsWithWebpayToPersonal(mock(
           {
             document: Faker.random.uuid(),
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.cl.webpay.id,
@@ -67,7 +66,7 @@ describe('Magento', () => {
 
     context('Multicaja', () => {
       it('can buy `wonder womans purse` using Multicaja to personal', () => {
-        magento.buyWonderWomansPurseWithMulticajaToPersonal(mock(
+        magento.buyBlueHorizonsBraceletsWithMulticajaToPersonal(mock(
           {
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.cl.multicaja.id,
           }

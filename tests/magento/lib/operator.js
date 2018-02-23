@@ -113,4 +113,48 @@ export default class Magento {
         });
     });
   }
+
+  buyBlueHorizonsBraceletsWithSencillitoToPersonal(data, next) {
+    this[buyBlueHorizonsBracelets]();
+
+    this.pages.checkout.placeWithSencillito(data, () => {
+      this.pages.thankYou
+        .stillOnSencillito((resp) => {
+          tryNext(next, resp);
+        });
+    });
+  }
+
+  buyBlueHorizonsBraceletsWithServipagToPersonal(data, next) {
+    this[buyBlueHorizonsBracelets]();
+
+    this.pages.checkout.placeWithServipag(data, () => {
+      this.pages.thankYou
+        .stillOnServipag((resp) => {
+          tryNext(next, resp);
+        });
+    });
+  }
+
+  buyBlueHorizonsBraceletsWithWebpayToPersonal(data, next) {
+    this[buyBlueHorizonsBracelets]();
+
+    this.pages.checkout.placeWithWebpay(data, () => {
+      this.pages.thankYou
+        .stillOnWebpay((resp) => {
+          tryNext(next, resp);
+        });
+    });
+  }
+
+  buyBlueHorizonsBraceletsWithMulticajaToPersonal(data, next) {
+    this[buyBlueHorizonsBracelets]();
+
+    this.pages.checkout.placeWithMulticaja(data, () => {
+      this.pages.thankYou
+        .stillOnMulticaja((resp) => {
+          tryNext(next, resp);
+        });
+    });
+  }
 }
