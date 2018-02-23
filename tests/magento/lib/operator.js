@@ -91,6 +91,18 @@ export default class Magento {
       });
   }
 
+  buyBlueHorizonsBraceletsWithDebitCardToPersonal(data, next) {
+    this[buyBlueHorizonsBracelets]();
+
+    this.pages.checkout
+      .placeWithDebitCard(data, () => {
+        this.pages.thankYou
+          .stillOnDebitCard((resp) => {
+            tryNext(next, resp);
+          });
+      });
+  }
+
   buyBlueHorizonsBraceletsWithCreditCardToPersonal(data, next) {
     this[buyBlueHorizonsBracelets]();
 
@@ -103,12 +115,34 @@ export default class Magento {
       });
   }
 
+  buyBlueHorizonsBraceletsWithOxxoToPersonal(data, next) {
+    this[buyBlueHorizonsBracelets]();
+
+    this.pages.checkout.placeWithOxxo(data, () => {
+      this.pages.thankYou
+        .stillOnOxxo((resp) => {
+          tryNext(next, resp);
+        });
+    });
+  }
+
   buyBlueHorizonsBraceletsWithBoletoToPersonal(data, next) {
     this[buyBlueHorizonsBracelets]();
 
     this.pages.checkout.placeWithBoleto(data, () => {
       this.pages.thankYou
         .stillOnBoleto((resp) => {
+          tryNext(next, resp);
+        });
+    });
+  }
+
+  buyBlueHorizonsBraceletsWithSpeiToPersonal(data, next) {
+    this[buyBlueHorizonsBracelets]();
+
+    this.pages.checkout.placeWithSpei(data, () => {
+      this.pages.thankYou
+        .stillOnSpei((resp) => {
           tryNext(next, resp);
         });
     });

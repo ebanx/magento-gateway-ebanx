@@ -89,11 +89,43 @@ export default class ThankYou {
     });
   }
 
+  stillOnSpei(next) {
+    this[stillOn]();
+
+    this.cy
+      .get('#ebanx-spei-frame')
+      .then(($speiIframe) => {
+        expect($speiIframe.contents().find('table.spei-table.non-responsive .amount').length).to.equal(2);
+      });
+
+    this[extractHash]((hash) => {
+      tryNext(next, { hash });
+    });
+  }
+
+  stillOnOxxo(next) {
+    this[stillOn]();
+
+    this.cy
+      .get('#ebanx-oxxo-frame')
+      .then(($oxxoIframe) => {
+        expect($oxxoIframe.contents().find('div.oxxo-barcode > div.oxxo-barcode-img').length).to.equal(1);
+      });
+
+    this[extractHash]((hash) => {
+      tryNext(next, { hash });
+    });
+  }
+
   stillOnSafetyPay(next) {
     this[stillOnAndExtractHashFromUrl](next);
   }
 
   stillOnCreditCard(next) {
+    this[stillOnAndExtractHash](next);
+  }
+
+  stillOnDebitCard(next) {
     this[stillOnAndExtractHash](next);
   }
 
