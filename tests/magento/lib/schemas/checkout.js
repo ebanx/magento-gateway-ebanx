@@ -110,12 +110,13 @@ export const CHECKOUT_SCHEMA = {
           this.compliance(),
           {
             schema: 'ColombiaPse',
+            paymentTypeId: Joi.string().required(),
             paymentType: Joi.any().allow(
               defaults.pay.api.DEFAULT_VALUES.paymentMethods.co.pse.types
             ).required(),
           }
         )
-      ).without('schema', [...R.keys(this.compliance()), ...['paymentType']]);
+      ).without('schema', [...R.keys(this.compliance()), ...['paymentType', 'paymentTypeId']]);
     },
   },
   mx: {

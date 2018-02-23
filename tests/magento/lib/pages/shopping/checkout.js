@@ -291,6 +291,36 @@ export default class Checkout {
     });
   }
 
+  placeWithPse(data, next) {
+    validateSchema(CHECKOUT_SCHEMA.co.pse(), data, () => {
+      this[fillBilling](data);
+      this[clickElement]('#p_method_ebanx_pse');
+
+      this[selectField](data, 'paymentType', 'paymentTypeId', '#ebanx_pse_bank');
+
+      this[placeOrder]();
+
+      waitUrlHas(`${pay.api.url}/simulator/confirm`);
+
+      this.cy
+        .get('.via.eft', { timeout: 15000 })
+        .should('be.visible');
+
+      this[confirmSimulator](next);
+    });
+  }
+
+  placeWithBaloto(data, next) {
+    validateSchema(CHECKOUT_SCHEMA.co.baloto(), data, () => {
+      this[fillBilling](data);
+      this[clickElement]('#p_method_ebanx_baloto');
+
+      this[placeOrder]();
+
+      next();
+    });
+  }
+
   placeWithEfectivo(data, next) {
     validateSchema(CHECKOUT_SCHEMA.ar.efectivo(), data, () => {
       this[fillBilling](data);
