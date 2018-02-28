@@ -1,7 +1,5 @@
 <?php
 
-use Ebanx\Benjamin\Models\Country;
-
 abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Form_Cc
 {
 	public function getInstalmentTerms()
@@ -59,18 +57,6 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
 		$message = sprintf('%sx de %s %s', $instalmentNumber, $amount, $interestMessage);
 		return $message;
 	}
-
-	public function getSandboxWarningText()
-    {
-        $countryCode = Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getCountry();
-        $country = Mage::helper('ebanx')->transformCountryCodeToName($countryCode);
-
-        if($country === Country::BRAZIL){
-            return 'Ainda estamos testando esse tipo de pagamento. Por isso, a sua compra não será cobrada nem enviada.';
-        }
-
-        return 'Todavia estamos probando este método de pago. Por eso su compra no sera cobrada ni enviada.';
-    }
 
 	/**
 	 * @param bool $hasInterests
