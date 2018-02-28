@@ -2,15 +2,19 @@
   max-width: 100%;
   display: inline-block;
   position: relative;
-  background-color: #FCF8BB;
   border: 1px solid #F3E39A;
   border-radius: 2px;
-  font-size: 12px;
   padding: 15px 10px 10px 10px;
+  background-color: #FCF8BB;
 }
 
 .sandbox-alert-icon {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.sandbox-alert-text {
+  margin-left: 42px;
+  font-size: 12px;
 }

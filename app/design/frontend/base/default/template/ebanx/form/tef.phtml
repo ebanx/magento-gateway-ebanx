@@ -7,6 +7,7 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' 
 ?>
 
 <ul class="form-list ebanx-payment-method ebanx-br-method" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+  <?php include 'sandbox-warning.phtml' ?>
   <li class="centinel-logos">
     <label class="ebanx-payment-method-desc">Selecione o seu banco. A seguir, você será redirecionado para concluir o pagamento pelo seu internet banking.</label>
     <?php if(!$showInlineIcon): ?>
