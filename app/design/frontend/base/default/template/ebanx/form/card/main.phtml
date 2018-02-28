@@ -12,6 +12,7 @@
 ?>
 
 <ul class="form-list ebanx-payment-method ebanx-<?= $lowerCountry ?>-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
+  <?php include __DIR__ . '/../sandbox-warning.phtml'; ?>
   <li class="centinel-logos">
     <label class="ebanx-payment-method-desc"><?= $text['method-desc'] ?></label>
       <?php if(!$showInlineIcon): ?>
