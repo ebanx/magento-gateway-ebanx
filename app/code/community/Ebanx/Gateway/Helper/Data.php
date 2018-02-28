@@ -553,4 +553,16 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
 		return $methodsToFields[$methodCode];
 	}
+
+    public function getSandboxWarningText()
+    {
+        $countryCode = Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getCountry();
+        $country = Mage::helper('ebanx')->transformCountryCodeToName($countryCode);
+
+        if($country === Country::BRAZIL){
+            return 'Ainda estamos testando esse tipo de pagamento. Por isso, a sua compra não será cobrada nem enviada.';
+        }
+
+        return 'Todavia estamos probando este método de pago. Por eso su compra no sera cobrada ni enviada.';
+    }
 }

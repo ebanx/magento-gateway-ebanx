@@ -7,6 +7,9 @@
             <action method="addCss">
                 <stylesheet>ebanx/css/checkout.css</stylesheet>
             </action>
+            <action method="addCss">
+                <stylesheet>ebanx/css/sandbox-alert.css</stylesheet>
+            </action>
             <block type="core/text" name="lib_js">
                 <action method="setText">
                     <text>
