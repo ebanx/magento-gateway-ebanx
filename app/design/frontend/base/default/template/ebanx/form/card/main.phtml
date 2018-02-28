@@ -7,12 +7,15 @@
   $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
   $icon           = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-credit-card-' . $lowerCountry . '.png" />';
   $showIof = Mage::getStoreConfig('payment/ebanx_settings/iof_local_amount');
+$isSandbox = Mage::helper('ebanx')->isSandboxMode();
 
   echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' : null;
 ?>
 
 <ul class="form-list ebanx-payment-method ebanx-<?= $lowerCountry ?>-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
-  <?php include __DIR__ . '/../sandbox-warning.phtml'; ?>
+  <?php if($isSandbox): ?>
+    <?php include __DIR__ . '/../sandbox-warning.phtml'; ?>
+  <?php endif; ?>
   <li class="centinel-logos">
     <label class="ebanx-payment-method-desc"><?= $text['method-desc'] ?></label>
       <?php if(!$showInlineIcon): ?>
