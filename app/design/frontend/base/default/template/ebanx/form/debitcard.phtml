@@ -3,16 +3,12 @@ $_code = $this->getMethodCode();
 $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
 $icon = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-debit-card.png" />';
-$isSandbox = Mage::helper('ebanx')->isSandboxMode();
 
 echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' : null;
 ?>
 
 <ul class="form-list ebanx-payment-method ebanx-es-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
-  <?php if($isSandbox): ?>
-    <?php include 'sandbox-warning.phtml' ?>
-  <?php endif; ?>
-
+  <?php include 'sandbox-warning.phtml' ?>
   <li class="centinel-logos">
     <label class="ebanx-payment-method-desc">Pagar con Tarjeta de Débito.</label>
     <?php if(!$showInlineIcon): ?>
