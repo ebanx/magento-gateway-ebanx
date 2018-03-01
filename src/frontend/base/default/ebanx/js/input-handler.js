@@ -1,18 +1,39 @@
 /* global VMasker */
 
+const maskValues = {
+  br: {
+    masks: ['999.999.999-999', '99.999.999/9999-99'],
+    changeOnLenght: 14,
+  },
+  ar: {
+    masks: ['SS-SSSSSSSS-S'],
+    changeOnLenght: 0,
+  },
+  co: {
+    masks: ['999999999999999999'],
+    changeOnLenght: 0,
+  },
+  cl: {
+    masks: ['99.999.999-S'],
+    changeOnLenght: 0,
+  },
+};
+
 const handler = (masks, max, element) => {
-  const value = element.value.replace(/\D/g, '');
-  const toggleMask = element.value.length > max ? 1 : 0;
+  let toggleMask = 0;
+  if(max !== 0){
+    toggleMask = element.value.length > max ? 1 : 0;
+  }
   VMasker(element).unMask();
   VMasker(element).maskPattern(masks[toggleMask]);
-  element.value = VMasker.toPattern(value, masks[toggleMask]);
+  element.value = VMasker.toPattern(element.value, masks[toggleMask]);
 };
 
 const inputHandler = (inputDoc, country) => { // eslint-disable-line no-unused-vars
-  if (country.toLowerCase() === 'br' && inputDoc) {
-    const docMask = ['999.999.999-999', '99.999.999/9999-99'];
-    VMasker(inputDoc).maskPattern(docMask[0]);
-    inputDoc.addEventListener('input', (e) => { handler(docMask, 14, e.target); }, false);
+  if (maskValues[country.toLowerCase()] && inputDoc) {
+    const docMaskValues = maskValues[country.toLowerCase()];
+    VMasker(inputDoc).maskPattern(docMaskValues.masks[0]);
+    inputDoc.addEventListener('input', (e) => { handler(docMaskValues.masks, docMaskValues.changeOnLenght, e.target); }, false);
   }
 };
 
