@@ -4,9 +4,7 @@ $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
 $icon = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-baloto.png" />';
 $warningTexts = Mage::helper('ebanx')->getSandboxWarningText();
 $isSandbox = Mage::helper('ebanx')->isSandboxMode();
-$sandboxTag = $isSandbox
-  ? '<div class="sandbox-form-tag">' . $warningTexts['tag'] . '</div>'
-  : '';
+$sandboxTag = $isSandbox ? '<div class="sandbox-form-tag">' . $warningTexts['tag'] . '</div>' : '';
 
 echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxTag . '</div>' : null;
 ?>

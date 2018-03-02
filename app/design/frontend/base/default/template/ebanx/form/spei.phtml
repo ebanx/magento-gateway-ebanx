@@ -1,8 +1,10 @@
 <?php
 $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
-$icon = '<div><img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-spei.png" /></div>';
-$sandboxTag = '<div class="sandbox-form-tag">' . Mage::helper('ebanx')->getSandboxWarningText()['tag'] . '</div>';
+$icon = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-spei.png" />';
+$warningTexts = Mage::helper('ebanx')->getSandboxWarningText();
+$isSandbox = Mage::helper('ebanx')->isSandboxMode();
+$sandboxTag = $isSandbox ? '<div class="sandbox-form-tag">' . $warningTexts['tag'] . '</div>' : '';
 
 echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxTag . '</div>' : null;
 ?>
