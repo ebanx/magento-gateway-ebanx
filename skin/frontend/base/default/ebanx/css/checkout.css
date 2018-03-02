@@ -72,6 +72,8 @@
 
 .ebanx-method-icon {
   height: 30px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .save-card,
