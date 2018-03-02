@@ -1,7 +1,6 @@
 <?php
 $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
-$sandboxTag = '<div class="sandbox-form-tag">EM TESTE</div>';
 $warningTexts = Mage::helper('ebanx')->getSandboxWarningText();
 $isSandbox = Mage::helper('ebanx')->isSandboxMode();
 $sandboxTag = $isSandbox ? '<div class="sandbox-form-tag">' . $warningTexts['tag'] . '</div>' : '';
