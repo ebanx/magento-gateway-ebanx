@@ -2,8 +2,9 @@
 $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
 $icon = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-servipag.png" />';
+$sandboxTag = '<div class="sandbox-form-tag">' . Mage::helper('ebanx')->getSandboxWarningText()['tag'] . '</div>';
 
-echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . '</div>' : null;
+echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxTag . '</div>' : null;
 ?>
 
 <ul class="form-list ebanx-payment-method ebanx-es-method" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
