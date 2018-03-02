@@ -560,9 +560,15 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         $country = Mage::helper('ebanx')->transformCountryCodeToName($countryCode);
 
         if($country === Country::BRAZIL){
-            return 'Ainda estamos testando esse tipo de pagamento. Por isso, a sua compra não será cobrada nem enviada.';
+            return array(
+                'alert' => 'Ainda estamos testando esse tipo de pagamento. Por isso, a sua compra não será cobrada nem enviada.',
+                'tag' => 'EM TESTE',
+            );
         }
 
-        return 'Todavia estamos probando este método de pago. Por eso su compra no sera cobrada ni enviada.';
+        return array(
+            'alert' => 'Todavia estamos probando este método de pago. Por eso su compra no sera cobrada ni enviada.',
+            'tag' => 'EN PRUEBA',
+        );
     }
 }

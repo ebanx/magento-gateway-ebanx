@@ -18,3 +18,43 @@
   margin-left: 42px;
   font-size: 12px;
 }
+
+.sandbox-form-tag {
+  display: inline-block;
+  background-color: #FCF8BB;
+  border: 2px solid #F3E39A;
+  border-radius: 2px;
+  padding: 0 5px 0 5px;
+  position: relative;
+  color: #8E6007;
+  font-size: 12px;
+  margin-left: 14px;
+}
+
+.sandbox-form-tag:before {
+  content:"";
+  position: absolute;
+  right: 100%;
+  width: 0;
+  height: 0;
+  top: 2px;
+  left: -8px;
+  border-top: 7px solid transparent;
+  border-right: 7px solid #F3E39A;
+  border-bottom: 7px solid transparent;
+}
+
+.sandbox-form-tag:after {
+  content:"";
+  position: absolute;
+  right: 100%;
+  width: 0;
+  height: 0;
+  top: 3px;
+  left: -5px;
+  border-top: 6px solid transparent;
+  border-right: 6px solid #FCF8BB;
+  border-bottom: 6px solid transparent;
+}
+
+
