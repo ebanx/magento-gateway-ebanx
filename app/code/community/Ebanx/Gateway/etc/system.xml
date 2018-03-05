@@ -14,7 +14,7 @@
                         document.getElementById('logo_ebanx').src = SKIN_URL + 'ebanx/images/logo.png';
                     </script>
                     <br/>
-                    <p>EBANX easy-to-setup checkout allows your business to accept local payments in Brazil, Mexico, Colombia, Chile & Peru.</p>
+                    <p>EBANX easy-to-setup checkout allows your business to accept local payments in Brazil, Argentina, Ecuador, Mexico, Colombia, Chile & Peru.</p>
                     <p>You can obtain your API keys in the settings section, on the <a href="https://dashboard.ebanx.com/" target="_blank" title="EBANX Dashboard">EBANX Dashboard</a>.</p>
                     ]]></comment>
                     <fields>
