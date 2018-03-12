@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 2.6.0
+* Feature - Remove documents for Chile (except webpay) [#252](https://github.com/ebanx/magento-gateway-ebanx/pull/252)
+* Feature - Remove document for Baloto and PSE [#253](https://github.com/ebanx/magento-gateway-ebanx/pull/253)
+* Feature - Add document for Peru [#254](https://github.com/ebanx/magento-gateway-ebanx/pull/254)
+* Feature - Add document on Argentina [#250](https://github.com/ebanx/magento-gateway-ebanx/pull/250)
+* Feature - Add sandbox warning on gateways [#268](https://github.com/ebanx/magento-gateway-ebanx/pull/268) and [#270](https://github.com/ebanx/magento-gateway-ebanx/pull/270)
+* Feature - Document masks in all Latam countries [#269](https://github.com/ebanx/magento-gateway-ebanx/pull/269)
+* Feature - Updated error messages [#273](https://github.com/ebanx/magento-gateway-ebanx/pull/273)
+* Fix - Saved credit card validation not working [#246](https://github.com/ebanx/magento-gateway-ebanx/pull/246)
+* Fix - Local amount element not found on credit card gateway [#247](https://github.com/ebanx/magento-gateway-ebanx/pull/247)
+* Fix - Benjamin not sending Latam customers documents [#249](https://github.com/ebanx/magento-gateway-ebanx/pull/249)
+* Fix - Check if there's a document before trying to return it [#257](https://github.com/ebanx/magento-gateway-ebanx/pull/257)
+* Fix - Two clicks needed to buy with credit card [#266](https://github.com/ebanx/magento-gateway-ebanx/pull/266)
+
 ## 2.5.3
 * Fix - Make cash payments due date reflect admin configuration [#242](https://github.com/ebanx/magento-gateway-ebanx/pull/242)
 
