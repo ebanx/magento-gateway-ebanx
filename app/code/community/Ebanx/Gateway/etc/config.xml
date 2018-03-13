@@ -44,7 +44,7 @@
             </ebanx_resource>
         </models>
 
-        <events>11
+        <events>
             <sales_order_invoice_pay>
                 <observers>
                     <ebanx_gateway_model_capture>
