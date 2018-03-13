@@ -300,7 +300,7 @@
                         </max_instalments>
                         <min_instalment_value translate="label">
                             <label>Minimum Instalment (USD)</label>
-                            <comment>Set the minimum instalment value during the ckeckout. The minimum EBANX allows for BRL is 20 and MXN is 100, lower values in these currencies considered will not be considered.</comment>
+                            <comment>Set the minimum instalment value during the ckeckout. The minimumgit  EBANX allows for BRL is 20 and MXN is 100, lower values in these currencies considered will not be considered.</comment>
                             <frontend_type>text</frontend_type>
                             <validate>required-entry validate-number</validate>
                             <sort_order>240</sort_order>
