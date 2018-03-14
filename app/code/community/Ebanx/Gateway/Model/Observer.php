@@ -2,35 +2,70 @@
 
 class Ebanx_Gateway_Model_Observer extends Varien_Event_Observer
 {
+
 	public function observeConfigSection($observer)
 	{
 		$store = Mage::app()->getStore();
-		$user = Mage::getSingleton('admin/session');
 
-		$url = 'https://dashboard.ebanx.com/api/lead';
-		$args = array(
-			'body' => array(
-				'lead' => array(
-					'user_email' => $user->getEmail(),
-					'user_last_name' => $user->getLastname(),
-					'user_first_name' => $user->getFirstname(),
-					'site_email' => Mage::getStoreConfig('trans_email/ident_sales/email'),
-					'site_url' => $store->getHomeUrl(),
-					'site_name' => $store->getFrontendName(),
-					'site_language' => Mage::app()->getLocale()->getLocaleCode(),
-					'magento_version' => Mage::getVersion(),
-				),
-			),
+		$leadModel = new Ebanx_Gateway_Model_Lead();
+
+		$lead = $leadModel->load($store->getWebsiteId(), 'id_store')->getData();
+
+		if (!empty($lead)) {
+			$helperEbanxData = Mage::helper('ebanx/data');
+			$leadData = array(
+				'id' => $lead['id_lead'],
+				'integration_key' => $helperEbanxData->getIntegrationKey(),
+			);
+		} else {
+			$user = Mage::getSingleton('admin/session')->getUser();
+			$leadData = array(
+				'user_email' => $user->getEmail(),
+				'user_last_name' => $user->getLastname(),
+				'user_first_name' => $user->getFirstname(),
+				'site_email' => Mage::getStoreConfig('trans_email/ident_sales/email'),
+				'site_url' => Mage::getBaseUrl(),
+				'site_name' => $store->getFrontendName(),
+				'site_language' => Mage::app()->getLocale()->getLocaleCode(),
+				'magento_version' => Mage::getVersion(),
+				'type' => 'Magento',
+			);
+		}
+
+		$data = json_encode(
+			array('lead' => $leadData)
 		);
 
-		$ch = curl_init($url);
+		$this->doCurl($data, $store->getWebsiteId(), (isset($user)));
+	}
+
+	private function doCurl($data, $storeId, $new = true)
+	{
+		$ch = curl_init('https://dashboard.ebanx.com/api/lead');
 
 		curl_setopt_array($ch, array(
 			CURLOPT_POST => true,
-			CURLOPT_POSTFIELDS => $args,
+			CURLOPT_POSTFIELDS => $data,
 			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTPHEADER => array(
+				'Content-Type: application/json',
+			),
 		));
 
 		$transfer = curl_exec($ch);
+		$error = curl_error($ch);
+
+		if ($new && empty($error)) {
+			$leadInfo = json_decode($transfer, true);
+
+			if (isset($leadInfo['id'])) {
+				$leadModel = new Ebanx_Gateway_Model_Lead();
+				$leadModel->setIdLead($leadInfo['id']);
+				$leadModel->setIdStore($storeId);
+
+				$leadModel->save();
+			}
+		}
 	}
 }
