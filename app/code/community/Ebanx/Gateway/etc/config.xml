@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Ebanx_Gateway>
-            <version>2.6.0</version>
+            <version>2.6.1</version>
         </Ebanx_Gateway>
     </modules>
     <global>
@@ -40,6 +40,9 @@
                     <usercard>
                         <table>ebanx_user_cards</table>
                     </usercard>
+                    <lead>
+                        <table>ebanx_store_lead</table>
+                    </lead>
                 </entities>
             </ebanx_resource>
         </models>
@@ -54,6 +57,15 @@
                     </ebanx_gateway_model_capture>
                 </observers>
             </sales_order_invoice_pay>
+            <admin_system_config_changed_section_payment>
+                <observers>
+                    <Ebanx_Gateway_Model_Observer>
+                        <type>singleton</type>
+                        <class>Ebanx_Gateway_Model_Observer</class>
+                        <method>observeConfigSection</method>
+                    </Ebanx_Gateway_Model_Observer>
+                </observers>
+            </admin_system_config_changed_section_payment>
         </events>
 
         <resources>
