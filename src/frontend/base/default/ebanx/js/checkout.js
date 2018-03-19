@@ -212,4 +212,16 @@ var handleEbanxForm = (countryCode, paymentType, formListId) => { // eslint-disa
     cardExpirationYear.addEventListener('change', clearResponseData, false);
     cardCvv.addEventListener('change', clearResponseData, false);
   }
+
+  cardNumber.addEventListener('input', function (elm) {
+    setInterval(function() {
+    cardCvv.setAttribute('maxlength', 3);
+    if ((' ' + elm.target.className + ' ').indexOf(' amex ') > -1) {
+      cardCvv.setAttribute('maxlength', 4);
+    }
+
+    if ((' ' + elm.target.className + ' ').indexOf(' unknown ') > -1) {
+      cardCvv.value = '';
+    }}, 200);
+  });
 };
