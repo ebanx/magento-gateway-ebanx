@@ -128,6 +128,9 @@ var handleEbanxForm = (countryCode, paymentType, formListId) => { // eslint-disa
   };
 
   const forceClickInPlaceOrder = (elem) => {
+    if (!elem) {
+      return false;
+    }
     var event = document.createEvent('Event');
     event.initEvent('click', true, true);
     elem.dispatchEvent(event);
@@ -215,13 +218,14 @@ var handleEbanxForm = (countryCode, paymentType, formListId) => { // eslint-disa
 
   cardNumber.addEventListener('input', function (elm) {
     setInterval(function() {
-    cardCvv.setAttribute('maxlength', 3);
-    if ((' ' + elm.target.className + ' ').indexOf(' amex ') > -1) {
-      cardCvv.setAttribute('maxlength', 4);
-    }
+      cardCvv.setAttribute('maxlength', 3);
+      if ((' ' + elm.target.className + ' ').indexOf(' amex ') > -1) {
+        cardCvv.setAttribute('maxlength', 4);
+      }
 
-    if ((' ' + elm.target.className + ' ').indexOf(' unknown ') > -1) {
-      cardCvv.value = '';
-    }}, 200);
+      if ((' ' + elm.target.className + ' ').indexOf(' unknown ') > -1) {
+        cardCvv.value = '';
+      }
+    }, 200);
   });
 };
