@@ -43,6 +43,9 @@
                     <lead>
                         <table>ebanx_store_lead</table>
                     </lead>
+                    <log>
+                        <table>ebanx_logs</table>
+                    </log>
                 </entities>
             </ebanx_resource>
         </models>
