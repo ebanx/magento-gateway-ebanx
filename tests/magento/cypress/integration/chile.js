@@ -57,7 +57,7 @@ describe('Shopping', () => {
       it('can buy `blue horizons bracelets` using Webpay to personal', () => {
         magento.buyBlueHorizonsBraceletsWithWebpayToPersonal(mock(
           {
-            document: '24.876.016-4',
+            document: '248760164',
             paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.cl.webpay.id,
           }
         ));
