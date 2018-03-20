@@ -14,14 +14,14 @@ Faker.locale = 'es';
 const mock = (data) => (R.merge(
   data,
   {
-    firstName: Faker.name.firstName(),
-    lastName: Faker.name.lastName(),
+    firstName: 'MESSI',
+    lastName: 'LIONEL ANDRES',
+    document: '23-33016244-9',
     address: Faker.address.streetName(),
     city: Faker.address.city(),
     state: 'Catamarca',
     stateId: 'K',
     zipcode: Faker.address.zipCode(),
-    document: Faker.random.uuid(),
     phone: Faker.phone.phoneNumberFormat(2),
     email: Faker.internet.email(),
     country: 'Argentina',

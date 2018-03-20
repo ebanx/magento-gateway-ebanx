@@ -304,7 +304,7 @@ export default class Checkout {
       this[fillBilling](data);
       this[clickElement]('#p_method_ebanx_webpay');
 
-      this[fillInput](data, 'document', '#ebanx-document-ebanx_webpay');
+      this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_webpay');
 
       this[placeOrder]();
 
@@ -389,7 +389,7 @@ export default class Checkout {
     validateSchema(CHECKOUT_SCHEMA.ar.efectivo(), data, () => {
       this[fillBilling](data);
       this[clickElement](`#p_method_ebanx_${sanitizeMethod(data.paymentMethod)}`);
-      this[fillInput](data, 'document', `#ebanx-document-ebanx_${sanitizeMethod(data.paymentMethod)}`);
+      this[fillInputWithJquery](data, 'document', `#ebanx-document-ebanx_${sanitizeMethod(data.paymentMethod)}`);
 
       this[placeOrder]();
 
