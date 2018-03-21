@@ -79,21 +79,12 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 		$this->paymentData = $this->adapter->transform($this->data);
 	}
 
-	private function log(array $data = array(), $event = 'payment-request') {
-		$logModel = new Ebanx_Gateway_Model_Log();
-
-		$logModel->setEvent($event);
-		$logModel->setLog(json_encode($data));
-
-		$logModel->save();
-	}
-
 	public function processPayment()
 	{
 		$res = $this->gateway->create($this->paymentData);
 		$error = Mage::helper('ebanx/error');
 
-		$this->log(array(
+		Ebanx_Gateway_Log_Logger_Checkout::persist(array(
 			'config' => Mage::getSingleton('ebanx/api')->getConfig(),
 			'request' => $this->paymentData,
 			'response' => $res
