@@ -13,6 +13,7 @@ class Ebanx_Gateway_Log_Environment
 				'version' => $environment->platform->version,
 				'theme' => self::get_theme_data(),
 				'plugins' => self::get_plugins_data(),
+				'store_id' => Mage::app()->getStore()->getWebsiteId(),
 			),
 			'server' => array(
 				'language' => $environment->interpreter,
