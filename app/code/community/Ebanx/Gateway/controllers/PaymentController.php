@@ -114,6 +114,12 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
 		$isSandbox = $this->loadOrderEnv() === 'sandbox';
 		$payment = $api->paymentInfo()->findByHash($this->hash, $isSandbox);
 
+		Ebanx_Gateway_Log_Logger_NotificationQuery::persist(array(
+			'params' => $this->getRequest()->getParams(),
+			'payment' => $payment,
+			'isSandbox' => $isSandbox
+		));
+
 		$this->helper->log($payment, 'ebanx_payment_notification');
 
 		if ($payment['status'] !== 'SUCCESS') {
