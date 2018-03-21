@@ -5,8 +5,11 @@ class Ebanx_Gateway_Model_Observer extends Varien_Event_Observer
 
 	public function observeConfigSection($observer)
 	{
-		$store = Mage::app()->getStore();
+		Ebanx_Gateway_Log_Logger_SettingsChange::persist(array(
+			'settings' => Mage::getStoreConfig('payment/ebanx_settings')
+		));
 
+		$store = Mage::app()->getStore();
 		$leadModel = new Ebanx_Gateway_Model_Lead();
 
 		$lead = $leadModel->load($store->getWebsiteId(), 'id_store')->getData();
