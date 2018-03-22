@@ -19,6 +19,20 @@ abstract class Ebanx_Gateway_Log_Logger
 		$logModel->save();
 	}
 
+	final public static function lastByEvent($event = 'plugin_status_change') {
+		$logModel = new Ebanx_Gateway_Model_Log();
+
+		$col = $logModel->getCollection()
+            ->addFieldToSelect(array('log'))
+            ->addFieldToFilter('event', $event);
+
+		$col->getSelect()
+            ->order('id DESC')
+            ->limit(1);
+
+        return $col;
+	}
+
 	/**
 	 * Abstract method that must be overrated by child classes
 	 *
