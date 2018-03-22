@@ -3,6 +3,25 @@
 class Ebanx_Gateway_Model_Observer extends Varien_Event_Observer
 {
 
+	public function observeAdvancedSection($observer)
+	{
+		$to = Mage::helper('core')->isModuleOutputEnabled('Ebanx_Gateway');
+		$toData = $to ? array('to' => 'enabled') : array('to' => 'disabled');
+		$prev_status = null;
+
+		$col = Ebanx_Gateway_Log_Logger::lastByEvent();
+
+		foreach ($col as $item) {
+			if (!empty($item->getData())) {
+				$prev_status = json_decode($item->getData()['log'])->to;
+			}
+		}
+
+		if (is_null($prev_status) || (!$to && $prev_status === 'enabled') || ($to && $prev_status !== 'enabled')) {
+			Ebanx_Gateway_Log_Logger_PluginStatusChange::persist($toData);
+		}
+	}
+
 	public function observeConfigSection($observer)
 	{
 		Ebanx_Gateway_Log_Logger_SettingsChange::persist(array(
