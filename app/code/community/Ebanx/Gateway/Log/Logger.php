@@ -33,6 +33,27 @@ abstract class Ebanx_Gateway_Log_Logger
         return $col;
 	}
 
+	final public static function truncate() {
+		Mage::getResourceModel('ebanx/log')->truncate();
+	}
+
+	final public static function fetch() {
+		$logModel = new Ebanx_Gateway_Model_Log();
+
+		$col = $logModel->getCollection();
+
+		$col->getSelect()
+            ->order('id DESC');
+
+        $res = array();
+
+        foreach ($col as $log) {
+        	$res[] = $log->getData();
+        }
+
+        return $res;
+	}
+
 	/**
 	 * Abstract method that must be overrated by child classes
 	 *
