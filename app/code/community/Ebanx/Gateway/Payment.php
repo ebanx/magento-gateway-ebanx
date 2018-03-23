@@ -81,13 +81,14 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 
 	public function processPayment()
 	{
-		$this->helper->log(Mage::getSingleton('ebanx/api')->getConfig(), $this->getCode());
-		$this->helper->log($this->paymentData, $this->getCode());
-
 		$res = $this->gateway->create($this->paymentData);
 		$error = Mage::helper('ebanx/error');
 
-		$this->helper->log($res, $this->getCode());
+		Ebanx_Gateway_Log_Logger_Checkout::persist(array(
+			'config' => Mage::getSingleton('ebanx/api')->getConfig(),
+			'request' => $this->paymentData,
+			'response' => $res
+		));
 
 		if ($res['status'] !== 'SUCCESS') {
 			$country = $this->order->getBillingAddress()->getCountry();
@@ -147,6 +148,16 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 	{
 		$hash = $payment->getEbanxPaymentHash();
 		$result = $this->ebanx->refund()->requestByHash($hash, $amount, $this->helper->__('Refund requested by Magento Admin Panel'));
+
+		Ebanx_Gateway_Log_Logger_Refund::persist(array(
+			'request' => array(
+				'hash' => $hash,
+				'amount' => $amount,
+				'description' => $this->helper->__('Refund requested by Magento Admin Panel')
+			),
+			'response' => $result
+		));
+
 		if($result['status'] === 'ERROR') {
 			$errorMsg = $this->helper->__('Error processing refund: '.$result['status_message'].' ('.$result['status_code'].')');
 			Mage::throwException($errorMsg);

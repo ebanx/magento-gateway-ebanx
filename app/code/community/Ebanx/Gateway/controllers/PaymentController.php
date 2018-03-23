@@ -16,6 +16,10 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
 	public function notifyAction()
 	{
 		try {
+			Ebanx_Gateway_Log_Logger_NotificationReceived::persist(array(
+				'params' => $this->getRequest()->getParams()
+			));
+
 			$this->initialize();
 		} catch (Ebanx_Gateway_Exception $e) {
 			$this->helper->errorLog($e->getMessage());
@@ -109,6 +113,12 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
 		$api = Mage::getSingleton('ebanx/api')->ebanx();
 		$isSandbox = $this->loadOrderEnv() === 'sandbox';
 		$payment = $api->paymentInfo()->findByHash($this->hash, $isSandbox);
+
+		Ebanx_Gateway_Log_Logger_NotificationQuery::persist(array(
+			'params' => $this->getRequest()->getParams(),
+			'payment' => $payment,
+			'isSandbox' => $isSandbox
+		));
 
 		$this->helper->log($payment, 'ebanx_payment_notification');
 
