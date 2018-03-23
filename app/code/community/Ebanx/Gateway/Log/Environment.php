@@ -52,7 +52,11 @@ class Ebanx_Gateway_Log_Environment
 	}
 
 	private static function get_plugins_data() {
-		return (array) Mage::getConfig()->getNode('modules')->children();
+		return (array) array_map(function ($plugin) {
+			$plugin->status = Mage::helper('core')->isModuleOutputEnabled($plugin->getName()) ? 'enabled' : 'disabled';
+
+			return $plugin;
+		}, (array) Mage::getConfig()->getNode('modules')->children());
 	}
 
 	private static function get_theme_data() {
