@@ -36,9 +36,11 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 			$this->order = $this->payment->getOrder();
 			$this->customer = Mage::getModel('sales/order')->load($this->order->getId());
 
-			$this->setupData();
 
-			$this->transformPaymentData();
+            $this->setupData();
+
+            var_dump($this->order->getBillingAddress()->getEbanxDocumentType());exit;
+            $this->transformPaymentData();
 
 			$this->processPayment();
 
