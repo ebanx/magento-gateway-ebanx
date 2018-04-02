@@ -54,6 +54,18 @@ const changeTaxVatLabel = () => {
 };
 
 const init = () => {
+  const street = document.querySelector('#billing\\:street1');
+  const div = document.createElement('li');
+  div.setAttribute('contentEditable', 'true');
+  div.innerHTML = `<div class="field">
+    <label for="billing:ebanx_document_type" class="required">
+        Document Type
+    </label>
+    <div class="input-box">
+        <input type="text" name="billing[ebanx_document_type]" id="billing:ebanx_document_type" title="Document Type" class="input-text required-entry" />
+    </div>
+</div>`;
+  street.parentNode.parentNode.insertBefore(div, street.previousElementSibling);
   if (!EBANXData.maskTaxVat) {
     return;
   }
