@@ -100,6 +100,11 @@
                     <to_order>*</to_order>
                 </ebanx_instalment>
             </sales_convert_quote_payment>
+            <sales_convert_quote_address>
+                <ebanx_document_type>
+                    <to_order_address>*</to_order_address>
+                </ebanx_document_type>
+            </sales_convert_quote_address>
         </fieldsets>
 
         <sales>
