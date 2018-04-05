@@ -136,7 +136,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 				->setEbanxCustomerDocument($documentNumber);
 
 			if ($this->order->getBillingAddress()->getCountry() === 'AR') {
-				$documentType = $this->order->getBillingAddress()->getEbanxDocumentType();
+				$documentType = $this->helper->getDocumentType('AR');
 				$customer->setEbanxCustomerDocumentType($documentType);
 			}
 
