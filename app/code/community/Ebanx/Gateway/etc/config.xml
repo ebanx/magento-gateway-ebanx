@@ -43,6 +43,9 @@
                     <lead>
                         <table>ebanx_store_lead</table>
                     </lead>
+                    <log>
+                        <table>ebanx_logs</table>
+                    </log>
                 </entities>
             </ebanx_resource>
 
@@ -77,6 +80,15 @@
                     </Ebanx_Gateway_Model_Observer>
                 </observers>
             </admin_system_config_changed_section_payment>
+            <admin_system_config_changed_section_advanced>
+                <observers>
+                    <Ebanx_Gateway_Model_Observer>
+                        <type>singleton</type>
+                        <class>Ebanx_Gateway_Model_Observer</class>
+                        <method>observeAdvancedSection</method>
+                    </Ebanx_Gateway_Model_Observer>
+                </observers>
+            </admin_system_config_changed_section_advanced>
         </events>
 
         <resources>

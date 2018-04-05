@@ -10,7 +10,7 @@ if (!$installer->tableExists('ebanx_logs')) {
 	$installer->run("
 		CREATE TABLE {$this->getTable('ebanx_logs')} (
 			id int NOT NULL AUTO_INCREMENT,
-			time datetime NOT NULL,
+			time datetime(6) NOT NULL DEFAULT NOW(6),
 			event varchar(150) NOT NULL,
 			log blob NOT NULL,
 			UNIQUE KEY id (id)
