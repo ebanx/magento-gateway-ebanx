@@ -37,10 +37,9 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 			$this->customer = Mage::getModel('sales/order')->load($this->order->getId());
 
 
-            $this->setupData();
+			$this->setupData();
 
-            var_dump($this->order->getBillingAddress()->getEbanxDocumentType());exit;
-            $this->transformPaymentData();
+			$this->transformPaymentData();
 
 			$this->processPayment();
 
@@ -135,6 +134,11 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 			$documentNumber = $this->helper->getDocumentNumber($this->order, $this->data);
 			$customer = Mage::getModel('customer/customer')->load($this->order->getCustomerId())
 				->setEbanxCustomerDocument($documentNumber);
+
+			if ($this->order->getBillingAddress()->getCountry() === 'AR') {
+				$documentType = $this->order->getBillingAddress()->getEbanxDocumentType();
+				$customer->setEbanxCustomerDocumentType($documentType);
+			}
 
 			$methodCode = $this->order->getPayment()->getMethodInstance()->getCode();
 			$documentFields = $this->helper->getDocumentFieldsRequiredForMethod($methodCode);

@@ -151,6 +151,7 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 		return new Person(array(
 			'type' => $this->helper->getPersonType($document),
 			'document' => $document,
+			'documentType' => $data->getBillingAddress()->getEbanxDocumentType(),
 			'email' => $email,
 			'ip' => $data->getRemoteIp(),
 			'name' => $name,
