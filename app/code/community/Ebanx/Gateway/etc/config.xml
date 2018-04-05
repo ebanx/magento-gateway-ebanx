@@ -346,6 +346,7 @@
                 <cnpj_field></cnpj_field>
                 <rut_field></rut_field>
                 <cdi_field></cdi_field>
+                <document_type_field></document_type_field>
                 <dni_field_pe></dni_field_pe>
                 <dni_field></dni_field>
             </ebanx_settings>
