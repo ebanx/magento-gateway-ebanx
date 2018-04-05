@@ -151,7 +151,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 			case 'ebanx_rapipago':
 			case 'ebanx_cupon':
 			case 'ebanx_cc_ar':
-				return 'Documento';
+				return 'Document';
 
 			default:
 				return $this->__('Document Number');
@@ -298,6 +298,35 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 		}
 
 		return $customer['ebanx-document'][$methodCode];
+	}
+
+	public function getDocumentType($country)
+	{
+		if ($country !== 'AR') {
+			return null;
+		}
+
+		$customer = $this->getCustomerData();
+
+		if ($typeField = Mage::getStoreConfig('payment/ebanx_settings/document_type_field')) {
+			if ($typeField === 'taxvat') {
+				return $this->order->getBillingAddress()->getEbanxDocumentType();
+			}
+
+			if ($customer[$typeField]) {
+				return $customer[$typeField];
+			}
+		}
+
+		if(!is_array($customer)
+			|| !array_key_exists('ebanx-document-type', $customer)
+			|| !is_array($customer['ebanx-document-type'])
+			|| !array_key_exists($country, $customer['ebanx-document-type'])
+		) {
+			return '';
+		}
+
+		return $customer['ebanx-document-type'][$country];
 	}
 
 	public function getColombianDocumentNumber($methodCode)
