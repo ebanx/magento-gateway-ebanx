@@ -37,7 +37,7 @@
             <ebanx_resource>
                 <class>Ebanx_Gateway_Model_Resource</class>
                 <entities>
-                    <usercard>s
+                    <usercard>
                         <table>ebanx_user_cards</table>
                     </usercard>
                     <lead>
@@ -48,17 +48,6 @@
                     </log>
                 </entities>
             </ebanx_resource>
-
-            <ebanx_logger>
-                <class>Ebanx_Gateway_Model_Logger</class>
-                <resourceModel>ebanx_logger_resource</resourceModel>
-            </ebanx_logger>
-            <ebanx_logger_resource>
-                <class>Ebanx_Gateway_Model_Logger_Resource</class>
-                <entities>
-                    <!-- -->
-                </entities>
-            </ebanx_logger_resource>
         </models>
 
         <events>
