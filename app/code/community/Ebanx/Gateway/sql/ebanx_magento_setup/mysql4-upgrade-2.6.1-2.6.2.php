@@ -60,22 +60,4 @@ $attribute->setData("used_in_forms", $used_in_forms)
 ;
 $attribute->save();
 
-$sales_quote_address = $installer->getTable('sales/quote_address');
-$installer->getConnection()
-          ->addColumn($sales_quote_address, 'ebanx_document_type', array(
-              'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-              'comment' => 'New Delivery Instruction Field Added'
-          ));
-
-/**
- * Adding Extra Column to sales_flat_order_address
- * to store the delivery instruction field
- */
-$sales_order_address = $installer->getTable('sales/order_address');
-$installer->getConnection()
-          ->addColumn($sales_order_address, 'ebanx_document_type', array(
-              'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-              'comment' => 'New Delivery Instruction Field Added'
-          ));
-
 $installer->endSetup();

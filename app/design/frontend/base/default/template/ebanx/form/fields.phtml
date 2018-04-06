@@ -15,7 +15,7 @@ if (Mage::getSingleton('customer/session')->isLoggedIn()) {
   $ebanxCustomerDocumentType = $customer->getEbanxCustomerDocumentType();
 }
 
-if ($helper->hasDocumentFieldAlreadyForMethod($this->getMethodCode()) && ($country !== 'AR' || $ebanxCustomerDocumentType)) {
+if ($helper->hasDocumentFieldAlreadyForMethod($this->getMethodCode()) && (!isset($customer) || $country !== 'AR' || $ebanxCustomerDocumentType)) {
   return;
 }
 
@@ -23,7 +23,7 @@ if ($helper->hasDocumentFieldAlreadyForMethod($this->getMethodCode()) && ($count
 <li class="ebanx-compliance-fields">
   <?php if ($country === 'AR'): ?>
     <label for="ebanx-document-type-<?= $this->getMethodCode() ?>" class="ebanx-document-label required">
-      Document Type <?= $country ?>
+      Document Type
     </label>
     <div class="input-box">
       <select
@@ -32,7 +32,7 @@ if ($helper->hasDocumentFieldAlreadyForMethod($this->getMethodCode()) && ($count
         title="Document Type"
         class="validate-select required-entry"
       >
-        <option value="">Select a document type</option>
+        <option value="" selected>Select a document type</option>
         <option value="ARG_CUIT">CUIT</option>
         <option value="ARG_CUIL">CUIL</option>
         <option value="ARG_CDI">CDI</option>
