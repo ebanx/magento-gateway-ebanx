@@ -77,7 +77,7 @@ const addDocumentTypeField = () => {
       </label>
       <div class="input-box">
           <select name="billing[ebanx_document_type]" id="billing:ebanx_document_type" title="Document Type" class="validate-select required-entry">
-            <option value="">Select a document type</option>
+            <option value="" selected>Select a document type</option>
             <option value="ARG_CUIT">CUIT</option>
             <option value="ARG_CUIL">CUIL</option>
             <option value="ARG_CDI">CDI</option>
