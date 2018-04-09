@@ -12,9 +12,11 @@ abstract class Ebanx_Gateway_Log_Logger
 	 */
 	final protected static function save($event, array $log_data) {
 		$logModel = new Ebanx_Gateway_Model_Log();
+        $integrationKey = Mage::helper('ebanx/data')->getIntegrationKey();
 
 		$logModel->setEvent($event);
 		$logModel->setLog(json_encode($log_data));
+		$logModel->setIntegrationKey($integrationKey);
 
 		$logModel->save();
 	}
@@ -33,16 +35,18 @@ abstract class Ebanx_Gateway_Log_Logger
         return $col;
 	}
 
-	final public static function truncate() {
-		Mage::getResourceModel('ebanx/log')->truncate();
+	final public static function delete($col) {
+       foreach($col as $log)
+            $log->delete();
 	}
 
-	final public static function fetch() {
+	final public static function fetch($integrationKey) {
 		$logModel = new Ebanx_Gateway_Model_Log();
 
 		$col = $logModel->getCollection();
 
-		$col->getSelect()
+		$col->addFieldToFilter('integration_key', $integrationKey)
+            ->getSelect()
             ->order('id DESC');
 
         $res = array();
@@ -51,7 +55,7 @@ abstract class Ebanx_Gateway_Log_Logger
         	$res[] = $log->getData();
         }
 
-        return $res;
+        return [$col ,$res];
 	}
 
 	/**
