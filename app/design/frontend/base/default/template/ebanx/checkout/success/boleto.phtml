@@ -2,6 +2,7 @@
 $order = $this->getOrder();
 $payment = $this->getPayment();
 $dueDate = $this->helper->getDueDate($order->getEbanxDueDate(), 'dd/MM');
+$is_mobile = Zend_Http_UserAgent_Mobile::match(Mage::helper('core/http')->getHttpUserAgent(), $_SERVER);
 ?>
 <div class="ebanx-details">
     <p><strong><?= $order->getBillingAddress()->getFirstname(); ?></strong>, seu boleto foi gerado e a data de vencimento é dia
@@ -30,16 +31,39 @@ $dueDate = $this->helper->getDueDate($order->getEbanxDueDate(), 'dd/MM');
             <a href="<?php echo $this->getEbanxUrlPdf(); ?>" target="_blank"
                class="button banking-ticket__action"><?php echo $this->__('Salvar em PDF'); ?></a>
         </div>
-        <div class="ebanx-group">
-            <a href="<?php echo $this->getEbanxUrlPrint() ?>" target="_blank"
-               class="button banking-ticket__action"><?php echo $this->__('Imprimir boleto'); ?></a>
-        </div>
+        <?php if ($is_mobile): ?>
+            <div class="ebanx-group">
+                <a href="<?php echo $this->getEbanxUrlMobile() ?>" target="_blank"
+                   class="button banking-ticket__action"><?php echo $this->__('Ver Boleto'); ?></a>
+            </div>
+        <?php else: ?>
+            <div class="ebanx-group">
+                <a href="<?php echo $this->getEbanxUrlPrint() ?>" target="_blank"
+                   class="button banking-ticket__action"><?php echo $this->__('Imprimir boleto'); ?></a>
+            </div>
+        <?php endif; ?>
     </div>
 
+    <?php if (!$is_mobile): ?>
     <div>
         <iframe id="ebanx-boleto-frame" src="<?php echo $this->getVoucherUrl(); ?>"
                 style="width: 100%; border: 0px; height: 1000px"></iframe>
     </div>
+    <?php endif; ?>
+
+    <script type="text/javascript" src="https://print.ebanx.com/assets/sources/fingerprint/fingerprint2.min.js"></script>
+    <script type="text/javascript" src="https://print.ebanx.com/assets/sources/fingerprint/browserdetect.js"></script>
+    <script type="text/javascript" src="https://print.ebanx.com/assets/sources/fingerprint/mystiquefingerprint.js"></script>
+    <script type="text/javascript">
+        (function() {
+            var done = null;
+            var options = {
+                justPrint: false,
+                paymentHash: '<?php echo $this->getEbanxPaymentHash(); ?>'
+            };
+            Mystique.registerFingerprint(done, options, '<?php echo $is_mobile ? 'boleto-responsive' : 'boleto-default'; ?>');
+                })();
+    </script>
 
     <?php include 'apps.phtml' ?>
 </div>
