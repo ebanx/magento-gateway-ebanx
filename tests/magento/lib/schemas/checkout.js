@@ -213,6 +213,8 @@ export const CHECKOUT_SCHEMA = {
       address: Joi.string().required(),
       password: Joi.string().optional(),
       document: Joi.string().required(),
+      documentType: Joi.string().required(),
+      documentTypeId: Joi.string().required(),
       lastName: Joi.string().required(),
       countryId: Joi.string().required(),
       firstName: Joi.string().required(),

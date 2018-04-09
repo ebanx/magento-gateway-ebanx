@@ -394,6 +394,7 @@ export default class Checkout {
     validateSchema(CHECKOUT_SCHEMA.ar.efectivo(), data, () => {
       this[fillBilling](data);
       this[clickElement](`#p_method_ebanx_${sanitizeMethod(data.paymentMethod)}`);
+      this[selectField](data, 'documentType', 'documentTypeId', `#ebanx-document-type-ebanx_${sanitizeMethod(data.paymentMethod)}`);
       this[fillInputWithJquery](data, 'document', `#ebanx-document-ebanx_${sanitizeMethod(data.paymentMethod)}`);
 
       this[placeOrder]();
