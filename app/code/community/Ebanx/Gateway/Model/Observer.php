@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Ebanx_Gateway_Model_Observer extends Varien_Event_Observer
 {
@@ -38,6 +38,8 @@ class Ebanx_Gateway_Model_Observer extends Varien_Event_Observer
 			$leadData = array(
 				'id' => $lead['id_lead'],
 				'integration_key' => $helperEbanxData->getIntegrationKey(),
+				'site_url' => Mage::getBaseUrl(),
+				'type' => 'Magento',
 			);
 		} else {
 			$user = Mage::getSingleton('admin/session')->getUser();
