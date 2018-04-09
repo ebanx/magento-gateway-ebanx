@@ -485,6 +485,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 				$url = '';
 		}
 
+		if ('mobile' == $format) {
+			return "{$url}&target_device=mobile";
+		}
+
 		return "{$url}&format={$format}";
 	}
 
