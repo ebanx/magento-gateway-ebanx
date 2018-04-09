@@ -13,6 +13,7 @@ if (!$installer->tableExists('ebanx_logs')) {
 			time datetime(6) NOT NULL DEFAULT NOW(6),
 			event varchar(150) NOT NULL,
 			log blob NOT NULL,
+			integration_key VARCHAR(255) NOT NULL,
 			UNIQUE KEY id (id)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 	");
