@@ -2,11 +2,11 @@
 <br>
 <p>Total a pagar en Peso chileno: <?php
 
-  if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
+if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
     echo $this->getLocalAmount('CLP');
-  } else {
+} else {
     echo $this->getLocalAmountWithoutTax('CLP');
-  }
-  ?></p>
+}
+    ?></p>
 
 <?php echo $this->getChildHtml() ?>

@@ -22,7 +22,7 @@
     <td class="label"><?= $this->__('EBANX Payment Method') ?></td>
     <td class="value"><strong><?= $this->getInfo()->getMethodInstance()->getTitle() ?></strong></td>
   </tr>
-  <?php if (in_array($orderState, array(Mage_Sales_Model_Order::STATE_PENDING_PAYMENT, Mage_Sales_Model_Order::STATE_NEW))): ?>
+    <?php if (in_array($orderState, array(Mage_Sales_Model_Order::STATE_PENDING_PAYMENT, Mage_Sales_Model_Order::STATE_NEW))) : ?>
   <tr>
     <td class="label"><?= $this->__('EBANX Force Update Check') ?></td>
     <td class="value">
@@ -58,6 +58,6 @@
       })();
     </script>
   </tr>
-  <?php endif; ?>
+    <?php endif; ?>
   </tbody>
 </table>

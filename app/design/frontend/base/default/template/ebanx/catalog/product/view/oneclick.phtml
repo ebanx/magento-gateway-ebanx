@@ -5,7 +5,7 @@ $savedCards = $this->usercards;
 $text = $this->getText();
 $lowerCountry   = strtolower($this->getCountry());
 ?>
-<?php if ($this->canShowOneclickButton()): ?>
+<?php if ($this->canShowOneclickButton()) : ?>
 <div id="ebanx-one-click-container" class="clearfix">
   <span id="product-oneclick-ebanx-button" class="button btn-ebanx">Pague com um clique</span>
   <div class="ebanx-one-click-tooltip" id="ebanx-one-click-tooltip">
@@ -15,8 +15,8 @@ $lowerCountry   = strtolower($this->getCountry());
 
       <p>Escolha o cartão: </p>
       <ul id="ebanx-one-click-card-list">
-        <?php foreach ($savedCards as $card): ?>
-          <?php include __DIR__ . '/../../../form/card/saved-card.phtml' ?>
+        <?php foreach ($savedCards as $card) : ?>
+            <?php include __DIR__ . '/../../../form/card/saved-card.phtml' ?>
         <?php endforeach; ?>
         <?php include __DIR__ . '/../../../form/card/instalments.phtml' ?>
         <li>

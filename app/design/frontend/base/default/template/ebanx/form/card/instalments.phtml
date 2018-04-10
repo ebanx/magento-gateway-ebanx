@@ -2,13 +2,13 @@
 $_instalmentOptions = $this->getInstalmentTerms();
 $_selected = $this->getInfoData('instalments');
 ?>
-<?php if (count($_instalmentOptions) > 1): ?>
+<?php if (count($_instalmentOptions) > 1) : ?>
   <li id="<?php echo $_code ?>-instalments-div">
     <label for="<?php echo $_code ?>_instalments" class="required"><em>*</em><?= $text['instalments'] ?></label>
     <div class="input-box">
       <select id="<?php echo $_code ?>_instalments" name="payment[instalments]" title="Instalments"
               class="required-entry validate-select">
-        <?php foreach ($_instalmentOptions as $_instalmentTerm): ?>
+        <?php foreach ($_instalmentOptions as $_instalmentTerm) : ?>
           <option
             value="<?php echo $_instalmentTerm->instalmentNumber ?>"
             data-local-amount="<?php echo Mage::app()->getLocale()->currency($localCurrency)->toCurrency($_instalmentTerm->localAmountWithTax * $_instalmentTerm->instalmentNumber) ?>"
