@@ -143,7 +143,11 @@ export default class Checkout {
   }
 
   [chooseShipping] (method) {
-    this[clickElement](`#s_method_${method || 'flatrate'}_${method || 'flatrate'}`);
+    this.cy.get(`#s_method_${method || 'flatrate'}_${method || 'flatrate'}`, {timeout: 30000}).then((elm) => {
+      if (!elm.is(':checked')) {
+        this[clickElement](`#s_method_${method || 'flatrate'}_${method || 'flatrate'}`);
+      }
+    });
     this[clickElement]('#shipping-method-buttons-container > button');
   }
 
