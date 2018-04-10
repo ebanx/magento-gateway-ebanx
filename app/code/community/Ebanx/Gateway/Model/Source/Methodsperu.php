@@ -5,6 +5,9 @@ class Ebanx_Gateway_Model_Source_Methodsperu
     const SAFETYPAY = 'ebanx_safetypay';
     const PAGOEFECTIVO = 'ebanx_pagoefectivo';
 
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         return array(

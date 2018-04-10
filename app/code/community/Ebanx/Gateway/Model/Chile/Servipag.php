@@ -7,6 +7,9 @@ class Ebanx_Gateway_Model_Chile_Servipag extends Ebanx_Gateway_Payment
     protected $_formBlockType = 'ebanx/form_servipag';
     protected $_infoBlockType = 'ebanx/info_servipag';
 
+    /**
+     * Ebanx_Gateway_Model_Chile_Servipag constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -14,6 +17,10 @@ class Ebanx_Gateway_Model_Chile_Servipag extends Ebanx_Gateway_Payment
         $this->gateway = $this->ebanx->servipag();
     }
 
+    /**
+     * @param null $quote unused
+     * @return bool
+     */
     public function isAvailable($quote = null)
     {
         return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_chile']));

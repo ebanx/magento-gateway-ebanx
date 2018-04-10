@@ -7,6 +7,9 @@ class Ebanx_Gateway_Model_Source_Methodsmexico
     const OXXO = 'ebanx_oxxo';
     const SPEI = 'ebanx_spei';
 
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         return array(
