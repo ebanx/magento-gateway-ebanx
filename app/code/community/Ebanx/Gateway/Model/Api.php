@@ -9,11 +9,17 @@ class Ebanx_Gateway_Model_Api
     protected $ebanx;
     protected $config;
 
+    /**
+     * Ebanx_Gateway_Model_Api constructor.
+     */
     public function __construct()
     {
         $this->ebanx = EBANX($this->getConfig(), $this->getCreditCardConfig());
     }
 
+    /**
+     * @return Config
+     */
     public function getConfig()
     {
         return new Config(array(
@@ -62,11 +68,17 @@ class Ebanx_Gateway_Model_Api
         return $creditCardConfig;
     }
 
+    /**
+     * @return \Ebanx\Benjamin\Facade
+     */
     public function ebanx()
     {
         return $this->ebanx;
     }
 
+    /**
+     * @return \Ebanx\Benjamin\Facade
+     */
     public function ebanxCreditCard()
     {
         return $this->ebanx;

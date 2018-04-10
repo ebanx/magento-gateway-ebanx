@@ -7,6 +7,9 @@ class Ebanx_Gateway_Model_Source_Methodsbrazil
     const TEF = 'ebanx_tef';
     const WALLET = 'ebanx_wallet';
 
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         return array(

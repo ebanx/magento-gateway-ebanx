@@ -5,6 +5,9 @@ class Ebanx_Gateway_Model_Source_Duedate
     const MIN_DUE_DATE_DAYS = 1;
     const MAX_DUE_DATE_DAYS = 3;
 
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         $options = array();

@@ -5,6 +5,9 @@ class Ebanx_Gateway_Model_Source_Mode
     const SANDBOX = 'sandbox';
     const LIVE = 'live';
 
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         return array(
