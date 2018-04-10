@@ -2,6 +2,9 @@
 
 class Ebanx_Gateway_Block_Checkout_Success_Payment_Boleto extends Ebanx_Gateway_Block_Checkout_Success_Cashpayment
 {
+    /**
+     * @return array
+     */
     public function getEbanxBarCodeFormated()
     {
         $code = $this->getEbanxBarCode();
@@ -18,11 +21,17 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment_Boleto extends Ebanx_Gateway_
         );
     }
 
+    /**
+     * @return mixed
+     */
     public function getEbanxBarCode()
     {
         return $this->getOrder()->getPayment()->getEbanxBarCode();
     }
 
+    /**
+     * @return Ebanx_Gateway_Block_Checkout_Success_Cashpayment|void
+     */
     protected function _construct()
     {
         parent::_construct();

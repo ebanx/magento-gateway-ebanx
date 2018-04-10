@@ -2,6 +2,9 @@
 
 class Ebanx_Gateway_Block_Adminhtml_System_Config_Form_Field_Interest extends Mage_Adminhtml_Block_System_Config_Form_Field_Array_Abstract
 {
+    /**
+     * Ebanx_Gateway_Block_Adminhtml_System_Config_Form_Field_Interest constructor.
+     */
     public function __construct()
     {
         $this->addColumn('instalments', array(
@@ -20,9 +23,7 @@ class Ebanx_Gateway_Block_Adminhtml_System_Config_Form_Field_Interest extends Ma
     }
 
     /**
-     * Render array cell for prototypeJS template
-     *
-     * @param  string $columnName
+     * @param  string $columnName Name of the column
      * @return string
      */
     protected function _renderCellTemplate($columnName)
@@ -43,8 +44,8 @@ class Ebanx_Gateway_Block_Adminhtml_System_Config_Form_Field_Interest extends Ma
     }
 
     /**
-     * @param $name
-     * @param $extraParams
+     * @param string $name        The name
+     * @param string $extraParams Extra parameters
      * @return string
      */
     public function getInstallmentsSelectHtml($name, $extraParams)

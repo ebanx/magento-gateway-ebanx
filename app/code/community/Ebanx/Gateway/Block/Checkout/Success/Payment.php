@@ -5,6 +5,9 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment extends Mage_Checkout_Block_O
     protected $_order;
     protected $helper;
 
+    /**
+     * @return Ebanx_Gateway_Block_Checkout_Success_Payment
+     */
     protected function _construct()
     {
         parent::_construct();
@@ -12,16 +15,25 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment extends Mage_Checkout_Block_O
         $this->helper = Mage::helper('ebanx/order');
     }
 
+    /**
+     * @return mixed
+     */
     public function getSuccessPaymentBlock()
     {
         return $this->getPayment()->getMethodInstance()->getCode();
     }
 
+    /**
+     * @return mixed
+     */
     public function getPayment()
     {
         return $this->getOrder()->getPayment();
     }
 
+    /**
+     * @return mixed
+     */
     public function getOrder()
     {
         if (is_null($this->_order)) {
@@ -32,6 +44,9 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment extends Mage_Checkout_Block_O
         return $this->_order;
     }
 
+    /**
+     * @return array
+     */
     public function getCustomer()
     {
         $customerId = $this->getOrder()->getCustomerId();
@@ -42,6 +57,11 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment extends Mage_Checkout_Block_O
         );
     }
 
+    /**
+     * @param string $currency Currency type
+     * @param float  $price    Amount
+     * @return mixed
+     */
     public function formatPriceWithLocalCurrency($currency, $price)
     {
         return Mage::app()->getLocale()->currency($currency)->toCurrency($price);

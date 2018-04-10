@@ -14,7 +14,7 @@ class Ebanx_Gateway_Block_Form_Creditcard_Br extends Ebanx_Gateway_Block_Form_Cr
     }
 
     /**
-     * @param bool $hasInterests
+     * @param bool $hasInterests Has interests
      * @return string
      */
     protected function getInterestMessage($hasInterests)
@@ -22,6 +22,9 @@ class Ebanx_Gateway_Block_Form_Creditcard_Br extends Ebanx_Gateway_Block_Form_Cr
         return $hasInterests ? 'com juros' : '';
     }
 
+    /**
+     * @return array
+     */
     public function getText()
     {
         return array(
@@ -37,6 +40,9 @@ class Ebanx_Gateway_Block_Form_Creditcard_Br extends Ebanx_Gateway_Block_Form_Cr
         );
     }
 
+    /**
+     * @return string
+     */
     private function getLocalAmountText()
     {
         return Mage::getStoreConfig('payment/ebanx_settings/iof_local_amount')

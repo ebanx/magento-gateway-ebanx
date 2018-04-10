@@ -52,6 +52,9 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
      */
     private $customer;
 
+    /**
+     * @return Ebanx_Gateway_OneclickController
+     */
     protected function _construct()
     {
         parent::_construct();
@@ -59,6 +62,9 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
         $this->request = Mage::app()->getRequest()->getPost();
     }
 
+    /**
+     * @return mixed
+     */
     public function payAction()
     {
         if (!Mage::getSingleton('customer/session')->isLoggedIn()
@@ -77,6 +83,9 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
         return $this->_redirect('sales/order/view', array('order_id' => $this->order->getId()));
     }
 
+    /**
+     * @return mixed
+     */
     private function isCardFromCustomer()
     {
         $selectedCard = $this->request['payment']['selected_card'];
@@ -86,6 +95,9 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
         return Mage::getModel('ebanx/usercard')->doesCardBelongsToCustomer($cardToken, $customerId);
     }
 
+    /**
+     * @return mixed
+     */
     private function getPaymentMethod()
     {
         $selectedCard = $this->request['payment']['selected_card'];
@@ -95,8 +107,9 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
     }
 
     /**
-     * @param array  $products
-     * @param string $paymentMethod
+     * @param array  $products      Products
+     * @param string $paymentMethod Method of payment
+     * @return void
      */
     private function createOrder($products, $paymentMethod)
     {
@@ -206,6 +219,11 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
         $this->transaction->save();
     }
 
+    /**
+     * @param array $requestData Data array
+     * @return array
+     * @throws Exception
+     */
     private function addProduct($requestData)
     {
         $request = new Varien_Object();
@@ -265,6 +283,11 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
         return $items;
     }
 
+    /**
+     * @param Mage_Catalog_Model_Product $product Product
+     * @param int                        $qty     Quantity
+     * @return mixed
+     */
     private function productToOrderItem(Mage_Catalog_Model_Product $product, $qty = 1)
     {
         $rowTotal = $product->getFinalPrice() * $qty;

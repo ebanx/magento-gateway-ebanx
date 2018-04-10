@@ -2,6 +2,9 @@
 
 class Ebanx_Gateway_Block_Form_Pse extends Ebanx_Gateway_Block_Form_Abstract
 {
+    /**
+     * @return array
+     */
     public function getBanksList()
     {
         return array(
@@ -27,6 +30,9 @@ class Ebanx_Gateway_Block_Form_Pse extends Ebanx_Gateway_Block_Form_Abstract
         );
     }
 
+    /**
+     * @return Ebanx_Gateway_Block_Form_Pse
+     */
     protected function _construct()
     {
         parent::_construct();
