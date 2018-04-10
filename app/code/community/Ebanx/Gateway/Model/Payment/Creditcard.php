@@ -5,6 +5,9 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Paym
     protected $_canSaveCc = false;
     private $gatewayFields;
 
+    /**
+     * Ebanx_Gateway_Model_Payment_Creditcard constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -13,6 +16,10 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Paym
         $this->gateway = $this->ebanx->creditCard();
     }
 
+    /**
+     * @param null $grandTotal grand total
+     * @return mixed
+     */
     public function getInstalmentTerms($grandTotal = null)
     {
         $amount = $grandTotal ?: $this->getTotal();
@@ -24,12 +31,19 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Paym
      */
     abstract protected function getCountry();
 
+    /**
+     * @param string $country 2 letter ISO country
+     * @return bool|mixed
+     */
     public function canUseForCountry($country)
     {
         return $this->helper->transformCountryCodeToName($country) === $this->getCountry()
             && parent::canUseForCountry($country);
     }
 
+    /**
+     * @return void
+     */
     public function setupData()
     {
         parent::setupData();
@@ -45,11 +59,17 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Paym
         $this->gatewayFields = $this->data->getGatewayFields();
     }
 
+    /**
+     * @return void
+     */
     public function transformPaymentData()
     {
         $this->paymentData = $this->adapter->transformCard($this->data);
     }
 
+    /**
+     * @return void
+     */
     public function processPayment()
     {
         if ($this->gatewayFields['selected_card'] !== 'newcard') {
@@ -67,6 +87,9 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Paym
         parent::processPayment();
     }
 
+    /**
+     * @return void
+     */
     public function persistPayment()
     {
         parent::persistPayment();
@@ -80,6 +103,9 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Paym
         $this->persistCreditCardData();
     }
 
+    /**
+     * @return void
+     */
     private function persistCreditCardData()
     {
         if (!Mage::helper('ebanx')->saveCreditCardAllowed()) {

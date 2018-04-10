@@ -4,6 +4,9 @@ class Ebanx_Gateway_Model_Source_Methodsecuador
 {
     const SAFETYPAY = 'ebanx_safetypay_ec';
 
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         return array(

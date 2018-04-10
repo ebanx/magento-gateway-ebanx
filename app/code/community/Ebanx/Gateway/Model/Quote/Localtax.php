@@ -2,11 +2,19 @@
 
 class Ebanx_Gateway_Model_Quote_Localtax extends Mage_Sales_Model_Quote_Address_Total_Abstract
 {
+    /**
+     * Ebanx_Gateway_Model_Quote_Localtax constructor.
+     */
     public function __construct()
     {
         $this->setCode('ebanx_local_tax');
     }
 
+    /**
+     * @param Mage_Sales_Model_Quote_Address $address adress
+     *
+     * @return void
+     */
     public function collect(Mage_Sales_Model_Quote_Address $address)
     {
         if ($address->getAddressType() !== Mage_Sales_Model_Quote_Address::TYPE_BILLING) {
@@ -37,6 +45,10 @@ class Ebanx_Gateway_Model_Quote_Localtax extends Mage_Sales_Model_Quote_Address_
         $address->setGrandTotal($address->getGrandTotal() + $localTaxAmount);
     }
 
+    /**
+     * @param Mage_Sales_Model_Quote_Address $address address
+     * @return $this
+     */
     public function fetch(Mage_Sales_Model_Quote_Address $address)
     {
         $amount = $address->getEbanxLocalTaxAmount();

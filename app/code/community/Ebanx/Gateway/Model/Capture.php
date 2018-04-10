@@ -8,7 +8,12 @@ class Ebanx_Gateway_Model_Capture
     private $ebanx;
     private $payment;
 
-    public function capture_payment($observer)
+    /**
+     * @param observer $observer payment observer
+     * @return void
+     * @throws Ebanx_Gateway_Exception
+     */
+    public function capturePayment($observer)
     {
         $this->ebanx = Mage::getSingleton('ebanx/api')->ebanx();
         $this->payment = $observer
@@ -29,6 +34,11 @@ class Ebanx_Gateway_Model_Capture
         $this->ebanx->creditCard()->captureByHash($hash);
     }
 
+    /**
+     * @param string $hash payment hash
+     * @return bool
+     * @throws Ebanx_Gateway_Exception
+     */
     private function isPaymentPending($hash)
     {
         $helper = Mage::helper('ebanx/order');

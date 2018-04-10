@@ -7,6 +7,9 @@ class Ebanx_Gateway_Model_Brazil_Tef extends Ebanx_Gateway_Payment
     protected $_formBlockType = 'ebanx/form_tef';
     protected $_infoBlockType = 'ebanx/info_tef';
 
+    /**
+     * Ebanx_Gateway_Model_Brazil_Tef constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -14,6 +17,9 @@ class Ebanx_Gateway_Model_Brazil_Tef extends Ebanx_Gateway_Payment
         $this->gateway = $this->ebanx->tef();
     }
 
+    /**
+     * @return void
+     */
     public function transformPaymentData()
     {
         parent::transformPaymentData();
@@ -24,6 +30,10 @@ class Ebanx_Gateway_Model_Brazil_Tef extends Ebanx_Gateway_Payment
         $this->paymentData->bankCode = $bankCode;
     }
 
+    /**
+     * @param null $quote unused
+     * @return bool
+     */
     public function isAvailable($quote = null)
     {
         return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_brazil']));

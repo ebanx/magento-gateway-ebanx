@@ -3,6 +3,11 @@
 class Ebanx_Gateway_Model_Observer extends Varien_Event_Observer
 {
 
+    /**
+     * @param observer $observer event observer
+     *
+     * @return void
+     */
     public function observeAdvancedSection($observer)
     {
         $to = Mage::helper('core')->isModuleOutputEnabled('Ebanx_Gateway');
@@ -22,6 +27,11 @@ class Ebanx_Gateway_Model_Observer extends Varien_Event_Observer
         }
     }
 
+    /**
+     * @param observer $observer event observer
+     *
+     * @return void
+     */
     public function observeConfigSection($observer)
     {
         Ebanx_Gateway_Log_Logger_SettingsChange::persist(array(
@@ -61,8 +71,16 @@ class Ebanx_Gateway_Model_Observer extends Varien_Event_Observer
         $this->doCurl($data, $store->getWebsiteId(), (isset($user)));
     }
 
+    /**
+     * @param string $data    encoded json data
+     * @param string $storeId store id
+     * @param bool   $new     is lead new
+     *
+     * @return void
+     */
     private function doCurl($data, $storeId, $new = true)
     {
+        // phpcs:disable
         $ch = curl_init('https://dashboard.ebanx.com/api/lead');
 
         curl_setopt_array($ch, array(
@@ -77,6 +95,7 @@ class Ebanx_Gateway_Model_Observer extends Varien_Event_Observer
 
         $transfer = curl_exec($ch);
         $error = curl_error($ch);
+        // phpcs:enable
 
         if ($new && empty($error)) {
             $leadInfo = json_decode($transfer, true);
