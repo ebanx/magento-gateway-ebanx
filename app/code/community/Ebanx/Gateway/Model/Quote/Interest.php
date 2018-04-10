@@ -2,11 +2,19 @@
 
 class Ebanx_Gateway_Model_Quote_Interest extends Mage_Sales_Model_Quote_Address_Total_Abstract
 {
+    /**
+     * Ebanx_Gateway_Model_Quote_Interest constructor.
+     */
     public function __construct()
     {
         $this->setCode('ebanx_interest');
     }
 
+    /**
+     * @param Mage_Sales_Model_Quote_Address $address address
+     *
+     * @return void
+     */
     public function collect(Mage_Sales_Model_Quote_Address $address)
     {
         if ($address->getAddressType() !== Mage_Sales_Model_Quote_Address::TYPE_BILLING) {
@@ -48,6 +56,10 @@ class Ebanx_Gateway_Model_Quote_Interest extends Mage_Sales_Model_Quote_Address_
         }
     }
 
+    /**
+     * @param Mage_Sales_Model_Quote_Address $address address
+     * @return $this
+     */
     public function fetch(Mage_Sales_Model_Quote_Address $address)
     {
         $amount = $address->getEbanxInterestAmount();

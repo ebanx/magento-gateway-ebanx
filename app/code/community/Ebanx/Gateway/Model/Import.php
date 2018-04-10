@@ -11,8 +11,8 @@ class Ebanx_Gateway_Model_Import extends Mage_Directory_Model_Currency_Import_Ab
     /**
      * Retrieve rate
      *
-     * @param string $currencyFrom
-     * @param string $currencyTo
+     * @param string $currencyFrom original currency
+     * @param string $currencyTo   destination currency
      *
      * @return float|null
      */

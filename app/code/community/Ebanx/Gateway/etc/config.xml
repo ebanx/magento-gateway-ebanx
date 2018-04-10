@@ -56,7 +56,7 @@
                     <ebanx_gateway_model_capture>
                         <type>singleton</type>
                         <class>Ebanx_Gateway_Model_Capture</class>
-                        <method>capture_payment</method>
+                        <method>capturePayment</method>
                     </ebanx_gateway_model_capture>
                 </observers>
             </sales_order_invoice_pay>

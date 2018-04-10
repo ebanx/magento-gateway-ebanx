@@ -6,6 +6,9 @@ class Ebanx_Gateway_Model_Source_Methodscolombia
     const BALOTO = 'ebanx_baloto';
     const CREDIT_CARD = 'ebanx_cc_co';
 
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         return array(
