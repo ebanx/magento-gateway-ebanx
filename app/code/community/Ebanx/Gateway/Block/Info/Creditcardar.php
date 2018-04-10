@@ -2,6 +2,9 @@
 
 class Ebanx_Gateway_Block_Info_Creditcardar extends Ebanx_Gateway_Block_Info_Abstract
 {
+    /**
+     * @return Ebanx_Gateway_Block_Info_Creditcardar
+     */
     protected function _construct()
     {
         parent::_construct();

@@ -2,16 +2,28 @@
 
 class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
 {
+    /**
+     * @param string $hash Hash of the payment
+     * @return mixed
+     */
     public function getOrderByHash($hash)
     {
         return $this->getOrderBy('ebanx_payment_hash', $hash);
     }
 
+    /**
+     * @param string $hash Hash of the payment
+     * @return mixed
+     */
     public function getLegacyOrderByHash($hash)
     {
         return $this->getOrderBy('ebanx_hash', $hash);
     }
 
+    /**
+     * @param string $ebanxStatus Payment status
+     * @return mixed
+     */
     public function getEbanxMagentoOrder($ebanxStatus)
     {
         $status = array(
@@ -24,6 +36,10 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
         return $status[strtoupper($ebanxStatus)];
     }
 
+    /**
+     * @param string $ebanxStatus Payment status
+     * @return mixed
+     */
     public function getTranslatedOrderStatus($ebanxStatus)
     {
         $status = array(
@@ -36,6 +52,11 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
         return $status[strtoupper($ebanxStatus)];
     }
 
+    /**
+     * @param string $field Field to filter
+     * @param string $value Value to filter
+     * @return mixed
+     */
     private function getOrderBy($field, $value)
     {
         $model = Mage::getModel('sales/order_payment')

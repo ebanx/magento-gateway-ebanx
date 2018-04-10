@@ -4,6 +4,9 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment_Creditcardco extends Ebanx_Ga
 {
     protected $currencyCode = 'COP';
 
+    /**
+     * @return Ebanx_Gateway_Block_Checkout_Success_Payment_Creditcardco
+     */
     protected function _construct()
     {
         parent::_construct();

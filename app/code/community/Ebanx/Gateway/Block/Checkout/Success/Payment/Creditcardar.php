@@ -4,6 +4,9 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment_Creditcardar extends Ebanx_Ga
 {
     protected $currencyCode = 'ARS';
 
+    /**
+     * @return Ebanx_Gateway_Block_Checkout_Success_Payment_Creditcardar
+     */
     protected function _construct()
     {
         parent::_construct();

@@ -5,6 +5,9 @@
  */
 class Ebanx_Gateway_IndexController extends Mage_Core_Controller_Front_Action
 {
+    /**
+     * @return void
+     */
     public function notificationAction()
     {
         $this->getResponse()->setRedirect(
