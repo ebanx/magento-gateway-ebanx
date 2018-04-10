@@ -10,16 +10,16 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxT
 ?>
 
 <ul class="form-list ebanx-payment-method ebanx-br-method" id="payment_form_<?= $this->getMethodCode() ?>" style="display:none;">
-  <?php include 'sandbox-warning.phtml' ?>
+    <?php include 'sandbox-warning.phtml' ?>
   <li class="centinel-logos">
     <label class="ebanx-payment-method-desc">Pague com boleto bancário.</label>
-    <?php if(!$showInlineIcon): ?>
+    <?php if (!$showInlineIcon) : ?>
       <div class="input-box">
         <?= $icon; ?>
       </div>
     <?php endif; ?>
   </li>
-  <?php include 'fields.phtml' ?>
+    <?php include 'fields.phtml' ?>
   <li>
     <?php include 'brazil/local_amount.phtml'; ?>
   </li>

@@ -8,7 +8,7 @@ $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 <?= $this->getMessagesBlock()->getGroupedHtml() ?>
 <?= $this->getChildHtml('pager'); ?>
 
-<?php if ($this->getCards()->getSize()): ?>
+<?php if ($this->getCards()->getSize()) : ?>
   <form  id="credit-card-list-form" method="post" action="<?= $this->escapeUrl($this->getFormUrl()) ?>">
 
     <table class="data-table" id="my-credit-cards-table">
@@ -22,7 +22,7 @@ $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
       </tr>
       </thead>
       <tbody>
-      <?php foreach ($this->getCards() as $card): ?>
+        <?php foreach ($this->getCards() as $card) : ?>
         <tr>
           <td>
             <input type="checkbox" class="checkbox related-checkbox" value="<?= $card->getEbanxCardId(); ?>" id="card[<?= $card->getEbanxCardId(); ?>]" name="card[]" />
@@ -34,7 +34,7 @@ $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
             </label>
           </td>
         </tr>
-      <?php endforeach; ?>
+        <?php endforeach; ?>
       </tbody>
     </table>
 
@@ -55,8 +55,7 @@ $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
       </button>
     </div>
   </form>
-<?php else: ?>
-
+<?php else : ?>
   <p><?= $this->__('You have no saved credit cards yet.') ?></p>
   <div class="buttons-set">
     <p class="back-link">

@@ -10,16 +10,16 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxT
 ?>
 
 <ul class="form-list ebanx-payment-method ebanx-es-method" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
-  <?php include 'sandbox-warning.phtml' ?>
+    <?php include 'sandbox-warning.phtml' ?>
   <li class="centinel-logos">
     <label class="ebanx-payment-method-desc">Paga con SafetyPay.</label>
-    <?php if(!$showInlineIcon): ?>
+    <?php if (!$showInlineIcon) : ?>
       <div class="input-box">
         <?= $icon; ?>
       </div>
     <?php endif; ?>
   </li>
-  <?php include 'fields.phtml' ?><li>
+    <?php include 'fields.phtml' ?><li>
   <li>
     <label for="ebanx_safetypay_type_cash">
       <input type="radio" id="ebanx_safetypay_type_cash" name="ebanx_safetypay_type" value="Cash" checked>

@@ -2,11 +2,11 @@
 <br>
 <p>Total a pagar en dolar: <?php
 
-  if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
+if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
     echo $this->getLocalAmount('USD');
-  } else {
+} else {
     echo $this->getLocalAmountWithoutTax('USD');
-  }
-  ?></p>
+}
+    ?></p>
 
 <?php echo $this->getChildHtml() ?>

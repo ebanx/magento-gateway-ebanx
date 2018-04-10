@@ -2,20 +2,20 @@
 
 class Ebanx_Gateway_Helper_Error extends Ebanx_Gateway_Helper_Data
 {
-	private $errors;
-	private $generalCode = 'GENERAL';
+    private $errors;
+    private $generalCode = 'GENERAL';
 
-	public function __construct()
-	{
-		$this->errors = $this->setupErrors();
-	}
+    public function __construct()
+    {
+        $this->errors = $this->setupErrors();
+    }
 
-	public function setupErrors()
-	{
-		return array(
-			'pt-br' => array(
-				'GENERAL' => 'Não foi possível concluir a compra. Por favor, tente novamente ou entre em contato com o site.',
-				'BP-DR-13' => 'Ei, você esqueceu de preencher o seu nome.',
+    public function setupErrors()
+    {
+        return array(
+            'pt-br' => array(
+                'GENERAL' => 'Não foi possível concluir a compra. Por favor, tente novamente ou entre em contato com o site.',
+                'BP-DR-13' => 'Ei, você esqueceu de preencher o seu nome.',
                 'BP-DR-14' => 'Epa, o seu nome está com mais caracteres do que o limite permitido. Procure abreviá-lo ou então coloque apenas um sobrenome.',
                 'BP-DR-15' => 'Espera aí! Faltou preencher o e-mail.',
                 'BP-DR-17' => 'Desculpa, mas o e-mail enviado é inválido.',
@@ -69,21 +69,21 @@ class Ebanx_Gateway_Helper_Error extends Ebanx_Gateway_Helper_Data
                 'BP-ZIP-1' => 'Ei, você esqueceu de nos informar o seu CEP.',
                 'BP-ZIP-2' => 'O CEP enviado não é válido. Por favor, tente de novo.',
                 'BP-ZIP-3' => 'O CEP enviado é inválido ou inexistente. Por favor, tente de novo.',
-				'MISSING-DEVICE-FINGERPRINT' => 'Algo aconteceu e não conseguimos concluir a sua compra. Por favor tente novamente.',
-				'MISSING-CVV' => 'Por favor digite o CVV do seu cartão de crédito.',
-				'MISSING-INSTALMENTS' => 'Por favor escolha em quantas parcelas você quer pagar.',
-				'MISSING-BANK-NAME' => 'Escolha um banco que deseja efetuar a sua compra.',
-				'INVALID-SAFETYPAY-TYPE' => 'Escolha uma opção para o método de pagamento SafetyPay.',
-				'INVALID-FIELDS' => 'Alguns campos não foram preenchidos corretamente. Por favor, verifique e tente novamente.',
-				'INVALID-BILLING-COUNTRY' => 'Por favor, escolha um país.',
-				'INVALID-ADDRESS' => 'Insira o seu endereço completo com o número da casa, apartamento ou estabelecimento.',
-				'SANDBOX-INVALID-CC-NUMBER' => 'Detectamos que você está em modo Sandbox e por isso só permitimos apenas alguns números de cartões. <a href="https://www.ebanx.com/business/en/developers/integrations/testing/credit-card-test-numbers" target="_blank">Você pode utilizar um dos nossos cartões de teste acessando a EBANX Developer\'s Academy.</a>',
-				'CC-NOK' => 'Houve um problema com seu cartão de crédito, entre em contato com o emissor do cartão.',
-				'CC-RETRY' => 'Ocorreu um problema com seu cartão, tente novamente em alguns momentos.',
-			),
-			'es' => array(
-				'GENERAL' => 'No pudimos concluir tu compra. Por favor intenta nuevamente o entra en contacto con el sitio web.',
-				'BP-DR-13' => '¡Ey!, olvidaste ingresar tu nombre.',
+                'MISSING-DEVICE-FINGERPRINT' => 'Algo aconteceu e não conseguimos concluir a sua compra. Por favor tente novamente.',
+                'MISSING-CVV' => 'Por favor digite o CVV do seu cartão de crédito.',
+                'MISSING-INSTALMENTS' => 'Por favor escolha em quantas parcelas você quer pagar.',
+                'MISSING-BANK-NAME' => 'Escolha um banco que deseja efetuar a sua compra.',
+                'INVALID-SAFETYPAY-TYPE' => 'Escolha uma opção para o método de pagamento SafetyPay.',
+                'INVALID-FIELDS' => 'Alguns campos não foram preenchidos corretamente. Por favor, verifique e tente novamente.',
+                'INVALID-BILLING-COUNTRY' => 'Por favor, escolha um país.',
+                'INVALID-ADDRESS' => 'Insira o seu endereço completo com o número da casa, apartamento ou estabelecimento.',
+                'SANDBOX-INVALID-CC-NUMBER' => 'Detectamos que você está em modo Sandbox e por isso só permitimos apenas alguns números de cartões. <a href="https://www.ebanx.com/business/en/developers/integrations/testing/credit-card-test-numbers" target="_blank">Você pode utilizar um dos nossos cartões de teste acessando a EBANX Developer\'s Academy.</a>',
+                'CC-NOK' => 'Houve um problema com seu cartão de crédito, entre em contato com o emissor do cartão.',
+                'CC-RETRY' => 'Ocorreu um problema com seu cartão, tente novamente em alguns momentos.',
+            ),
+            'es' => array(
+                'GENERAL' => 'No pudimos concluir tu compra. Por favor intenta nuevamente o entra en contacto con el sitio web.',
+                'BP-DR-13' => '¡Ey!, olvidaste ingresar tu nombre.',
                 'BP-DR-14' => '¡Ey!, su nombre tiene más caracteres que el límite permitido. Busque abreviado o coloque sólo un apellido.',
                 'BP-DR-15' => '¡Espera! Falto ingresar tu correo electrónico.',
                 'BP-DR-17' => 'Disculpa, pero ese correo electrónico no es válido.',
@@ -137,44 +137,44 @@ class Ebanx_Gateway_Helper_Error extends Ebanx_Gateway_Helper_Data
                 'BP-ZIP-1' => '¡Ey!, olvidaste informar el Código Postal.',
                 'BP-ZIP-2' => 'El Código Postal informado, no es válido. Por favor, ingresalo nuevamente.',
                 'BP-ZIP-3' => 'El Código Postal es invalido o no existe. Por favor, prueba con otro.',
-				'MISSING-CARD-PARAMS' => 'Por favor, verifica que la información de la tarjeta esté correcta.',
-				'MISSING-DEVICE-FINGERPRINT' => 'Hemos encontrado un error y no fue posible concluir la compra. Por favor intenta de nuevo.',
-				'MISSING-CVV' => 'Por favor, introduce el CVV de tu tarjeta de crédito.',
-				'MISSING-INSTALMENTS' => 'Por favor, escoge en cuántos meses sin intereses deseas pagar.',
-				'MISSING-BANK-NAME' => 'Por favor, escoge el banco para finalizar la compra.',
-				'INVALID-SAFETYPAY-TYPE' => 'Por favor, escoge una opción para el método de pago SafetyPay.',
-				'INVALID-FIELDS' => 'Algunos campos no fueron llenados correctamente. Por favor verifica e inténtalo de nuevo.',
-				'INVALID-BILLING-COUNTRY' => 'Por favor, escoge un país.',
-				'INVALID-ADDRESS' => 'Por favor, introduce tu dirección completa. Número de residencia o apartamento.',
-				'SANDBOX-INVALID-CC-NUMBER' => 'Detectamos que estás en modo Sandbox y por eso restringimos algunos números de tarjetas. <a href="https://www.ebanx.com/business/en/developers/integrations/testing/credit-card-test-numbers" target="_blank">Puedes utilizar una de nuestras tarjetas de prueba accediendo a EBANX Developer\'s Academy.</a>',
-				'CC-NOK' => 'Ha habido un problema con su tarjeta de crédito, póngase en contacto con el emisor de la tarjeta.',
-				'CC-RETRY' => 'Se ha producido un problema con su tarjeta, vuelva a intentarlo en algunos momentos.',
-			),
-		);
-	}
+                'MISSING-CARD-PARAMS' => 'Por favor, verifica que la información de la tarjeta esté correcta.',
+                'MISSING-DEVICE-FINGERPRINT' => 'Hemos encontrado un error y no fue posible concluir la compra. Por favor intenta de nuevo.',
+                'MISSING-CVV' => 'Por favor, introduce el CVV de tu tarjeta de crédito.',
+                'MISSING-INSTALMENTS' => 'Por favor, escoge en cuántos meses sin intereses deseas pagar.',
+                'MISSING-BANK-NAME' => 'Por favor, escoge el banco para finalizar la compra.',
+                'INVALID-SAFETYPAY-TYPE' => 'Por favor, escoge una opción para el método de pago SafetyPay.',
+                'INVALID-FIELDS' => 'Algunos campos no fueron llenados correctamente. Por favor verifica e inténtalo de nuevo.',
+                'INVALID-BILLING-COUNTRY' => 'Por favor, escoge un país.',
+                'INVALID-ADDRESS' => 'Por favor, introduce tu dirección completa. Número de residencia o apartamento.',
+                'SANDBOX-INVALID-CC-NUMBER' => 'Detectamos que estás en modo Sandbox y por eso restringimos algunos números de tarjetas. <a href="https://www.ebanx.com/business/en/developers/integrations/testing/credit-card-test-numbers" target="_blank">Puedes utilizar una de nuestras tarjetas de prueba accediendo a EBANX Developer\'s Academy.</a>',
+                'CC-NOK' => 'Ha habido un problema con su tarjeta de crédito, póngase en contacto con el emisor de la tarjeta.',
+                'CC-RETRY' => 'Se ha producido un problema con su tarjeta, vuelva a intentarlo en algunos momentos.',
+            ),
+        );
+    }
 
-	public function getError($code = 'GENERAL', $country = null)
-	{
-		$language = $this->getLanguage($country);
+    public function getError($code = 'GENERAL', $country = null)
+    {
+        $language = $this->getLanguage($country);
 
-		$isErrorExist = array_key_exists($code, $this->errors[$language]);
+        $isErrorExist = array_key_exists($code, $this->errors[$language]);
 
-		return $isErrorExist ? $this->errors[$language][strtoupper($code)] : $this->errors[$language][$this->generalCode];
-	}
+        return $isErrorExist ? $this->errors[$language][strtoupper($code)] : $this->errors[$language][$this->generalCode];
+    }
 
-	public function getLanguage($country)
-	{
-		switch (strtolower($country)) {
-			case 'br':
-				return 'pt-br';
-			case 'mx':
-			case 'cl':
-			case 'co':
-			case 'pe':
-				return 'es';
-				break;
-			default:
-				return 'pt-br';
-		};
-	}
+    public function getLanguage($country)
+    {
+        switch (strtolower($country)) {
+            case 'br':
+                return 'pt-br';
+            case 'mx':
+            case 'cl':
+            case 'co':
+            case 'pe':
+                return 'es';
+                break;
+            default:
+                return 'pt-br';
+        };
+    }
 }
