@@ -2,9 +2,12 @@
 
 class Ebanx_Gateway_LogController extends Mage_Core_Controller_Front_Action
 {
+    /**
+     * @return void
+     */
     public function fetchAction()
     {
-        header('Content-Type: application/json');
+        header('Content-Type: application/json');   // phpcs:ignore
 
         $integration_key = $this->getRequest()->getParam('integration_key');
 

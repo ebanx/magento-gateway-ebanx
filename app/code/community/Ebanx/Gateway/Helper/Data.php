@@ -13,31 +13,49 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     private $order;
 
+    /**
+     * @return string
+     */
     public function getEbanxUrl()
     {
         return $this->isSandboxMode() ? self::URL_PRINT_SANDBOX : self::URL_PRINT_LIVE;
     }
 
+    /**
+     * @return bool
+     */
     public function isSandboxMode()
     {
         return $this->getMode() === Ebanx_Gateway_Model_Source_Mode::SANDBOX;
     }
 
+    /**
+     * @return mixed
+     */
     public function getMode()
     {
         return Mage::getStoreConfig('payment/ebanx_settings/mode');
     }
 
+    /**
+     * @return mixed
+     */
     public function getSandboxIntegrationKey()
     {
         return Mage::getStoreConfig('payment/ebanx_settings/integration_key_' . Ebanx_Gateway_Model_Source_Mode::SANDBOX);
     }
 
+    /**
+     * @return mixed
+     */
     public function getLiveIntegrationKey()
     {
         return Mage::getStoreConfig('payment/ebanx_settings/integration_key_' . Ebanx_Gateway_Model_Source_Mode::LIVE);
     }
 
+    /**
+     * @return bool
+     */
     public function areKeysFilled()
     {
         $keys = $this->getIntegrationKey();
@@ -45,16 +63,27 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return !empty($keys) && !empty($publicKeys);
     }
 
+    /**
+     * @return mixed
+     */
     public function getIntegrationKey()
     {
         return Mage::getStoreConfig('payment/ebanx_settings/integration_key_' . $this->getMode());
     }
 
+    /**
+     * @return mixed
+     */
     public function getPublicIntegrationKey()
     {
         return Mage::getStoreConfig('payment/ebanx_settings/integration_key_public_' . $this->getMode());
     }
 
+    /**
+     * @param string $date   Date if not currently
+     * @param string $format Format desired to the date
+     * @return mixed
+     */
     public function getDueDate($date = null, $format = 'YYYY-MM-dd HH:mm:ss')
     {
         $date = !is_null($date) ? $date : Mage::getModel('core/date')->timestamp();
@@ -63,31 +92,50 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return $dueDate->addDay($this->getDueDateDays())->get($format);
     }
 
+    /**
+     * @return mixed
+     */
     public function getDueDateDays()
     {
         return Mage::getStoreConfig('payment/ebanx_settings/due_date_days');
     }
 
+    /**
+     * @return mixed
+     */
     public function getMaxInstalments()
     {
         return Mage::getStoreConfig('payment/ebanx_settings/max_instalments');
     }
 
+    /**
+     * @return mixed
+     */
     public function getMinInstalmentValue()
     {
         return Mage::getStoreConfig('payment/ebanx_settings/min_instalment_value');
     }
 
+    /**
+     * @return mixed
+     */
     public function getInterestRate()
     {
         return Mage::getStoreConfig('payment/ebanx_settings/interest_rate');
     }
 
+    /**
+     * @return mixed
+     */
     public function saveCreditCardAllowed()
     {
         return Mage::getStoreConfig('payment/ebanx_settings/save_card_data');
     }
 
+    /**
+     * @param string $bankCode Code of the bank
+     * @return mixed
+     */
     public function transformTefToBankName($bankCode)
     {
         $banks = array(
@@ -100,6 +148,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return $banks[strtolower($bankCode)];
     }
 
+    /**
+     * @param string $methodCode Method code
+     * @return bool
+     */
     public function hasDocumentFieldAlreadyForMethod($methodCode)
     {
         $fields = $this->getDocumentFieldsRequiredForMethod($methodCode);
@@ -130,6 +182,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return false;
     }
 
+    /**
+     * @param string $code Code of ebanx payment method
+     * @return string
+     */
     public function getLabelForComplianceField($code)
     {
         switch ($code) {
@@ -158,6 +214,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         }
     }
 
+    /**
+     * @param string $countryCode Country string
+     * @return string
+     */
     public function getLabelForComplianceFieldByCountry($countryCode)
     {
         switch (strtolower($countryCode)) {
@@ -175,6 +235,9 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         }
     }
 
+    /**
+     * @return string
+     */
     public function getBrazilianDocumentLabel()
     {
         $label = array();
@@ -183,6 +246,11 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return strtoupper(implode(' / ', $taxes));
     }
 
+    /**
+     * @param object $order Some order
+     * @param object $data  Ebanx document
+     * @return null|string
+     */
     public function getDocumentNumber($order, $data)
     {
         $this->order = $order;
@@ -206,6 +274,9 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         }
     }
 
+    /**
+     * @return array
+     */
     public function getCustomerData()
     {
         $checkoutData = Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getData();
@@ -228,6 +299,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return $data;
     }
 
+    /**
+     * @param string $countryCode ISO country code
+     * @return bool|mixed|null
+     */
     public function transformCountryCodeToName($countryCode)
     {
         if (!$countryCode) {
@@ -243,6 +318,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return $country;
     }
 
+    /**
+     * @param $string $methodCode EBANX method code
+     * @return mixed
+     */
     public function getBrazilianDocumentNumber($methodCode)
     {
         $customer = $this->getCustomerData();
@@ -275,6 +354,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return $customer['ebanx-document'][$methodCode];
     }
 
+    /**
+     * @param string $methodCode EBANX method code
+     * @return mixed|string
+     */
     public function getChileanDocumentNumber($methodCode)
     {
         $customer = $this->getCustomerData();
@@ -300,6 +383,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return $customer['ebanx-document'][$methodCode];
     }
 
+    /**
+     * @param string $methodCode EBANX method code
+     * @return mixed|string
+     */
     public function getColombianDocumentNumber($methodCode)
     {
         $customer = $this->getCustomerData();
@@ -325,6 +412,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return $customer['ebanx-document'][$methodCode];
     }
 
+    /**
+     * @param string $methodCode EBANX method code
+     * @return mixed
+     */
     public function getArgetinianDocument($methodCode)
     {
         $customer = $this->getCustomerData();
@@ -342,6 +433,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return $customer['ebanx-document'][$methodCode];
     }
 
+    /**
+     * @param string $methodCode EBANX method code
+     * @return mixed
+     */
     public function getPeruvianDocumentNumber($methodCode)
     {
         $customer = $this->getCustomerData();
@@ -359,6 +454,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return $customer['ebanx-document'][$methodCode];
     }
 
+    /**
+     * @param string $document Document
+     * @return string
+     */
     public function getPersonType($document)
     {
         $document = str_replace(array('.', '-', '/'), '', $document);
@@ -370,11 +469,21 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return Person::TYPE_BUSINESS;
     }
 
+    /**
+     * @param mixed $data Data to be logged
+     * @return void
+     */
     public function errorLog($data)
     {
         $this->log($data, 'ebanx_error');
     }
 
+    /**
+     * @param mixed  $data      Data to be logged
+     * @param string $filename  Filename of the log file
+     * @param string $extension Log extension
+     * @return void
+     */
     public function log($data, $filename = 'ebanx', $extension = '.log')
     {
         $isLogEnabled = Mage::getStoreConfig('payment/ebanx_settings/debug_log') === '1';
@@ -387,12 +496,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Splits address in street name, house number and addition
-     *
      * @param  string $address Address to be split
      * @return array
      */
-    public function split_street($address)
+    public function splitStreet($address)
     {
         $result = preg_match('/^([^,\-\/\#0-9]*)\s*[,\-\/\#]?\s*([0-9]+)\s*[,\-\/]?\s*([^,\-\/]*)(\s*[,\-\/]?\s*)([^,\-\/]*)$/', $address, $matches);
         if ($result === false) {
@@ -419,6 +526,11 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         );
     }
 
+    /**
+     * @param string $hash   Url Hash
+     * @param string $format Voucher format
+     * @return string|void
+     */
     public function getVoucherUrlByHash($hash, $format = 'basic')
     {
         $res = $this->getPaymentByHash($hash);
@@ -465,6 +577,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return "{$url}&format={$format}";
     }
 
+    /**
+     * @param string $hash Payment hash
+     * @return mixed
+     */
     public function getPaymentByHash($hash)
     {
         $ebanx = Mage::getSingleton('ebanx/api')->ebanx();
@@ -472,6 +588,11 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return $ebanx->paymentInfo()->findByHash($hash);
     }
 
+    /**
+     * @param string $currency Currency
+     * @param float  $value    Amount
+     * @return mixed
+     */
     public function getLocalAmountWithTax($currency, $value)
     {
         $ebanx = Mage::getSingleton('ebanx/api')->ebanx();
@@ -479,6 +600,11 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return $ebanx->exchange()->siteToLocalWithTax($currency, $value);
     }
 
+    /**
+     * @param string $currency Currency
+     * @param float  $value    Amount
+     * @return mixed
+     */
     public function getLocalAmountWithoutTax($currency, $value)
     {
         $ebanx = Mage::getSingleton('ebanx/api')->ebanx();
@@ -486,11 +612,18 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return $ebanx->exchange()->siteToLocal($currency, $value);
     }
 
+    /**
+     * @return mixed
+     */
     public function hasToShowInlineIcon()
     {
         return Mage::getStoreConfig('payment/ebanx_settings/payment_methods_visualization');
     }
 
+    /**
+     * @param string $code EBANX Method Code
+     * @return bool
+     */
     public function isEbanxMethod($code)
     {
         $ebanxMethods = array(
@@ -521,7 +654,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @param $methodCode
+     * @param string $methodCode EBANX Method Code
      * @return mixed
      */
     public function getDocumentFieldsRequiredForMethod($methodCode)
@@ -561,6 +694,9 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         return $methodsToFields[$methodCode];
     }
 
+    /**
+     * @return array
+     */
     public function getSandboxWarningText()
     {
         $countryCode = Mage::getSingleton('checkout/session')->getQuote()->getBillingAddress()->getCountry();
