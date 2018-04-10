@@ -7,6 +7,9 @@ class Ebanx_Gateway_Model_Chile_Multicaja extends Ebanx_Gateway_Payment
     protected $_formBlockType = 'ebanx/form_multicaja';
     protected $_infoBlockType = 'ebanx/info_multicaja';
 
+    /**
+     * Ebanx_Gateway_Model_Chile_Multicaja constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -14,6 +17,10 @@ class Ebanx_Gateway_Model_Chile_Multicaja extends Ebanx_Gateway_Payment
         $this->gateway = $this->ebanx->multicaja();
     }
 
+    /**
+     * @param null $quote unused
+     * @return bool
+     */
     public function isAvailable($quote = null)
     {
         return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_chile']));

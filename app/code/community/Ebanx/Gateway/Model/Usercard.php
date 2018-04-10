@@ -4,6 +4,8 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
 {
     /**
      * Internal constructor
+     *
+     * @return void
      */
     protected function _construct()
     {
@@ -13,8 +15,9 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
     /**
      * Remove the cards from array cards
      *
-     * @param  array $cards
-     * @param  int   $userId
+     * @param array $cards  user cards
+     * @param int   $userId user id
+     *
      * @return Varien_Object
      */
     public function removeCardsFromUser($cards, $userId)
@@ -29,8 +32,9 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
     /**
      * Returns the registry by user id and masked number
      *
-     * @param  int    $userId
-     * @param  string $maskedNumber
+     * @param int    $userId       user id
+     * @param string $maskedNumber user masked number
+     *
      * @return Varien_Object
      */
     public function getByCustomerIdAndMaskedNumber($userId, $maskedNumber)
@@ -41,8 +45,9 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
     /**
      * Returns if a Card is already saved for the customer
      *
-     * @param  string $maskedNumber
-     * @param  int    $userId
+     * @param string $maskedNumber user masked number
+     * @param int    $userId       user id
+     *
      * @return bool
      */
     public function isCardAlreadySavedForCustomer($maskedNumber, $userId)
@@ -53,8 +58,9 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
     /**
      * Returns if the Card belongs to the customer
      *
-     * @param  string $token
-     * @param  int    $userId
+     * @param string $token  collection token
+     * @param int    $userId user id
+     *
      * @return bool
      */
     public function doesCardBelongsToCustomer($token, $userId)
@@ -62,12 +68,22 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
         return $this->getCollectionByCustomerIdAndToken($userId, $token)->count() > 0;
     }
 
+    /**
+     * @param int $userId user d
+     *
+     * @return mixed
+     */
     public function getCustomerSavedCards($userId)
     {
         return $this->getCollection()
                     ->addFieldToFilter('user_id', $userId);
     }
 
+    /**
+     * @param string $token collection token
+     *
+     * @return mixed
+     */
     public function getPaymentMethodByToken($token)
     {
         $collection = $this->getCollection()
@@ -79,8 +95,9 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
     /**
      * Returns a collection by customer ID and Masked Number
      *
-     * @param  int    $userId
-     * @param  string $maskedNumber
+     * @param int    $userId       user id
+     * @param string $maskedNumber user masked number
+     *
      * @return Ebanx_Gateway_Model_Resource_Usercard_Collection
      */
     private function getCollectionByCustomerIdAndMaskedNumber($userId, $maskedNumber)
@@ -93,8 +110,9 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
     /**
      * Returns a collection by customer ID and Card ID
      *
-     * @param  int   $userId
-     * @param  array $cardId
+     * @param int   $userId user id
+     * @param array $cardId card id
+     *
      * @return Ebanx_Gateway_Model_Resource_Usercard_Collection
      */
     private function getCollectionByCustomerIdAndCardId($userId, $cardId)
@@ -107,8 +125,9 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
     /**
      * Returns a collection by customer ID and Token
      *
-     * @param  int    $userId
-     * @param  string $token
+     * @param int    $userId user id
+     * @param string $token  collection token
+     *
      * @return Ebanx_Gateway_Model_Resource_Usercard_Collection
      */
     private function getCollectionByCustomerIdAndToken($userId, $token)

@@ -5,6 +5,9 @@ class Ebanx_Gateway_Model_Source_Persontype
     const CPF = 'cpf';
     const CNPJ = 'cnpj';
 
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         return array(

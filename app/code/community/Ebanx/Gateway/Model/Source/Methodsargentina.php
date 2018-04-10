@@ -7,6 +7,9 @@ class Ebanx_Gateway_Model_Source_Methodsargentina
     const PAGOFACIL = 'ebanx_pagofacil';
     const OTROS_CUPONES = 'ebanx_otroscupones';
 
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         return array(

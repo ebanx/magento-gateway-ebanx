@@ -4,16 +4,19 @@ require_once Mage::getBaseDir('lib') . '/Ebanx/vendor/autoload.php';
 
 class Ebanx_Gateway_Log_Environment
 {
-    public static function get_platform_info()
+    /**
+     * @return array
+     */
+    public static function getPlatformInfo()
     {
-        $environment = self::get_environment();
+        $environment = self::getEnvironment();
 
         return array(
             'platform' => array(
                 'name' => 'Magento',
                 'version' => $environment->platform->version,
-                'theme' => self::get_theme_data(),
-                'plugins' => self::get_plugins_data(),
+                'theme' => self::getThemeData(),
+                'plugins' => self::getPluginsData(),
                 'store_id' => Mage::app()->getStore()->getWebsiteId(),
             ),
             'server' => array(
@@ -25,7 +28,10 @@ class Ebanx_Gateway_Log_Environment
         );
     }
 
-    private static function get_environment()
+    /**
+     * @return stdClass
+     */
+    private static function getEnvironment()
     {
         $environment = new stdClass();
         $environment->platform = new stdClass();
@@ -48,12 +54,15 @@ class Ebanx_Gateway_Log_Environment
 
         $environment->operating_system = new stdClass();
         $environment->operating_system->name = PHP_OS;
-        $environment->operating_system->version = self::extract_version_number_from(php_uname('v'));
+        $environment->operating_system->version = self::extractVersionNumberFrom(php_uname('v'));
 
         return $environment;
     }
 
-    private static function get_plugins_data()
+    /**
+     * @return array
+     */
+    private static function getPluginsData()
     {
         return (array) array_map(function ($plugin) {
             $plugin->status = Mage::helper('core')->isModuleOutputEnabled($plugin->getName()) ? 'enabled' : 'disabled';
@@ -62,7 +71,10 @@ class Ebanx_Gateway_Log_Environment
         }, (array) Mage::getConfig()->getNode('modules')->children());
     }
 
-    private static function get_theme_data()
+    /**
+     * @return array
+     */
+    private static function getThemeData()
     {
         return array_map(function ($v) {
             return (object) [ $v => Mage::getSingleton('core/design_package')->getTheme($v)];
@@ -76,7 +88,11 @@ class Ebanx_Gateway_Log_Environment
         ]);
     }
 
-    private static function extract_version_number_from($haystack)
+    /**
+     * @param mixed $haystack haystack to extract version number
+     * @return mixed|string
+     */
+    private static function extractVersionNumberFrom($haystack)
     {
         preg_match('/((\d)+(\.|\D))+/', $haystack, $version_candidates_array);
         if (count($version_candidates_array) > 0 && strlen($version_candidates_array[0]) > 0) {

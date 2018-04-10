@@ -7,6 +7,9 @@ class Ebanx_Gateway_Model_Source_Methodschile
     const WEBPAY = 'ebanx_webpay';
     const MULTICAJA = 'ebanx_multicaja';
 
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         return array(

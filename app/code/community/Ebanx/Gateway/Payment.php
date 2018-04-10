@@ -19,6 +19,9 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
     protected $_isInitializeNeeded = true;
     protected $_canRefund = true;
 
+    /**
+     * Ebanx_Gateway_Payment constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -29,6 +32,12 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         $this->helper = Mage::helper('ebanx');
     }
 
+    /**
+     * @param string $paymentAction action performed
+     * @param object $stateObject   state object
+     *
+     * @return void
+     */
     public function initialize($paymentAction, $stateObject)
     {
         try {
@@ -50,6 +59,9 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         }
     }
 
+    /**
+     * @return void
+     */
     public function setupData()
     {
         // Create payment data
@@ -74,11 +86,17 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
             ->setOrder($this->order);
     }
 
+    /**
+     * @return void
+     */
     public function transformPaymentData()
     {
         $this->paymentData = $this->adapter->transform($this->data);
     }
 
+    /**
+     * @return void
+     */
     public function processPayment()
     {
         $res = $this->gateway->create($this->paymentData);
@@ -121,6 +139,9 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         $this->result = $res;
     }
 
+    /**
+     * @return void
+     */
     public function persistPayment()
     {
         $this->payment
@@ -144,6 +165,11 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         }
     }
 
+    /**
+     * @param Varien_Object $payment payment object
+     * @param float         $amount  money amount to refund
+     * @return $this
+     */
     public function refund(Varien_Object $payment, $amount)
     {
         $hash = $payment->getEbanxPaymentHash();
@@ -165,17 +191,28 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getOrderPlaceRedirectUrl()
     {
         return self::$redirect_url;
     }
 
+    /**
+     * @param null $quote not used
+     * @return bool
+     */
     public function isAvailable($quote = null)
     {
         return Mage::getStoreConfig('payment/ebanx_settings/enabled')
             && $this->helper->areKeysFilled();
     }
 
+    /**
+     * @param string $country 2 letter ISO country
+     * @return mixed
+     */
     public function canUseForCountry($country)
     {
         $countryName = $this->helper->transformCountryCodeToName($country);
@@ -183,6 +220,9 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         return $this->gateway->isAvailableForCountry($countryName);
     }
 
+    /**
+     * @return mixed
+     */
     public function getTotal()
     {
         $quote = $this->getInfoInstance()->getQuote();
