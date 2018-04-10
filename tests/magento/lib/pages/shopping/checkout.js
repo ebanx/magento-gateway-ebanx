@@ -394,6 +394,7 @@ export default class Checkout {
     validateSchema(CHECKOUT_SCHEMA.ar.efectivo(), data, () => {
       this[fillBilling](data);
       this[clickElement](`#p_method_ebanx_${sanitizeMethod(data.paymentMethod)}`);
+      this[selectField](data, 'documentType', 'documentTypeId', `#ebanx-document-type-ebanx_${sanitizeMethod(data.paymentMethod)}`);
       this[fillInputWithJquery](data, 'document', `#ebanx-document-ebanx_${sanitizeMethod(data.paymentMethod)}`);
 
       this[placeOrder]();
@@ -409,6 +410,7 @@ export default class Checkout {
       this[fillBilling](data);
       this[clickElement](`#p_method_ebanx_cc_${lowerCountry}`);
 
+      this[selectField](data, 'documentType', 'documentTypeId', `#ebanx-document-type-ebanx_cc_${lowerCountry}`);
       this[fillInputWithJquery](data, 'document', `#ebanx-document-ebanx_cc_${lowerCountry}`);
 
       this[fillCreditCardName](lowerCountry, data.card);
