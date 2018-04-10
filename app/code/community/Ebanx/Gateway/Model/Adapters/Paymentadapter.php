@@ -40,11 +40,19 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
         'tocantins' => 'TO',
     );
 
+    /**
+     * Ebanx_Gateway_Model_Adapters_Paymentadapter constructor.
+     */
     public function __construct()
     {
         $this->helper = Mage::helper('ebanx');
     }
 
+    /**
+     * @param Varien_Object $data data object
+     *
+     * @return Payment
+     */
     public function transformCard(Varien_Object $data)
     {
         $gatewayFields = $data->getGatewayFields();
@@ -88,7 +96,7 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
     }
 
     /**
-     * @param Varien_Object $data
+     * @param Varien_Object $data varien data
      * @return Payment
      */
     public function transform(Varien_Object $data)
@@ -107,8 +115,8 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
     }
 
     /**
-     * @param Varien_Object $address
-     * @param Varien_Object $data
+     * @param Varien_Object $address varien address
+     * @param Varien_Object $data    varien data
      * @return Address
      */
     public function transformAddress($address, $data)
@@ -139,6 +147,12 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
         ));
     }
 
+    /**
+     * @param Varien_Object $person person to be transformed
+     * @param Varien_Object $data   varien data
+     *
+     * @return Person
+     */
     public function transformPerson($person, $data)
     {
         $document = $this->helper->getDocumentNumber($data->getOrder(), $data);
@@ -159,6 +173,11 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
         ));
     }
 
+    /**
+     * @param Varien_Object $items item array
+     * @param Varien_Object $data  varien data
+     * @return array
+     */
     public function transformItems($items, $data)
     {
         $itemsData = array();
@@ -178,8 +197,8 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
     }
 
     /**
-     * @param array  $gatewayFields
-     * @param string $code
+     * @param array  $gatewayFields gateway fields
+     * @param string $code          key code
      *
      * @return bool|DateTime
      */

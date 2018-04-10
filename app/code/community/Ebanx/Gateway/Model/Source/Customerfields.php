@@ -2,11 +2,18 @@
 
 class Ebanx_Gateway_Model_Source_Customerfields
 {
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         return $this->getAttributesByEntityCode('customer');
     }
 
+    /**
+     * @param string $entity entity code
+     * @return array
+     */
     private function getAttributesByEntityCode($entity)
     {
         $type = Mage::getSingleton('eav/config')->getEntityType($entity);

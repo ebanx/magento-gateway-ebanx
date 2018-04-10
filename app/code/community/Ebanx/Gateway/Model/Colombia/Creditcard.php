@@ -8,6 +8,10 @@ class Ebanx_Gateway_Model_Colombia_Creditcard extends Ebanx_Gateway_Model_Paymen
     protected $_formBlockType = 'ebanx/form_creditcard_co';
     protected $_infoBlockType = 'ebanx/info_creditcardco';
 
+    /**
+     * @param null $quote unused
+     * @return bool
+     */
     public function isAvailable($quote = null)
     {
         return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_colombia']));

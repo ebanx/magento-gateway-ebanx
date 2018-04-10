@@ -5,6 +5,9 @@ class Ebanx_Gateway_Model_Source_Instalment
     const MIN_INSTALMENTS = 1;
     const MAX_INSTALMENTS = 12;
 
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         $options = array();
