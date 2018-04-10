@@ -13,6 +13,9 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
         'CA' => Mage_Sales_Model_Order::STATE_CANCELED,
     );
 
+    /**
+     * @return void
+     */
     public function notifyAction()
     {
         try {
@@ -51,6 +54,9 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
         }
     }
 
+    /**
+     * @return void
+     */
     private function loadOrder()
     {
         try {
@@ -61,6 +67,10 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
         }
     }
 
+    /**
+     * @throws Ebanx_Gateway_Exception
+     * @return void
+     */
     private function initialize()
     {
         $this->helper = Mage::helper('ebanx/order');
@@ -71,6 +81,10 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
         $this->validateStatus();
     }
 
+    /**
+     * @throws Ebanx_Gateway_Exception
+     * @return void
+     */
     private function validateEbanxPaymentRequest()
     {
         $request = $this->getRequest();
@@ -91,11 +105,19 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
         }
     }
 
+    /**
+     * @param object $order Order
+     * @return mixed
+     */
     private function _getPaymentMethod($order)
     {
         return $order->getPayment()->getMethodInstance()->getCode();
     }
 
+    /**
+     * @param array $data JSON array
+     * @return void
+     */
     private function setResponseToJson($data)
     {
         $this->getResponse()->clearHeaders()->setHeader(
@@ -108,6 +130,10 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
         );
     }
 
+    /**
+     * @return mixed
+     * @throws Ebanx_Gateway_Exception
+     */
     private function loadEbanxPaymentStatus()
     {
         $api = Mage::getSingleton('ebanx/api')->ebanx();
@@ -129,6 +155,9 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
         return $payment['payment']['status'];
     }
 
+    /**
+     * @return string
+     */
     private function loadOrderEnv()
     {
         $env = $this->order->getPayment()->getEbanxEnvironment();
@@ -143,6 +172,10 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
 
     // Actions
 
+    /**
+     * @param string $statusEbanx Ebanx status
+     * @return void
+     */
     private function updateOrder($statusEbanx)
     {
         $statusMagento = $this->helper->getEbanxMagentoOrder($statusEbanx);
@@ -153,6 +186,9 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
         $this->order->save();
     }
 
+    /**
+     * @return void
+     */
     private function createInvoice()
     {
 
@@ -166,6 +202,10 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
             ->save();
     }
 
+    /**
+     * @throws Ebanx_Gateway_Exception
+     * @return void
+     */
     private function validateStatus()
     {
         if (array_key_exists($this->statusEbanx, $this->ebanxStatusToState)) {

@@ -11,12 +11,20 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
      */
     public $customer;
 
+    /**
+     * Ebanx_Gateway_Block_Catalog_Product_View_Oneclick constructor.
+     *
+     * @param array $args Arguments
+     */
     public function __construct(array $args = array())
     {
         parent::__construct($args);
         $this->initialize();
     }
 
+    /**
+     * @return array
+     */
     public function getText()
     {
         $country = $this->getCountry();
@@ -42,6 +50,9 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
         return $text;
     }
 
+    /**
+     * @return array
+     */
     public function getAddress()
     {
         $addressId = $this->customer->getDefaultShipping();
@@ -53,6 +64,9 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
         return $address;
     }
 
+    /**
+     * @return bool
+     */
     public function canShowOneclickButton()
     {
         return Mage::getSingleton('customer/session')->isLoggedIn()
@@ -64,6 +78,9 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
                    || $this->countryDocumentIsOptional($this->getCountry()));
     }
 
+    /**
+     * @return void
+     */
     private function initialize()
     {
         if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
@@ -74,6 +91,10 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
         $this->usercards = Mage::getModel('ebanx/usercard')->getCustomerSavedCards($this->customer->getId());
     }
 
+    /**
+     * @param string $country Country in the ISO format
+     * @return bool
+     */
     private function countryDocumentIsOptional($country)
     {
         $isOptional = array(
@@ -116,6 +137,11 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
         }
     }
 
+    /**
+     * @param string $currency  Currency type
+     * @param bool   $formatted Format amount
+     * @return float
+     */
     public function getLocalAmount($currency, $formatted = true)
     {
         $amount = round(Mage::helper('ebanx')->getLocalAmountWithTax($currency, $this->getTotal()), 2);
@@ -123,16 +149,27 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
         return $formatted ? $this->formatPriceWithLocalCurrency($currency, $amount) : $amount;
     }
 
+    /**
+     * @param string $currency Currency type
+     * @param float  $price    Amount
+     * @return mixed
+     */
     private function formatPriceWithLocalCurrency($currency, $price)
     {
         return Mage::app()->getLocale()->currency($currency)->toCurrency($price);
     }
 
+    /**
+     * @return mixed
+     */
     public function getTotal()
     {
         return Mage::registry('current_product')->getPrice();
     }
 
+    /**
+     * @return mixed
+     */
     public function getInstalmentTerms()
     {
         return $this->getMethod()->getInstalmentTerms($this->getTotal());
@@ -156,6 +193,9 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
         }
     }
 
+    /**
+     * @return string
+     */
     private function getLocalAmountText()
     {
         return Mage::getStoreConfig('payment/ebanx_settings/iof_local_amount')
@@ -163,6 +203,11 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
             : 'Total a pagar: ';
     }
 
+    /**
+     * @param installment $instalment    Instalment
+     * @param string      $localCurrency Local currency type
+     * @return string
+     */
     public function formatInstalment($instalment, $localCurrency)
     {
         $amount           = Mage::app()->getLocale()->currency($localCurrency)->toCurrency($instalment->localAmountWithTax);

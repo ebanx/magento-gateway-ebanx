@@ -3,6 +3,9 @@ class Ebanx_Gateway_Block_Customer_Usercards_List extends Mage_Core_Block_Templa
 {
     private $cards = null;
 
+    /**
+     * @return mixed
+     */
     private function getCustomer()
     {
         return Mage::getSingleton('customer/session')->getCustomer();

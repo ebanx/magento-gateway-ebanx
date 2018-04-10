@@ -113,7 +113,7 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
      */
     public function transformAddress($address, $data)
     {
-        $street = $this->helper->split_street($address->getStreet1());
+        $street = $this->helper->splitStreet($address->getStreet1());
         $state = $address->getRegion();
 
         $streetNumberField = Mage::getStoreConfig('payment/ebanx_settings/street_number_field');

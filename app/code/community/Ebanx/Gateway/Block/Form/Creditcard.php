@@ -2,16 +2,25 @@
 
 abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Form_Cc
 {
+    /**
+     * @return mixed
+     */
     public function getInstalmentTerms()
     {
         return $this->getMethod()->getInstalmentTerms();
     }
 
+    /**
+     * @return mixed
+     */
     public function getTotal()
     {
         return $this->getMethod()->getTotal();
     }
 
+    /**
+     * @return bool
+     */
     public function canShowSaveCardOption()
     {
         return Mage::getSingleton('checkout/session')->getQuote()->getCheckoutMethod() == "register" || Mage::getSingleton('customer/session')->isLoggedIn();
@@ -30,11 +39,21 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
         return Mage::getModel('ebanx/usercard')->getCustomerSavedCards($customerId);
     }
 
+    /**
+     * @param string $currency Currency type
+     * @param float  $price    Amount
+     * @return mixed
+     */
     private function formatPriceWithLocalCurrency($currency, $price)
     {
         return Mage::app()->getLocale()->currency($currency)->toCurrency($price);
     }
 
+    /**
+     * @param string $currency  Currency type
+     * @param bool   $formatted Format the amount
+     * @return float|mixed
+     */
     public function getLocalAmount($currency, $formatted = true)
     {
         $amount = round(Mage::helper('ebanx')->getLocalAmountWithTax($currency, $this->getTotal()), 2);
@@ -42,6 +61,11 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
         return $formatted ? $this->formatPriceWithLocalCurrency($currency, $amount) : $amount;
     }
 
+    /**
+     * @param string $currency  Currency type
+     * @param bool   $formatted Format the amount
+     * @return float|mixed
+     */
     public function getLocalAmountWithoutTax($currency, $formatted = true)
     {
         $amount = round(Mage::helper('ebanx')->getLocalAmountWithoutTax($currency, $this->getTotal()), 2);
@@ -49,6 +73,11 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
         return $formatted ? $this->formatPriceWithLocalCurrency($currency, $amount) : $amount;
     }
 
+    /**
+     * @param object $instalment    Installment
+     * @param string $localCurrency Currency type
+     * @return string
+     */
     public function formatInstalment($instalment, $localCurrency)
     {
         $amount = Mage::app()->getLocale()->currency($localCurrency)->toCurrency($instalment->localAmountWithTax);
@@ -59,11 +88,14 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
     }
 
     /**
-     * @param bool $hasInterests
+     * @param bool $hasInterests Has interests
      * @return string
      */
     abstract protected function getInterestMessage($hasInterests);
 
+    /**
+     * @return Ebanx_Gateway_Block_Form_Creditcard
+     */
     protected function _construct()
     {
         parent::_construct();

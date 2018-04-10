@@ -2,6 +2,9 @@
 
 class Ebanx_Gateway_Block_Info_Webpay extends Ebanx_Gateway_Block_Info_Abstract
 {
+    /**
+     * @return Ebanx_Gateway_Block_Info_Webpay
+     */
     protected function _construct()
     {
         parent::_construct();
