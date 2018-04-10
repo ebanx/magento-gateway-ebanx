@@ -405,6 +405,7 @@ export default class Checkout {
       this[fillBilling](data);
       this[clickElement](`#p_method_ebanx_cc_${lowerCountry}`);
 
+      this[selectField](data, 'documentType', 'documentTypeId', `#ebanx-document-type-ebanx_cc_${lowerCountry}`);
       this[fillInputWithJquery](data, 'document', `#ebanx-document-ebanx_cc_${lowerCountry}`);
 
       this[fillCreditCardName](lowerCountry, data.card);
