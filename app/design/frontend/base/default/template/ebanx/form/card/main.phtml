@@ -29,17 +29,17 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxT
             include __DIR__ . '/../fields.phtml';
             $savedCards = $this->getSavedCards();
         if (Mage::helper('ebanx')->saveCreditCardAllowed() && $savedCards && $savedCards->getSize()) :
-        ?>
+            ?>
 
-        <?php foreach ($savedCards as $card) : ?>
+            <?php foreach ($savedCards as $card) : ?>
             <?php include 'saved-card.phtml' ?>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
 
   <li class="ebanx-credit-card-option">
     <input id="card[newcard]" type="radio" name="payment[selected_card]" value="newcard">
     <label for="card[newcard]"><?= $text['newcard'] ?></label>
     <div class="new-card">
-        <?php include 'card-form.phtml' ?>
+            <?php include 'card-form.phtml' ?>
     </div>
   </li>
 

@@ -12,7 +12,7 @@
     $taxvatShow = Mage::getStoreConfig('customer/address/taxvat_show');
 
     if (!empty($taxvatDocumentFields) && ($taxvatShow === 'opt' || $taxvatShow === 1)) :
-?>
+        ?>
 <script type="text/javascript">
 //<![CDATA[
   window.onload = function () {
@@ -20,5 +20,5 @@
   };
 //]]>
 </script>
-<?php
+        <?php
     endif;

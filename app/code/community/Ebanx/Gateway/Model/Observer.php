@@ -17,7 +17,9 @@ class Ebanx_Gateway_Model_Observer extends Varien_Event_Observer
         $col = Ebanx_Gateway_Log_Logger::lastByEvent();
 
         foreach ($col as $item) {
+            // phpcs:disable
             if (!empty($item->getData())) {
+                // phpcs:enable
                 $prev_status = json_decode($item->getData()['log'])->to;
             }
         }
