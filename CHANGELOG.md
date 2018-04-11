@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2.7.0
+* Feature - Changed text for minimum local amount config [#275](https://github.com/ebanx/magento-gateway-ebanx/pull/275)
+* Feature - Save debug logs for EBANX's later access [#281](https://github.com/ebanx/magento-gateway-ebanx/pull/281)
+* Feature - Changed text for displaying payment method logos config [#282](https://github.com/ebanx/magento-gateway-ebanx/pull/282)
+* Feature - Added document type as a requirement for argentinian payments [#287](https://github.com/ebanx/magento-gateway-ebanx/pull/287)
+* Fix - Added "total spent" message to debit card's checkout [#277](https://github.com/ebanx/magento-gateway-ebanx/pull/277)
+
 ## 2.6.0
 * Feature - Remove documents for Chile (except webpay) [#252](https://github.com/ebanx/magento-gateway-ebanx/pull/252)
 * Feature - Remove document for Baloto and PSE [#253](https://github.com/ebanx/magento-gateway-ebanx/pull/253)
