@@ -1,17 +1,17 @@
 <?php
-$documentFields = array(
-  Mage::getStoreConfig('payment/ebanx_settings/cpf_field'),
-  Mage::getStoreConfig('payment/ebanx_settings/cnpj_field'),
-  Mage::getStoreConfig('payment/ebanx_settings/rut_field'),
-  Mage::getStoreConfig('payment/ebanx_settings/dni_field')
-);
-$taxvatDocumentFields = array_filter($documentFields, function ($field) {
-    return $field === 'taxvat';
-});
+    $documentFields = array(
+        Mage::getStoreConfig('payment/ebanx_settings/cpf_field'),
+        Mage::getStoreConfig('payment/ebanx_settings/cnpj_field'),
+        Mage::getStoreConfig('payment/ebanx_settings/rut_field'),
+        Mage::getStoreConfig('payment/ebanx_settings/dni_field')
+    );
+    $taxvatDocumentFields = array_filter($documentFields, function ($field) {
+        return $field === 'taxvat';
+    });
 
-$taxvatShow = Mage::getStoreConfig('customer/address/taxvat_show');
+    $taxvatShow = Mage::getStoreConfig('customer/address/taxvat_show');
 
-if (!empty($taxvatDocumentFields) && ($taxvatShow === 'opt' || $taxvatShow === 1)) :
+    if (!empty($taxvatDocumentFields) && ($taxvatShow === 'opt' || $taxvatShow === 1)) :
 ?>
 <script type="text/javascript">
 //<![CDATA[
@@ -21,4 +21,4 @@ if (!empty($taxvatDocumentFields) && ($taxvatShow === 'opt' || $taxvatShow === 1
 //]]>
 </script>
 <?php
-endif;
+    endif;

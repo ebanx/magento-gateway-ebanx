@@ -25,15 +25,15 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxT
         <?php endif; ?>
   </li>
 
-    <?php
-    include __DIR__ . '/../fields.phtml';
-    $savedCards = $this->getSavedCards();
-    if (Mage::helper('ebanx')->saveCreditCardAllowed() && $savedCards && $savedCards->getSize()) :
-    ?>
+        <?php
+            include __DIR__ . '/../fields.phtml';
+            $savedCards = $this->getSavedCards();
+        if (Mage::helper('ebanx')->saveCreditCardAllowed() && $savedCards && $savedCards->getSize()) :
+        ?>
 
-    <?php foreach ($savedCards as $card) : ?>
-    <?php include 'saved-card.phtml' ?>
-    <?php endforeach; ?>
+        <?php foreach ($savedCards as $card) : ?>
+            <?php include 'saved-card.phtml' ?>
+        <?php endforeach; ?>
 
   <li class="ebanx-credit-card-option">
     <input id="card[newcard]" type="radio" name="payment[selected_card]" value="newcard">
@@ -43,14 +43,14 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxT
     </div>
   </li>
 
-    <?php else : ?>
+        <?php else : ?>
     <li>
       <input id="card[newcard]" type="hidden" name="payment[selected_card]" value="newcard"/>
       <div class="container-new-card">
         <?php include 'card-form.phtml' ?>
       </div>
     </li>
-    <?php endif; ?>
+        <?php endif; ?>
 
     <?php include 'instalments.phtml' ?>
 
