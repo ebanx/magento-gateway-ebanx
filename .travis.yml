@@ -16,6 +16,8 @@ cache:
     - $TRAVIS_BUILD_DIR/tests/node_modules
     - $HOME/.composer/cache
 
+install: composer update
+
 before_script:
   - sudo service mysql stop
   - "export DISPLAY=:99.0"
@@ -32,6 +34,16 @@ env:
     - TEST_COUNTRY=mexico
     - TEST_COUNTRY=peru
 
+stages:
+  - Lint
+  - Tests
+
+jobs:
+  include:
+    - stage: Lint
+      env: TEST_COUNTRY=
+      script: bash ./tests/bin/lint.sh
+
 script:
   - bash ./tests/bin/test.sh
 
@@ -41,6 +53,9 @@ stages:
 
 jobs:
   include:
+    - stage: Lint
+      env: TEST_COUNTRY=
+      script: bash ./tests/bin/lint.sh
     - stage: release
       script:
         - cd $TRAVIS_BUILD_DIR
