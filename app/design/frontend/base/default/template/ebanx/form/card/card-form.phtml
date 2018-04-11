@@ -44,7 +44,7 @@
           
           $_ccYears    = $this->getCcYears();
           $_ccYears[0] = $this->__('Ano');
-            ?>
+        ?>
         <select id="<?php echo $_code ?>_expiration_yr" name="payment[cc_exp_year]" class="year required-entry-select">
             <?php foreach ($_ccYears as $k => $v) : ?>
             <option value="<?php echo $k ? $k : '' ?>"><?php echo $v ?></option>
