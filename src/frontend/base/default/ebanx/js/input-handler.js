@@ -55,3 +55,15 @@ const hideTaxVat = () => { // eslint-disable-line no-unused-vars
     taxvat.style.display = 'none';
   }
 };
+
+const selectOption = (elements, option) => { // eslint-disable-line no-unused-vars
+  if (!elements || elements === null) {
+    return;
+  }
+
+  elements.forEach((elem) => {
+    if(elem.value === option) {
+      elem.setAttribute('selected', 'selected');
+    }
+  });
+};

@@ -420,7 +420,7 @@
                         <cpf_field translate="label">
                             <label>CPF Document</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>410</sort_order>
+                            <sort_order>409</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -428,7 +428,7 @@
                         <cnpj_field translate="label">
                             <label>CNPJ Document</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>411</sort_order>
+                            <sort_order>410</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -436,11 +436,19 @@
                         <rut_field translate="label">
                             <label>RUT Document</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>412</sort_order>
+                            <sort_order>411</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </rut_field>
+                        <document_type_field translate="label">
+                            <label>Argentinian Document Type</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>412</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </document_type_field>
                         <cdi_field translate="label">
                             <label>CDI Document</label>
                             <frontend_type>text</frontend_type>
@@ -452,7 +460,7 @@
                         <dni_field_pe translate="label">
                             <label>Peru DNI Document</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>413</sort_order>
+                            <sort_order>414</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
