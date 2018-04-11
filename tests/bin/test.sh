@@ -4,7 +4,6 @@
 
 cd $TRAVIS_BUILD_DIR
 chmod +x $(pwd)/scripts/start.sh && $(pwd)/scripts/start.sh
-composer install
 
 cd $TRAVIS_BUILD_DIR/tests
 
