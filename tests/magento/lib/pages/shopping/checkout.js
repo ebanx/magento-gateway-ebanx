@@ -143,7 +143,12 @@ export default class Checkout {
   }
 
   [chooseShipping] (method) {
-    this[clickElement](`#s_method_${method || 'flatrate'}_${method || 'flatrate'}`);
+    const element = `#s_method_${method || 'flatrate'}_${method || 'flatrate'}`;
+    this.cy.get(element, {timeout: 30000}).then((elm) => {
+      if (!elm.is(':checked')) {
+        this[clickElement](element);
+      }
+    });
     this[clickElement]('#shipping-method-buttons-container > button');
   }
 
@@ -389,6 +394,7 @@ export default class Checkout {
     validateSchema(CHECKOUT_SCHEMA.ar.efectivo(), data, () => {
       this[fillBilling](data);
       this[clickElement](`#p_method_ebanx_${sanitizeMethod(data.paymentMethod)}`);
+      this[selectField](data, 'documentType', 'documentTypeId', `#ebanx-document-type-ebanx_${sanitizeMethod(data.paymentMethod)}`);
       this[fillInputWithJquery](data, 'document', `#ebanx-document-ebanx_${sanitizeMethod(data.paymentMethod)}`);
 
       this[placeOrder]();
@@ -404,6 +410,7 @@ export default class Checkout {
       this[fillBilling](data);
       this[clickElement](`#p_method_ebanx_cc_${lowerCountry}`);
 
+      this[selectField](data, 'documentType', 'documentTypeId', `#ebanx-document-type-ebanx_cc_${lowerCountry}`);
       this[fillInputWithJquery](data, 'document', `#ebanx-document-ebanx_cc_${lowerCountry}`);
 
       this[fillCreditCardName](lowerCountry, data.card);
