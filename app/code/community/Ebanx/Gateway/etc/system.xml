@@ -18,6 +18,14 @@
                     <p>You can obtain your API keys in the settings section, on the <a href="https://dashboard.ebanx.com/" target="_blank" title="EBANX Dashboard">EBANX Dashboard</a>.</p>
                     ]]></comment>
                     <fields>
+                        <health_check translate="label">
+                            <label>Health Check</label>
+                            <frontend_model>ebanx/health_check</frontend_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </health_check>
                         <enabled translate="label">
                             <label>Enabled</label>
                             <frontend_type>select</frontend_type>
