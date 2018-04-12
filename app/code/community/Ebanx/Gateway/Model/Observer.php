@@ -2,7 +2,6 @@
 
 class Ebanx_Gateway_Model_Observer extends Varien_Event_Observer
 {
-
     /**
      * @param observer $observer event observer
      *

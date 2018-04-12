@@ -22,7 +22,11 @@ if ($helper->hasDocumentFieldAlreadyForMethod($this->getMethodCode()) && (!isset
 
 ?>
 <li class="ebanx-compliance-fields">
+<<<<<<< HEAD
   <?php if ($country === 'AR'): ?>
+=======
+    <?php if ($country === 'AR') : ?>
+>>>>>>> 4aebe1ce16d14ebdaa84e63dba4754804b448265
     <label for="ebanx-document-type-<?= $this->getMethodCode() ?>" class="ebanx-document-label required">
       Document Type
     </label>
@@ -39,7 +43,11 @@ if ($helper->hasDocumentFieldAlreadyForMethod($this->getMethodCode()) && (!isset
         <option value="ARG_CDI">CDI</option>
       </select>
     </div>
+<<<<<<< HEAD
   <?php endif ?>
+=======
+    <?php endif ?>
+>>>>>>> 4aebe1ce16d14ebdaa84e63dba4754804b448265
   <label class="ebanx-document-label required" for="ebanx-document-<?= $this->getMethodCode() ?>">
     <em>*</em>
     <?= $helper->getLabelForComplianceField($this->getMethodCode()); ?>

@@ -41,6 +41,9 @@ stages:
 
 jobs:
   include:
+    - stage: Lint
+      env: TEST_COUNTRY=
+      script: bash ./tests/bin/lint.sh
     - stage: release
       script:
         - cd $TRAVIS_BUILD_DIR
