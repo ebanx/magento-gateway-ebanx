@@ -479,9 +479,9 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @param array|string  $data      Data to be logged
-     * @param string $filename  Filename of the log file
-     * @param string $extension Log extension
+     * @param array|string $data      Data to be logged
+     * @param string       $filename  Filename of the log file
+     * @param string       $extension Log extension
      * @return void
      */
     public function log($data, $filename = 'ebanx', $extension = '.log')
