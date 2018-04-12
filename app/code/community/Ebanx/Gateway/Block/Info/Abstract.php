@@ -3,7 +3,7 @@
 abstract class Ebanx_Gateway_Block_Info_Abstract extends Mage_Payment_Block_Info
 {
     /**
-     * @return mixed
+     * @return float
      */
     private function getTotal()
     {
@@ -13,7 +13,7 @@ abstract class Ebanx_Gateway_Block_Info_Abstract extends Mage_Payment_Block_Info
     /**
      * @param string $currency Currency type
      * @param float  $price    Amount
-     * @return mixed
+     * @return string
      */
     private function formatPriceWithLocalCurrency($currency, $price)
     {
@@ -23,7 +23,7 @@ abstract class Ebanx_Gateway_Block_Info_Abstract extends Mage_Payment_Block_Info
     /**
      * @param string $currency  Currency type
      * @param bool   $formatted Format Amount
-     * @return float|mixed
+     * @return float
      */
     public function getLocalAmount($currency, $formatted = true)
     {
@@ -39,7 +39,7 @@ abstract class Ebanx_Gateway_Block_Info_Abstract extends Mage_Payment_Block_Info
     /**
      * @param string $currency  Currency type
      * @param bool   $formatted Format Amount
-     * @return mixed
+     * @return string|float
      */
     public function getLocalAmountWithoutTax($currency, $formatted = true)
     {
@@ -87,7 +87,7 @@ abstract class Ebanx_Gateway_Block_Info_Abstract extends Mage_Payment_Block_Info
 
     /**
      * @param string $hash Payment hash
-     * @return mixed
+     * @return string
      */
     protected function getNotificationUrl($hash)
     {
