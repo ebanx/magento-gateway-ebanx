@@ -36,19 +36,6 @@ env:
 
 stages:
   - Lint
-  - Tests
-
-jobs:
-  include:
-    - stage: Lint
-      env: TEST_COUNTRY=
-      script: bash ./tests/bin/lint.sh
-
-script:
-  - bash ./tests/bin/test.sh
-
-stages:
-  - Lint
   - test
   - release
 
@@ -72,3 +59,6 @@ jobs:
           on:
             tags: true
             all_branches: true
+script:
+  - bash ./tests/bin/test.sh
+

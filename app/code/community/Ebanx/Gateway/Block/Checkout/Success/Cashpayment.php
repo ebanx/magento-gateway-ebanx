@@ -6,7 +6,7 @@ class Ebanx_Gateway_Block_Checkout_Success_Cashpayment extends Ebanx_Gateway_Blo
 
     /**
      * @param string $format Date format
-     * @return mixed
+     * @return Zend_Date
      */
     public function getEbanxDueDate($format = 'dd/MM')
     {
@@ -16,7 +16,7 @@ class Ebanx_Gateway_Block_Checkout_Success_Cashpayment extends Ebanx_Gateway_Blo
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEbanxUrlPrint()
     {
@@ -25,7 +25,7 @@ class Ebanx_Gateway_Block_Checkout_Success_Cashpayment extends Ebanx_Gateway_Blo
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEbanxPaymentHash()
     {
@@ -33,7 +33,7 @@ class Ebanx_Gateway_Block_Checkout_Success_Cashpayment extends Ebanx_Gateway_Blo
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEbanxUrlPdf()
     {
@@ -42,7 +42,7 @@ class Ebanx_Gateway_Block_Checkout_Success_Cashpayment extends Ebanx_Gateway_Blo
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEbanxUrlBasic()
     {
@@ -51,7 +51,7 @@ class Ebanx_Gateway_Block_Checkout_Success_Cashpayment extends Ebanx_Gateway_Blo
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getVoucherUrl()
     {
@@ -61,7 +61,7 @@ class Ebanx_Gateway_Block_Checkout_Success_Cashpayment extends Ebanx_Gateway_Blo
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEbanxUrlMobile()
     {

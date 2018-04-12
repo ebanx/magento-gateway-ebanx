@@ -16,7 +16,7 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment extends Mage_Checkout_Block_O
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getSuccessPaymentBlock()
     {
@@ -32,7 +32,7 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment extends Mage_Checkout_Block_O
     }
 
     /**
-     * @return mixed
+     * @return Mage_Sales_Model_Order
      */
     public function getOrder()
     {
@@ -60,7 +60,7 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment extends Mage_Checkout_Block_O
     /**
      * @param string $currency Currency type
      * @param float  $price    Amount
-     * @return mixed
+     * @return string
      */
     public function formatPriceWithLocalCurrency($currency, $price)
     {
