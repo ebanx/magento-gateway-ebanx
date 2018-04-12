@@ -152,7 +152,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
     /**
      * @param string $currency Currency type
      * @param float  $price    Amount
-     * @return mixed
+     * @return string
      */
     private function formatPriceWithLocalCurrency($currency, $price)
     {
@@ -160,7 +160,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
     }
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getTotal()
     {
@@ -168,7 +168,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getInstalmentTerms()
     {

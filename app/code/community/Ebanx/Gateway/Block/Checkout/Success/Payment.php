@@ -24,7 +24,7 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment extends Mage_Checkout_Block_O
     }
 
     /**
-     * @return mixed
+     * @return Mage_Sales_Model_Order_Payment
      */
     public function getPayment()
     {

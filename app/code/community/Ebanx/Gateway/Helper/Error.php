@@ -162,7 +162,7 @@ class Ebanx_Gateway_Helper_Error extends Ebanx_Gateway_Helper_Data
     /**
      * @param string $code    Error code
      * @param string $country Country to get the error
-     * @return mixed
+     * @return string
      */
     public function getError($code = 'GENERAL', $country = null)
     {

@@ -22,7 +22,7 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment_Boleto extends Ebanx_Gateway_
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEbanxBarCode()
     {

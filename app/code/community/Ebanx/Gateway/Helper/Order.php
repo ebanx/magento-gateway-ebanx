@@ -4,7 +4,7 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
 {
     /**
      * @param string $hash Hash of the payment
-     * @return mixed
+     * @return Mage_Sales_Model_Order
      */
     public function getOrderByHash($hash)
     {
@@ -13,7 +13,7 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
 
     /**
      * @param string $hash Hash of the payment
-     * @return mixed
+     * @return Mage_Sales_Model_Order
      */
     public function getLegacyOrderByHash($hash)
     {
@@ -22,7 +22,7 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
 
     /**
      * @param string $ebanxStatus Payment status
-     * @return mixed
+     * @return string
      */
     public function getEbanxMagentoOrder($ebanxStatus)
     {
@@ -38,7 +38,7 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
 
     /**
      * @param string $ebanxStatus Payment status
-     * @return mixed
+     * @return string
      */
     public function getTranslatedOrderStatus($ebanxStatus)
     {
@@ -55,7 +55,7 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
     /**
      * @param string $field Field to filter
      * @param string $value Value to filter
-     * @return mixed
+     * @return Mage_Sales_Model_Order
      */
     private function getOrderBy($field, $value)
     {

@@ -71,7 +71,7 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
     /**
      * @param int $userId user d
      *
-     * @return mixed
+     * @return Ebanx_Gateway_Model_Resource_Log_Collection
      */
     public function getCustomerSavedCards($userId)
     {
@@ -82,7 +82,7 @@ class Ebanx_Gateway_Model_Usercard extends Mage_Core_Model_Abstract
     /**
      * @param string $token collection token
      *
-     * @return mixed
+     * @return Ebanx_Gateway_Model_Resource_Log_Collection
      */
     public function getPaymentMethodByToken($token)
     {
