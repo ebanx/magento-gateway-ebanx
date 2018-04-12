@@ -51,7 +51,7 @@ jobs:
         - provider: releases
           api_key:
             secure: jh/I4KedqzpcrFw7vTUlchkTw9eKPvOGxdbl3lM5DfiIaU5OXIOol60MTiJ1VAE3iAMbPb29MSlwiY83iV9TmqdtNTZrgvAKYPdOAFSITjIq6spDL7Xe4GJMY9iCvZlJlTHelVbGkzNOxxNItvNvBPFmLKgzAApC93aZ4SEr7q33qMyUb54QROM/EATYD5vZ+Ip7zZfSVpyNB4W6QVirW/17VTtOcY5OildhCWUdEuvK2LeL520HzYhfXYDeFiyjKeprEsky13vYbXcnL9zWcx5acn8ydn4rSC9MS8K2Q5GDzZqwuLoseL0JPnP9iXKIfVqBF+uyYe9ESO9Xw00JrEEFRK00p6tMekFyTuQfKUj/iYobrqjajCFhWgttDX0zA4X/6ciydUAZK8xNSQR4nN1o4DIVTlZX6XwXeU//jdo3iFy8dcU3hpUKH+r1QRQpJoHp5vh79hp/BmNp79KjQsTlWLliyLhPABBEC1ocOACtz2Y1FqQNYZa0DkdHKQSxCYahxr8S3MEVR7zuUxrUCbrg33C99F2zBHdgTujaa2UNGT03BCwK5u8XA4G5fG0wipCGFbvr9vffUJRU00XcmOM5SM5mXkgVlVy+l7gduCZAsjoNck+xaY56PJxxVEYp3NUrNF6NjJEc/RRe9GapsRxwE4QL+rGZM+Ro3K85hOU=
-          file: magento-gateway-ebanx.zip, ebanx_gateway-${TRAVIS_TAG}.tgz
+          file: ebanx_gateway-${TRAVIS_TAG}.tgz
           skip_cleanup: true
           on:
             tags: true
