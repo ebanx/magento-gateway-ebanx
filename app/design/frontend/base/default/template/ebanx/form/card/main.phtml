@@ -15,44 +15,44 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxT
 ?>
 
 <ul class="form-list ebanx-payment-method ebanx-<?= $lowerCountry ?>-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
-  <?php include __DIR__ . '/../sandbox-warning.phtml'; ?>
+    <?php include __DIR__ . '/../sandbox-warning.phtml'; ?>
   <li class="centinel-logos">
     <label class="ebanx-payment-method-desc"><?= $text['method-desc'] ?></label>
-      <?php if(!$showInlineIcon): ?>
+        <?php if (!$showInlineIcon) : ?>
         <div class="input-box">
-          <?= $icon; ?>
+            <?= $icon; ?>
         </div>
-      <?php endif; ?>
+        <?php endif; ?>
   </li>
 
-  <?php
-    include __DIR__ . '/../fields.phtml';
-    $savedCards = $this->getSavedCards();
-    if (Mage::helper('ebanx')->saveCreditCardAllowed() && $savedCards && $savedCards->getSize()):
-  ?>
+        <?php
+            include __DIR__ . '/../fields.phtml';
+            $savedCards = $this->getSavedCards();
+        if (Mage::helper('ebanx')->saveCreditCardAllowed() && $savedCards && $savedCards->getSize()) :
+            ?>
 
-  <?php foreach ($savedCards as $card): ?>
-    <?php include 'saved-card.phtml' ?>
-  <?php endforeach; ?>
+            <?php foreach ($savedCards as $card) : ?>
+                <?php include 'saved-card.phtml'; ?>
+            <?php endforeach; ?>
 
   <li class="ebanx-credit-card-option">
     <input id="card[newcard]" type="radio" name="payment[selected_card]" value="newcard">
     <label for="card[newcard]"><?= $text['newcard'] ?></label>
     <div class="new-card">
-      <?php include 'card-form.phtml' ?>
+            <?php include 'card-form.phtml' ?>
     </div>
   </li>
 
-  <?php else: ?>
+        <?php else : ?>
     <li>
       <input id="card[newcard]" type="hidden" name="payment[selected_card]" value="newcard"/>
       <div class="container-new-card">
         <?php include 'card-form.phtml' ?>
       </div>
     </li>
-  <?php endif; ?>
+        <?php endif; ?>
 
-  <?php include 'instalments.phtml' ?>
+    <?php include 'instalments.phtml' ?>
 
   <li>
     <div class="total-to-pay">

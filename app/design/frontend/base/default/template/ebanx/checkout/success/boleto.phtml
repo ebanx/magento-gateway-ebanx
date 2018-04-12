@@ -31,12 +31,12 @@ $is_mobile = Zend_Http_UserAgent_Mobile::match(Mage::helper('core/http')->getHtt
             <a href="<?php echo $this->getEbanxUrlPdf(); ?>" target="_blank"
                class="button banking-ticket__action"><?php echo $this->__('Salvar em PDF'); ?></a>
         </div>
-        <?php if ($is_mobile): ?>
+        <?php if ($is_mobile) : ?>
             <div class="ebanx-group">
                 <a href="<?php echo $this->getEbanxUrlMobile() ?>" target="_blank"
                    class="button banking-ticket__action"><?php echo $this->__('Ver Boleto'); ?></a>
             </div>
-        <?php else: ?>
+        <?php else : ?>
             <div class="ebanx-group">
                 <a href="<?php echo $this->getEbanxUrlPrint() ?>" target="_blank"
                    class="button banking-ticket__action"><?php echo $this->__('Imprimir boleto'); ?></a>
@@ -44,7 +44,7 @@ $is_mobile = Zend_Http_UserAgent_Mobile::match(Mage::helper('core/http')->getHtt
         <?php endif; ?>
     </div>
 
-    <?php if (!$is_mobile): ?>
+    <?php if (!$is_mobile) : ?>
     <div>
         <iframe id="ebanx-boleto-frame" src="<?php echo $this->getVoucherUrl(); ?>"
                 style="width: 100%; border: 0px; height: 1000px"></iframe>

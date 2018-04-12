@@ -8,20 +8,19 @@ $ebanxCustomerDocumentType = null;
 $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 $country = Mage::getSingleton('checkout/cart')->getQuote()->getShippingAddress()->getCountryId();
 
-if (Mage::getSingleton('customer/session')->isLoggedIn()) {
-  $customer_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
-  $customer = Mage::getModel('customer/customer')->load($customer_id);
-  $ebanxCustomerDocument = $customer->getEbanxCustomerDocument();
-  $ebanxCustomerDocumentType = $customer->getEbanxCustomerDocumentType();
+if ($helper->hasDocumentFieldAlreadyForMethod($this->getMethodCode())) {
+    return;
 }
 
-if ($helper->hasDocumentFieldAlreadyForMethod($this->getMethodCode()) && (!isset($customer) || $country !== 'AR' || $ebanxCustomerDocumentType)) {
-  return;
+if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+    $customer_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
+    $customer = Mage::getModel('customer/customer')->load($customer_id);
+    $ebanxCustomerDocument = $customer->getEbanxCustomerDocument();
 }
 
 ?>
 <li class="ebanx-compliance-fields">
-  <?php if ($country === 'AR'): ?>
+    <?php if ($country === 'AR') : ?>
     <label for="ebanx-document-type-<?= $this->getMethodCode() ?>" class="ebanx-document-label required">
       Document Type
     </label>
@@ -38,7 +37,7 @@ if ($helper->hasDocumentFieldAlreadyForMethod($this->getMethodCode()) && (!isset
         <option value="ARG_CDI">CDI</option>
       </select>
     </div>
-  <?php endif ?>
+    <?php endif ?>
   <label class="ebanx-document-label required" for="ebanx-document-<?= $this->getMethodCode() ?>">
     <em>*</em>
     <?= $helper->getLabelForComplianceField($this->getMethodCode()); ?>

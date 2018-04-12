@@ -1,60 +1,60 @@
 <?php
 class Ebanx_Gateway_CustomerController extends Mage_Core_Controller_Front_Action
 {
-	/**
-	 * Check customer authentication
-	 *
-	 * @return Mage_Core_Controller_Front_Action
-	 */
-	public function preDispatch()
-	{
-		parent::preDispatch();
+    /**
+     * Check customer authentication
+     *
+     * @return Mage_Core_Controller_Front_Action
+     */
+    public function preDispatch()
+    {
+        parent::preDispatch();
 
-		$loginUrl = Mage::helper('customer')->getLoginUrl();
+        $loginUrl = Mage::helper('customer')->getLoginUrl();
 
-		if (!Mage::getSingleton('customer/session')->authenticate($this, $loginUrl)) {
-			$this->setFlag('', self::FLAG_NO_DISPATCH, true);
-		}
+        if (!Mage::getSingleton('customer/session')->authenticate($this, $loginUrl)) {
+            $this->setFlag('', self::FLAG_NO_DISPATCH, true);
+        }
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Display list of customer's cards
-	 *
-	 * @return void
-	 */
-	public function usercardsAction()
-	{
-		$this->loadLayout();
-		$this->_initLayoutMessages('customer/session');
+    /**
+     * Display list of customer's cards
+     *
+     * @return void
+     */
+    public function usercardsAction()
+    {
+        $this->loadLayout();
+        $this->_initLayoutMessages('customer/session');
 
-		$block = $this->getLayout()->getBlock('ebanx_customer_usercards_list');
-		$block->setRefererUrl($this->_getRefererUrl());
+        $block = $this->getLayout()->getBlock('ebanx_customer_usercards_list');
+        $block->setRefererUrl($this->_getRefererUrl());
 
-		$headBlock = $this->getLayout()->getBlock('head');
-		$headBlock->setTitle(Mage::helper('ebanx')->__('My Payment Cards'));
+        $headBlock = $this->getLayout()->getBlock('head');
+        $headBlock->setTitle(Mage::helper('ebanx')->__('My Payment Cards'));
 
-		$this->renderLayout();
-	}
+        $this->renderLayout();
+    }
 
-	/**
-	 * Remove card action
-	 *
-	 * @return void
-	 */
-	public function removecardAction()
-	{
-		$cardsToRemove = $this->getRequest()->getParam('card');
+    /**
+     * Remove card action
+     *
+     * @return void
+     */
+    public function removecardAction()
+    {
+        $cardsToRemove = $this->getRequest()->getParam('card');
 
-		if (!empty($cardsToRemove)) {
-			Mage::getModel('ebanx/usercard')->removeCardsFromUser(
-				$cardsToRemove,
-				Mage::getSingleton('customer/session')->getCustomerId()
-			);
-			Mage::getSingleton('customer/session')->addSuccess('The cards have been removed successfully.');
-		}
+        if (!empty($cardsToRemove)) {
+            Mage::getModel('ebanx/usercard')->removeCardsFromUser(
+                $cardsToRemove,
+                Mage::getSingleton('customer/session')->getCustomerId()
+            );
+            Mage::getSingleton('customer/session')->addSuccess('The cards have been removed successfully.');
+        }
 
-		$this->_redirect('ebanx/customer/usercards');
-	}
+        $this->_redirect('ebanx/customer/usercards');
+    }
 }

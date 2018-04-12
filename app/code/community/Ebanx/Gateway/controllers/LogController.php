@@ -2,20 +2,23 @@
 
 class Ebanx_Gateway_LogController extends Mage_Core_Controller_Front_Action
 {
-	public function fetchAction()
-	{
-		header('Content-Type: application/json');
+    /**
+     * @return void
+     */
+    public function fetchAction()
+    {
+        header('Content-Type: application/json');   // phpcs:ignore
 
-		$integration_key = $this->getRequest()->getParam('integration_key');
+        $integration_key = $this->getRequest()->getParam('integration_key');
 
-		if (empty($integration_key) || ($integration_key !== Mage::helper('ebanx/data')->getSandboxIntegrationKey() && $integration_key !== Mage::helper('ebanx/data')->getLiveIntegrationKey())) {
-			die(json_encode([]));
-		}
+        if (empty($integration_key) || $integration_key !== Mage::helper('ebanx/data')->getIntegrationKey()) {
+            die(json_encode([]));
+        }
 
-		list($col, $res) = Ebanx_Gateway_Log_Logger::fetch($integration_key);
+        $res = Ebanx_Gateway_Log_Logger::fetch();
 
-		Ebanx_Gateway_Log_Logger::delete($col);
+        Ebanx_Gateway_Log_Logger::truncate();
 
-		echo json_encode($res);
-	}
+        echo json_encode($res);
+    }
 }

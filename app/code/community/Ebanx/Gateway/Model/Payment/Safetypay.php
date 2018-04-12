@@ -2,28 +2,43 @@
 
 abstract class Ebanx_Gateway_Model_Payment_Safetypay extends Ebanx_Gateway_Payment
 {
-	/**
-	 * @return string
-	 */
-	abstract protected function getCountry();
+    /**
+     * @return string
+     */
+    abstract protected function getCountry();
 
-	public function __construct() {
-		parent::__construct();
+    /**
+     * Ebanx_Gateway_Model_Payment_Safetypay constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
 
-		$this->gateway = $this->ebanx->safetyPayCash();
-	}
+        $this->gateway = $this->ebanx->safetyPayCash();
+    }
 
-	public function initialize( $paymentAction, $stateObject ) {
-		$safetyPayType = Mage::app()->getRequest()->getPost()['ebanx_safetypay_type'];
+    /**
+     * @param string $paymentAction payment action
+     * @param object $stateObject   state object
+     *
+     * @return void
+     */
+    public function initialize($paymentAction, $stateObject)
+    {
+        $safetyPayType = Mage::app()->getRequest()->getPost()['ebanx_safetypay_type'];
 
-		$this->gateway = $this->ebanx->{'safetyPay' . $safetyPayType}();
+        $this->gateway = $this->ebanx->{'safetyPay' . $safetyPayType}();
 
-		parent::initialize( $paymentAction, $stateObject );
-	}
+        parent::initialize($paymentAction, $stateObject);
+    }
 
-	public function canUseForCountry($country)
-	{
-		return $this->helper->transformCountryCodeToName($country) === $this->getCountry()
-			   && parent::canUseForCountry($country);
-	}
+    /**
+     * @param string $country 2 letter ISO country
+     * @return bool|mixed
+     */
+    public function canUseForCountry($country)
+    {
+        return $this->helper->transformCountryCodeToName($country) === $this->getCountry()
+               && parent::canUseForCountry($country);
+    }
 }
