@@ -51,15 +51,12 @@ system("rm -f magento-gateway-ebanx.zip");
 _p("Creating files...");
 $tagData = explode(' ', system("git tag -n1 | grep `git describe`"), 2);
 
-if (count($tagData) !== 2) {
-	_p('Error');
-	$error = 'Packaging failed, HEAD is not in a tagged commit. Please create a tag before packaging.';
-} else {
-	$tag = $tagData[0];
-	$message = trim($tagData[1]);
 
-	system("scripts/pack $tag \"$message\"");
-}
+$tag = $tagData[0];
+$message = trim($tagData[1]);
+
+system("scripts/pack $tag \"$message\"");
+
 
 if ($hasChanged) {
 	_p("Returning you PHP version to $phpversion...");
