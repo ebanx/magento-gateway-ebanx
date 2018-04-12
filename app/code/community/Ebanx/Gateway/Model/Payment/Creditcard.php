@@ -17,8 +17,8 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Paym
     }
 
     /**
-     * @param null $grandTotal grand total
-     * @return mixed
+     * @param null|float $grandTotal grand total
+     * @return array
      */
     public function getInstalmentTerms($grandTotal = null)
     {
@@ -33,7 +33,7 @@ abstract class Ebanx_Gateway_Model_Payment_Creditcard extends Ebanx_Gateway_Paym
 
     /**
      * @param string $country 2 letter ISO country
-     * @return bool|mixed
+     * @return bool
      */
     public function canUseForCountry($country)
     {

@@ -30,7 +30,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getMode()
     {
@@ -38,7 +38,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getSandboxIntegrationKey()
     {
@@ -46,7 +46,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getLiveIntegrationKey()
     {
@@ -64,7 +64,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getIntegrationKey()
     {
@@ -72,7 +72,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPublicIntegrationKey()
     {
@@ -82,7 +82,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * @param string $date   Date if not currently
      * @param string $format Format desired to the date
-     * @return mixed
+     * @return Zend_Date
      */
     public function getDueDate($date = null, $format = 'YYYY-MM-dd HH:mm:ss')
     {
@@ -93,7 +93,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDueDateDays()
     {
@@ -101,7 +101,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getMaxInstalments()
     {
@@ -109,7 +109,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getMinInstalmentValue()
     {
@@ -117,7 +117,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getInterestRate()
     {
@@ -125,7 +125,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function saveCreditCardAllowed()
     {
@@ -134,7 +134,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $bankCode Code of the bank
-     * @return mixed
+     * @return string
      */
     public function transformTefToBankName($bankCode)
     {
@@ -301,7 +301,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $countryCode ISO country code
-     * @return bool|mixed|null
+     * @return bool|string
      */
     public function transformCountryCodeToName($countryCode)
     {
@@ -320,7 +320,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param $string $methodCode EBANX method code
-     * @return mixed
+     * @return string
      */
     public function getBrazilianDocumentNumber($methodCode)
     {
@@ -356,7 +356,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $methodCode EBANX method code
-     * @return mixed|string
+     * @return string
      */
     public function getChileanDocumentNumber($methodCode)
     {
@@ -385,7 +385,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $methodCode EBANX method code
-     * @return mixed|string
+     * @return string
      */
     public function getColombianDocumentNumber($methodCode)
     {
@@ -414,7 +414,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $methodCode EBANX method code
-     * @return mixed
+     * @return string
      */
     public function getArgetinianDocument($methodCode)
     {
@@ -435,7 +435,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $methodCode EBANX method code
-     * @return mixed
+     * @return string
      */
     public function getPeruvianDocumentNumber($methodCode)
     {
@@ -470,7 +470,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @param mixed $data Data to be logged
+     * @param array|string $data Data to be logged
      * @return void
      */
     public function errorLog($data)
@@ -479,7 +479,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @param mixed  $data      Data to be logged
+     * @param array|string  $data      Data to be logged
      * @param string $filename  Filename of the log file
      * @param string $extension Log extension
      * @return void
@@ -579,7 +579,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $hash Payment hash
-     * @return mixed
+     * @return array
      */
     public function getPaymentByHash($hash)
     {
@@ -591,7 +591,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * @param string $currency Currency
      * @param float  $value    Amount
-     * @return mixed
+     * @return double
      */
     public function getLocalAmountWithTax($currency, $value)
     {
@@ -603,7 +603,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * @param string $currency Currency
      * @param float  $value    Amount
-     * @return mixed
+     * @return double
      */
     public function getLocalAmountWithoutTax($currency, $value)
     {
@@ -613,7 +613,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function hasToShowInlineIcon()
     {
@@ -655,7 +655,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $methodCode EBANX Method Code
-     * @return mixed
+     * @return array
      */
     public function getDocumentFieldsRequiredForMethod($methodCode)
     {

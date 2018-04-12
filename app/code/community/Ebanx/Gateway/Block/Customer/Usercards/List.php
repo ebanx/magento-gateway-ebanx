@@ -4,7 +4,7 @@ class Ebanx_Gateway_Block_Customer_Usercards_List extends Mage_Core_Block_Templa
     private $cards = null;
 
     /**
-     * @return mixed
+     * @return Mage_Customer_Model_Customer
      */
     private function getCustomer()
     {
