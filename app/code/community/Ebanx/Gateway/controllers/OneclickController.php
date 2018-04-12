@@ -63,7 +63,7 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
     }
 
     /**
-     * @return mixed
+     * @return Ebanx_Gateway_OneclickController
      */
     public function payAction()
     {
@@ -84,7 +84,7 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
     }
 
     /**
-     * @return mixed
+     * @return bool
      */
     private function isCardFromCustomer()
     {
@@ -96,7 +96,7 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
     }
 
     /**
-     * @return mixed
+     * @return Ebanx_Gateway_Model_Resource_Log_Collection
      */
     private function getPaymentMethod()
     {
@@ -286,7 +286,7 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
     /**
      * @param Mage_Catalog_Model_Product $product Product
      * @param int                        $qty     Quantity
-     * @return mixed
+     * @return Mage_Sales_Model_Order_Item
      */
     private function productToOrderItem(Mage_Catalog_Model_Product $product, $qty = 1)
     {
@@ -335,7 +335,6 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
                          ->setProductOptions($options);
 
         $this->subTotal += $rowTotal;
-
         return $orderItem;
     }
 }

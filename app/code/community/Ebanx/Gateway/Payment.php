@@ -192,7 +192,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getOrderPlaceRedirectUrl()
     {
@@ -211,7 +211,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 
     /**
      * @param string $country 2 letter ISO country
-     * @return mixed
+     * @return bool
      */
     public function canUseForCountry($country)
     {
@@ -221,7 +221,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
     }
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getTotal()
     {

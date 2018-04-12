@@ -3,7 +3,7 @@
 abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Form_Cc
 {
     /**
-     * @return mixed
+     * @return array
      */
     public function getInstalmentTerms()
     {
@@ -11,7 +11,7 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
     }
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getTotal()
     {
@@ -42,7 +42,7 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
     /**
      * @param string $currency Currency type
      * @param float  $price    Amount
-     * @return mixed
+     * @return string
      */
     private function formatPriceWithLocalCurrency($currency, $price)
     {
@@ -52,7 +52,7 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
     /**
      * @param string $currency  Currency type
      * @param bool   $formatted Format the amount
-     * @return float|mixed
+     * @return float
      */
     public function getLocalAmount($currency, $formatted = true)
     {
@@ -64,7 +64,7 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
     /**
      * @param string $currency  Currency type
      * @param bool   $formatted Format the amount
-     * @return float|mixed
+     * @return float
      */
     public function getLocalAmountWithoutTax($currency, $formatted = true)
     {

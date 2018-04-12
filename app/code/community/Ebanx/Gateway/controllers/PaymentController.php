@@ -107,7 +107,7 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
 
     /**
      * @param object $order Order
-     * @return mixed
+     * @return string
      */
     private function _getPaymentMethod($order)
     {
@@ -131,7 +131,7 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
     }
 
     /**
-     * @return mixed
+     * @return string
      * @throws Ebanx_Gateway_Exception
      */
     private function loadEbanxPaymentStatus()
