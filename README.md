@@ -17,7 +17,21 @@ composer install
 ```
 
 This will install and run the project with Docker on port 80.
-If you want to change that port you may use an environment variable or the `.env` file. Just run `cp .env.example .env` and change the ports the way you want it.
+If you want to change that port or any other configuration you may use an environment variable or the `.env` file. Just run `cp .env.example .env` and change the values the way you want it. The values meaning are descripted below:
+
+```
+MAGENTO_EXTERNAL_PORT: Magento port exposed by Docker. 80 is the default port.
+MYSQL_EXTERNAL_PORT: MySQL port exposed by Docker. 3306 is the default port.
+MAGENTO_DATABASE: Magento Databse name. "magento" is the default database.
+MYSQL_PASSWORD: MySQL database root password. It will be used by setup the MySQL and to connect Magento to MySQL. "root" is the default root password.
+ADMIN_USER: Magento default admin user. It is the first Magento used created in setup. "ebanx" is the default Magento user.
+ADMIN_PASSWORD: Magento default admin password. It is the default password of ${ADMIN_USER} user. "ebanx123" is the default password.
+ADMIN_FIRSTNAME: Magento default admin user Firstname. "Ebanx" is the default admin Firstname.
+ADMIN_LASTNAME: Magento default admin user Lirstname. "Store" is the default admin Lastname.
+ADMIN_EMAIL: Magento default admin user e-mail. "magento@ebanx.com" is the default admin e-mail.
+```
+
+
 
 After that, you can use the command to start:
 ```
