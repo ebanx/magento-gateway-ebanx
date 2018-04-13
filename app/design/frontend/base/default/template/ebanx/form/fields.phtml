@@ -10,23 +10,19 @@ $country = Mage::getSingleton('checkout/cart')->getQuote()->getShippingAddress()
 
 
 if (Mage::getSingleton('customer/session')->isLoggedIn()) {
-  $customer_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
-  $customer = Mage::getModel('customer/customer')->load($customer_id);
-  $ebanxCustomerDocument = $customer->getEbanxCustomerDocument();
-  $ebanxCustomerDocumentType = $customer->getEbanxCustomerDocumentType();
+    $customer_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
+    $customer = Mage::getModel('customer/customer')->load($customer_id);
+    $ebanxCustomerDocument = $customer->getEbanxCustomerDocument();
+    $ebanxCustomerDocumentType = $customer->getEbanxCustomerDocumentType();
 }
 
 if ($helper->hasDocumentFieldAlreadyForMethod($this->getMethodCode()) && (!isset($customer) || $country !== 'AR' || $ebanxCustomerDocumentType)) {
-  return;
+    return;
 }
 
 ?>
 <li class="ebanx-compliance-fields">
-<<<<<<< HEAD
-  <?php if ($country === 'AR'): ?>
-=======
     <?php if ($country === 'AR') : ?>
->>>>>>> 4aebe1ce16d14ebdaa84e63dba4754804b448265
     <label for="ebanx-document-type-<?= $this->getMethodCode() ?>" class="ebanx-document-label required">
       Document Type
     </label>
@@ -43,11 +39,7 @@ if ($helper->hasDocumentFieldAlreadyForMethod($this->getMethodCode()) && (!isset
         <option value="ARG_CDI">CDI</option>
       </select>
     </div>
-<<<<<<< HEAD
-  <?php endif ?>
-=======
     <?php endif ?>
->>>>>>> 4aebe1ce16d14ebdaa84e63dba4754804b448265
   <label class="ebanx-document-label required" for="ebanx-document-<?= $this->getMethodCode() ?>">
     <em>*</em>
     <?= $helper->getLabelForComplianceField($this->getMethodCode()); ?>
