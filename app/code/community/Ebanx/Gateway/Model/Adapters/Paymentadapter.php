@@ -101,7 +101,8 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 			'address' => $this->transformAddress($data->getBillingAddress(), $data),
 			'person' => $this->transformPerson($data->getPerson(), $data),
 			'responsible' => $this->transformPerson($data->getPerson(), $data),
-			'items' => $this->transformItems($data->getItems(), $data)
+			'items' => $this->transformItems($data->getItems(), $data),
+			'riskProfileId' => $this->transformRiskProfileId(),
 		));
 	}
 
@@ -196,5 +197,11 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 		}
 
 		return DateTime::createFromFormat( 'n-Y', $month . '-' . $year );
+	}
+
+	private function transformRiskProfileId() {
+		$version = 'Mx' . Mage::getConfig()->getNode('modules/Ebanx_Gateway/version');
+
+		return preg_replace('/\./', 'x', $version);
 	}
 }
