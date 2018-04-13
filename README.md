@@ -1,4 +1,4 @@
-# EBANX Payment Gateway for Magento 1.9.x [![Build Status](https://api.travis-ci.org/ebanx/magento-gateway-ebanx.svg)](https://travis-ci.org/ebanx/magento-gateway-ebanx)
+# EBANX Payment Gateway for Magento 1.9.x [![Build Status](https://travis-ci.org/ebanx/magento-gateway-ebanx.svg?branch=master)](https://travis-ci.org/ebanx/magento-gateway-ebanx) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/64dbf4b4e1b941b7bb38f35251af7575)](https://www.codacy.com/app/ebanx/magento-gateway-ebanx)
 
 This plugin enables you to integrate your Magento 1.x store with the EBANX payment gateway.
 
