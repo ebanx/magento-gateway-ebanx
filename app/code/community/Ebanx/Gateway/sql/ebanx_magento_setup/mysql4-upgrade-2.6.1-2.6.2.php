@@ -41,15 +41,11 @@ $installer->addAttribute("customer_address", "ebanx_document_type", array(
 $attribute = Mage::getSingleton("eav/config")->getAttribute("customer_address", "ebanx_document_type");
 
 $installer->addAttributeToGroup(
-<<<<<<< HEAD
-    $entityTypeId, $attributeSetId, $attributeGroupId, 'ebanx_document_type', '999'  //sort_order
-=======
     $entityTypeId,
     $attributeSetId,
     $attributeGroupId,
     'ebanx_document_type',
     '999'  //sort_order
->>>>>>> 4aebe1ce16d14ebdaa84e63dba4754804b448265
 );
 
 $used_in_forms = array();
