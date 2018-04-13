@@ -6,10 +6,16 @@ export default class PaymentMethods {
   }
 
   setupEbanxPlugin() {
+    if (!this.cy.get('#payment_ebanx_settings_integration_key_sandbox', { timeout: 10000 })
+      .should('be.visible')) {
+      this.cy
+        .get('#payment_ebanx_settings-head', { timeout: 10000 })
+        .should('be.visible')
+        .click()
+    } else {
+
+    }
     this.cy
-      .get('#payment_ebanx_settings-head', { timeout: 10000 })
-      .should('be.visible')
-      .click()
       .get('#payment_ebanx_settings_integration_key_sandbox', { timeout: 10000 })
       .should('be.visible')
       .then(($input) => {
