@@ -8,9 +8,7 @@ class Ebanx_Gateway_LogController extends Mage_Core_Controller_Front_Action
 		$integration_key = $this->getRequest()->getParam('integration_key');
 
 		if (empty($integration_key) || ($integration_key !== Mage::helper('ebanx/data')->getSandboxIntegrationKey() && $integration_key !== Mage::helper('ebanx/data')->getLiveIntegrationKey())) {
-			$this->getResponse()
-			     ->setHeader('Content-Type', 'application/json')
-			     ->setBody('');
+			$this->norouteAction();
 
 			return;
 		}
