@@ -14,7 +14,7 @@ class Ebanx_Gateway_Model_Observer extends Varien_Event_Observer
 		foreach ($col as $item) {
 			$itemData = $item->getData();
 			if (!empty($itemData)) {
-				$prev_status = json_decode($item->getData()['log'])->to;
+				$prev_status = json_decode($itemData['log'])->to;
 			}
 		}
 
