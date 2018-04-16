@@ -55,7 +55,7 @@ abstract class Ebanx_Gateway_Log_Logger
         	$res[] = $log->getData();
         }
 
-        return [$col ,$res];
+        return array($col ,$res);
 	}
 
 	/**
@@ -65,5 +65,5 @@ abstract class Ebanx_Gateway_Log_Logger
 	 *
 	 * @param array $log_data data to be logged.
 	 */
-	abstract public static function persist(array $log_data = []);
+	abstract public static function persist(array $log_data = array());
 }
