@@ -61,15 +61,15 @@ class Ebanx_Gateway_Log_Environment
 
 	private static function get_theme_data() {
 		return array_map(function ($v) {
-			return (object) [ $v => Mage::getSingleton('core/design_package')->getTheme($v)];
-		}, [
+			return (object) array($v => Mage::getSingleton('core/design_package')->getTheme($v));
+		}, array(
 			'locale',
 			'layout',
 			'template',
 			'default',
 			'frontend',
 			'skin'
-		]);
+		));
 	}
 
 	private static function extract_version_number_from($haystack) {
