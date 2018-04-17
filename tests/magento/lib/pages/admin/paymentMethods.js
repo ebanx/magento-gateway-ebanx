@@ -12,8 +12,6 @@ export default class PaymentMethods {
         .get('#payment_ebanx_settings-head', { timeout: 10000 })
         .should('be.visible')
         .click()
-    } else {
-
     }
     this.cy
       .get('#payment_ebanx_settings_integration_key_sandbox', { timeout: 10000 })
