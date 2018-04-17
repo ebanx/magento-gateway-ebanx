@@ -11,6 +11,7 @@
     <rule ref="PSR2">
         <exclude name="PSR2.Namespaces" />
     </rule>
+    <rule ref="Generic.Arrays.DisallowShortArraySyntax.Found" />
     <rule ref="PEAR.Commenting.FunctionComment" />
     <rule ref="Generic.Commenting">
         <exclude-pattern>*.phtml</exclude-pattern>
