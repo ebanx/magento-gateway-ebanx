@@ -24,6 +24,7 @@ class Ebanx_Gateway_Block_Adminhtml_System_Config_Form_Field_Interest extends Ma
 
     /**
      * @param  string $columnName Name of the column
+     *
      * @return string
      */
     protected function _renderCellTemplate($columnName)
@@ -46,6 +47,7 @@ class Ebanx_Gateway_Block_Adminhtml_System_Config_Form_Field_Interest extends Ma
     /**
      * @param string $name        The name
      * @param string $extraParams Extra parameters
+     *
      * @return string
      */
     public function getInstallmentsSelectHtml($name, $extraParams)

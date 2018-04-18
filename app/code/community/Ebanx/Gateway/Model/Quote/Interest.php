@@ -58,6 +58,7 @@ class Ebanx_Gateway_Model_Quote_Interest extends Mage_Sales_Model_Quote_Address_
 
     /**
      * @param Mage_Sales_Model_Quote_Address $address address
+     *
      * @return $this
      */
     public function fetch(Mage_Sales_Model_Quote_Address $address)

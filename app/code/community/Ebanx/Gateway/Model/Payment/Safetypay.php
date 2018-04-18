@@ -34,6 +34,7 @@ abstract class Ebanx_Gateway_Model_Payment_Safetypay extends Ebanx_Gateway_Payme
 
     /**
      * @param string $country 2 letter ISO country
+     *
      * @return bool
      */
     public function canUseForCountry($country)

@@ -42,6 +42,7 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
     /**
      * @param string $currency Currency type
      * @param float  $price    Amount
+     *
      * @return string
      */
     private function formatPriceWithLocalCurrency($currency, $price)
@@ -52,6 +53,7 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
     /**
      * @param string $currency  Currency type
      * @param bool   $formatted Format the amount
+     *
      * @return float
      */
     public function getLocalAmount($currency, $formatted = true)
@@ -64,6 +66,7 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
     /**
      * @param string $currency  Currency type
      * @param bool   $formatted Format the amount
+     *
      * @return float
      */
     public function getLocalAmountWithoutTax($currency, $formatted = true)
@@ -76,6 +79,7 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
     /**
      * @param object $instalment    Installment
      * @param string $localCurrency Currency type
+     *
      * @return string
      */
     public function formatInstalment($instalment, $localCurrency)
@@ -89,6 +93,7 @@ abstract class Ebanx_Gateway_Block_Form_Creditcard extends Mage_Payment_Block_Fo
 
     /**
      * @param bool $hasInterests Has interests
+     *
      * @return string
      */
     abstract protected function getInterestMessage($hasInterests);

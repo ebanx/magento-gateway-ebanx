@@ -11,6 +11,7 @@ class Ebanx_Gateway_Model_Peru_Safetypay extends Ebanx_Gateway_Model_Payment_Saf
 
     /**
      * @param null $quote unused
+     *
      * @return bool
      */
     public function isAvailable($quote = null)

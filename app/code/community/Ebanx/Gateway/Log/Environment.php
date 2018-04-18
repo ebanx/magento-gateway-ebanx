@@ -90,6 +90,7 @@ class Ebanx_Gateway_Log_Environment
 
     /**
      * @param string $haystack haystack to extract version number
+     *
      * @return string
      */
     private static function extractVersionNumberFrom($haystack)

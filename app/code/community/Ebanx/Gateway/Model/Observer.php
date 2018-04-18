@@ -16,10 +16,10 @@ class Ebanx_Gateway_Model_Observer extends Varien_Event_Observer
         $col = Ebanx_Gateway_Log_Logger::lastByEvent();
 
         foreach ($col as $item) {
-	        $itemData = $item->getData();
-	        if (!empty($itemData)) {
-		        $prev_status = json_decode($itemData['log'])->to;
-	        }
+            $itemData = $item->getData();
+            if (!empty($itemData)) {
+                $prev_status = json_decode($itemData['log'])->to;
+            }
         }
 
         if (is_null($prev_status) || (!$to && $prev_status === 'enabled') || ($to && $prev_status !== 'enabled')) {

@@ -15,6 +15,7 @@ class Ebanx_Gateway_Block_Form_Creditcard_Br extends Ebanx_Gateway_Block_Form_Cr
 
     /**
      * @param bool $hasInterests Has interests
+     *
      * @return string
      */
     protected function getInterestMessage($hasInterests)
