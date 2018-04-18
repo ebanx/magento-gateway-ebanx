@@ -9,7 +9,7 @@ final class Ebanx_Gateway_Log_Logger_SettingsChange extends Ebanx_Gateway_Log_Lo
      *
      * @return void
      */
-    public static function persist(array $log_data = [])
+    public static function persist(array $log_data = array())
     {
         parent::save(
             'settings_change',

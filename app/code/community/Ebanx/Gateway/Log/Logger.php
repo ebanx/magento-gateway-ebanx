@@ -79,5 +79,5 @@ abstract class Ebanx_Gateway_Log_Logger
      *
      * @return void
      */
-    abstract public static function persist(array $log_data = []);
+    abstract public static function persist(array $log_data = array());
 }
