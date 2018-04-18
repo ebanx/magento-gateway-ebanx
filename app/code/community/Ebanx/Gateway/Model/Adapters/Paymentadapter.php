@@ -226,7 +226,8 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
     /**
      * @return null|string
      */
-    private function transformRiskProfileId() {
+    private function transformRiskProfileId()
+    {
         $version = 'Mx' . Mage::getConfig()->getNode('modules/Ebanx_Gateway/version');
 
         return preg_replace('/\./', 'x', $version);
