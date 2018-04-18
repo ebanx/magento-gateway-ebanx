@@ -9,4 +9,7 @@ composer install
 cd $TRAVIS_BUILD_DIR/tests
 
 npm install
+
+php --info
+
 node ./node_modules/.bin/cypress run --config videoRecording=false --project ./magento -s cypress/integration/$TEST_COUNTRY.js
