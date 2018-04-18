@@ -10,6 +10,7 @@ class Ebanx_Gateway_Model_Mexico_Creditcard extends Ebanx_Gateway_Model_Payment_
 
     /**
      * @param null $quote unused
+     *
      * @return bool
      */
     public function isAvailable($quote = null)

@@ -60,6 +60,7 @@ class Ebanx_Gateway_Block_Checkout_Success_Payment extends Mage_Checkout_Block_O
     /**
      * @param string $currency Currency type
      * @param float  $price    Amount
+     *
      * @return string
      */
     public function formatPriceWithLocalCurrency($currency, $price)

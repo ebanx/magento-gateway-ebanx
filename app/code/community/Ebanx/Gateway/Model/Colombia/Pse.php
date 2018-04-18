@@ -31,6 +31,7 @@ class Ebanx_Gateway_Model_Colombia_Pse extends Ebanx_Gateway_Payment
 
     /**
      * @param null $quote unused
+     *
      * @return bool
      */
     public function isAvailable($quote = null)

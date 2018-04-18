@@ -14,6 +14,7 @@ class Ebanx_Gateway_Block_Form_Debitcard extends Mage_Payment_Block_Form_Cc
     /**
      * @param string $currency Currency type
      * @param float  $price    Amount
+     *
      * @return string
      */
     private function formatPriceWithLocalCurrency($currency, $price)
@@ -24,6 +25,7 @@ class Ebanx_Gateway_Block_Form_Debitcard extends Mage_Payment_Block_Form_Cc
     /**
      * @param string $currency  Currency type
      * @param bool   $formatted Format amount
+     *
      * @return float
      */
     public function getLocalAmount($currency, $formatted = true)
@@ -36,6 +38,7 @@ class Ebanx_Gateway_Block_Form_Debitcard extends Mage_Payment_Block_Form_Cc
     /**
      * @param string $currency  Currency type
      * @param bool   $formatted Format amount
+     *
      * @return float
      */
     public function getLocalAmountWithoutTax($currency, $formatted = true)

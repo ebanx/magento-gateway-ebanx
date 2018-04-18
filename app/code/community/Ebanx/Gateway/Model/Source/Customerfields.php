@@ -12,6 +12,7 @@ class Ebanx_Gateway_Model_Source_Customerfields
 
     /**
      * @param string $entity entity code
+     *
      * @return array
      */
     private function getAttributesByEntityCode($entity)

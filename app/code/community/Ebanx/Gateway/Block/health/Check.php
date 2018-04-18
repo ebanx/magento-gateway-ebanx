@@ -3,8 +3,7 @@
 /**
  * Ebanx_Gateway_Block_Health_Check class used to display (or not) a health check info on payment method configuration
  */
-final class Ebanx_Gateway_Block_Health_Check
-{
+final class Ebanx_Gateway_Block_Health_Check {
     public $supportedCurrencies = array(
         'EUR',
         'BRL',

@@ -19,6 +19,7 @@ class Ebanx_Gateway_Model_Chile_Multicaja extends Ebanx_Gateway_Payment
 
     /**
      * @param null $quote unused
+     *
      * @return bool
      */
     public function isAvailable($quote = null)

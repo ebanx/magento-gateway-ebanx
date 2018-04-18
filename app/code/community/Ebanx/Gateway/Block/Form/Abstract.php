@@ -13,6 +13,7 @@ abstract class Ebanx_Gateway_Block_Form_Abstract extends Mage_Payment_Block_Form
     /**
      * @param string $currency Currency type
      * @param float  $price    Amount
+     *
      * @return string
      */
     private function formatPriceWithLocalCurrency($currency, $price)
@@ -23,6 +24,7 @@ abstract class Ebanx_Gateway_Block_Form_Abstract extends Mage_Payment_Block_Form
     /**
      * @param string $currency  Currency type
      * @param bool   $formatted Format the amount
+     *
      * @return float
      */
     public function getLocalAmount($currency, $formatted = true)
@@ -35,6 +37,7 @@ abstract class Ebanx_Gateway_Block_Form_Abstract extends Mage_Payment_Block_Form
     /**
      * @param string $currency  Currency type
      * @param bool   $formatted Format the amount
+     *
      * @return float
      */
     public function getLocalAmountWithoutTax($currency, $formatted = true)

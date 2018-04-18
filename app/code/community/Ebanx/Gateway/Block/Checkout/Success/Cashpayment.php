@@ -6,6 +6,7 @@ class Ebanx_Gateway_Block_Checkout_Success_Cashpayment extends Ebanx_Gateway_Blo
 
     /**
      * @param string $format Date format
+     *
      * @return Zend_Date
      */
     public function getEbanxDueDate($format = 'dd/MM')
