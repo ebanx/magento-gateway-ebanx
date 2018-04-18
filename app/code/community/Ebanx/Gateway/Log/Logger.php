@@ -67,17 +67,15 @@ abstract class Ebanx_Gateway_Log_Logger
             $res[] = $log->getData();
         }
 
-        return $res;
-    }
+        return array($col ,$res);
+	}
 
-    /**
-     * Abstract method that must be overrated by child classes
-     *
-     * This method is responsible for receive log data, manage them and send them to method save
-     *
-     * @param array $log_data data to be logged.
-     *
-     * @return void
-     */
-    abstract public static function persist(array $log_data = array());
+	/**
+	 * Abstract method that must be overrated by child classes
+	 *
+	 * This method is responsible for receive log data, manage them and send them to method save
+	 *
+	 * @param array $log_data data to be logged.
+	 */
+	abstract public static function persist(array $log_data = array());
 }

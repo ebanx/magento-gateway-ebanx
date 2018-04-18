@@ -5,7 +5,9 @@
 * Feature - Save debug logs for EBANX's later access [#281](https://github.com/ebanx/magento-gateway-ebanx/pull/281)
 * Feature - Changed text for displaying payment method logos config [#282](https://github.com/ebanx/magento-gateway-ebanx/pull/282)
 * Feature - Added document type as a requirement for argentinian payments [#287](https://github.com/ebanx/magento-gateway-ebanx/pull/287)
+* Feature - Send payment risk profile id to EBANX on payments [#296](https://github.com/ebanx/magento-gateway-ebanx/pull/296)
 * Fix - Added "total spent" message to debit card's checkout [#277](https://github.com/ebanx/magento-gateway-ebanx/pull/277)
+* Fix - Define country variable before trying to use it [#298](https://github.com/ebanx/magento-gateway-ebanx/pull/298)
 
 ## 2.6.0
 * Feature - Remove documents for Chile (except webpay) [#252](https://github.com/ebanx/magento-gateway-ebanx/pull/252)
