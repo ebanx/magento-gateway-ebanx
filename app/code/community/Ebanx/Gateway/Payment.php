@@ -165,8 +165,8 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
     }
 
     /**
-     * @param  Varien_Object $payment payment object
-     * @param  float         $amount  money amount to refund
+     * @param Varien_Object $payment payment object
+     * @param float         $amount  money amount to refund
      *
      * @return $this
      */
@@ -200,7 +200,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
     }
 
     /**
-     * @param  null $quote not used
+     * @param null $quote not used
      *
      * @return bool
      */
@@ -211,7 +211,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
     }
 
     /**
-     * @param  string $country 2 letter ISO country
+     * @param string $country 2 letter ISO country
      *
      * @return bool
      */

@@ -12,7 +12,7 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
     }
 
     /**
-     * @param  string $hash Hash of the payment
+     * @param string $hash Hash of the payment
      *
      * @return Mage_Sales_Model_Order
      */
@@ -22,7 +22,7 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
     }
 
     /**
-     * @param  string $ebanxStatus Payment status
+     * @param string $ebanxStatus Payment status
      *
      * @return string
      */
@@ -39,7 +39,7 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
     }
 
     /**
-     * @param  string $ebanxStatus Payment status
+     * @param string $ebanxStatus Payment status
      *
      * @return string
      */
@@ -56,8 +56,8 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
     }
 
     /**
-     * @param  string $field Field to filter
-     * @param  string $value Value to filter
+     * @param string $field Field to filter
+     * @param string $value Value to filter
      *
      * @return Mage_Sales_Model_Order
      */
