@@ -70,7 +70,7 @@ final class Ebanx_Gateway_Block_Health_Check
      */
     public function hasMininumPhpVersion()
     {
-        if (5.4 >= floatval(phpversion())) {
+        if (5.4 > floatval(phpversion())) {
             return '<strong>PHP Version: </strong> The minimum version required is 5.4, you are currently using ' . phpversion() . '.';
         }
         return true;
