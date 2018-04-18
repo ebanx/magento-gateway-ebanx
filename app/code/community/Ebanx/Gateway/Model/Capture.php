@@ -10,7 +10,9 @@ class Ebanx_Gateway_Model_Capture
 
     /**
      * @param observer $observer payment observer
+     *
      * @return void
+     *
      * @throws Ebanx_Gateway_Exception
      */
     public function capturePayment($observer)
@@ -36,7 +38,9 @@ class Ebanx_Gateway_Model_Capture
 
     /**
      * @param string $hash payment hash
+     *
      * @return bool
+     *
      * @throws Ebanx_Gateway_Exception
      */
     private function isPaymentPending($hash)

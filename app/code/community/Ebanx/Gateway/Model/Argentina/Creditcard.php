@@ -10,6 +10,7 @@ class Ebanx_Gateway_Model_Argentina_Creditcard extends Ebanx_Gateway_Model_Payme
 
     /**
      * @param null $quote unused
+     *
      * @return bool
      */
     public function isAvailable($quote = null)

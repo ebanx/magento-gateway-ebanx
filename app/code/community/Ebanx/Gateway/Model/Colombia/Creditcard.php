@@ -10,6 +10,7 @@ class Ebanx_Gateway_Model_Colombia_Creditcard extends Ebanx_Gateway_Model_Paymen
 
     /**
      * @param null $quote unused
+     *
      * @return bool
      */
     public function isAvailable($quote = null)

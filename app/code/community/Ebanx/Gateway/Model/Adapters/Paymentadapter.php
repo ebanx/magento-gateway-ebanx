@@ -97,6 +97,7 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 
     /**
      * @param Varien_Object $data varien data
+     *
      * @return Payment
      */
     public function transform(Varien_Object $data)
@@ -118,6 +119,7 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
     /**
      * @param Varien_Object $address varien address
      * @param Varien_Object $data    varien data
+     *
      * @return Address
      */
     public function transformAddress($address, $data)
@@ -177,6 +179,7 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
     /**
      * @param Varien_Object $items item array
      * @param Varien_Object $data  varien data
+     *
      * @return array
      */
     public function transformItems($items, $data)

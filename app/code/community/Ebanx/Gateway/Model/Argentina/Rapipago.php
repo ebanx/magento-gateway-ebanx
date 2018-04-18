@@ -18,6 +18,7 @@ class Ebanx_Gateway_Model_Argentina_Rapipago extends Ebanx_Gateway_Payment
 
     /**
      * @param null $quote unused
+     *
      * @return bool
      */
     public function isAvailable($quote = null)
