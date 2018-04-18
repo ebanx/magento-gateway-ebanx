@@ -35,13 +35,13 @@ env:
     - TEST_COUNTRY=peru
 
 stages:
-  - Lint
+  - lint
   - test
   - release
 
 jobs:
   include:
-    - stage: Lint
+    - stage: lint
       env: TEST_COUNTRY=
       script: bash ./tests/bin/lint.sh
     - stage: release

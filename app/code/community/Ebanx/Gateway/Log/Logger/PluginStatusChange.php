@@ -9,7 +9,7 @@ final class Ebanx_Gateway_Log_Logger_PluginStatusChange extends Ebanx_Gateway_Lo
      *
      * @return void
      */
-    public static function persist(array $log_data = [])
+    public static function persist(array $log_data = array())
     {
         parent::save(
             'plugin_status_change',
