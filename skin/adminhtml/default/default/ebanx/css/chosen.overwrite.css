@@ -7,3 +7,5 @@
   background-image: linear-gradient(#feaa44 20%, #f56d07 90%);
   color: #fff;
 }
+
+div.paypal-payment-notice {margin:10px 0!important;}

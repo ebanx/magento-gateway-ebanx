@@ -17,6 +17,7 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
+  - php --info
   - sudo service mysql stop
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
