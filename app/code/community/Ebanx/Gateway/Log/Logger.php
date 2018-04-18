@@ -24,6 +24,7 @@ abstract class Ebanx_Gateway_Log_Logger
 
     /**
      * @param string $event event
+     *
      * @return Ebanx_Gateway_Model_Resource_Log_Collection
      */
     final public static function lastByEvent($event = 'plugin_status_change')

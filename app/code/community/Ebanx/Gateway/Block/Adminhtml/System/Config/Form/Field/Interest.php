@@ -23,7 +23,7 @@ class Ebanx_Gateway_Block_Adminhtml_System_Config_Form_Field_Interest extends Ma
     }
 
     /**
-     * @param  string $columnName Name of the column
+     * @param string $columnName Name of the column
      *
      * @return string
      */
