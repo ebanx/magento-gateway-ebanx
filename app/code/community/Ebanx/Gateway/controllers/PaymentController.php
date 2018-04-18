@@ -107,6 +107,7 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
 
     /**
      * @param object $order Order
+     *
      * @return string
      */
     private function _getPaymentMethod($order)
@@ -116,6 +117,7 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
 
     /**
      * @param array $data JSON array
+     *
      * @return void
      */
     private function setResponseToJson($data)
@@ -174,6 +176,7 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
 
     /**
      * @param string $statusEbanx Ebanx status
+     *
      * @return void
      */
     private function updateOrder($statusEbanx)

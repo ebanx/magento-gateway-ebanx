@@ -93,6 +93,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
 
     /**
      * @param string $country Country in the ISO format
+     *
      * @return bool
      */
     private function countryDocumentIsOptional($country)
@@ -140,6 +141,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
     /**
      * @param string $currency  Currency type
      * @param bool   $formatted Format amount
+     *
      * @return float
      */
     public function getLocalAmount($currency, $formatted = true)
@@ -152,6 +154,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
     /**
      * @param string $currency Currency type
      * @param float  $price    Amount
+     *
      * @return string
      */
     private function formatPriceWithLocalCurrency($currency, $price)
@@ -206,6 +209,7 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
     /**
      * @param installment $instalment    Instalment
      * @param string      $localCurrency Local currency type
+     *
      * @return string
      */
     public function formatInstalment($instalment, $localCurrency)

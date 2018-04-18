@@ -82,6 +82,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * @param string $date   Date if not currently
      * @param string $format Format desired to the date
+     *
      * @return Zend_Date
      */
     public function getDueDate($date = null, $format = 'YYYY-MM-dd HH:mm:ss')
@@ -134,6 +135,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $bankCode Code of the bank
+     *
      * @return string
      */
     public function transformTefToBankName($bankCode)
@@ -150,6 +152,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $methodCode Method code
+     *
      * @return bool
      */
     public function hasDocumentFieldAlreadyForMethod($methodCode)
@@ -184,6 +187,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $code Code of ebanx payment method
+     *
      * @return string
      */
     public function getLabelForComplianceField($code)
@@ -216,6 +220,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $countryCode Country string
+     *
      * @return string
      */
     public function getLabelForComplianceFieldByCountry($countryCode)
@@ -249,6 +254,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * @param object $order Some order
      * @param object $data  Ebanx document
+     *
      * @return null|string
      */
     public function getDocumentNumber($order, $data)
@@ -301,6 +307,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $countryCode ISO country code
+     *
      * @return bool|string
      */
     public function transformCountryCodeToName($countryCode)
@@ -319,7 +326,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @param $string $methodCode EBANX method code
+     * @param string $methodCode EBANX method code
+     *
      * @return string
      */
     public function getBrazilianDocumentNumber($methodCode)
@@ -356,6 +364,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $methodCode EBANX method code
+     *
      * @return string
      */
     public function getChileanDocumentNumber($methodCode)
@@ -385,6 +394,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $methodCode EBANX method code
+     *
      * @return string
      */
     public function getColombianDocumentNumber($methodCode)
@@ -414,6 +424,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $methodCode EBANX method code
+     *
      * @return string
      */
     public function getArgetinianDocument($methodCode)
@@ -435,6 +446,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $methodCode EBANX method code
+     *
      * @return string
      */
     public function getPeruvianDocumentNumber($methodCode)
@@ -456,6 +468,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $document Document
+     *
      * @return string
      */
     public function getPersonType($document)
@@ -471,6 +484,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param array|string $data Data to be logged
+     *
      * @return void
      */
     public function errorLog($data)
@@ -482,6 +496,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
      * @param array|string $data      Data to be logged
      * @param string       $filename  Filename of the log file
      * @param string       $extension Log extension
+     *
      * @return void
      */
     public function log($data, $filename = 'ebanx', $extension = '.log')
@@ -497,6 +512,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param  string $address Address to be split
+     *
      * @return array
      */
     public function splitStreet($address)
@@ -529,6 +545,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * @param string $hash   Url Hash
      * @param string $format Voucher format
+     *
      * @return string|void
      */
     public function getVoucherUrlByHash($hash, $format = 'basic')
@@ -579,6 +596,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $hash Payment hash
+     *
      * @return array
      */
     public function getPaymentByHash($hash)
@@ -591,6 +609,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * @param string $currency Currency
      * @param float  $value    Amount
+     *
      * @return double
      */
     public function getLocalAmountWithTax($currency, $value)
@@ -603,6 +622,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * @param string $currency Currency
      * @param float  $value    Amount
+     *
      * @return double
      */
     public function getLocalAmountWithoutTax($currency, $value)
@@ -622,6 +642,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $code EBANX Method Code
+     *
      * @return bool
      */
     public function isEbanxMethod($code)
@@ -655,6 +676,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * @param string $methodCode EBANX Method Code
+     *
      * @return array
      */
     public function getDocumentFieldsRequiredForMethod($methodCode)

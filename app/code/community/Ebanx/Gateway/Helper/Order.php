@@ -4,6 +4,7 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
 {
     /**
      * @param string $hash Hash of the payment
+     *
      * @return Mage_Sales_Model_Order
      */
     public function getOrderByHash($hash)

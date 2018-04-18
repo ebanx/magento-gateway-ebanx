@@ -109,6 +109,7 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
     /**
      * @param array  $products      Products
      * @param string $paymentMethod Method of payment
+     *
      * @return void
      */
     private function createOrder($products, $paymentMethod)
@@ -221,7 +222,9 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
 
     /**
      * @param array $requestData Data array
+     *
      * @return array
+     *
      * @throws Exception
      */
     private function addProduct($requestData)
@@ -286,6 +289,7 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
     /**
      * @param Mage_Catalog_Model_Product $product Product
      * @param int                        $qty     Quantity
+     *
      * @return Mage_Sales_Model_Order_Item
      */
     private function productToOrderItem(Mage_Catalog_Model_Product $product, $qty = 1)
