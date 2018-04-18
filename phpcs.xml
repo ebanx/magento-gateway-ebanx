@@ -17,6 +17,7 @@
         <exclude-pattern>*.phtml</exclude-pattern>
         <exclude name="Generic.Commenting.DocComment.MissingShort" />
         <exclude name="Generic.Commenting.DocComment.SpacingBeforeTags" />
+        <exclude name="Generic.Commenting.DocComment.NonParamGroup" />
     </rule>
     <!-- Excludes -->
     <rule ref="PSR1.Classes.ClassDeclaration">
