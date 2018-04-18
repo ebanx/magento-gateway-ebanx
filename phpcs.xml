@@ -16,7 +16,7 @@
     <rule ref="Generic.Commenting">
         <exclude-pattern>*.phtml</exclude-pattern>
         <exclude name="Generic.Commenting.DocComment.MissingShort" />
-        <exclude name="Generic.Commenting.DocComment.FirstTag" />
+        <exclude name="Generic.Commenting.DocComment.SpacingBeforeTags" />
     </rule>
     <!-- Excludes -->
     <rule ref="PSR1.Classes.ClassDeclaration">
