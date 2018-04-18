@@ -186,10 +186,11 @@ class Ebanx_Gateway_Helper_Error extends Ebanx_Gateway_Helper_Data
             case 'cl':
             case 'co':
             case 'pe':
+            case 'ar':
                 return 'es';
                 break;
             default:
                 return 'pt-br';
-        };
+        }
     }
 }
