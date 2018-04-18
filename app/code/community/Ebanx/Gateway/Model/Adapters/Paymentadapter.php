@@ -221,4 +221,14 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 
         return DateTime::createFromFormat('n-Y', $month . '-' . $year);
     }
+
+
+    /**
+     * @return null|string
+     */
+    private function transformRiskProfileId() {
+        $version = 'Mx' . Mage::getConfig()->getNode('modules/Ebanx_Gateway/version');
+
+        return preg_replace('/\./', 'x', $version);
+    }
 }
