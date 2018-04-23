@@ -30,6 +30,9 @@ const handler = (masks, max, element) => {
 };
 
 const inputHandler = (inputDoc, country) => { // eslint-disable-line no-unused-vars
+  if (country === 'AR') {
+    inputDoc.classList.add('validate-ar-document-length');
+  }
   if (maskValues[country.toLowerCase()] && inputDoc) {
     const docMaskValues = maskValues[country.toLowerCase()];
     VMasker(inputDoc).maskPattern(docMaskValues.masks[0]);
