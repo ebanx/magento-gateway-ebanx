@@ -27,10 +27,12 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
         } catch (Ebanx_Gateway_Exception $e) {
             $this->helper->errorLog($e->getMessage());
 
-            return $this->setResponseToJson(array(
+            $response = array(
                 'success' => false,
-                'message' => $e->getMessage()
-            ));
+                'message' => 'Error - ' . $e->getMessage(),
+            );
+
+            return $this->setResponseToJson($response, 400);
         }
 
         try {
@@ -61,6 +63,8 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
     {
         try {
             $this->order = $this->helper->getOrderByHash($this->hash);
+        } catch (Ebanx_Gateway_Exception $e) {
+            throw $e;
         } catch (Exception $e) {
             // LEGACY: Support for legacy orders which store their hash somewhere else
             $this->order = $this->helper->getLegacyOrderByHash($this->hash);
@@ -117,15 +121,16 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
 
     /**
      * @param array $data JSON array
+     * @param int $statusCode
      *
      * @return void
      */
-    private function setResponseToJson($data)
+    private function setResponseToJson($data, $statusCode = 200)
     {
         $this->getResponse()->clearHeaders()->setHeader(
             'Content-type',
             'application/json'
-        );
+        )->setHeader('HTTP/1.1', $statusCode, true);
 
         $this->getResponse()->setBody(
             Mage::helper('core')->jsonEncode($data)

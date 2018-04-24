@@ -61,6 +61,7 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
      * @param string $value Value to filter
      *
      * @return Mage_Sales_Model_Order
+     * @throws Ebanx_Gateway_Exception
      */
     private function getOrderBy($field, $value)
     {
@@ -72,7 +73,7 @@ class Ebanx_Gateway_Helper_Order extends Ebanx_Gateway_Helper_Data
             ->load();
 
         if ($model->count() !== 1) {
-            Mage::throwException($this->__('EBANX: Invalid payment hash. We couldn\'t find the order.'));
+            throw new Ebanx_Gateway_Exception($this->__('EBANX: Invalid payment hash. We couldn\'t find the order.'));
         };
 
         $payment = $model->getFirstItem();
