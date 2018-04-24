@@ -11,16 +11,16 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxT
 ?>
 
 <ul class="form-list ebanx-payment-method ebanx-es-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
-  <?php include 'sandbox-warning.phtml' ?>
+    <?php include 'sandbox-warning.phtml' ?>
   <li class="centinel-logos">
     <label class="ebanx-payment-method-desc">Pagar con Tarjeta de Débito.</label>
-    <?php if(!$showInlineIcon): ?>
+    <?php if (!$showInlineIcon) : ?>
       <div class="input-box">
         <?= $icon; ?>
       </div>
     <?php endif; ?>
   </li>
-  <?php include 'fields.phtml' ?>
+    <?php include 'fields.phtml' ?>
   <li>
     <label for="<?php echo $_code ?>_dc_name" class="required"><em>*</em>Titular de la tarjeta</label>
     <div class="input-box">
@@ -43,31 +43,31 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxT
           <div class="v-fix">
               <select id="<?php echo $_code ?>_expiration" name="payment[dc_exp_month]"
                       class="month validate-dc-exp required-entry">
-                  <?php
-                  $_ccMonths = $this->getCcMonths();
-                  $_ccMonths[0] = $this->__('Mes');
-                  ?>
-                  <?php foreach ($_ccMonths as $k => $v): ?>
+                    <?php
+                    $_ccMonths = $this->getCcMonths();
+                    $_ccMonths[0] = $this->__('Mes');
+                    ?>
+                    <?php foreach ($_ccMonths as $k => $v) : ?>
                       <option value="<?php echo $k ?>"><?php echo $v ?></option>
-                  <?php endforeach ?>
+                    <?php endforeach ?>
               </select>
           </div>
           <div class="v-fix">
-              <?php
-              $_ccExpYear = $this->getInfoData('cc_exp_year');
+                <?php
+                $_ccExpYear = $this->getInfoData('cc_exp_year');
 
-              $_ccYears = $this->getCcYears();
-              $_ccYears[0] = $this->__('Año');
-              ?>
+                $_ccYears = $this->getCcYears();
+                $_ccYears[0] = $this->__('Año');
+                ?>
               <select id="<?php echo $_code ?>_expiration_yr" name="payment[dc_exp_year]" class="year required-entry">
-                  <?php foreach ($_ccYears as $k => $v): ?>
+                    <?php foreach ($_ccYears as $k => $v) : ?>
                       <option value="<?php echo $k ? $k : '' ?>"><?php echo $v ?></option>
-                  <?php endforeach ?>
+                    <?php endforeach ?>
               </select>
           </div>
       </div>
   </li>
-  <?php echo $this->getChildHtml() ?>
+    <?php echo $this->getChildHtml() ?>
   <li id="<?php echo $_code ?>_dc_type_cvv_div">
       <label for="<?php echo $_code ?>_dc_cid" class="required"><em>*</em>Código de verificación</label>
       <div class="input-box">

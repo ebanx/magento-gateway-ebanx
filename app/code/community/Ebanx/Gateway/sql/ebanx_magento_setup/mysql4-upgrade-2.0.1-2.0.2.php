@@ -7,8 +7,7 @@ $installer = $this;
 $installer->startSetup();
 
 if (!$installer->tableExists('ebanx_user_cards')) {
-
-	$installer->run("
+    $installer->run("
 	CREATE TABLE {$this->getTable('ebanx_user_cards')} (
 	    `ebanx_card_id` int(11) unsigned NOT NULL auto_increment,
 	    `user_id` int(11) NOT NULL default 0,

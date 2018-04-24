@@ -2,12 +2,12 @@
 <br>
 <p>Total a pagar en Peso argentino: <?php
 
-  if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
+if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
     echo $this->getLocalAmount('ARS');
-  } else {
+} else {
     echo $this->getLocalAmountWithoutTax('ARS');
-  }
-  ?></p>
+}
+?></p>
 
 <?php echo $this->getChildHtml() ?>
 
