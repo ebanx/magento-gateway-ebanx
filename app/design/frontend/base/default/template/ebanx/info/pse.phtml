@@ -2,11 +2,11 @@
 <br>
 <p>Total a pagar en Peso colombiano: <?php
 
-  if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
+if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
     echo $this->getLocalAmount('COP');
-  } else {
+} else {
     echo $this->getLocalAmountWithoutTax('COP');
-  }
-  ?></p>
+}
+?></p>
 
 <?php echo $this->getChildHtml() ?>

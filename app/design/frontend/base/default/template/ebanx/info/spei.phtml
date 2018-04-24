@@ -2,12 +2,12 @@
 <br>
 <p>Total a pagar en Peso mexicano: <?php
 
-  if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
+if (strpos(Mage::helper('core/url')->getCurrentUrl(), Mage::helper('checkout/url')->getCheckoutUrl()) !== false) {
     echo $this->getLocalAmount('MXN');
-  } else {
+} else {
     echo $this->getLocalAmountWithoutTax('MXN');
-  }
-  ?></p>
+}
+?></p>
 
 <?php echo $this->getChildHtml() ?>
 

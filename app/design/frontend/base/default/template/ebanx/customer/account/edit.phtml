@@ -5,19 +5,19 @@ $documentFields = array(
   Mage::getStoreConfig('payment/ebanx_settings/rut_field'),
   Mage::getStoreConfig('payment/ebanx_settings/dni_field')
 );
-$taxvatDocumentFields = array_filter($documentFields, function($field) {
-  return $field === 'taxvat';
+$taxvatDocumentFields = array_filter($documentFields, function ($field) {
+    return $field === 'taxvat';
 });
 
 $session = Mage::getSingleton('customer/session');
 
-if (!empty($taxvatDocumentFields) && $session->isLoggedIn() && $session->getCustomer()->getDefaultBillingAddress()):
-  $countryCode = $session->getCustomer()->getDefaultBillingAddress()->getCountry();
+if (!empty($taxvatDocumentFields) && $session->isLoggedIn() && $session->getCustomer()->getDefaultBillingAddress()) :
+    $countryCode = $session->getCustomer()->getDefaultBillingAddress()->getCountry();
 
-  if ($countryCode) {
-    $label = Mage::helper('ebanx')->getLabelForComplianceFieldByCountry($countryCode);
-  }
-  ?>
+    if ($countryCode) {
+        $label = Mage::helper('ebanx')->getLabelForComplianceFieldByCountry($countryCode);
+    }
+    ?>
   <script type="text/javascript">
   //<![CDATA[
     window.onload = function () {
@@ -26,5 +26,5 @@ if (!empty($taxvatDocumentFields) && $session->isLoggedIn() && $session->getCust
     };
   //]]>
   </script>
-  <?php
+    <?php
 endif;

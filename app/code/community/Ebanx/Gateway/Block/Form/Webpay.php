@@ -2,9 +2,12 @@
 
 class Ebanx_Gateway_Block_Form_Webpay extends Ebanx_Gateway_Block_Form_Abstract
 {
-	protected function _construct()
-	{
-		parent::_construct();
-		$this->setTemplate('ebanx/form/webpay.phtml');
-	}
+    /**
+     * @return Ebanx_Gateway_Block_Form_Webpay
+     */
+    protected function _construct()
+    {
+        parent::_construct();
+        $this->setTemplate('ebanx/form/webpay.phtml');
+    }
 }

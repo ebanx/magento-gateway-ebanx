@@ -7,7 +7,7 @@ $installer = $this;
 $installer->startSetup();
 
 if (!$installer->tableExists('ebanx_logs')) {
-	$installer->run("
+    $installer->run("
 		CREATE TABLE {$this->getTable('ebanx_logs')} (
 			id int NOT NULL AUTO_INCREMENT,
 			time datetime(6) NOT NULL DEFAULT NOW(6),
@@ -20,7 +20,7 @@ if (!$installer->tableExists('ebanx_logs')) {
 }
 
 if (!$installer->tableExists('ebanx_store_lead')) {
-	$installer->run("
+    $installer->run("
 		CREATE TABLE {$this->getTable('ebanx_store_lead')} (
 			id int NOT NULL AUTO_INCREMENT,
 			id_store int NOT NULL,
