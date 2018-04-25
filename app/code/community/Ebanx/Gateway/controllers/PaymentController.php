@@ -32,7 +32,8 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
                 'message' => 'Error - ' . $e->getMessage(),
             );
 
-            return $this->setResponseToJson($response, 400);
+            $this->setResponseToJson($response, 400);
+            return;
         }
 
         try {
@@ -58,17 +59,12 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
 
     /**
      * @return void
+     *
+     * @throws Ebanx_Gateway_Exception If payment not found.
      */
     private function loadOrder()
     {
-        try {
             $this->order = $this->helper->getOrderByHash($this->hash);
-        } catch (Ebanx_Gateway_Exception $e) {
-            throw $e;
-        } catch (Exception $e) {
-            // LEGACY: Support for legacy orders which store their hash somewhere else
-            $this->order = $this->helper->getLegacyOrderByHash($this->hash);
-        }
     }
 
     /**
