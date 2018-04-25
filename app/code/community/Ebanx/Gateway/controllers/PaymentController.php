@@ -116,8 +116,8 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
     }
 
     /**
-     * @param array $data JSON array
-     * @param int $statusCode
+     * @param array $data       JSON array
+     * @param int   $statusCode HTTP status code to be returned
      *
      * @return void
      */
