@@ -24,6 +24,6 @@ class Ebanx_Gateway_Model_Brazil_Wallet extends Ebanx_Gateway_Payment
      */
     public function isAvailable($quote = null)
     {
-        return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_brazil']));
+        return parent::isAvailable() && in_array($this->getCode(), explode(',', $this->configs['payment_methods_brazil'])) && parent::canUseForCountry('BR');
     }
 }
