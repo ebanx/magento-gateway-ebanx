@@ -162,8 +162,9 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 
         $email = $person->getCustomerEmail() ?: $data->getBillingAddress()->getEmail();
 
-        if (Mage::getSingleton('customer/session')->isLoggedIn() && empty($email)) {
-            $email = Mage::getSingleton('customer/session')->getCustomer()->getEmail();
+        $session = Mage::getSingleton( 'customer/session' );
+        if ( $session->isLoggedIn() && empty($email)) {
+            $email = $session->getCustomer()->getEmail();
         }
 
         $name = $person->getCustomerFirstname() || $person->getCustomerLastname()
