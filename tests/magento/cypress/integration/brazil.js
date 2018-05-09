@@ -125,5 +125,30 @@ describe('Shopping', () => {
         });
       });
     });
+
+    context('Logged In', () => {
+      const checkoutData = mock(
+        {
+          paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.boleto.id,
+          password: Faker.internet.password(),
+        }
+      );
+      before(() => magento.createAccount(checkoutData));
+      it('can buy with boleto while logged in', () => {
+        magento.buyBlueHorizonsBraceletsWithBoletoLoggedIn(checkoutData, (resp) => {
+          api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
+            const checkoutPayment = Api.paymentData({
+              payment_type_code: checkoutData.paymentMethod,
+              boleto_url: `${defaults.pay.url}/print/?hash=${resp.hash}`,
+              instalments: '1',
+              status: 'PE',
+              amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
+            });
+
+            wrapOrderAssertations(payment, checkoutPayment, brPayCustomerData(checkoutData));
+          });
+        });
+      });
+    });
   });
 });
