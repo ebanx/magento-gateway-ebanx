@@ -66,7 +66,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         // Create payment data
         $id = $this->payment->getOrder()->getIncrementId();
         $time = time();
-        $merchantPaymentCode = "$id-$time";
+        $merchantPaymentCode = "{$id}-{$time}";
 
         $this->data = new Varien_Object();
         $this->data
@@ -74,13 +74,10 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
             ->setOrderId($id)
             ->setDueDate($this->helper->getDueDate())
             ->setEbanxMethod($this->getCode())
-            ->setStoreCurrency(Mage::app()->getStore()
-            ->getCurrentCurrencyCode())
             ->setAmountTotal($this->order->getGrandTotal())
             ->setItems($this->order->getAllVisibleItems())
             ->setRemoteIp($this->order->getRemoteIp())
             ->setBillingAddress($this->order->getBillingAddress())
-            ->setPayment($this->payment)
             ->setOrder($this->order);
     }
 
