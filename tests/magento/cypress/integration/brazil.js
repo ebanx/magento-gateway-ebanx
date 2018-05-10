@@ -127,14 +127,16 @@ describe('Shopping', () => {
     });
 
     context('Logged In', () => {
-      const checkoutData = mock(
-        {
-          paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.boleto.id,
-          password: Faker.internet.password(),
-        }
-      );
-      before(() => magento.createAccount(checkoutData));
       it('can buy with boleto while logged in', () => {
+        const checkoutData = mock(
+          {
+            paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.boleto.id,
+            password: Faker.internet.password(),
+          }
+        );
+
+        magento.createAccount(checkoutData);
+
         magento.buyBlueHorizonsBraceletsWithBoletoLoggedIn(checkoutData, (resp) => {
           api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
             const checkoutPayment = Api.paymentData({
