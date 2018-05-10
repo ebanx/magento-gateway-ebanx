@@ -111,21 +111,20 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
             'merchantPaymentCode' => $data->getMerchantPaymentCode(),
             'orderNumber' => $data->getOrderId(),
             'dueDate' => new \DateTime($data->getDueDate()),
-            'address' => $this->transformAddress($data->getBillingAddress(), $data),
+            'address' => $this->transformAddress($data->getBillingAddress()),
             'person' => $person,
             'responsible' => $person,
-            'items' => $this->transformItems($data->getItems(), $data),
+            'items' => $this->transformItems($data->getItems()),
             'riskProfileId' => $this->transformRiskProfileId(),
         ));
     }
 
     /**
-     * @param Varien_Object $address varien address
-     * @param Varien_Object $data    varien data
+     * @param Mage_Sales_Model_Order_Address $address varien address
      *
      * @return Address
      */
-    public function transformAddress($address, $data)
+    public function transformAddress($address)
     {
         $street = $this->helper->splitStreet($address->getStreet1());
         $state = $address->getRegion();
@@ -155,10 +154,10 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 
     /**
      *
-     * @param Mage_Sales_Model_Order         $order             Order
-     * @param Mage_Sales_Model_Order_Address $billingAddress    Address
-     * @param string|bool                    $remoteIp          Ip
-     * @param string                         $methodCode Method code
+     * @param Mage_Sales_Model_Order         $order          Order
+     * @param Mage_Sales_Model_Order_Address $billingAddress Address
+     * @param string|bool                    $remoteIp       Ip
+     * @param string                         $methodCode     Method code
      *
      * @return Person
      */
@@ -189,11 +188,10 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 
     /**
      * @param Varien_Object $items item array
-     * @param Varien_Object $data  varien data
      *
      * @return array
      */
-    public function transformItems($items, $data)
+    public function transformItems($items)
     {
         $itemsData = array();
 
