@@ -149,7 +149,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
             ->setEbanxLocalAmount($this->result['payment']['amount_br']);
 
         if ($this->order->getCustomerId()) {
-            $documentNumber = $this->helper->getDocumentNumber($this->order, $this->data);
+            $documentNumber = $this->helper->getDocumentNumber($this->order, $this->data->getEbanxMethod());
             $customer = Mage::getModel('customer/customer')->load($this->order->getCustomerId())
                 ->setEbanxCustomerDocument($documentNumber);
 

@@ -102,6 +102,8 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
      */
     public function transform(Varien_Object $data)
     {
+        $person = $this->transformPerson($data->getOrder(), $data->getBillingAddress(), $data->getRemoteIp(), $data->getEbanxMethod());
+
         return new Payment(array(
             'type' => $data->getEbanxMethod(),
             'amountTotal' => $data->getAmountTotal(),
@@ -109,8 +111,8 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
             'orderNumber' => $data->getOrderId(),
             'dueDate' => new \DateTime($data->getDueDate()),
             'address' => $this->transformAddress($data->getBillingAddress(), $data),
-            'person' => $this->transformPerson( $data),
-            'responsible' => $this->transformPerson($data),
+            'person' => $person,
+            'responsible' => $person,
             'items' => $this->transformItems($data->getItems(), $data),
             'riskProfileId' => $this->transformRiskProfileId(),
         ));
@@ -151,16 +153,19 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
     }
 
     /**
-     * @param Varien_Object $data varien data
+     *
+     * @param Mage_Sales_Model_Order         $order
+     * @param Mage_Sales_Model_Order_Address $billingAddress
+     * @param string|bool                    $remoteIp
+     * @param string                         $methodCode
      *
      * @return Person
      */
-    public function transformPerson($data)
+    public function transformPerson($order, $billingAddress, $remoteIp, $methodCode)
     {
-        $document = $this->helper->getDocumentNumber($data->getOrder(), $data);
-        $order = $data->getOrder();
+        $document = $this->helper->getDocumentNumber($order, $methodCode);
 
-        $email = $order->getCustomerEmail() ?: $data->getBillingAddress()->getEmail();
+        $email = $order->getCustomerEmail() ?: $billingAddress->getEmail();
 
         $session = Mage::getSingleton('customer/session');
         if ($session->isLoggedIn() && empty($email)) {
@@ -169,15 +174,15 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 
         $name = $order->getCustomerFirstname() || $order->getCustomerLastname()
             ? $order->getCustomerFirstname() . ' ' . $order->getCustomerLastname()
-            : $data->getBillingAddress()->getName();
+            : $billingAddress->getName();
 
         return new Person(array(
             'type' => $this->helper->getPersonType($document),
             'document' => $document,
             'email' => $email,
-            'ip' => $data->getRemoteIp(),
+            'ip' => $remoteIp,
             'name' => $name,
-            'phoneNumber' => $data->getBillingAddress()->getTelephone()
+            'phoneNumber' => $billingAddress->getTelephone()
         ));
     }
 
