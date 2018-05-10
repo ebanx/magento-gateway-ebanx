@@ -252,8 +252,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @param object $order Some order
-     * @param string $methodCode
+     * @param object $order      Some order
+     * @param string $methodCode Method code
      *
      * @return null|string
      */

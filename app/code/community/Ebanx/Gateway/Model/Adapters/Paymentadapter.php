@@ -102,10 +102,11 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
      */
     public function transform(Varien_Object $data)
     {
-        $person = $this->transformPerson($data->getOrder(), $data->getBillingAddress(), $data->getRemoteIp(), $data->getEbanxMethod());
+        $methodCode = $data->getEbanxMethod();
+        $person = $this->transformPerson($data->getOrder(), $data->getBillingAddress(), $data->getRemoteIp(), $methodCode);
 
         return new Payment(array(
-            'type' => $data->getEbanxMethod(),
+            'type' => $methodCode,
             'amountTotal' => $data->getAmountTotal(),
             'merchantPaymentCode' => $data->getMerchantPaymentCode(),
             'orderNumber' => $data->getOrderId(),
@@ -154,10 +155,10 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
 
     /**
      *
-     * @param Mage_Sales_Model_Order         $order
-     * @param Mage_Sales_Model_Order_Address $billingAddress
-     * @param string|bool                    $remoteIp
-     * @param string                         $methodCode
+     * @param Mage_Sales_Model_Order         $order             Order
+     * @param Mage_Sales_Model_Order_Address $billingAddress    Address
+     * @param string|bool                    $remoteIp          Ip
+     * @param string                         $methodCode Method code
      *
      * @return Person
      */
