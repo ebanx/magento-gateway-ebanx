@@ -109,8 +109,8 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
             'orderNumber' => $data->getOrderId(),
             'dueDate' => new \DateTime($data->getDueDate()),
             'address' => $this->transformAddress($data->getBillingAddress(), $data),
-            'person' => $this->transformPerson($data->getPerson(), $data),
-            'responsible' => $this->transformPerson($data->getPerson(), $data),
+            'person' => $this->transformPerson( $data),
+            'responsible' => $this->transformPerson($data),
             'items' => $this->transformItems($data->getItems(), $data),
             'riskProfileId' => $this->transformRiskProfileId(),
         ));
@@ -151,24 +151,24 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
     }
 
     /**
-     * @param Varien_Object $person person to be transformed
-     * @param Varien_Object $data   varien data
+     * @param Varien_Object $data varien data
      *
      * @return Person
      */
-    public function transformPerson($person, $data)
+    public function transformPerson($data)
     {
         $document = $this->helper->getDocumentNumber($data->getOrder(), $data);
+        $order = $data->getOrder();
 
-        $email = $person->getCustomerEmail() ?: $data->getBillingAddress()->getEmail();
+        $email = $order->getCustomerEmail() ?: $data->getBillingAddress()->getEmail();
 
         $session = Mage::getSingleton('customer/session');
         if ($session->isLoggedIn() && empty($email)) {
             $email = $session->getCustomer()->getEmail();
         }
 
-        $name = $person->getCustomerFirstname() || $person->getCustomerLastname()
-            ? $person->getCustomerFirstname() . ' ' . $person->getCustomerLastname()
+        $name = $order->getCustomerFirstname() || $order->getCustomerLastname()
+            ? $order->getCustomerFirstname() . ' ' . $order->getCustomerLastname()
             : $data->getBillingAddress()->getName();
 
         return new Person(array(

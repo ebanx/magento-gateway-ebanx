@@ -4,15 +4,16 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 {
     static protected $redirect_url;
 
-    protected $gateway;
-    protected $payment;
-    protected $ebanx;
     protected $adapter;
-    protected $data;
-    protected $result;
-    protected $customer;
-    protected $paymentData;
     protected $configs;
+    protected $data;
+    protected $ebanx;
+    protected $gateway;
+    protected $helper;
+    protected $order;
+    protected $payment;
+    protected $paymentData;
+    protected $result;
 
     protected $_isGateway = true;
     protected $_canUseFormMultishipping = false;
@@ -43,7 +44,6 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         try {
             $this->payment = $this->getInfoInstance();
             $this->order = $this->payment->getOrder();
-            $this->customer = Mage::getModel('sales/order')->load($this->order->getId());
             $this->setupData();
 
             $this->transformPaymentData();
@@ -77,7 +77,6 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
             ->setStoreCurrency(Mage::app()->getStore()
             ->getCurrentCurrencyCode())
             ->setAmountTotal($this->order->getGrandTotal())
-            ->setPerson($this->customer)
             ->setItems($this->order->getAllVisibleItems())
             ->setRemoteIp($this->order->getRemoteIp())
             ->setBillingAddress($this->order->getBillingAddress())
