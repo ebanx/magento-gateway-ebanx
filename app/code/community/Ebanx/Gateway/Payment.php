@@ -4,15 +4,16 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 {
     static protected $redirect_url;
 
-    protected $gateway;
-    protected $payment;
-    protected $ebanx;
     protected $adapter;
-    protected $data;
-    protected $result;
-    protected $customer;
-    protected $paymentData;
     protected $configs;
+    protected $data;
+    protected $ebanx;
+    protected $gateway;
+    protected $helper;
+    protected $order;
+    protected $payment;
+    protected $paymentData;
+    protected $result;
 
     protected $_isGateway = true;
     protected $_canUseFormMultishipping = false;
@@ -43,7 +44,6 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         try {
             $this->payment = $this->getInfoInstance();
             $this->order = $this->payment->getOrder();
-            $this->customer = Mage::getModel('sales/order')->load($this->order->getId());
             $this->setupData();
 
             $this->transformPaymentData();
@@ -66,7 +66,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         // Create payment data
         $id = $this->payment->getOrder()->getIncrementId();
         $time = time();
-        $merchantPaymentCode = "$id-$time";
+        $merchantPaymentCode = "{$id}-{$time}";
 
         $this->data = new Varien_Object();
         $this->data
@@ -74,14 +74,10 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
             ->setOrderId($id)
             ->setDueDate($this->helper->getDueDate())
             ->setEbanxMethod($this->getCode())
-            ->setStoreCurrency(Mage::app()->getStore()
-            ->getCurrentCurrencyCode())
             ->setAmountTotal($this->order->getGrandTotal())
-            ->setPerson($this->customer)
             ->setItems($this->order->getAllVisibleItems())
             ->setRemoteIp($this->order->getRemoteIp())
             ->setBillingAddress($this->order->getBillingAddress())
-            ->setPayment($this->payment)
             ->setOrder($this->order);
     }
 
@@ -150,7 +146,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
             ->setEbanxLocalAmount($this->result['payment']['amount_br']);
 
         if ($this->order->getCustomerId()) {
-            $documentNumber = $this->helper->getDocumentNumber($this->order, $this->data);
+            $documentNumber = $this->helper->getDocumentNumber($this->order, $this->data->getEbanxMethod());
             $customer = Mage::getModel('customer/customer')->load($this->order->getCustomerId())
                 ->setEbanxCustomerDocument($documentNumber);
 
