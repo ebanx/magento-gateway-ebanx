@@ -2,6 +2,7 @@ import Home from './pages/shopping/home';
 import Cart from './pages/shopping/cart';
 import Checkout from './pages/shopping/checkout';
 import ThankYou from './pages/shopping/thankYou';
+import Account from './pages/shopping/account';
 import BlueHorizonsBracelets from './pages/shopping/blueHorizonsBracelets';
 
 import AdminHome from './pages/admin/home';
@@ -21,6 +22,7 @@ export default class Magento {
       cart: new Cart(cy),
       checkout: new Checkout(cy),
       thankYou: new ThankYou(cy),
+      account: new Account(cy),
       blueHorizonsBracelets: new BlueHorizonsBracelets(cy),
       admin: {
         home: new AdminHome(cy),
@@ -58,6 +60,10 @@ export default class Magento {
 
     this.pages.admin.paymentMethods
       .setupEbanxPlugin();
+  }
+
+  createAccount(data) {
+    this.pages.account.create(data);
   }
 
   buyBlueHorizonsBraceletsByOneClick(cvv) {
@@ -130,6 +136,17 @@ export default class Magento {
     this[buyBlueHorizonsBracelets]();
 
     this.pages.checkout.placeWithBoleto(data, () => {
+      this.pages.thankYou
+        .stillOnBoleto((resp) => {
+          tryNext(next, resp);
+        });
+    });
+  }
+
+  buyBlueHorizonsBraceletsWithBoletoLoggedIn(data, next) {
+    this[buyBlueHorizonsBracelets]();
+
+    this.pages.checkout.placeWithBoletoLoggedIn(data, () => {
       this.pages.thankYou
         .stillOnBoleto((resp) => {
           tryNext(next, resp);
