@@ -102,27 +102,29 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
      */
     public function transform(Varien_Object $data)
     {
+        $methodCode = $data->getEbanxMethod();
+        $person = $this->transformPerson($data->getOrder(), $data->getBillingAddress(), $data->getRemoteIp(), $methodCode);
+
         return new Payment(array(
-            'type' => $data->getEbanxMethod(),
+            'type' => $methodCode,
             'amountTotal' => $data->getAmountTotal(),
             'merchantPaymentCode' => $data->getMerchantPaymentCode(),
             'orderNumber' => $data->getOrderId(),
             'dueDate' => new \DateTime($data->getDueDate()),
-            'address' => $this->transformAddress($data->getBillingAddress(), $data),
-            'person' => $this->transformPerson($data->getPerson(), $data),
-            'responsible' => $this->transformPerson($data->getPerson(), $data),
-            'items' => $this->transformItems($data->getItems(), $data),
+            'address' => $this->transformAddress($data->getBillingAddress()),
+            'person' => $person,
+            'responsible' => $person,
+            'items' => $this->transformItems($data->getItems()),
             'riskProfileId' => $this->transformRiskProfileId(),
         ));
     }
 
     /**
-     * @param Varien_Object $address varien address
-     * @param Varien_Object $data    varien data
+     * @param Mage_Sales_Model_Order_Address $address varien address
      *
      * @return Address
      */
-    public function transformAddress($address, $data)
+    public function transformAddress($address)
     {
         $street = $this->helper->splitStreet($address->getStreet1());
         $state = $address->getRegion();
@@ -151,43 +153,45 @@ class Ebanx_Gateway_Model_Adapters_Paymentadapter
     }
 
     /**
-     * @param Varien_Object $person person to be transformed
-     * @param Varien_Object $data   varien data
+     *
+     * @param Mage_Sales_Model_Order         $order          Order
+     * @param Mage_Sales_Model_Order_Address $billingAddress Address
+     * @param string|bool                    $remoteIp       Ip
+     * @param string                         $methodCode     Method code
      *
      * @return Person
      */
-    public function transformPerson($person, $data)
+    public function transformPerson($order, $billingAddress, $remoteIp, $methodCode)
     {
-        $document = $this->helper->getDocumentNumber($data->getOrder(), $data);
+        $document = $this->helper->getDocumentNumber($order, $methodCode);
 
-        $email = $person->getCustomerEmail() ?: $data->getBillingAddress()->getEmail();
+        $email = $order->getCustomerEmail() ?: $billingAddress->getEmail();
 
         $session = Mage::getSingleton('customer/session');
         if ($session->isLoggedIn() && empty($email)) {
             $email = $session->getCustomer()->getEmail();
         }
 
-        $name = $person->getCustomerFirstname() || $person->getCustomerLastname()
-            ? $person->getCustomerFirstname() . ' ' . $person->getCustomerLastname()
-            : $data->getBillingAddress()->getName();
+        $name = $order->getCustomerFirstname() || $order->getCustomerLastname()
+            ? $order->getCustomerFirstname() . ' ' . $order->getCustomerLastname()
+            : $billingAddress->getName();
 
         return new Person(array(
             'type' => $this->helper->getPersonType($document),
             'document' => $document,
             'email' => $email,
-            'ip' => $data->getRemoteIp(),
+            'ip' => $remoteIp,
             'name' => $name,
-            'phoneNumber' => $data->getBillingAddress()->getTelephone()
+            'phoneNumber' => $billingAddress->getTelephone()
         ));
     }
 
     /**
      * @param Varien_Object $items item array
-     * @param Varien_Object $data  varien data
      *
      * @return array
      */
-    public function transformItems($items, $data)
+    public function transformItems($items)
     {
         $itemsData = array();
 

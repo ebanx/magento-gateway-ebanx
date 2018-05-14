@@ -252,17 +252,16 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @param object $order Some order
-     * @param object $data  Ebanx document
+     * @param object $order      Some order
+     * @param string $methodCode Method code
      *
      * @return null|string
      */
-    public function getDocumentNumber($order, $data)
+    public function getDocumentNumber($order, $methodCode)
     {
         $this->order = $order;
         $countryCode = $this->getCustomerData()['country_id'];
         $country = $this->transformCountryCodeToName($countryCode);
-        $methodCode = $data->getEbanxMethod();
 
         switch ($country) {
             case Country::BRAZIL:
