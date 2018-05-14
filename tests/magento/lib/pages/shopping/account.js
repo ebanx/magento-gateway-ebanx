@@ -1,5 +1,5 @@
 /* global Cypress */
-import R from "ramda";
+import R from 'ramda';
 
 const visit = Symbol('visit');
 const register = Symbol('register');
