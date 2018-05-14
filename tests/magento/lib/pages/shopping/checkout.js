@@ -27,6 +27,7 @@ const fillCompliance = Symbol('fillCompliance');
 const chooseShipping = Symbol('chooseShipping');
 const confirmSimulator = Symbol('confirmSimulator');
 const fillInputWithJquery = Symbol('fillInputWithJquery');
+const fillLoggedInCompliance = Symbol('fillLoggedInCompliance');
 
 const fillCreditCardCvv = Symbol('fillCreditCardCvv');
 const fillCreditCardName = Symbol('fillCreditCardName');
@@ -157,6 +158,18 @@ export default class Checkout {
     this[fillFirstName](data);
     this[fillLastName](data);
     this[fillEmail](data);
+    this[fillAddress](data);
+    this[fillPostcode](data);
+    this[fillCity](data);
+    this[fillState](data);
+    this[fillPhone](data);
+
+    this[clickElement]('#billing-buttons-container > button');
+    this[chooseShipping](data.shippingMethod);
+  }
+
+  [fillLoggedInCompliance] (data) {
+    this[selectCountry](data);
     this[fillAddress](data);
     this[fillPostcode](data);
     this[fillCity](data);
@@ -470,6 +483,17 @@ export default class Checkout {
   placeWithBoleto(data, next) {
     validateSchema(CHECKOUT_SCHEMA.br.boleto(), data, () => {
       this[fillBilling](data);
+      this[clickElement]('#p_method_ebanx_boleto');
+      this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_boleto');
+      this[placeOrder]();
+
+      next();
+    });
+  }
+
+  placeWithBoletoLoggedIn(data, next) {
+    validateSchema(CHECKOUT_SCHEMA.br.boleto(), data, () => {
+      this[fillLoggedInCompliance](data);
       this[clickElement]('#p_method_ebanx_boleto');
       this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_boleto');
       this[placeOrder]();
