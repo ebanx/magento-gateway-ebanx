@@ -28,7 +28,7 @@ final class Ebanx_Gateway_Block_Health_Check implements Varien_Data_Form_Element
     }
 
     /**
-     * @param $element Varien_Data_Form_Element_Abstract
+     * @param Varien_Data_Form_Element_Abstract $element Abstract element
      *
      * @return void|string
      */
