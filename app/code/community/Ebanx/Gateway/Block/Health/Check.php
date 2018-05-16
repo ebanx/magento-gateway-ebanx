@@ -1,23 +1,16 @@
 <?php
 
+use Ebanx\Benjamin\Models\Currency;
+
 /**
  * Ebanx_Gateway_Block_Health_Check class used to display (or not) a health check info on payment method configuration
  */
-final class Ebanx_Gateway_Block_Health_Check
+final class Ebanx_Gateway_Block_Health_Check implements Varien_Data_Form_Element_Renderer_Interface
 {
-    public $supportedCurrencies = array(
-        'EUR',
-        'BRL',
-        'MXN',
-        'PEN',
-        'USD',
-        'CLP',
-        'COP',
-        'ARS',
-    );
+    public $supportedCurrencies;
 
     /**
-     * Method setForm is currently using by Magento, but we are don't using actually
+     * Method setForm is required by interface, but we don't need it
      *
      * @return void
      */
@@ -26,7 +19,7 @@ final class Ebanx_Gateway_Block_Health_Check
     }
 
     /**
-     * Method setConfigData is currently using by Magento, but we are don't using actually
+     * Method setConfigData is required by interface, but we don't need it
      *
      * @return void
      */
@@ -35,9 +28,11 @@ final class Ebanx_Gateway_Block_Health_Check
     }
 
     /**
+     * @param Varien_Data_Form_Element_Abstract $element
+     *
      * @return void|string
      */
-    public function render()
+    public function render(Varien_Data_Form_Element_Abstract $element)
     {
         $strToAppendOnNotification = '';
 
@@ -106,6 +101,8 @@ final class Ebanx_Gateway_Block_Health_Check
      */
     public function hasAnySupportedCurrency()
     {
+        $this->supportedCurrencies = Currency::all();
+
         try {
             array_walk(Mage::app()->getStores(), function ($store) {
                 if (in_array(Mage::app()->getStore($store->store_id)->getCurrentCurrencyCode(), $this->supportedCurrencies)) {
