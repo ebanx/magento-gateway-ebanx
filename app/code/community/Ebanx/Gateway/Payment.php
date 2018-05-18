@@ -112,6 +112,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         }
 
         if ($res['payment']['status'] === 'CA') {
+            $country = $this->order->getBillingAddress()->getCountry();
             $errorType = 'GENERAL';
 
             if (isset($res['payment']['transaction_status'])) {
