@@ -15,6 +15,7 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
 
     /**
      * @return void
+     * @throws Mage_Core_Exception Throws the exception after logging it.
      */
     public function notifyAction()
     {
@@ -53,7 +54,12 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
         } catch (Exception $e) {
             $this->order->addStatusHistoryComment($this->helper->__('EBANX: We could not update the order status. Error message: %s.', $e->getMessage()));
             $this->helper->errorLog($e->getMessage());
-            Mage::throwException(get_class($e).': '.$e->getMessage());
+
+            if ($e->getMessage() === 'Trying to roll status back') {
+                return;
+            }
+
+            Mage::throwException(get_class($e) . ': ' . $e->getMessage());
         }
     }
 
@@ -179,9 +185,25 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
      * @param string $statusEbanx Ebanx status
      *
      * @return void
+     * @throws Ebanx_Gateway_Exception Warns the payment status won't roll back.
      */
     private function updateOrder($statusEbanx)
     {
+        switch ($this->order->getData('status')){
+            case Mage_Sales_Model_Order::STATE_COMPLETE:
+            case Mage_Sales_Model_Order::STATE_CLOSED:
+            case Mage_Sales_Model_Order::STATE_CANCELED:
+                $response = array(
+                    'success' => false,
+                    'failReason' => 'No status roll back',
+                    'currentOrderStatus' => $this->order->getData('status'),
+                );
+
+                $this->setResponseToJson($response);
+
+                throw new Ebanx_Gateway_Exception('Trying to roll status back');
+        }
+
         $statusMagento = $this->helper->getEbanxMagentoOrder($statusEbanx);
 
         $this->order->setData('status', $statusMagento);
