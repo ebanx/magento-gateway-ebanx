@@ -189,7 +189,7 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
      */
     private function updateOrder($statusEbanx)
     {
-        switch ($this->order->getData('status')){
+        switch ($this->order->getData('status')) {
             case Mage_Sales_Model_Order::STATE_COMPLETE:
             case Mage_Sales_Model_Order::STATE_CLOSED:
             case Mage_Sales_Model_Order::STATE_CANCELED:
