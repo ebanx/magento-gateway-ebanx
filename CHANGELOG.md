@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2.8.0
+* Feature - Force Argentinian document to be 11 digits long [#301](https://github.com/ebanx/magento-gateway-ebanx/pull/301)
+* Feature - Check if platform configurations are compliant to extension needs [#302](https://github.com/ebanx/magento-gateway-ebanx/pull/302)
+* Feature - Change return for notifications when payment is not found [#303](https://github.com/ebanx/magento-gateway-ebanx/pull/303)
+* Feature - Show EBANX Account gateway only when store currency is USD [#304](https://github.com/ebanx/magento-gateway-ebanx/pull/304)
+* Feature - Try to get customer's email from Customer model [#305](https://github.com/ebanx/magento-gateway-ebanx/pull/305)
+* Fix - Don't roll payment status back for ending statuses [#310](https://github.com/ebanx/magento-gateway-ebanx/pull/310)
+
 ## 2.7.0
 * Feature - Changed text for minimum local amount config [#275](https://github.com/ebanx/magento-gateway-ebanx/pull/275)
 * Feature - Save debug logs for EBANX's later access [#281](https://github.com/ebanx/magento-gateway-ebanx/pull/281)
