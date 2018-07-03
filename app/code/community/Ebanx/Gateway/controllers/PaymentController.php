@@ -3,6 +3,9 @@
 class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
 {
     private $helper;
+    /**
+     * @var Mage_Sales_Model_Order
+     */
     private $order;
     private $hash;
 
@@ -186,9 +189,26 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
      *
      * @return void
      * @throws Ebanx_Gateway_Exception Warns the payment status won't roll back.
+     * @throws Exception
      */
     private function updateOrder($statusEbanx)
     {
+        $refundCount = $this->order->getCreditmemosCollection() ? $this->order->getCreditmemosCollection()->count() : 0;
+
+        if ($refundCount > 0) {
+            $response    = array(
+                'success' => false,
+                'failReason' => 'Refunded payment',
+                'refundCountNumber' => $refundCount,
+                'currentOrderStatus' => $this->order->getData('status'),
+                'ebanxStatus' => $statusEbanx,
+            );
+
+            $this->setResponseToJson($response);
+
+            throw new Ebanx_Gateway_Exception('Trying to roll status back');
+        };
+
         switch ($this->order->getData('status')) {
             case Mage_Sales_Model_Order::STATE_COMPLETE:
             case Mage_Sales_Model_Order::STATE_CLOSED:
