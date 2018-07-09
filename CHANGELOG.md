@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.8.1
+* Fix - Refunded payments will no longer change their status on notification arrival [#311](https://github.com/ebanx/magento-gateway-ebanx/pull/311)
+
 ## 2.8.0
 * Feature - Force Argentinian document to be 11 digits long [#301](https://github.com/ebanx/magento-gateway-ebanx/pull/301)
 * Feature - Check if platform configurations are compliant to extension needs [#302](https://github.com/ebanx/magento-gateway-ebanx/pull/302)
