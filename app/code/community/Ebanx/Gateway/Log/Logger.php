@@ -11,13 +11,16 @@ abstract class Ebanx_Gateway_Log_Logger
      * @param array  $log_data data to be logged.
      *
      * @return void
+     * @throws Exception If saving model fails.
      */
     final protected static function save($event, array $log_data)
     {
         $logModel = new Ebanx_Gateway_Model_Log();
+        $integrationKey = Mage::helper('ebanx/data')->getIntegrationKey();
 
         $logModel->setEvent($event);
         $logModel->setLog(json_encode($log_data));
+        $logModel->setIntegrationKey($integrationKey);
 
         $logModel->save();
     }
@@ -31,44 +34,51 @@ abstract class Ebanx_Gateway_Log_Logger
     {
         $logModel = new Ebanx_Gateway_Model_Log();
 
-        $col = $logModel->getCollection()
+        $row = $logModel->getCollection()
             ->addFieldToSelect(array('log'))
             ->addFieldToFilter('event', $event);
 
-        $col->getSelect()
+        $row->getSelect()
             ->order('id DESC')
             ->limit(1);
 
-        return $col;
+        return $row;
     }
 
     /**
+     * @param Ebanx_Gateway_Model_Resource_Log_Collection $row Row to be deleted
+     *
      * @return void
      */
-    final public static function truncate()
+    final public static function delete($row)
     {
-        Mage::getResourceModel('ebanx/log')->truncate();
+        foreach ($row as $log) {
+            $log->delete();
+        }
     }
 
     /**
+     * @param string $integrationKey Merchant integration key
+     *
      * @return array
      */
-    final public static function fetch()
+    final public static function fetch($integrationKey)
     {
         $logModel = new Ebanx_Gateway_Model_Log();
 
-        $col = $logModel->getCollection();
+        $row = $logModel->getCollection();
 
-        $col->getSelect()
+        $row->addFieldToFilter('integration_key', $integrationKey)
+            ->getSelect()
             ->order('id DESC');
 
         $res = array();
 
-        foreach ($col as $log) {
+        foreach ($row as $log) {
             $res[] = $log->getData();
         }
 
-        return array($col ,$res);
+        return array($row ,$res);
     }
 
     /**
