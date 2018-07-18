@@ -98,10 +98,10 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
     private function loadOrder()
     {
         try {
-            $this->order = $this->helper->getOrderByHash( $this->hash );
-        } catch(Ebanx_Gateway_Exception $e) {
+            $this->order = $this->helper->getOrderByHash($this->hash);
+        } catch (Ebanx_Gateway_Exception $e) {
             $merchantPaymentCode = $this->getRequest()->getParam('merchant_payment_code');
-            $isSandbox = substr( $merchantPaymentCode, 0, 2 ) === "SB" ? true : false;
+            $isSandbox = substr($merchantPaymentCode, 0, 2) === "SB" ? true : false;
             $api = Mage::getSingleton('ebanx/api')->ebanx();
             $queryResponse = $api->paymentInfo()->findByHash($this->hash, $isSandbox);
 
@@ -306,6 +306,11 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
         );
     }
 
+    /**
+     * @param string $paymentTypeCode
+     *
+     * @return bool
+     */
     private function isCreditCardPayment($paymentTypeCode)
     {
         $creditCardBrands = array(
