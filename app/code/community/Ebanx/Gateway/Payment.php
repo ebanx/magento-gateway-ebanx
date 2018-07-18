@@ -66,7 +66,8 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         // Create payment data
         $id = $this->payment->getOrder()->getIncrementId();
         $time = time();
-        $merchantPaymentCode = "{$id}-{$time}";
+        $env = Mage::getSingleton('ebanx/api')->getConfig()->isSandbox ? 'SB' : 'PD';
+        $merchantPaymentCode = "{$env}-{$id}-{$time}";
 
         $this->data = new Varien_Object();
         $this->data
