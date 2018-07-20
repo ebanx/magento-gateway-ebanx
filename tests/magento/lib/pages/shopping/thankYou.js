@@ -139,7 +139,7 @@ export default class ThankYou {
     this[stillOnAndExtractHash](next);
   }
 
-  failedOnCreditCard() {
+  failedOnCreditCard(next) {
     const stub = this.cy.stub();
 
     this.cy.on('window:alert', stub);
@@ -149,9 +149,10 @@ export default class ThankYou {
       .should('be.visible')
       .get('#review-please-wait', { timeout: 10000 })
       .should('not.be.visible')
-      .then(() => (
-        expect(stub.getCall(0)).to.be.calledWith('Houve um problema com seu cartão de crédito, entre em contato com o emissor do cartão.')
-      ));
+      .then(() => {
+        const [hash, merchantPaymentCode] = stub.getCall(0).args[0].split('-');
+        tryNext(next, { hash, merchantPaymentCode });
+      });
   }
 
   stillOnDebitCard(next) {
