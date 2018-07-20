@@ -1,4 +1,4 @@
-/* global expect */
+/* global expect, window */
 
 import { sanitizeMethod, tryNext } from '../../../../utils';
 
@@ -137,6 +137,21 @@ export default class ThankYou {
 
   stillOnCreditCard(next) {
     this[stillOnAndExtractHash](next);
+  }
+
+  failedOnCreditCard() {
+    const stub = this.cy.stub();
+
+    this.cy.on('window:alert', stub);
+
+    this.cy
+      .get('#review-please-wait', { timeout: 10000 })
+      .should('be.visible')
+      .get('#review-please-wait', { timeout: 10000 })
+      .should('not.be.visible')
+      .then(() => (
+        expect(stub.getCall(0)).to.be.calledWith('Houve um problema com seu cartão de crédito, entre em contato com o emissor do cartão.')
+      ));
   }
 
   stillOnDebitCard(next) {

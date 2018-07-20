@@ -121,6 +121,16 @@ export default class Magento {
       });
   }
 
+  failToBuyBlueHorizonsBraceletsWithCreditCard(data) {
+    this[buyBlueHorizonsBracelets]();
+
+    this.pages.checkout
+      .placeWithCreditCard(data, () => {
+        this.pages.thankYou
+          .failedOnCreditCard();
+      });
+  }
+
   buyBlueHorizonsBraceletsWithOxxoToPersonal(data, next) {
     this[buyBlueHorizonsBracelets]();
 
