@@ -142,7 +142,14 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         $this->result = $res;
     }
 
-    private static function resolveProcessPaymentErrorMessage($devError, $liveError) {
+    /**
+     * @param string $devError
+     * @param string $liveError
+     *
+     * @return string
+     */
+    private static function resolveProcessPaymentErrorMessage($devError, $liveError)
+    {
         return Mage::helper('ebanx/env')->isTest() ? $devError : $liveError;
     }
     /**
