@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable
 /**
  * Magento
  *
@@ -23,8 +24,6 @@
  * @copyright  Copyright (c) 2006-2018 Magento, Inc. (http://www.magento.com)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-
-// phpcs:disable
 
 if (version_compare(phpversion(), '5.3.0', '<')===true) {
     echo  '<div style="font:12px/1.35em arial, helvetica, sans-serif;">
