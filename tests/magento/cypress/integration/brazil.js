@@ -47,59 +47,59 @@ describe('Shopping', () => {
   });
 
   context('Brazil', () => {
-    // context('Boleto', () => {
-    //   it('can buy `blue horizons bracelets` using boleto to personal', () => {
-    //     const checkoutData = mock(
-    //       {
-    //         paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.boleto.id,
-    //       }
-    //     );
-    //
-    //     magento.buyBlueHorizonsBraceletsWithBoletoToPersonal(checkoutData, (resp) => {
-    //       api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
-    //         const checkoutPayment = Api.paymentData({
-    //           payment_type_code: checkoutData.paymentMethod,
-    //           boleto_url: `${defaults.pay.url}/print/?hash=${resp.hash}`,
-    //           instalments: '1',
-    //           status: 'PE',
-    //           amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
-    //         });
-    //
-    //         wrapOrderAssertations(payment, checkoutPayment, brPayCustomerData(checkoutData));
-    //       });
-    //     });
-    //   });
-    // });
+    context('Boleto', () => {
+      it('can buy `blue horizons bracelets` using boleto to personal', () => {
+        const checkoutData = mock(
+          {
+            paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.boleto.id,
+          }
+        );
+
+        magento.buyBlueHorizonsBraceletsWithBoletoToPersonal(checkoutData, (resp) => {
+          api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
+            const checkoutPayment = Api.paymentData({
+              payment_type_code: checkoutData.paymentMethod,
+              boleto_url: `${defaults.pay.url}/print/?hash=${resp.hash}`,
+              instalments: '1',
+              status: 'PE',
+              amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
+            });
+
+            wrapOrderAssertations(payment, checkoutPayment, brPayCustomerData(checkoutData));
+          });
+        });
+      });
+    });
 
     context('Credit Card', () => {
-      // it('can buy `blue horizons bracelets`, create account and can one-click', () => {
-      //   const checkoutData = mock({
-      //     paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.creditcard.id,
-      //     card: {
-      //       number: defaults._globals.cardsWhitelist.mastercard,
-      //       expiryYear: '2028',
-      //       expiryMonth: '12',
-      //       cvv: '123',
-      //       save: true,
-      //     },
-      //     password: Faker.internet.password(),
-      //   });
-      //
-      //   magento.buyBlueHorizonsBraceletsWithCreditCardToPersonal(checkoutData, (resp) => {
-      //     api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
-      //       const checkoutPayment = Api.paymentData({
-      //         amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
-      //         payment_type_code: 'mastercard',
-      //         instalments: '1',
-      //         status: 'CO',
-      //       });
-      //
-      //       wrapOrderAssertations(payment, checkoutPayment, brPayCustomerData(checkoutData));
-      //
-      //       magento.buyBlueHorizonsBraceletsByOneClick(checkoutData.card.cvv);
-      //     });
-      //   });
-      // });
+      it('can buy `blue horizons bracelets`, create account and can one-click', () => {
+        const checkoutData = mock({
+          paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.creditcard.id,
+          card: {
+            number: defaults._globals.cardsWhitelist.mastercard,
+            expiryYear: '2028',
+            expiryMonth: '12',
+            cvv: '123',
+            save: true,
+          },
+          password: Faker.internet.password(),
+        });
+
+        magento.buyBlueHorizonsBraceletsWithCreditCardToPersonal(checkoutData, (resp) => {
+          api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
+            const checkoutPayment = Api.paymentData({
+              amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
+              payment_type_code: 'mastercard',
+              instalments: '1',
+              status: 'CO',
+            });
+
+            wrapOrderAssertations(payment, checkoutPayment, brPayCustomerData(checkoutData));
+
+            magento.buyBlueHorizonsBraceletsByOneClick(checkoutData.card.cvv);
+          });
+        });
+      });
 
       it('will fail to buy `blue horizons bracelets` and notification won`t be error', () => {
         const checkoutData = mock({
@@ -118,55 +118,55 @@ describe('Shopping', () => {
       });
     });
 
-    // context('Tef', () => {
-    //   it('can buy `blue horizons bracelets` using tef (Itaú) to personal', () => {
-    //     const checkoutData = mock(
-    //       {
-    //         paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.tef.id,
-    //         paymentType: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.tef.types.itau.id,
-    //       }
-    //     );
-    //
-    //     magento.buyBlueHorizonsBraceletsWithTefToPersonal(checkoutData, (resp) => {
-    //       api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
-    //         const checkoutPayment = Api.paymentData({
-    //           amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
-    //           payment_type_code: 'itau',
-    //           instalments: '1',
-    //           status: 'CO',
-    //         });
-    //
-    //         wrapOrderAssertations(payment, checkoutPayment, brPayCustomerData(checkoutData));
-    //       });
-    //     });
-    //   });
-    // });
+    context('Tef', () => {
+      it('can buy `blue horizons bracelets` using tef (Itaú) to personal', () => {
+        const checkoutData = mock(
+          {
+            paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.tef.id,
+            paymentType: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.tef.types.itau.id,
+          }
+        );
 
-    // context('Logged In', () => {
-    //   it('can buy with boleto while logged in', () => {
-    //     const checkoutData = mock(
-    //       {
-    //         paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.boleto.id,
-    //         password: Faker.internet.password(),
-    //       }
-    //     );
-    //
-    //     magento.createAccount(checkoutData);
-    //
-    //     magento.buyBlueHorizonsBraceletsWithBoletoLoggedIn(checkoutData, (resp) => {
-    //       api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
-    //         const checkoutPayment = Api.paymentData({
-    //           payment_type_code: checkoutData.paymentMethod,
-    //           boleto_url: `${defaults.pay.url}/print/?hash=${resp.hash}`,
-    //           instalments: '1',
-    //           status: 'PE',
-    //           amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
-    //         });
-    //
-    //         wrapOrderAssertations(payment, checkoutPayment, brPayCustomerData(checkoutData));
-    //       });
-    //     });
-    //   });
-    // });
+        magento.buyBlueHorizonsBraceletsWithTefToPersonal(checkoutData, (resp) => {
+          api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
+            const checkoutPayment = Api.paymentData({
+              amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
+              payment_type_code: 'itau',
+              instalments: '1',
+              status: 'CO',
+            });
+
+            wrapOrderAssertations(payment, checkoutPayment, brPayCustomerData(checkoutData));
+          });
+        });
+      });
+    });
+
+    context('Logged In', () => {
+      it('can buy with boleto while logged in', () => {
+        const checkoutData = mock(
+          {
+            paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.boleto.id,
+            password: Faker.internet.password(),
+          }
+        );
+
+        magento.createAccount(checkoutData);
+
+        magento.buyBlueHorizonsBraceletsWithBoletoLoggedIn(checkoutData, (resp) => {
+          api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
+            const checkoutPayment = Api.paymentData({
+              payment_type_code: checkoutData.paymentMethod,
+              boleto_url: `${defaults.pay.url}/print/?hash=${resp.hash}`,
+              instalments: '1',
+              status: 'PE',
+              amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
+            });
+
+            wrapOrderAssertations(payment, checkoutPayment, brPayCustomerData(checkoutData));
+          });
+        });
+      });
+    });
   });
 });
