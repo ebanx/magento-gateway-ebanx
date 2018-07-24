@@ -126,7 +126,7 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
         $this->validateEbanxPaymentRequest();
         $this->hash = $this->getRequest()->getParam('hash_codes');
         $this->loadOrder();
-        $this->statusEbanx = $this->loadEbanxPaymentInfo();
+        $this->statusEbanx = $this->loadEbanxPaymentStatus();
         $this->validateStatus();
     }
 
@@ -186,7 +186,7 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
      * @return string
      * @throws Ebanx_Gateway_Exception
      */
-    private function loadEbanxPaymentInfo()
+    private function loadEbanxPaymentStatus()
     {
         $api = Mage::getSingleton('ebanx/api')->ebanx();
         $isSandbox = $this->loadOrderEnv() === 'sandbox';
