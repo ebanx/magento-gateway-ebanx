@@ -12,7 +12,9 @@
         <exclude name="PSR2.Namespaces" />
     </rule>
     <rule ref="Generic.Arrays.DisallowShortArraySyntax.Found" />
-    <rule ref="PEAR.Commenting.FunctionComment" />
+    <rule ref="PEAR.Commenting.FunctionComment">
+        <exclude name="PEAR.Commenting.FunctionComment.MissingParamComment" />
+    </rule>
     <rule ref="Generic.Commenting">
         <exclude-pattern>*.phtml</exclude-pattern>
         <exclude name="Generic.Commenting.DocComment.MissingShort" />

@@ -100,6 +100,22 @@ describe('Shopping', () => {
           });
         });
       });
+
+      it('will fail to buy `blue horizons bracelets` and notification won`t be error', () => {
+        const checkoutData = mock({
+          paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.br.creditcard.id,
+          card: {
+            number: defaults._globals.cardsBlacklist.visa,
+            expiryYear: '2028',
+            expiryMonth: '12',
+            cvv: '123',
+          },
+        });
+
+        magento.failToBuyBlueHorizonsBraceletsWithCreditCard(checkoutData, (data) => {
+          magento.notifyCancelledCardPayment(data.hash, data.merchantPaymentCode);
+        });
+      });
     });
 
     context('Tef', () => {

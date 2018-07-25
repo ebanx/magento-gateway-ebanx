@@ -1,8 +1,9 @@
 import Home from './pages/shopping/home';
 import Cart from './pages/shopping/cart';
+import Account from './pages/shopping/account';
 import Checkout from './pages/shopping/checkout';
 import ThankYou from './pages/shopping/thankYou';
-import Account from './pages/shopping/account';
+import Notification from './pages/shopping/notification';
 import BlueHorizonsBracelets from './pages/shopping/blueHorizonsBracelets';
 
 import AdminHome from './pages/admin/home';
@@ -20,9 +21,10 @@ export default class Magento {
     this.pages = {
       home: new Home(cy),
       cart: new Cart(cy),
+      account: new Account(cy),
       checkout: new Checkout(cy),
       thankYou: new ThankYou(cy),
-      account: new Account(cy),
+      notification: new Notification(cy),
       blueHorizonsBracelets: new BlueHorizonsBracelets(cy),
       admin: {
         home: new AdminHome(cy),
@@ -119,6 +121,20 @@ export default class Magento {
             tryNext(next, resp);
           });
       });
+  }
+
+  failToBuyBlueHorizonsBraceletsWithCreditCard(data, next) {
+    this[buyBlueHorizonsBracelets]();
+
+    this.pages.checkout
+      .placeWithCreditCard(data, () => {
+        this.pages.thankYou
+          .failedOnCreditCard(next);
+      });
+  }
+
+  notifyCancelledCardPayment(hash, merchantPaymentCode) {
+    this.pages.notification.notifyCancelledCardPayment(hash, merchantPaymentCode);
   }
 
   buyBlueHorizonsBraceletsWithOxxoToPersonal(data, next) {

@@ -66,7 +66,8 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         // Create payment data
         $id = $this->payment->getOrder()->getIncrementId();
         $time = time();
-        $merchantPaymentCode = "{$id}-{$time}";
+        $env = Mage::getSingleton('ebanx/api')->getConfig()->isSandbox ? 'SB' : 'PD';
+        $merchantPaymentCode = "{$env}-{$id}-{$time}";
 
         $this->data = new Varien_Object();
         $this->data
@@ -91,6 +92,7 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 
     /**
      * @return void
+     * @throws Mage_Core_Exception Exception.
      */
     public function processPayment()
     {
@@ -119,7 +121,12 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
                 $errorType = 'CC-'.$res['payment']['transaction_status']['code'];
             }
 
-            Mage::throwException($error->getError($errorType, $country));
+            Mage::throwException(
+                self::resolveProcessPaymentErrorMessage(
+                    $res['payment']['hash'] . '-' . $res['payment']['merchant_payment_code'],
+                    $error->getError($errorType, $country)
+                )
+            );
         }
 
         $this->order->setEmailSent(true);
@@ -135,6 +142,16 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         $this->result = $res;
     }
 
+    /**
+     * @param string $devError
+     * @param string $liveError
+     *
+     * @return string
+     */
+    private static function resolveProcessPaymentErrorMessage($devError, $liveError)
+    {
+        return Mage::getIsDeveloperMode() ? $devError : $liveError;
+    }
     /**
      * @return void
      */
