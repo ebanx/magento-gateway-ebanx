@@ -3,6 +3,9 @@ export default {
     cardsWhitelist: {
       mastercard: '5555 5555 5555 4444',
     },
+    cardsBlacklist: {
+      visa: '4000 0000 0000 0002',
+    },
   },
   pay: {
     url: 'https://sandbox.ebanx.com',

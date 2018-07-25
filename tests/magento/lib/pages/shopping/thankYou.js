@@ -1,4 +1,4 @@
-/* global expect */
+/* global expect, window */
 
 import { sanitizeMethod, tryNext } from '../../../../utils';
 
@@ -137,6 +137,22 @@ export default class ThankYou {
 
   stillOnCreditCard(next) {
     this[stillOnAndExtractHash](next);
+  }
+
+  failedOnCreditCard(next) {
+    const stub = this.cy.stub();
+
+    this.cy.on('window:alert', stub);
+
+    this.cy
+      .get('#review-please-wait', { timeout: 10000 })
+      .should('be.visible')
+      .get('#review-please-wait', { timeout: 10000 })
+      .should('not.be.visible')
+      .then(() => {
+        const [hash, merchantPaymentCode] = stub.getCall(0).args[0].split('-');
+        tryNext(next, { hash, merchantPaymentCode });
+      });
   }
 
   stillOnDebitCard(next) {
