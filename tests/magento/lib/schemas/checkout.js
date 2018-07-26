@@ -60,6 +60,7 @@ export const CHECKOUT_SCHEMA = {
       country: Joi.string().required(),
       zipcode: Joi.string().required(),
       address: Joi.string().required(),
+      document: Joi.string().required(),
       password: Joi.string().optional(),
       lastName: Joi.string().required(),
       countryId: Joi.string().required(),
@@ -79,7 +80,6 @@ export const CHECKOUT_SCHEMA = {
           this.compliance(),
           {
             schema: 'ColombiaCreditCard',
-            document: Joi.string().required(),
             card: Joi.object().keys({
               save: Joi.boolean().optional(),
               number: Joi.string().required(),

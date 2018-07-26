@@ -16,6 +16,7 @@ const mock = (data) => (R.merge(
     city: Faker.address.city(),
     state: Faker.address.state(),
     zipcode: Faker.address.zipCode(),
+    document: Faker.random.uuid(),
     phone: Faker.phone.phoneNumberFormat(2),
     email: Faker.internet.email(),
     country: 'Colombia',
@@ -59,7 +60,6 @@ describe('Shopping', () => {
       it('can buy `blue horizons bracelets`, using credit card', () => {
         const mockData = {
           paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.co.creditcard.id,
-          document: Faker.random.uuid(),
           card: {
             name: Faker.name.findName(),
             number: defaults._globals.cardsWhitelist.mastercard,

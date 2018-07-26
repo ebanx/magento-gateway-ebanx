@@ -341,6 +341,7 @@ export default class Checkout {
       this[fillBilling](data);
       this[clickElement]('#p_method_ebanx_pse');
 
+      this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_pse');
       this[selectField](data, 'paymentType', 'paymentTypeId', '#ebanx_pse_bank');
 
       this[placeOrder]();
@@ -384,6 +385,8 @@ export default class Checkout {
     validateSchema(CHECKOUT_SCHEMA.co.baloto(), data, () => {
       this[fillBilling](data);
       this[clickElement]('#p_method_ebanx_baloto');
+
+      this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_baloto');
 
       this[placeOrder]();
 
