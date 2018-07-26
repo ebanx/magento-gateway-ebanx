@@ -691,8 +691,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
             'ebanx_webpay'       => array('rut_field'),
             'ebanx_multicaja'    => array(),
             // Colombia
-            'ebanx_baloto'       => array(),
-            'ebanx_pse'          => array(),
+            'ebanx_baloto'       => array('dni_field'),
+            'ebanx_pse'          => array('dni_field'),
             'ebanx_cc_co'        => array('dni_field'),
             // Mexico
             'ebanx_oxxo'         => array(),
