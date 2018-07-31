@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.9.0
+* Feature - Modify notification flow to account for declined Credit Card operations [#315](https://github.com/ebanx/magento-gateway-ebanx/pull/315)
+* Feature - Document is required again in Colombia [#316](https://github.com/ebanx/magento-gateway-ebanx/pull/316)
+* Fix - Update log data correctly [#313](https://github.com/ebanx/magento-gateway-ebanx/pull/313)
+
 ## 2.8.1
 * Fix - Refunded payments will no longer change their status on notification arrival [#311](https://github.com/ebanx/magento-gateway-ebanx/pull/311)
 
