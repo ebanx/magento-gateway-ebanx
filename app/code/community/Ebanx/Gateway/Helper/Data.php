@@ -686,10 +686,10 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
             'ebanx_wallet'       => array('cpf_field', 'cnpj_field'),
             'ebanx_cc_br'        => array('cpf_field', 'cnpj_field'),
             // Chile
-            'ebanx_sencillito'   => array(),
-            'ebanx_servipag'     => array(),
+            'ebanx_sencillito'   => array('rut_field'),
+            'ebanx_servipag'     => array('rut_field'),
             'ebanx_webpay'       => array('rut_field'),
-            'ebanx_multicaja'    => array(),
+            'ebanx_multicaja'    => array('rut_field'),
             // Colombia
             'ebanx_baloto'       => array('dni_field'),
             'ebanx_pse'          => array('dni_field'),
