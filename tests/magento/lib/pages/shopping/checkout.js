@@ -271,6 +271,8 @@ export default class Checkout {
       this[fillBilling](data);
       this[clickElement]('#p_method_ebanx_sencillito');
 
+      this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_webpay');
+
       this[placeOrder]();
 
       waitUrlHas(`${pay.api.url}/simulator/confirm`);
@@ -288,6 +290,8 @@ export default class Checkout {
       this[fillBilling](data);
       this[clickElement]('#p_method_ebanx_servipag');
 
+      this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_webpay');
+
       this[placeOrder]();
 
       waitUrlHas(`${pay.api.url}/simulator/confirm`);
@@ -304,6 +308,8 @@ export default class Checkout {
     validateSchema(CHECKOUT_SCHEMA.cl.multicaja(), data, () => {
       this[fillBilling](data);
       this[clickElement]('#p_method_ebanx_multicaja');
+
+      this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_webpay');
 
       this[placeOrder]();
 
