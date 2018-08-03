@@ -271,7 +271,7 @@ export default class Checkout {
       this[fillBilling](data);
       this[clickElement]('#p_method_ebanx_sencillito');
 
-      this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_webpay');
+      this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_sencillito');
 
       this[placeOrder]();
 
@@ -290,7 +290,7 @@ export default class Checkout {
       this[fillBilling](data);
       this[clickElement]('#p_method_ebanx_servipag');
 
-      this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_webpay');
+      this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_servipag');
 
       this[placeOrder]();
 
@@ -309,7 +309,7 @@ export default class Checkout {
       this[fillBilling](data);
       this[clickElement]('#p_method_ebanx_multicaja');
 
-      this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_webpay');
+      this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_multicaja');
 
       this[placeOrder]();
 
