@@ -368,6 +368,7 @@ export const CHECKOUT_SCHEMA = {
       address: Joi.string().required(),
       password: Joi.string().optional(),
       lastName: Joi.string().required(),
+      document: Joi.string().required(),
       countryId: Joi.string().required(),
       firstName: Joi.string().required(),
       paymentMethod: Joi.any().allow(
@@ -407,7 +408,6 @@ export const CHECKOUT_SCHEMA = {
           this.compliance(),
           {
             schema: 'ChileWebpay',
-            document: Joi.string().required(),
           }
         )
       ).without('schema', [...R.keys(this.compliance()), ...['document']]);
