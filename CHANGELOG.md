@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.9.1
+* Fix - Make chilean document mandatory [#317](https://github.com/ebanx/magento-gateway-ebanx/pull/317)
+
 ## 2.9.0
 * Feature - Modify notification flow to account for declined Credit Card operations [#315](https://github.com/ebanx/magento-gateway-ebanx/pull/315)
 * Feature - Document is required again in Colombia [#316](https://github.com/ebanx/magento-gateway-ebanx/pull/316)
