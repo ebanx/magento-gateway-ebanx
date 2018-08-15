@@ -13,37 +13,39 @@ class Ebanx_Gateway_Model_Quote_Interest extends Mage_Sales_Model_Quote_Address_
     /**
      * @param Mage_Sales_Model_Quote_Address $address address
      *
-     * @return void
+     * @return Mage_Sales_Model_Quote_Address_Total_Abstract
      */
     public function collect(Mage_Sales_Model_Quote_Address $address)
     {
+        parent::collect($address);
+
         if ($address->getAddressType() !== Mage_Sales_Model_Quote_Address::TYPE_BILLING) {
-            return;
+            return $this;
         }
 
         $payment = $address->getQuote()->getPayment();
 
         if (!$payment->hasMethodInstance() || Mage::app()->getRequest()->getActionName() !== 'savePayment') {
-            return;
+            return $this;
         }
 
         $isCardPayment = substr($payment->getMethodInstance()->getCode(), 0, 8) === 'ebanx_cc';
         if (!$isCardPayment) {
-            return;
+            return $this;
         }
 
         $paymentInstance = $payment->getMethodInstance();
 
         $gatewayFields = Mage::app()->getRequest()->getPost('payment');
         if (!array_key_exists('instalments', $gatewayFields)) {
-            return;
+            return $this;
         }
         $instalments = $gatewayFields['instalments'];
         $grandTotal = $gatewayFields['grand_total'];
         $instalmentTerms = $paymentInstance->getInstalmentTerms($grandTotal);
 
         if (!array_key_exists($instalments - 1, $instalmentTerms)) {
-            return;
+            return $this;
         }
 
         $grandTotal = $grandTotal ?: $instalmentTerms[0]->baseAmount;
@@ -51,9 +53,12 @@ class Ebanx_Gateway_Model_Quote_Interest extends Mage_Sales_Model_Quote_Address_
         $interestAmount = ($instalmentAmount * $instalments) - $grandTotal;
 
         if ($interestAmount > 0) {
-            $address->setEbanxInterestAmount($interestAmount);
-            $address->setGrandTotal($address->getGrandTotal() + $interestAmount);
+            $address->getQuote()->setEbanxInterestAmount($interestAmount);
+            $this->_setAmount($address->getGrandTotal() + $interestAmount);
+            $this->_setBaseAmount($address->getBaseGrandTotal() + $interestAmount);
         }
+
+        return $this;
     }
 
     /**

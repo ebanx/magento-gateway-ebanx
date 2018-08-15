@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Ebanx_Gateway>
-            <version>2.9.1</version>
+            <version>2.9.2</version>
         </Ebanx_Gateway>
     </modules>
     <global>
@@ -27,6 +27,13 @@
             <ebanx>
                 <class>Ebanx_Gateway_Block</class>
             </ebanx>
+            <adminhtml>
+                <rewrite>
+                    <sales_order_totals>Ebanx_Gateway_Block_Adminhtml_Sales_Order_Totals</sales_order_totals>
+                    <sales_order_invoice_totals>Ebanx_Gateway_Block_Adminhtml_Sales_Order_Invoice_Totals</sales_order_invoice_totals>
+                    <sales_order_creditmemo_totals>Ebanx_Gateway_Block_Adminhtml_Sales_Order_Creditmemo_Totals</sales_order_creditmemo_totals>
+                </rewrite>
+            </adminhtml>
         </blocks>
 
         <models>
@@ -105,6 +112,11 @@
                     <to_order_address>*</to_order_address>
                 </ebanx_document_type>
             </sales_convert_quote_address>
+            <sales_convert_quote>
+                <ebanx_interest_amount>
+                    <to_order>*</to_order>
+                </ebanx_interest_amount>
+            </sales_convert_quote>
         </fieldsets>
 
         <sales>
@@ -122,7 +134,43 @@
                     </ebanx_local_tax>
                 </totals>
             </quote>
+            <order_invoice>
+                <totals>
+                    <ebanx_interest>
+                        <class>ebanx/order_invoice_total_interest</class>
+                        <after>grand_total</after>
+                    </ebanx_interest>
+                </totals>
+            </order_invoice>
         </sales>
+        <order_invoice>
+            <totals>
+                <ebanx_interest>
+                    <class>ebanx/invoice_interest</class>
+                    <after>discount</after>
+                    <before>tax</before>
+                </ebanx_interest>
+                <ebanx_local_tax>
+                    <class>ebanx/invoice_localtax</class>
+                    <after>discount</after>
+                    <before>tax</before>
+                </ebanx_local_tax>
+            </totals>
+        </order_invoice>
+        <order_creditmemo>
+            <totals>
+                <ebanx_interest>
+                    <class>ebanx/creditmemo_interest</class>
+                    <after>discount</after>
+                    <before>tax</before>
+                </ebanx_interest>
+                <ebanx_local_tax>
+                    <class>ebanx/creditmemo_localtax</class>
+                    <after>discount</after>
+                    <before>tax</before>
+                </ebanx_local_tax>
+            </totals>
+        </order_creditmemo>
     </global>
     <frontend>
         <routers>
