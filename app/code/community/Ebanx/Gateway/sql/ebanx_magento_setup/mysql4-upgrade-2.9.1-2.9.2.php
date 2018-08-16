@@ -15,6 +15,15 @@ $installer->addAttribute(
 
 $installer->addAttribute(
     'quote',
+    'ebanx_amount_with_interest',
+    array(
+        'type' => 'varchar',
+        'grid' => false,
+    )
+);
+
+$installer->addAttribute(
+    'quote_address',
     'ebanx_interest_amount',
     array(
         'type' => 'varchar',

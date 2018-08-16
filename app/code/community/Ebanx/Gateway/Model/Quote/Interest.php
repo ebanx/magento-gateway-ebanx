@@ -19,13 +19,17 @@ class Ebanx_Gateway_Model_Quote_Interest extends Mage_Sales_Model_Quote_Address_
     {
         parent::collect($address);
 
-        if ($address->getAddressType() !== Mage_Sales_Model_Quote_Address::TYPE_BILLING) {
+        $quote = $address->getQuote();
+        if (($quote->isVirtual() && $address->getAddressType() === Mage_Sales_Model_Quote_Address::TYPE_SHIPPING)
+             || (!$quote->isVirtual() && $address->getAddressType() === Mage_Sales_Model_Quote_Address::TYPE_BILLING)
+        ) {
             return $this;
         }
 
-        $payment = $address->getQuote()->getPayment();
+        $this->_setAddress($address);
+        $payment = $quote->getPayment();
 
-        if (!$payment->hasMethodInstance() || Mage::app()->getRequest()->getActionName() !== 'savePayment') {
+        if (!$payment->hasMethodInstance()) {
             return $this;
         }
 
@@ -41,7 +45,11 @@ class Ebanx_Gateway_Model_Quote_Interest extends Mage_Sales_Model_Quote_Address_
             return $this;
         }
         $instalments = $gatewayFields['instalments'];
-        $grandTotal = $gatewayFields['grand_total'];
+        $grandTotal = $quote->getEbanxAmountWithInterest();
+        if (!isset($grandTotal) || $grandTotal === 0) {
+            $grandTotal = Mage::getModel('checkout/session')->getQuote()->getData('grand_total');
+            $quote->setEbanxAmountWithInterest($grandTotal);
+        }
         $instalmentTerms = $paymentInstance->getInstalmentTerms($grandTotal);
 
         if (!array_key_exists($instalments - 1, $instalmentTerms)) {
@@ -53,9 +61,9 @@ class Ebanx_Gateway_Model_Quote_Interest extends Mage_Sales_Model_Quote_Address_
         $interestAmount = ($instalmentAmount * $instalments) - $grandTotal;
 
         if ($interestAmount > 0) {
-            $address->getQuote()->setEbanxInterestAmount($interestAmount);
-            $this->_setAmount($address->getGrandTotal() + $interestAmount);
-            $this->_setBaseAmount($address->getBaseGrandTotal() + $interestAmount);
+            $address->setEbanxInterestAmount($interestAmount);
+            $address->setGrandTotal($address->getGrandTotal() + $interestAmount);
+            $address->setBaseGrandTotal($address->getBaseGrandTotal() + $interestAmount);
         }
 
         return $this;
