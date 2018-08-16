@@ -158,11 +158,6 @@
                     <after>discount</after>
                     <before>tax</before>
                 </ebanx_interest>
-                <ebanx_local_tax>
-                    <class>ebanx/invoice_localtax</class>
-                    <after>discount</after>
-                    <before>tax</before>
-                </ebanx_local_tax>
             </totals>
         </order_invoice>
         <order_creditmemo>
@@ -172,11 +167,6 @@
                     <after>discount</after>
                     <before>tax</before>
                 </ebanx_interest>
-                <ebanx_local_tax>
-                    <class>ebanx/creditmemo_localtax</class>
-                    <after>discount</after>
-                    <before>tax</before>
-                </ebanx_local_tax>
             </totals>
         </order_creditmemo>
     </global>
