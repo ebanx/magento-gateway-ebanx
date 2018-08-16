@@ -1,7 +1,8 @@
 <?php
 
-class Ebanx_Gateway_Block_Adminhtml_Sales_Order_Totals extends Mage_Adminhtml_Block_Sales_Order_Totals
+class Ebanx_Gateway_Block_Customer_Sales_Order_Totals extends Mage_Sales_Block_Order_Totals
 {
+
     /**
      * Initialize order totals array
      *

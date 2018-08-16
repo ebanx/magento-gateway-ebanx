@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Ebanx_Gateway>
-            <version>2.9.2</version>
+            <version>2.9.1</version>
         </Ebanx_Gateway>
     </modules>
     <global>
@@ -112,11 +112,11 @@
                     <to_order_address>*</to_order_address>
                 </ebanx_document_type>
             </sales_convert_quote_address>
-            <sales_convert_quote>
+            <sales_convert_quote_address>
                 <ebanx_interest_amount>
                     <to_order>*</to_order>
                 </ebanx_interest_amount>
-            </sales_convert_quote>
+            </sales_convert_quote_address>
         </fieldsets>
 
         <sales>
@@ -142,6 +142,14 @@
                     </ebanx_interest>
                 </totals>
             </order_invoice>
+            <order_creditmemo>
+                <totals>
+                    <ebanx_interest>
+                        <class>ebanx/order_creditmemo_total_interest</class>
+                        <after>grand_total</after>
+                    </ebanx_interest>
+                </totals>
+            </order_creditmemo>
         </sales>
         <order_invoice>
             <totals>
