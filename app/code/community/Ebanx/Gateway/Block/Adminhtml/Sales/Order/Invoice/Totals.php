@@ -23,5 +23,4 @@ class Ebanx_Gateway_Block_Adminhtml_Sales_Order_Invoice_Totals extends Mage_Admi
 
         return $this;
     }
-
 }
