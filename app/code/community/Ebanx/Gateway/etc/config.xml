@@ -34,6 +34,11 @@
                     <sales_order_creditmemo_totals>Ebanx_Gateway_Block_Adminhtml_Sales_Order_Creditmemo_Totals</sales_order_creditmemo_totals>
                 </rewrite>
             </adminhtml>
+            <sales>
+                <rewrite>
+                    <order_totals>Ebanx_Gateway_Block_Customer_Sales_Order_Totals</order_totals>
+                </rewrite>
+            </sales>
         </blocks>
 
         <models>
