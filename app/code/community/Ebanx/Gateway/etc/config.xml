@@ -156,24 +156,6 @@
                 </totals>
             </order_creditmemo>
         </sales>
-        <order_invoice>
-            <totals>
-                <ebanx_interest>
-                    <class>ebanx/invoice_interest</class>
-                    <after>discount</after>
-                    <before>tax</before>
-                </ebanx_interest>
-            </totals>
-        </order_invoice>
-        <order_creditmemo>
-            <totals>
-                <ebanx_interest>
-                    <class>ebanx/creditmemo_interest</class>
-                    <after>discount</after>
-                    <before>tax</before>
-                </ebanx_interest>
-            </totals>
-        </order_creditmemo>
     </global>
     <frontend>
         <routers>
