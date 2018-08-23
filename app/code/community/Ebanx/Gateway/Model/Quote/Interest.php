@@ -49,6 +49,7 @@ class Ebanx_Gateway_Model_Quote_Interest extends Mage_Sales_Model_Quote_Address_
         if (!isset($grandTotal) || $grandTotal === 0) {
             $grandTotal = Mage::getModel('checkout/session')->getQuote()->getData('grand_total');
             $quote->setEbanxAmountWithInterest($grandTotal);
+            $quote->save();
         }
         $instalmentTerms = $paymentInstance->getInstalmentTerms($grandTotal);
 
