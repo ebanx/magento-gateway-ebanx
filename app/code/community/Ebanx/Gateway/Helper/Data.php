@@ -7,8 +7,8 @@ use Ebanx\Benjamin\Models\Person;
 
 class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 {
-    const URL_PRINT_LIVE = 'https://print.ebanx.com/';
-    const URL_PRINT_SANDBOX = 'https://sandbox.ebanx.com/print/';
+    const URL_PRINT_LIVE = 'https://print.ebanxpay.com/';
+    const URL_PRINT_SANDBOX = 'https://sandbox.ebanxpay.com/print/';
 
     private $order;
 
