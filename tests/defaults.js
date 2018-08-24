@@ -10,7 +10,7 @@ export default {
   pay: {
     url: 'https://sandbox.ebanx.com',
     api: {
-      url: 'https://sandbox.ebanx.com/ws',
+      url: 'https://sandbox.ebanxpay.com/ws',
       DEFAULT_VALUES: {
         paymentMethods: {
           ar: {
