@@ -27,6 +27,18 @@
             <ebanx>
                 <class>Ebanx_Gateway_Block</class>
             </ebanx>
+            <adminhtml>
+                <rewrite>
+                    <sales_order_totals>Ebanx_Gateway_Block_Adminhtml_Sales_Order_Totals</sales_order_totals>
+                    <sales_order_invoice_totals>Ebanx_Gateway_Block_Adminhtml_Sales_Order_Invoice_Totals</sales_order_invoice_totals>
+                    <sales_order_creditmemo_totals>Ebanx_Gateway_Block_Adminhtml_Sales_Order_Creditmemo_Totals</sales_order_creditmemo_totals>
+                </rewrite>
+            </adminhtml>
+            <sales>
+                <rewrite>
+                    <order_totals>Ebanx_Gateway_Block_Customer_Sales_Order_Totals</order_totals>
+                </rewrite>
+            </sales>
         </blocks>
 
         <models>
@@ -105,6 +117,11 @@
                     <to_order_address>*</to_order_address>
                 </ebanx_document_type>
             </sales_convert_quote_address>
+            <sales_convert_quote_address>
+                <ebanx_interest_amount>
+                    <to_order>*</to_order>
+                </ebanx_interest_amount>
+            </sales_convert_quote_address>
         </fieldsets>
 
         <sales>
@@ -122,6 +139,22 @@
                     </ebanx_local_tax>
                 </totals>
             </quote>
+            <order_invoice>
+                <totals>
+                    <ebanx_interest>
+                        <class>ebanx/order_invoice_total_interest</class>
+                        <after>grand_total</after>
+                    </ebanx_interest>
+                </totals>
+            </order_invoice>
+            <order_creditmemo>
+                <totals>
+                    <ebanx_interest>
+                        <class>ebanx/order_creditmemo_total_interest</class>
+                        <after>grand_total</after>
+                    </ebanx_interest>
+                </totals>
+            </order_creditmemo>
         </sales>
     </global>
     <frontend>
