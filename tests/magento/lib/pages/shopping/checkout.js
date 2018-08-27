@@ -260,7 +260,7 @@ export default class Checkout {
 
       this[placeOrder]();
 
-      waitUrlHas(`${pay.api.url}/directtefredirect`);
+      waitUrlHas(`${pay.api.newUrl}/directtefredirect`);
 
       this[confirmSimulator](next);
     });
