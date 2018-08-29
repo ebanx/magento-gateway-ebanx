@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.10.0
+* Feature - Add interest fee to order details [320](https://github.com/ebanx/magento-gateway-ebanx/pull/320)
+* Feature - Change all API urls [321](https://github.com/ebanx/magento-gateway-ebanx/pull/321)
+* Feature - Removed Demo Merchant integration keys from env file [322](https://github.com/ebanx/magento-gateway-ebanx/pull/322)
+
 ## 2.9.1
 * Fix - Make chilean document mandatory [#317](https://github.com/ebanx/magento-gateway-ebanx/pull/317)
 
