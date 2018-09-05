@@ -43,7 +43,7 @@ class Ebanx_Gateway_Log_Environment
         $environment->interpreter->version = PHP_VERSION;
 
         $environment->web_server = new stdClass();
-        $environment->web_server->signature = $_SERVER['SERVER_SIGNATURE'];
+        $environment->web_server->signature = isset($_SERVER['SERVER_SIGNATURE']) ? $_SERVER['SERVER_SIGNATURE'] : '';
 
         $resource = Mage::getSingleton('core/resource');
         $conn = $resource->getConnection('externaldb_read');
