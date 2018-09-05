@@ -104,7 +104,8 @@ final class Ebanx_Gateway_Block_Health_Check implements Varien_Data_Form_Element
         $this->supportedCurrencies = Currency::all();
 
         try {
-            array_walk(Mage::app()->getStores(), function ($store) {
+            $stores = Mage::app()->getStores();
+            array_walk($stores, function ($store) {
                 if (in_array(Mage::app()->getStore($store->store_id)->getCurrentCurrencyCode(), $this->supportedCurrencies)) {
                     throw new Exception;
                 }
