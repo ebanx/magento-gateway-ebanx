@@ -150,6 +150,7 @@ export default class Checkout {
         this[clickElement](element);
       }
     });
+
     this[clickElement]('#shipping-method-buttons-container > button');
   }
 
@@ -347,8 +348,10 @@ export default class Checkout {
       this[fillBilling](data);
       this[clickElement]('#p_method_ebanx_pse');
 
-      this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_pse');
       this[selectField](data, 'paymentType', 'paymentTypeId', '#ebanx_pse_bank');
+
+      this[selectField](data, 'documentType', 'documentTypeId', `#ebanx-document-type-ebanx_pse`);
+      this[fillInputWithJquery](data, 'document', `#ebanx-document-ebanx_pse`);
 
       this[placeOrder]();
 
@@ -392,6 +395,7 @@ export default class Checkout {
       this[fillBilling](data);
       this[clickElement]('#p_method_ebanx_baloto');
 
+      this[selectField](data, 'documentType', 'documentTypeId', `#ebanx-document-type-ebanx_baloto`);
       this[fillInputWithJquery](data, 'document', '#ebanx-document-ebanx_baloto');
 
       this[placeOrder]();

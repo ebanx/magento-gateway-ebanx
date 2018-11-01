@@ -65,6 +65,8 @@ export const CHECKOUT_SCHEMA = {
       lastName: Joi.string().required(),
       countryId: Joi.string().required(),
       firstName: Joi.string().required(),
+      documentType: Joi.string().required(),
+      documentTypeId: Joi.string().required(),
       paymentMethod: Joi.any().allow(
         R.pluck('id')(
           R.values(

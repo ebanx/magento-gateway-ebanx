@@ -48,6 +48,11 @@ class Ebanx_Gateway_Model_Api
         ));
 
         $interestRate = unserialize(Mage::helper('ebanx')->getInterestRate());
+
+        if (is_null($interestRate)) {
+            return $creditCardConfig;
+        }
+
         usort($interestRate, function ($value, $previous) {
             if ($value['instalments'] === $previous['instalments']) {
                 return 0;

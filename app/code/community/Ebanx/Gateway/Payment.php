@@ -2,6 +2,7 @@
 
 abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 {
+    // phpcs:disable
     static protected $redirect_url;
 
     protected $adapter;

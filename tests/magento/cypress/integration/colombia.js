@@ -16,11 +16,13 @@ const mock = (data) => (R.merge(
     city: Faker.address.city(),
     state: Faker.address.state(),
     zipcode: Faker.address.zipCode(),
-    document: Faker.random.uuid(),
+    document: '213498478',
     phone: Faker.phone.phoneNumberFormat(2),
     email: Faker.internet.email(),
     country: 'Colombia',
     countryId: 'CO',
+    documentType: 'Cédula de Ciudadania',
+    documentTypeId: 'COL_CC',
   }
 ));
 
