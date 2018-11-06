@@ -59,7 +59,7 @@ describe('Shopping', () => {
           api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
             const checkoutPayment = Api.paymentData({
               payment_type_code: checkoutData.paymentMethod,
-              boleto_url: `${defaults.pay.url}/print/?hash=${resp.hash}`,
+              boleto_url: `${defaults.pay.newUrl}/print/?hash=${resp.hash}`,
               instalments: '1',
               status: 'PE',
               amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
@@ -157,7 +157,7 @@ describe('Shopping', () => {
           api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
             const checkoutPayment = Api.paymentData({
               payment_type_code: checkoutData.paymentMethod,
-              boleto_url: `${defaults.pay.url}/print/?hash=${resp.hash}`,
+              boleto_url: `${defaults.pay.newUrl}/print/?hash=${resp.hash}`,
               instalments: '1',
               status: 'PE',
               amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),

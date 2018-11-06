@@ -9,6 +9,7 @@ export default {
   },
   pay: {
     url: 'https://sandbox.ebanx.com',
+    newUrl: 'https://sandbox.ebanxpay.com',
     api: {
       url: 'https://sandbox.ebanx.com/ws',
       newUrl: 'https://sandbox.ebanxpay.com/ws',

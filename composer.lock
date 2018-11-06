@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "ebanx/benjamin",
-            "version": "1.14.0",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ebanx/benjamin.git",
-                "reference": "7029f36f6b1a94cb4992f26fc9d241e6e17856a5"
+                "reference": "1a1078302fa87bd0215733f290ee306ab67df0c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/7029f36f6b1a94cb4992f26fc9d241e6e17856a5",
-                "reference": "7029f36f6b1a94cb4992f26fc9d241e6e17856a5",
+                "url": "https://api.github.com/repos/ebanx/benjamin/zipball/1a1078302fa87bd0215733f290ee306ab67df0c6",
+                "reference": "1a1078302fa87bd0215733f290ee306ab67df0c6",
                 "shasum": ""
             },
             "require": {
@@ -46,7 +46,7 @@
                 "Apache-2.0"
             ],
             "description": "Business rule provider lib for plugin implementations",
-            "time": "2018-08-24T15:45:41+00:00"
+            "time": "2018-10-29T16:01:48+00:00"
         }
     ],
     "packages-dev": [
@@ -89,12 +89,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "89150c86d70a370059327b149b0363a979aa5c9e"
+                "reference": "76f964fb03cb3d4b260ff9507b51032391da4400"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/89150c86d70a370059327b149b0363a979aa5c9e",
-                "reference": "89150c86d70a370059327b149b0363a979aa5c9e",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/76f964fb03cb3d4b260ff9507b51032391da4400",
+                "reference": "76f964fb03cb3d4b260ff9507b51032391da4400",
                 "shasum": ""
             },
             "require": {
@@ -132,7 +132,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2018-08-24T04:22:58+00:00"
+            "time": "2018-10-29T05:12:34+00:00"
         }
     ],
     "aliases": [],

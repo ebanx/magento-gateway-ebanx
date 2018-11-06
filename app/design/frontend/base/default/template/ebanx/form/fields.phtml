@@ -7,6 +7,7 @@ $ebanxCustomerDocument = '';
 $ebanxCustomerDocumentType = null;
 $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 $country = Mage::getSingleton('checkout/cart')->getQuote()->getShippingAddress()->getCountryId();
+$documentTypeByCountry = $helper->getDocumentTypesByCountry($country);
 
 
 if (Mage::getSingleton('customer/session')->isLoggedIn()) {
@@ -22,7 +23,7 @@ if ($helper->hasDocumentFieldAlreadyForMethod($this->getMethodCode()) && (!isset
 
 ?>
 <li class="ebanx-compliance-fields">
-    <?php if ($country === 'AR') : ?>
+    <?php if ($country === 'AR' || $country === 'CO') : ?>
     <label for="ebanx-document-type-<?= $this->getMethodCode() ?>" class="ebanx-document-label required">
       Document Type
     </label>
@@ -34,9 +35,9 @@ if ($helper->hasDocumentFieldAlreadyForMethod($this->getMethodCode()) && (!isset
         class="validate-select required-entry"
       >
         <option value="" selected>Select a document type</option>
-        <option value="ARG_CUIT">CUIT</option>
-        <option value="ARG_CUIL">CUIL</option>
-        <option value="ARG_CDI">CDI</option>
+        <?php foreach ($documentTypeByCountry as $key => $value) : ?>
+          <option value="<?= $key?>"><?= $value ?></option>
+        <?php endforeach ?>
       </select>
     </div>
     <?php endif ?>

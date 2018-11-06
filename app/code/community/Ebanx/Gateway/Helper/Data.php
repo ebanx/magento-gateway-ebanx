@@ -734,4 +734,22 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
             'tag' => 'EN PRUEBA',
         );
     }
+
+    /**
+     * @param string $country
+     *
+     * @return array
+     */
+    public function getDocumentTypesByCountry($country)
+    {
+        $documentTypes = array();
+
+        if ($country === 'AR') {
+            $documentTypes = array('ARG_CUIT' => 'CUIT', 'ARG_CUIL' => 'CUIL', 'ARG_CDI' => 'CDI');
+        } else if ($country === 'CO') {
+            $documentTypes = array('COL_CC' => 'Cédula de Ciudadania', 'COL_NIT' => 'NIT', 'COL_CE' => 'Cédula de Exntrajeria');
+        }
+
+        return $documentTypes;
+    }
 }
