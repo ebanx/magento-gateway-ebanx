@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.11.0
+* Feature - Add Colombia Document Type [#328](https://github.com/ebanx/magento-gateway-ebanx/pull/328)
+
 ## 2.10.0
 * Feature - Add interest fee to order details [320](https://github.com/ebanx/magento-gateway-ebanx/pull/320)
 * Feature - Change all API urls [321](https://github.com/ebanx/magento-gateway-ebanx/pull/321)
