@@ -15,6 +15,22 @@ cache:
     - $TRAVIS_BUILD_DIR/vendor
     - $TRAVIS_BUILD_DIR/tests/node_modules
     - $HOME/.composer/cache
+    - ~/.npm
+    - ~/.cache
+
+env:
+  matrix:
+  - TEST_COUNTRY=argentina
+  - TEST_COUNTRY=brazil
+  - TEST_COUNTRY=chile
+  - TEST_COUNTRY=colombia
+  - TEST_COUNTRY=ecuador
+  - TEST_COUNTRY=mexico
+  - TEST_COUNTRY=peru
+
+before_install:
+  - nvm install stable
+  - nvm use stable
 
 install: composer update
 
@@ -23,16 +39,6 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3
-
-env:
-  matrix:
-    - TEST_COUNTRY=argentina
-    - TEST_COUNTRY=brazil
-    - TEST_COUNTRY=chile
-    - TEST_COUNTRY=colombia
-    - TEST_COUNTRY=ecuador
-    - TEST_COUNTRY=mexico
-    - TEST_COUNTRY=peru
 
 stages:
   - lint

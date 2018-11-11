@@ -7,5 +7,5 @@ chmod +x $(pwd)/scripts/start.sh && $(pwd)/scripts/start.sh
 
 cd $TRAVIS_BUILD_DIR/tests
 
-npm install
-node ./node_modules/.bin/cypress run --config videoRecording=false --project ./magento -s cypress/integration/$TEST_COUNTRY.js
+npm ci
+npx cypress run --config video=false --project ./magento -s magento/cypress/integration/$TEST_COUNTRY.js

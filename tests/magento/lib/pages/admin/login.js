@@ -10,7 +10,7 @@ export default class Login {
   [visit]() {
     this.cy
       .visit(`${Cypress.env('DEMO_URL')}/admin`)
-      .get('#username', { timeout: 10000 })
+      .get('#username', { timeout: 30000 })
       .should('be.visible');
   }
 
@@ -18,7 +18,7 @@ export default class Login {
     this[visit]();
 
     this.cy
-      .get('#username', { timeout: 10000 })
+      .get('#username', { timeout: 30000 })
       .should('be.visible')
       .type(Cypress.env('ADMIN_USERNAME'))
       .should('have.value', Cypress.env('ADMIN_USERNAME'))

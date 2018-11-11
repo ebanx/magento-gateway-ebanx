@@ -12,7 +12,7 @@
     "test": "bash bin/test.sh",
     "test:magento": "cypress run  --project ./magento",
     "cypress:open": "cypress open --project ./magento",
-    "test:no-video": "cypress run --config videoRecording=false --project ./magento",
+    "test:no-video": "cypress run --config video=false --project ./magento",
     "lint": "npm run lint:js",
     "lint:eslint": "eslint --ignore-path .gitignore",
     "lint:js": "npm run lint:eslint -- . ",
@@ -23,7 +23,7 @@
   },
   "pre-commit": "lint:staged",
   "dependencies": {
-    "cypress": "^1.0.3",
+    "cypress": "3.1.0",
     "eslint": "^4.17.0",
     "faker": "git://github.com/marak/Faker.js",
     "joi": "^13.1.2",
