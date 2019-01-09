@@ -104,14 +104,21 @@ final class Ebanx_Gateway_Block_Health_Check implements Varien_Data_Form_Element
         $this->supportedCurrencies = Currency::all();
 
         try {
-            array_walk(Mage::app()->getStores(), function ($store) {
-                if (in_array(Mage::app()->getStore($store->store_id)->getCurrentCurrencyCode(), $this->supportedCurrencies)) {
-                    throw new Exception;
+            $stores = Mage::app()->getStores();
+            $currentSupportedCurrencies = [];
+            foreach ($stores as $store) {
+                $currentCurrencyCode = $store->getCurrentCurrencyCode();
+                if (in_array($currentCurrencyCode, $this->supportedCurrencies)) {
+                    $currentSupportedCurrencies[] = $currentCurrencyCode;
                 }
-            });
-        } catch (\Exception $e) {
+            }
+            if (count($currentSupportedCurrencies) == 0) {
+                return '<strong>Currency not supported: </strong> Your website must support one of these currencies '
+                    . implode(', ', $this->supportedCurrencies) . '.';;
+            }
+        } catch (Exception $e) {
             return true;
         }
-        return '<strong>Currency not supported: </strong> Your website must support one of these currencies ' . implode(', ', $this->supportedCurrencies) . '.';
+        return true;
     }
 }
