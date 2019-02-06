@@ -166,6 +166,13 @@
                     <frontName>ebanx</frontName>
                 </args>
             </ebanx>
+            <routeurfrontend>
+                <use>standard</use>
+                <args>
+                    <module>Plugincheck</module>
+                    <frontName>plugincheck</frontName>
+                </args>
+            </routeurfrontend>
         </routers>
         <layout>
             <updates>
