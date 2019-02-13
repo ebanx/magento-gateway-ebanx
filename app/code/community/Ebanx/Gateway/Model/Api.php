@@ -15,6 +15,7 @@ class Ebanx_Gateway_Model_Api
     public function __construct()
     {
         $this->ebanx = EBANX($this->getConfig(), $this->getCreditCardConfig());
+        $this->ebanx->setSource('Magento', Mage::getVersion());
     }
 
     /**
