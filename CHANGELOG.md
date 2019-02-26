@@ -1,4 +1,7 @@
 # CHANGELOG
+## 2.12.1
+* Fix - Remove Echo usage from plugincheck page [#342](https://github.com/ebanx/magento-gateway-ebanx/pull/342) 
+
 ## 2.12.0
 * Feature - Add health check page [#337](https://github.com/ebanx/magento-gateway-ebanx/pull/337)
 * Feature - Add UserAgent version tracking [#336](https://github.com/ebanx/magento-gateway-ebanx/pull/336) 
