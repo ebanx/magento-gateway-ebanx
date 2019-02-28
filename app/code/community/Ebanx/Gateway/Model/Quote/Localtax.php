@@ -39,8 +39,8 @@ class Ebanx_Gateway_Model_Quote_Localtax extends Mage_Sales_Model_Quote_Address_
             return;
         }
 
-        $localTaxAmount = $grandTotal * 0.0038;
-
+        $grandTotalWithInterest = Mage::getModel('checkout/session')->getQuote()->getData('grand_total');
+        $localTaxAmount = $grandTotalWithInterest * 0.0038;
         $address->setEbanxLocalTaxAmount($localTaxAmount);
         $address->setGrandTotal($address->getGrandTotal() + $localTaxAmount);
     }
