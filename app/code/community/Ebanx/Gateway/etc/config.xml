@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Ebanx_Gateway>
-            <version>2.12.1</version>
+            <version>2.12.2</version>
         </Ebanx_Gateway>
     </modules>
     <global>

@@ -1,4 +1,7 @@
 # CHANGELOG
+## 2.12.2
+* Fix - Change IOF calculation on checkout review [#344](https://github.com/ebanx/magento-gateway-ebanx/pull/344)
+
 ## 2.12.1
 * Fix - Remove Echo usage from plugincheck page [#342](https://github.com/ebanx/magento-gateway-ebanx/pull/342) 
 
