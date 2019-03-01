@@ -10,6 +10,6 @@ class Ebanx_Gateway_PlugincheckController extends Mage_Core_Controller_Front_Act
     public function indexAction()
     {
         Mage::getSingleton('ebanx/Plugincheck');
-        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode(json_encode(Plugincheck::getPlugincheckList())));
+        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode(Plugincheck::getPlugincheckList()));
     }
 }
