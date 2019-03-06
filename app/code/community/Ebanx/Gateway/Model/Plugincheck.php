@@ -10,6 +10,8 @@ class Plugincheck extends Mage_Core_Model_Abstract
     {
         $list = array();
         $list['php'] = phpversion();
+        $list['Magento'] = Mage::getVersion();
+        $list['ebanx-gateway'] = (string)Mage::getConfig()->getNode('modules/Ebanx_Gateway/version');
         $list['sql'] = self::getDBVersion();
         $list['plugins'] = self::getModules();
         $list['configs'] = self::getEbanxConfigs();
