@@ -1,4 +1,7 @@
 # CHANGELOG
+## 2.12.3
+* Fix - Plugincheck and UserAgent wrong version and JSON format [#346](https://github.com/ebanx/magento-gateway-ebanx/pull/346)
+
 ## 2.12.2
 * Fix - Change IOF calculation on checkout review [#344](https://github.com/ebanx/magento-gateway-ebanx/pull/344)
 
