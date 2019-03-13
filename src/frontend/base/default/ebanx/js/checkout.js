@@ -1,6 +1,8 @@
 /* global EBANX */
 /* global Validation */
 
+const invalidCardErrorMessage = 'Some error happened. Please, verify the data of your card and try again.';
+
 const waitFor = (elementFinder, callback) => {
   const waiter = setInterval(() => {
     const element = elementFinder();
@@ -136,26 +138,34 @@ var handleEbanxForm = (countryCode, paymentType, formListId) => { // eslint-disa
     elem.dispatchEvent(event);
   };
 
+  const setCardErrorMessage = (message) => {
+    errorDiv.innerHTML = message;
+    disableBtnPlaceOrder(false);
+
+    setTimeout(() => {
+      Validation.showAdvice({
+        advices: false,
+      }, errorDiv, 'ebanx-error-message');
+    }, 500);
+
+    return false;
+  };
+
   const saveToken = (response) => {
+    if (!response.data.token){
+      return setCardErrorMessage(invalidCardErrorMessage);
+    }
+
     if (!response.data.hasOwnProperty('status')) {
       const error = response.error.err;
       let errorMessage = error.message;
 
       if (!error.message) {
         EBANX.errors.InvalidValueFieldError(error.status_code);
-        errorMessage = EBANX.errors.message || 'Some error happened. Please, verify the data of your credit card and try again.';
+        errorMessage = EBANX.errors.message || invalidCardErrorMessage;
       }
 
-      errorDiv.innerHTML = errorMessage;
-      disableBtnPlaceOrder(false);
-
-      setTimeout(() => {
-        Validation.showAdvice({
-          advices: false,
-        }, errorDiv, 'ebanx-error-message');
-      }, 500);
-
-      return false;
+      return setCardErrorMessage(errorMessage);
     }
 
     responseData = response.data;
