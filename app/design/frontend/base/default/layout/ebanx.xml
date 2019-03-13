@@ -107,6 +107,9 @@
         <update handle="ebanx_checkout_handle"/>
         <update handle="ebanx_firecheckout_handle"/>
     </firecheckout_index_index>
+    <fancycheckout_index_index>
+        <update handle="ebanx_checkout_handle"/>
+    </fancycheckout_index_index>
 
 
     <!-- Success Page -->
