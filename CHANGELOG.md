@@ -1,4 +1,9 @@
 # CHANGELOG
+## 2.13.0
+* Feature - Remove cash payment from Argentina [#350](https://github.com/ebanx/magento-gateway-ebanx/pull/350)
+* Fix     - Add card token presence verification on checkout [#349](https://github.com/ebanx/magento-gateway-ebanx/pull/349)
+* Fix     - Inject Ebanx javascript and stylesheet in fancycheckout pages [#348](https://github.com/ebanx/magento-gateway-ebanx/pull/346)
+
 ## 2.12.3
 * Fix - Plugincheck and UserAgent wrong version and JSON format [#346](https://github.com/ebanx/magento-gateway-ebanx/pull/346)
 
