@@ -3,6 +3,57 @@
 
 const invalidCardErrorMessage = 'Some error happened. Please, verify the data of your card and try again.';
 
+// Observer for elements
+function ElementsObserver(elements) {
+  const completionCallbacks = [];
+  const changeCallbacks = [];
+
+  function addCompletionCallback(callback) {
+    completionCallbacks.push(callback);
+    return this;
+  }
+
+  function addChangeCallback(callback) {
+    changeCallbacks.push(callback);
+    return this;
+  }
+
+  function areAllElementsFilled() {
+    return elements.every(element => element.value && element.value.trim().length);
+  }
+
+  function notifyElementChange(element) {
+    changeCallbacks.forEach(callback => {
+      if (callback) callback(element);
+    });
+  }
+
+  function notifyCompletion() {
+    completionCallbacks.forEach(callback => {
+      if (callback) callback();
+    });
+  }
+
+  function onChangeElement(element) {
+    notifyElementChange(element);
+    if (areAllElementsFilled()) {
+      notifyCompletion();
+    }
+  }
+
+  // Init fields
+  elements.forEach(element => {
+    element.addEventListener('change', (event) => {
+      onChangeElement(event.target);
+    }, false);
+  });
+
+  return {
+    addCompletionCallback,
+    addChangeCallback,
+  };
+}
+
 const waitFor = (elementFinder, callback) => {
   const waiter = setInterval(() => {
     const element = elementFinder();
@@ -114,14 +165,6 @@ var handleEbanxForm = (countryCode, paymentType, formListId) => { // eslint-disa
   EBANX.config.setPublishableKey(ebanxIntegrationKey.value);
   EBANX.config.setCountry(ebanxCountry.value);
 
-  const isFormEmpty = () => {
-    return !cardNumber.value.length ||
-      !cardName.value.length ||
-      !cardExpirationMonth.value.length ||
-      !cardExpirationYear.value.length ||
-      !cardCvv.value.length;
-  };
-
   const disableBtnPlaceOrder = (shouldDisable) => {
     const placeOrderButton = document.querySelector('#review-buttons-container > button');
     if (typeof placeOrderButton !== 'undefined' && placeOrderButton) {
@@ -195,12 +238,6 @@ var handleEbanxForm = (countryCode, paymentType, formListId) => { // eslint-disa
     }
   };
 
-  const handleToken = (ev) => {
-    if (!isFormEmpty()) {
-      generateToken(ev.relatedTarget);
-    }
-  };
-
   const clearResponseData = () => {
     responseData = null;
     ebanxToken.value = '';
@@ -213,17 +250,15 @@ var handleEbanxForm = (countryCode, paymentType, formListId) => { // eslint-disa
   };
 
   if (hasEbanxForm) {
-    cardName.addEventListener('blur', handleToken, false);
-    cardNumber.addEventListener('blur', handleToken, false);
-    cardExpirationMonth.addEventListener('blur', handleToken, false);
-    cardExpirationYear.addEventListener('blur', handleToken, false);
-    cardCvv.addEventListener('blur', handleToken, false);
-
-    cardName.addEventListener('change', clearResponseData, false);
-    cardNumber.addEventListener('change', clearResponseData, false);
-    cardExpirationMonth.addEventListener('change', clearResponseData, false);
-    cardExpirationYear.addEventListener('change', clearResponseData, false);
-    cardCvv.addEventListener('change', clearResponseData, false);
+    ElementsObserver([
+      cardName,
+      cardNumber,
+      cardExpirationMonth,
+      cardExpirationYear,
+      cardCvv,
+    ])
+      .addChangeCallback(clearResponseData)
+      .addCompletionCallback(generateToken);
   }
 
   cardNumber.addEventListener('input', function (elm) {
