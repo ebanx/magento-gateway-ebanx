@@ -1,4 +1,9 @@
 # CHANGELOG
+
+## 2.13.1
+* Fix     - Update the lib js version [#354](https://github.com/ebanx/magento-gateway-ebanx/pull/354)
+* Quality - Refactor checkout.js credit card tokenization process [#353](https://github.com/ebanx/magento-gateway-ebanx/pull/353)
+
 ## 2.13.0
 * Feature - Remove cash payment from Argentina [#350](https://github.com/ebanx/magento-gateway-ebanx/pull/350)
 * Fix     - Add card token presence verification on checkout [#349](https://github.com/ebanx/magento-gateway-ebanx/pull/349)
