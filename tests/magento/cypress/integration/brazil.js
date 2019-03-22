@@ -128,7 +128,7 @@ describe('Shopping', () => {
         );
 
         magento.buyBlueHorizonsBraceletsWithTefToPersonal(checkoutData, (resp) => {
-          api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
+          api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'),  (payment) => {
             const checkoutPayment = Api.paymentData({
               amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
               payment_type_code: 'itau',
