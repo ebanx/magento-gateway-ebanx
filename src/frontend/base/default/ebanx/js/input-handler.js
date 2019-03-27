@@ -6,8 +6,8 @@ const maskValues = {
     changeOnLenght: 14,
   },
   ar: {
-    masks: ['SS-SSSSSSSS-S'],
-    changeOnLenght: 0,
+    masks: ['SSSSSSSS', 'SS-SSSSSSSS-S'],
+    changeOnLenght: 8,
   },
   co: {
     masks: ['999999999999999999'],

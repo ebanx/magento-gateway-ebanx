@@ -69,6 +69,62 @@ describe('Shopping', () => {
           });
         });
       });
+      it('can buy `blue horizons bracelets` using credit card and 7-digit-DNI document', () => {
+           const checkoutData = mock({
+               documentType: 'DNI',
+               documentTypeId: 'ARG_DNI',
+               document: '1234567',
+               paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.ar.creditcard.id,
+               card: {
+                   name: Faker.name.findName(),
+                   number: defaults._globals.cardsWhitelist.mastercard,
+                   expiryYear: '2028',
+                   expiryMonth: '12',
+                   cvv: '123',
+               },
+           });
+
+           magento.buyBlueHorizonsBraceletsWithCreditCardToPersonal(checkoutData, (resp) => {
+               api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
+                   const checkoutPayment = Api.paymentData({
+                       amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
+                       payment_type_code: 'mastercard',
+                        instalments: '1',
+                       status: 'CO',
+                   });
+
+                   wrapOrderAssertations(payment, checkoutPayment, Api.customerData(checkoutData));
+               });
+           });
+       });
+       it('can buy `blue horizons bracelets` using credit card and 8-digit-DNI document', () => {
+           const checkoutData = mock({
+               documentType: 'DNI',
+               documentTypeId: 'ARG_DNI',
+               document: '12345678',
+               paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.ar.creditcard.id,
+               card: {
+                   name: Faker.name.findName(),
+                   number: defaults._globals.cardsWhitelist.mastercard,
+                   expiryYear: '2028',
+                   expiryMonth: '12',
+                   cvv: '123',
+               },
+           });
+
+           magento.buyBlueHorizonsBraceletsWithCreditCardToPersonal(checkoutData, (resp) => {
+               api.queryPayment(resp.hash, Cypress.env('DEMO_INTEGRATION_KEY'), (payment) => {
+                   const checkoutPayment = Api.paymentData({
+                       amount_ext: (Cypress.env('DEMO_SHIPPING_RATE') + Cypress.env('BLUE_HORIZONS_BRACELETS_PRICE')).toFixed(2),
+                       payment_type_code: 'mastercard',
+                       instalments: '1',
+                       status: 'CO',
+                   });
+
+                   wrapOrderAssertations(payment, checkoutPayment, Api.customerData(checkoutData));
+               });
+           });
+        });
     });
   });
 });

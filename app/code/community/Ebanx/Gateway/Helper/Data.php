@@ -727,7 +727,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         $documentTypes = array();
 
         if ($country === 'AR') {
-            $documentTypes = array('ARG_CUIT' => 'CUIT', 'ARG_CUIL' => 'CUIL', 'ARG_CDI' => 'CDI');
+            $documentTypes = array('ARG_CUIT' => 'CUIT', 'ARG_CUIL' => 'CUIL', 'ARG_CDI' => 'CDI', 'ARG_DNI' => 'DNI');
         } else if ($country === 'CO') {
             $documentTypes = array('COL_CC' => 'Cédula de Ciudadania', 'COL_NIT' => 'NIT', 'COL_CE' => 'Cédula de Exntrajeria');
         }
