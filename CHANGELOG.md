@@ -1,4 +1,6 @@
 # CHANGELOG
+## 2.14.0
+* Feature  - Add DNI Document for Argentina [#357](https://github.com/ebanx/magento-gateway-ebanx/pull/357)
 
 ## 2.13.1
 * Fix     - Update the lib js version [#354](https://github.com/ebanx/magento-gateway-ebanx/pull/354)
