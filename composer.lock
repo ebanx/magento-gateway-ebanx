@@ -8,7 +8,7 @@
     "packages": [
         {
             "name": "ebanx/benjamin",
-            "version": "1.17.2",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ebanx/benjamin.git",
