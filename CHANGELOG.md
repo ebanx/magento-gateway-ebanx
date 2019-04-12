@@ -1,4 +1,7 @@
 # CHANGELOG
+## 2.14.1
+* Fix  - Update Benjamin version [#359](https://github.com/ebanx/magento-gateway-ebanx/pull/359)
+
 ## 2.14.0
 * Feature  - Add DNI Document for Argentina [#357](https://github.com/ebanx/magento-gateway-ebanx/pull/357)
 
