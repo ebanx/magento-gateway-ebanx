@@ -1,4 +1,7 @@
 # CHANGELOG
+## 2.14.2
+* Fix  - Fix CreditCard Totals with installments [#361](https://github.com/ebanx/magento-gateway-ebanx/pull/361)
+
 ## 2.14.1
 * Fix  - Update Benjamin version [#359](https://github.com/ebanx/magento-gateway-ebanx/pull/359)
 
