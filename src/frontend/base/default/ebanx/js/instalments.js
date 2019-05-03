@@ -19,6 +19,7 @@ const initInstalments = (code, lowerCountry) => { // eslint-disable-line no-unus
     }
   };
 
+  updateInstalment();
   if (selectInstalment) {
     document.addEventListener('DOMContentLoaded', updateInstalment);
     selectInstalment.addEventListener('change', updateInstalment);
