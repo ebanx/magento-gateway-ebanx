@@ -1,4 +1,7 @@
 # CHANGELOG
+## 2.14.3
+* Quality  - Update Benjamin [#363](https://github.com/ebanx/magento-gateway-ebanx/pull/363)
+
 ## 2.14.2
 * Fix  - Fix CreditCard Totals with installments [#361](https://github.com/ebanx/magento-gateway-ebanx/pull/361)
 
