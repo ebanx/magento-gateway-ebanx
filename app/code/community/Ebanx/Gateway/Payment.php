@@ -100,47 +100,17 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         $res = $this->gateway->create($this->paymentData);
         $error = Mage::helper('ebanx/error');
 
-        Ebanx_Gateway_Log_Logger_Checkout::persist(array(
-            'config' => Mage::getSingleton('ebanx/api')->getConfig(),
-            'request' => $this->paymentData,
-            'response' => $res
-        ));
+	    $this->persistPaymentRequestResponse($res);
 
-        if ($res['status'] !== 'SUCCESS') {
-            $country = $this->order->getBillingAddress()->getCountry();
-            $code = $res['status_code'];
+	    $this->throwExceptionIfPaymentUnsuccessful($res, $error);
+	    $this->throwExceptionIfPaymentCancelled($res, $error);
 
-            $this->helper->errorLog($res);
-            Mage::throwException($error->getError($code, $country)." ($code)");
-        }
-
-        if ($res['payment']['status'] === 'CA') {
-            $country = $this->order->getBillingAddress()->getCountry();
-            $errorType = 'GENERAL';
-
-            if (isset($res['payment']['transaction_status'])) {
-                $errorType = 'CC-'.$res['payment']['transaction_status']['code'];
-            }
-
-            Mage::throwException(
-                self::resolveProcessPaymentErrorMessage(
-                    $res['payment']['hash'] . '-' . $res['payment']['merchant_payment_code'],
-                    $error->getError($errorType, $country)
-                )
-            );
-        }
-
-        $this->order->setEmailSent(true);
+	    $this->order->setEmailSent(true);
         $this->order->sendNewOrderEmail();
 
-        // Set the URL for redirect
-        if (!empty($res['redirect_url'])) {
-            self::$redirect_url = $res['redirect_url'];
-        } else {
-            self::$redirect_url = Mage::getUrl('checkout/onepage/success');
-        }
+	    $this->setRedirectUrl($res);
 
-        $this->result = $res;
+	    $this->result = $res;
     }
 
     /**
@@ -248,4 +218,62 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
         }
         return $quote->getGrandTotal();
     }
+
+	/**
+	 * @param $res
+	 * @param $error
+	 * @return mixed
+	 */
+	private function throwExceptionIfPaymentUnsuccessful($res, $error) {
+		if ($res['status'] !== 'SUCCESS') {
+			$country = $this->order->getBillingAddress()->getCountry();
+			$code = $res['status_code'];
+
+			$this->helper->errorLog($res);
+			Mage::throwException($error->getError($code, $country) . " ($code)");
+		}
+	}
+
+	/**
+	 * @param $res
+	 * @param $error
+	 * @return mixed
+	 */
+	private function throwExceptionIfPaymentCancelled($res, $error) {
+		if ($res['payment']['status'] === 'CA') {
+			$country = $this->order->getBillingAddress()->getCountry();
+
+			$errorType = isset($res['payment']['transaction_status'])
+				? 'GENERAL'
+				: 'CC-' . $res['payment']['transaction_status']['code'];
+
+			Mage::throwException(
+				self::resolveProcessPaymentErrorMessage(
+					$res['payment']['hash'] . '-' . $res['payment']['merchant_payment_code'],
+					$error->getError($errorType, $country)
+				)
+			);
+		}
+	}
+
+	/**
+	 * @param $res
+	 * @return mixed
+	 */
+	private function setRedirectUrl($res) {
+		self::$redirect_url = !empty($res['redirect_url'])
+			? $res['redirect_url']
+			: Mage::getUrl('checkout/onepage/success');
+	}
+
+	/**
+	 * @param $res
+	 */
+	private function persistPaymentRequestResponse($res) {
+		Ebanx_Gateway_Log_Logger_Checkout::persist(array(
+			'config' => Mage::getSingleton('ebanx/api')->getConfig(),
+			'request' => $this->paymentData,
+			'response' => $res
+		));
+	}
 }
