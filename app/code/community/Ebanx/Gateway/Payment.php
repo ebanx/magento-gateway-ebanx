@@ -128,25 +128,9 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
      */
     public function persistPayment()
     {
-        $this->payment
-            ->setEbanxPaymentHash($this->result['payment']['hash'])
-            ->setEbanxEnvironment($this->helper->getMode())
-            ->setEbanxDueDate($this->helper->getDueDate($this->order->getCreatedAt()))
-            ->setEbanxLocalAmount($this->result['payment']['amount_br']);
+	    $this->setEBANXFieldsOnPayment();
 
-        if ($this->order->getCustomerId()) {
-            $documentNumber = $this->helper->getDocumentNumber($this->order, $this->data->getEbanxMethod());
-            $customer = Mage::getModel('customer/customer')->load($this->order->getCustomerId())
-                ->setEbanxCustomerDocument($documentNumber);
-
-            $methodCode = $this->order->getPayment()->getMethodInstance()->getCode();
-            $documentFields = $this->helper->getDocumentFieldsRequiredForMethod($methodCode);
-            foreach ($documentFields as $field) {
-                $fieldValue = Mage::getStoreConfig('payment/ebanx_settings/' . $field) ?: 'taxvat';
-                $customer->setData($fieldValue, $documentNumber);
-            }
-            $customer->save();
-        }
+	    $this->saveCustomerIfCustomerDataExists();
     }
 
     /**
@@ -247,6 +231,26 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 		}
 	}
 
+	private function setEBANXFieldsOnPayment() {
+		$this->payment
+			->setEbanxPaymentHash($this->result['payment']['hash'])
+			->setEbanxEnvironment($this->helper->getMode())
+			->setEbanxDueDate($this->helper->getDueDate($this->order->getCreatedAt()))
+			->setEbanxLocalAmount($this->result['payment']['amount_br']);
+	}
+
+	private function saveCustomerIfCustomerDataExists() {
+		if ($this->order->getCustomerId()) {
+			$documentNumber = $this->helper->getDocumentNumber($this->order, $this->data->getEbanxMethod());
+			$customer = Mage::getModel('customer/customer')
+				->load($this->order->getCustomerId())
+				->setEbanxCustomerDocument($documentNumber);
+
+			$customer = $this->setPaymentMethodDataForCustomer($customer, $documentNumber);
+			$customer->save();
+		}
+	}
+
 	/**
 	 * @param $res
 	 * @return mixed
@@ -291,5 +295,20 @@ abstract class Ebanx_Gateway_Payment extends Mage_Payment_Model_Method_Abstract
 			$errorMsg = $this->helper->__('Error processing refund: ' . $result['status_message'] . ' (' . $result['status_code'] . ')');
 			Mage::throwException($errorMsg);
 		}
+	}
+
+	 /* @param $customer
+	 * @param $documentNumber*
+	 * @return $customer
+	 */
+	private function setPaymentMethodDataForCustomer($customer, $documentNumber) {
+		$methodCode = $this->order->getPayment()->getMethodInstance()->getCode();
+		$documentFields = $this->helper->getDocumentFieldsRequiredForMethod($methodCode);
+		foreach ($documentFields as $field) {
+			$fieldValue = Mage::getStoreConfig('payment/ebanx_settings/' . $field) ?: 'taxvat';
+			$customer->setData($fieldValue, $documentNumber);
+		}
+
+		return $customer;
 	}
 }
