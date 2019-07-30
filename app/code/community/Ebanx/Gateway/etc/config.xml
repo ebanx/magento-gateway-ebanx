@@ -215,13 +215,6 @@
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_cc_br>
-            <ebanx_wallet>
-                <active>1</active>
-                <model>ebanx/brazil_wallet</model>
-                <title>Saldo EBANX</title>
-                <payment_action>sale</payment_action>
-                <sort_order>1</sort_order>
-            </ebanx_wallet>
             <!-- Colombia -->
             <ebanx_baloto>
                 <active>1</active>
@@ -339,7 +332,7 @@
                 <enabled>1</enabled>
                 <iof_local_amount>1</iof_local_amount>
                 <!-- Brazil Payment Methods -->
-                <payment_methods_brazil>ebanx_cc_br,ebanx_boleto,ebanx_tef,ebanx_wallet</payment_methods_brazil>
+                <payment_methods_brazil>ebanx_cc_br,ebanx_boleto,ebanx_tef</payment_methods_brazil>
                 <payment_methods_chile>ebanx_sencillito,ebanx_servipag,ebanx_webpay</payment_methods_chile>
                 <payment_methods_chile>ebanx_sencillito,ebanx_servipag,ebanx_multicaja,ebanx_webpay</payment_methods_chile>
                 <payment_methods_colombia>ebanx_baloto,ebanx_pse,ebanx_cc_co</payment_methods_colombia>
