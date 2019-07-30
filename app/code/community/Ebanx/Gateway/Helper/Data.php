@@ -194,7 +194,6 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         switch ($code) {
             case 'ebanx_boleto':
             case 'ebanx_tef':
-            case 'ebanx_wallet':
             case 'ebanx_cc_br':
                 return $this->getBrazilianDocumentLabel();
 
@@ -637,7 +636,6 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
             'ebanx_cc_br',
             'ebanx_boleto',
             'ebanx_tef',
-            'ebanx_wallet',
             'ebanx_sencillito',
             'ebanx_servipag',
             'ebanx_webpay',
@@ -668,7 +666,6 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
             // Brazil
             'ebanx_boleto'       => array('cpf_field', 'cnpj_field'),
             'ebanx_tef'          => array('cpf_field', 'cnpj_field'),
-            'ebanx_wallet'       => array('cpf_field', 'cnpj_field'),
             'ebanx_cc_br'        => array('cpf_field', 'cnpj_field'),
             // Chile
             'ebanx_sencillito'   => array('rut_field'),

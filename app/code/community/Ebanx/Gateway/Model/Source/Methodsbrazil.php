@@ -5,7 +5,6 @@ class Ebanx_Gateway_Model_Source_Methodsbrazil
     const CREDIT_CARD = 'ebanx_cc_br';
     const BOLETO = 'ebanx_boleto';
     const TEF = 'ebanx_tef';
-    const WALLET = 'ebanx_wallet';
 
     /**
      * @return array
@@ -24,10 +23,6 @@ class Ebanx_Gateway_Model_Source_Methodsbrazil
             array(
                 'value' => self::TEF,
                 'label' => Mage::helper('ebanx')->__('Online Banking (TEF)')
-            ),
-            array(
-                'value' => self::WALLET,
-                'label' => Mage::helper('ebanx')->__('EBANX Wallet')
             ),
         );
     }
