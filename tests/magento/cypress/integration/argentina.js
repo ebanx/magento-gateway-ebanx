@@ -43,6 +43,32 @@ describe('Shopping', () => {
   });
 
   context('Argentina', () => {
+    context('Efectivo', () => {
+      it('can buy `blue horizons bracelets` using Rapipago to personal', () => {
+        magento.buyBlueHorizonsBraceletsWithEfectivoToPersonal(mock(
+          {
+            paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.ar.efectivo.types.rapipago,
+          }
+        ));
+      });
+
+      it('can buy `blue horizons bracelets` using Pagofacil to personal', () => {
+        magento.buyBlueHorizonsBraceletsWithEfectivoToPersonal(mock(
+          {
+            paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.ar.efectivo.types.pagofacil,
+          }
+        ));
+      });
+
+      it('can buy `blue horizons bracelets` using OtrosCupones to personal', () => {
+        magento.buyBlueHorizonsBraceletsWithEfectivoToPersonal(mock(
+          {
+            paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.ar.efectivo.types.otrosCupones,
+          }
+        ));
+      });
+    });
+
     context('Credit Card', () => {
       it('can buy `blue horizons bracelets` using credit card', () => {
         const checkoutData = mock({

@@ -205,6 +205,9 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
             case 'ebanx_cc_co':
                 return $this->__('DNI Document');
 
+            case 'ebanx_pagofacil':
+            case 'ebanx_rapipago':
+            case 'ebanx_cupon':
             case 'ebanx_cc_ar':
                 return 'Documento';
 
@@ -568,6 +571,15 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
             case 'spei':
                 $url = $payment['spei_url'];
                 break;
+            case 'rapipago':
+                $url = $payment['voucher_url'];
+                break;
+            case 'pagofacil':
+                $url = $payment['voucher_url'];
+                break;
+            case 'cupon':
+                $url = $payment['voucher_url'];
+                break;
             default:
                 $url = '';
         }
@@ -650,6 +662,9 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
             'ebanx_safetypay',
             'ebanx_pagoefectivo',
             'ebanx_cc_ar',
+            'ebanx_rapipago',
+            'ebanx_pagofacil',
+            'ebanx_otroscupones',
             'ebanx_safetypay_ec',
         );
         return in_array($code, $ebanxMethods);
@@ -686,6 +701,9 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
             'ebanx_safetypay'    => array('dni_field_pe'),
             // Argentina
             'ebanx_cc_ar'        => array('cdi_field'),
+            'ebanx_rapipago'     => array('cdi_field'),
+            'ebanx_pagofacil'    => array('cdi_field'),
+            'ebanx_otroscupones' => array('cdi_field'),
             // Ecuador
             'ebanx_safetypay_ec' => array(),
         );
