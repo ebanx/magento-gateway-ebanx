@@ -15,7 +15,7 @@
     "babel-core": "^6.26.3",
     "babel-preset-env": "1.7.0",
     "eslint-restricted-globals": "0.1.1",
-    "gulp": "3.9.1",
+    "gulp": "^4.0.0",
     "gulp-babel": "7.0.1",
     "gulp-eslint": "5.0.0",
     "gulp-prettier": "2.0.0",
