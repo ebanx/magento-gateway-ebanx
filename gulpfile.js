@@ -4,7 +4,6 @@ const uglify = require('gulp-uglify');
 const sourcemaps = require('gulp-sourcemaps');
 const eslint = require('gulp-eslint');
 const restrictedGlobals = require('eslint-restricted-globals');
-const prettier = require('gulp-prettier');
 
 // Compile JS
 gulp.task('scripts', function() {
@@ -19,22 +18,6 @@ gulp.task('scripts', function() {
     return file.base.replace(/\/src/, '/skin');
   }));
 });
-
-// prettify Js
-gulp.task("prettify", () =>
-  gulp
-    .src("./src/**/*.js")
-    .pipe(
-      prettier({
-        singleQuote: true,
-        semi: true,
-        tabWidth: 2,
-        bracketSpacing: true,
-        arrowParens: 'avoid',
-      })
-    )
-    .pipe(gulp.dest(file => file.base))
-);
 
 // LINT JS
 gulp.task('lint', function() {
@@ -98,4 +81,4 @@ gulp.task('watch', function() {
 });
 
 // Default Task
-gulp.task('default', ['scripts', 'lint']);
+gulp.task('default', gulp.parallel('scripts', 'lint'));
