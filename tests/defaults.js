@@ -16,6 +16,14 @@ export default {
       DEFAULT_VALUES: {
         paymentMethods: {
           ar: {
+            efectivo: {
+              id : 'efectivo',
+              types: {
+                rapipago: 'Rapipago',
+                pagofacil: 'Pagofacil',
+                otrosCupones: 'Otros Cupones',
+              },
+            },
             creditcard: {
               id: 'creditcard',
             },
