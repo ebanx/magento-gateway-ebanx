@@ -1,4 +1,7 @@
 # CHANGELOG
+## 2.15.0
+* Feature - Revert "Remove cash payment from Argentina" [#371](https://github.com/ebanx/magento-gateway-ebanx/pull/371)
+
 ## 2.14.3
 * Quality  - Update Benjamin [#363](https://github.com/ebanx/magento-gateway-ebanx/pull/363)
 
