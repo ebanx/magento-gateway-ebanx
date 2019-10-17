@@ -529,7 +529,12 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
         $house_number = $matches[2];
         $addition_to_address = $matches[3] . $matches[4] . $matches[5];
         if (empty($street_name)) {
-            $street_name = $matches[3];
+            if (empty($matches[3])) {
+                $street_name = $matches[0];
+            } else {
+                $street_name = $matches[3];
+            }
+
             $addition_to_address = $matches[5];
         }
         return array(
