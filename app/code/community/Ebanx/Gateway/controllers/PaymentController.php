@@ -18,14 +18,31 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
     private $hash;
 
     /**
+     * @var array
+     */
+    private $paymentInfoEbanx;
+
+    /**
      * @var string
      */
     private $statusEbanx;
+
+    /**
+     * @var string
+     */
+    private $notificationType;
 
     private $ebanxStatusToState = array(
         'CO' => Mage_Sales_Model_Order::STATE_PROCESSING,
         'PE' => Mage_Sales_Model_Order::STATE_PENDING_PAYMENT,
         'CA' => Mage_Sales_Model_Order::STATE_CANCELED,
+    );
+
+    private $refundStatusMap = array(
+        'RE' => 'Requested',
+        'CA' => 'Cancelled',
+        'PE' => 'Pending',
+        'CO' => 'Confirmed',
     );
 
     /**
@@ -65,7 +82,7 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
         }
 
         try {
-            $this->updateOrder($this->statusEbanx);
+            $this->updateOrder($this->statusEbanx, $this->notificationType);
 
             if (Mage::helper('ebanx')->isEbanxMethod($this->_getPaymentMethod($this->order))
                 && Mage::getStoreConfig('payment/ebanx_settings/create_invoice')
@@ -125,8 +142,10 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
         $this->helper = Mage::helper('ebanx/order');
         $this->validateEbanxPaymentRequest();
         $this->hash = $this->getRequest()->getParam('hash_codes');
+        $this->notificationType = $this->getRequest()->getParam('notification_type');
         $this->loadOrder();
-        $this->statusEbanx = $this->loadEbanxPaymentStatus();
+        $this->paymentInfoEbanx = $this->loadEbanxPaymentInfo();
+        $this->statusEbanx = $this->paymentInfoEbanx['status'];
         $this->validateStatus();
     }
 
@@ -186,7 +205,7 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
      * @return string
      * @throws Ebanx_Gateway_Exception
      */
-    private function loadEbanxPaymentStatus()
+    private function loadEbanxPaymentInfo()
     {
         $api = Mage::getSingleton('ebanx/api')->ebanx();
         $isSandbox = $this->loadOrderEnv() === 'sandbox';
@@ -204,7 +223,7 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
             throw new Ebanx_Gateway_Exception($this->helper->__('EBANX: Payment doesn\'t exist. ' . ($isSandbox ? 'sand' : 'live')));
         }
 
-        return $payment['payment']['status'];
+        return $payment['payment'];
     }
 
     /**
@@ -225,13 +244,14 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
     // Actions
 
     /**
-     * @param string $statusEbanx Ebanx status
+     * @param string $statusEbanx      Ebanx status
+     * @param string $notificationType Nofitication Type
      *
      * @return void
      * @throws Ebanx_Gateway_Exception Warns the payment status won't roll back.
      * @throws Exception
      */
-    private function updateOrder($statusEbanx)
+    private function updateOrder($statusEbanx, $notificationType)
     {
         $refundCount = $this->order->getCreditmemosCollection() ? $this->order->getCreditmemosCollection()->count() : 0;
 
@@ -266,10 +286,30 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
 
         $statusMagento = $this->helper->getEbanxMagentoOrder($statusEbanx);
 
-        $this->order->setData('status', $statusMagento);
-        $this->order->setState($this->ebanxStatusToState[$statusEbanx]);
-        $this->order->addStatusHistoryComment($this->helper->__('EBANX: The payment has been updated to: %s.', $this->helper->getTranslatedOrderStatus($statusEbanx)));
+        if ($notificationType === 'update') {
+            $this->order->setData('status', $statusMagento);
+            $this->order->setState($this->ebanxStatusToState[$statusEbanx]);
+        }
+
+        $this->order->addStatusHistoryComment($this->resolveHistoryComment($statusEbanx, $notificationType));
         $this->order->save();
+    }
+
+    /**
+     * @return string
+     */
+    private function resolveHistoryComment()
+    {
+        if ($this->notificationType === 'update') {
+            return $this->helper->__('EBANX: The payment has been updated to: %s.', $this->helper->getTranslatedOrderStatus($this->statusEbanx));
+        }
+
+        if ($this->notificationType === 'refund') {
+            $refunds = $this->formatEbanxRefundData();
+            return 'EBANX: a refund was issued for this payment. Refund history: <br>' . $refunds;
+        }
+
+        return $this->helper->__('EBANX: a %s was issued for this payment', $this->notificationType);
     }
 
     /**
@@ -326,5 +366,23 @@ class Ebanx_Gateway_PaymentController extends Mage_Core_Controller_Front_Action
         );
 
         return in_array($paymentTypeCode, $creditCardBrands);
+    }
+
+    /**
+     * @return string
+     */
+    private function formatEbanxRefundData()
+    {
+        $refunds = '';
+        foreach ($this->paymentInfoEbanx['refunds'] as $refund) {
+            $refunds .= '[ ';
+            $refunds .= $refund['merchant_refund_code'] ? '<b>Merchant refund code: </b>' . $refund['merchant_refund_code'] . ', ' : '';
+            $refunds .= '<b>Refund Status: </b>' . $this->refundStatusMap[$refund['status']] . ', ';
+            $refunds .= '<b>Requested Date: </b> (UTC) ' . $refund['request_date'] . ', ';
+            $refunds .= '<b>Refund Amount: </b>' . $refund['amount_ext'] . ', ';
+            $refunds .= '<b>Description: </b>' . $refund['description'];
+            $refunds .= ' ] <br>';
+        }
+        return $refunds;
     }
 }
