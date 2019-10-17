@@ -1,4 +1,8 @@
 # CHANGELOG
+## 2.16.0
+* Fix - Fix Address split [#378](https://github.com/ebanx/magento-gateway-ebanx/pull/378)
+* Feature - Add support for Refund/Chargeback notifications [#377](https://github.com/ebanx/magento-gateway-ebanx/pull/377)
+
 ## 2.15.0
 * Feature - Revert "Remove cash payment from Argentina" [#371](https://github.com/ebanx/magento-gateway-ebanx/pull/371)
 
