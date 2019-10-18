@@ -327,7 +327,7 @@ class Ebanx_Gateway_OneclickController extends Mage_Core_Controller_Front_Action
                          ->setOriginalPrice($product->getFinalPrice())
                          ->setRowTotal($rowTotal)
                          ->setBaseRowTotal($rowTotal)
-                         ->setWeeeTaxApplied(serialize(array()))
+                         ->setWeeeTaxApplied('a:0:{}')
                          ->setBaseWeeeTaxDisposition(0)
                          ->setWeeeTaxDisposition(0)
                          ->setBaseWeeeTaxRowDisposition(0)

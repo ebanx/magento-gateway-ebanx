@@ -48,7 +48,7 @@ class Ebanx_Gateway_Model_Api
             'minInstalmentAmount' => Mage::helper('ebanx')->getMinInstalmentValue(),
         ));
 
-        $interestRate = unserialize(Mage::helper('ebanx')->getInterestRate());
+        $interestRate = Mage::helper('ebanx')->getInterestRate();
 
         if (is_null($interestRate)) {
             return $creditCardConfig;
