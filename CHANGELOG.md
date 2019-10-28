@@ -1,4 +1,7 @@
 # CHANGELOG
+##2.16.1
+* Fix - Fix Serialize Functions [#380](https://github.com/ebanx/magento-gateway-ebanx/pull/380)
+
 ## 2.16.0
 * Fix - Fix Address split [#378](https://github.com/ebanx/magento-gateway-ebanx/pull/378)
 * Feature - Add support for Refund/Chargeback notifications [#377](https://github.com/ebanx/magento-gateway-ebanx/pull/377)
