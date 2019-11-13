@@ -60,7 +60,8 @@ class Plugincheck extends Mage_Core_Model_Abstract
             'save_card_data'        => Mage::getStoreConfig('payment/ebanx_settings/save_card_data'),
             'one_click'             => Mage::getStoreConfig('payment/ebanx_settings/auto_capture'),
             'capture_enabled'       => Mage::getStoreConfig('payment/ebanx_settings/one_click_payment'),
-            'show_local_amount'     => Mage::getStoreConfig('payment/ebanx_settings/iof_local_amount'),
+            'show_local_amount'     => Mage::getStoreConfig('payment/ebanx_settings/show_local_amount'),
+            'iof_local_amount'      => Mage::getStoreConfig('payment/ebanx_settings/iof_local_amount'),
             'enabled_payment_types' => self::getPaymentMethods(),
         );
     }

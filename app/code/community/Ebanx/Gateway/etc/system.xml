@@ -127,6 +127,18 @@
                             <show_in_store>0</show_in_store>
                         </brazil_taxes>
 
+                        <show_local_amount translate="label">
+                            <label>Show local amount</label>
+                            <comment>Show the total amount converted to local coin during Checkout.
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>65</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </show_local_amount>
+
                         <iof_local_amount translate="label">
                             <label>Apply IOF on local amount</label>
                             <comment>Get in touch with the EBANX team to validate the change and then, you just have to select "no" on this option.
@@ -134,7 +146,7 @@
                             </comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>65</sort_order>
+                            <sort_order>70</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
