@@ -1,4 +1,7 @@
 # CHANGELOG
+##2.17.0
+* Feature - Add config to show Local Amount on checkout [#382](https://github.com/ebanx/magento-gateway-ebanx/pull/382)
+
 ##2.16.1
 * Fix - Fix Serialize Functions [#380](https://github.com/ebanx/magento-gateway-ebanx/pull/380)
 
