@@ -1,4 +1,7 @@
 # CHANGELOG
+##2.17.1
+* Upkeep - Allow manual review for creditcard [#384](https://github.com/ebanx/magento-gateway-ebanx/pull/384)
+
 ##2.17.0
 * Feature - Add config to show Local Amount on checkout [#382](https://github.com/ebanx/magento-gateway-ebanx/pull/382)
 
