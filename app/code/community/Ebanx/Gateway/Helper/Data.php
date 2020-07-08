@@ -211,6 +211,9 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
             case 'ebanx_cc_ar':
                 return 'Documento';
 
+            case 'ebanx_cc_uy':
+                return $this->__('CI Document');
+
             default:
                 return $this->__('Document Number');
         }
@@ -233,6 +236,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
                 return $this->__('DNI Document');
             case 'ar':
                 return 'Documento';
+            case 'uy':
+                return $this->__('CI Document');
             default:
                 return $this->__('Document Number');
         }
@@ -272,6 +277,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
                 return $this->getArgetinianDocument($methodCode);
             case Country::PERU:
                 return $this->getPeruvianDocumentNumber($methodCode);
+            case Country::URUGUAY:
+                return $this->getUruguayanDocumentNumber($methodCode);
             default:
                 return null;
         }
@@ -457,6 +464,28 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
 
             if ($customer[$dniField]) {
                 return $customer[$dniField];
+            }
+        }
+
+        return $customer['ebanx-document'][$methodCode];
+    }
+
+    /**
+     * @param string $methodCode EBANX method code
+     *
+     * @return string
+     */
+    public function getUruguayanDocumentNumber($methodCode)
+    {
+        $customer = $this->getCustomerData();
+
+        if ($ciField = Mage::getStoreConfig('payment/ebanx_settings/ci_field')) {
+            if ($ciField === 'taxvat') {
+                return $this->order->getCustomerTaxvat();
+            }
+
+            if ($customer[$ciField]) {
+                return $customer[$ciField];
             }
         }
 
@@ -671,6 +700,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
             'ebanx_pagofacil',
             'ebanx_otroscupones',
             'ebanx_safetypay_ec',
+            'ebanx_cc_uy',
         );
         return in_array($code, $ebanxMethods);
     }
@@ -711,6 +741,8 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
             'ebanx_otroscupones' => array('cdi_field'),
             // Ecuador
             'ebanx_safetypay_ec' => array(),
+            // Uruguay
+            'ebanx_cc_uy'        => array('ci_field'),
         );
 
         return $methodsToFields[$methodCode];

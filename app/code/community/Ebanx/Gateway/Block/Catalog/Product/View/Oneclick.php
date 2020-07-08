@@ -44,6 +44,9 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
             case 'AR':
                 $text['local-amount'] = 'Total a pagar en Peso argentino: ';
                 break;
+            case 'UY':
+                $text['local-amount'] = 'Total a pagar en Peso uruguayo: ';
+                break;
             default:
                 break;
         }
@@ -132,6 +135,8 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
                 return 'COP';
             case 'AR':
                 return 'ARS';
+            case 'UY':
+                return 'UYU';
             case 'BR':
             default:
                 return 'BRL';
@@ -190,6 +195,8 @@ class Ebanx_Gateway_Block_Catalog_Product_View_Oneclick extends Mage_Core_Block_
                 return new Ebanx_Gateway_Model_Colombia_Creditcard();
             case 'AR':
                 return new Ebanx_Gateway_Model_Argentina_Creditcard();
+            case 'UY':
+                return new Ebanx_Gateway_Model_Uruguay_Creditcard();
             case 'BR':
             default:
                 return new Ebanx_Gateway_Model_Brazil_Creditcard();
