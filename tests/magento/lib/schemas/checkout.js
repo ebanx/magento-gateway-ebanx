@@ -426,4 +426,46 @@ export const CHECKOUT_SCHEMA = {
       ).without('schema', R.keys(this.compliance()));
     },
   },
+  uy: {
+    compliance: () => ({
+      city: Joi.string().required(),
+      phone: Joi.string().required(),
+      email: Joi.string().required(),
+      state: Joi.string().required(),
+      country: Joi.string().required(),
+      zipcode: Joi.string().required(),
+      address: Joi.string().required(),
+      password: Joi.string().optional(),
+      document: Joi.string().required(),
+      lastName: Joi.string().required(),
+      countryId: Joi.string().required(),
+      firstName: Joi.string().required(),
+      paymentMethod: Joi.any().allow(
+        R.pluck('id')(
+          R.values(
+            defaults.pay.api.DEFAULT_VALUES.paymentMethods.uy
+          )
+        )
+      ).required(),
+    }),
+    creditcard() {
+      return Joi.object().keys(
+        Object.assign(
+          {},
+          this.compliance(),
+          {
+            schema: 'UruguayCreditCard',
+            card: Joi.object().keys({
+              save: Joi.boolean().optional(),
+              name: Joi.string().required(),
+              number: Joi.string().required(),
+              cvv: Joi.string().required(),
+              expiryMonth: Joi.string().min(2).max(2).required(),
+              expiryYear: Joi.string().min(4).max(4).required(),
+            }).required(),
+          }
+        )
+      ).without('schema', [...R.keys(this.compliance()), ...['card']]);
+    },
+  },
 };

@@ -2,6 +2,7 @@ export default {
   _globals: {
     cardsWhitelist: {
       mastercard: '5555 5555 5555 4444',
+      visa: '4111 1111 1111 1111',
     },
     cardsBlacklist: {
       visa: '4000 0000 0000 0002',
@@ -112,6 +113,11 @@ export default {
             },
             ebanxbalance: {
               id: 'ebanxbalance',
+            },
+          },
+          uy: {
+            creditcard: {
+              id: 'creditcard',
             },
           },
         },
