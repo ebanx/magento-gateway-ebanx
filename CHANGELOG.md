@@ -1,4 +1,7 @@
 # CHANGELOG
+##2.18.0
+* Feature - Add Uruguayan Credit Card support [#388](https://github.com/ebanx/magento-gateway-ebanx/pull/388)
+
 ##2.17.1
 * Upkeep - Allow manual review for creditcard [#384](https://github.com/ebanx/magento-gateway-ebanx/pull/384)
 
