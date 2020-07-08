@@ -1,2 +1,2 @@
-"use strict";Validation.add("brand-required"," ",function(e){return!Validation.get("IsEmpty").test(e)}),Validation.add("validate-ar-document-length","Document digit number is invalid",function(e){var t=document.querySelector("#ebanx-document-type-ebanx_cc_ar");return console.log(t.value),"ARG_DNI"===t.value?7===e.length||8===e.length:13===e.length});
+"use strict";Validation.add("brand-required"," ",function(t){return!Validation.get("IsEmpty").test(t)}),Validation.add("validate-ar-document-length","Document digit number is invalid",function(t){return"ARG_DNI"===document.querySelector("#ebanx-document-type-ebanx_cc_ar").value?7===t.length||8===t.length:13===t.length});
 //# sourceMappingURL=validator.js.map

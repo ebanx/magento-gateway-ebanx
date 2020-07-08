@@ -17,6 +17,10 @@ const maskValues = {
     masks: ['99.999.999-S'],
     changeOnLenght: 0,
   },
+  uy: {
+    masks: ['9.999.999-9'],
+    changeOnLenght: 0,
+  },
 };
 
 const handler = (masks, max, element) => {

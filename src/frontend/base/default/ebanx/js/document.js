@@ -18,6 +18,8 @@ const getLabelByCountry = (country, defaultLabel) => {
       return 'RUT';
     case 'ar':
       return 'Document';
+    case 'uy':
+      return 'CI';
     default:
       return defaultLabel;
   }
