@@ -347,6 +347,14 @@
                 <payment_action>sale</payment_action>
                 <sort_order>1</sort_order>
             </ebanx_safetypay_ec>
+            <!-- Uruguay -->
+            <ebanx_cc_uy>
+                <active>1</active>
+                <model>ebanx/uruguay_creditcard</model>
+                <title>Tarjeta de Credito</title>
+                <payment_action>sale</payment_action>
+                <sort_order>1</sort_order>
+            </ebanx_cc_uy>
             <!-- Settings -->
             <ebanx_settings>
                 <brazil_taxes>cpf</brazil_taxes>
@@ -361,6 +369,7 @@
                 <payment_methods_mexico>ebanx_oxxo,ebanx_spei,ebanx_cc_mx,ebanx_dc_mx</payment_methods_mexico>
                 <payment_methods_argentina>ebanx_cc_ar,ebanx_rapipago,ebanx_pagofacil,ebanx_otroscupones</payment_methods_argentina>
                 <payment_methods_ecuador>ebanx_safetypay_ec</payment_methods_ecuador>
+                <payment_methods_uruguay>ebanx_cc_uy</payment_methods_uruguay>
 
                 <payment_methods_visualization>1</payment_methods_visualization>
                 <save_card_data>1</save_card_data>
@@ -382,6 +391,7 @@
                 <document_type_field></document_type_field>
                 <dni_field_pe></dni_field_pe>
                 <dni_field></dni_field>
+                <ci_field></ci_field>
             </ebanx_settings>
             <!-- Legacy -->
             <ebanx_standard>
