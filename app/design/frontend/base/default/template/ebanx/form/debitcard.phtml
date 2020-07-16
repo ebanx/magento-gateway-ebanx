@@ -1,8 +1,11 @@
 <?php
+$text = $this->getText();
+$lowerCountry   = $this->country;
+$localCurrency  = $this->localCurrency;
 $_code = $this->getMethodCode();
 $skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 $showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
-$icon = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-debit-card.png" />';
+$icon = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-debit-card-' . $lowerCountry . '.png" />';
 $warningTexts = Mage::helper('ebanx')->getSandboxWarningText();
 $isSandbox = Mage::helper('ebanx')->isSandboxMode();
 $sandboxTag = $isSandbox ? '<div class="sandbox-form-tag">' . $warningTexts['tag'] . '</div>' : '';
@@ -10,10 +13,10 @@ $sandboxTag = $isSandbox ? '<div class="sandbox-form-tag">' . $warningTexts['tag
 echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxTag . '</div>' : null;
 ?>
 
-<ul class="form-list ebanx-payment-method ebanx-es-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
+<ul class="form-list ebanx-payment-method ebanx-<?= $lowerCountry ?>-method" id="payment_form_<?php echo $_code ?>" style="display:none;">
     <?php include 'sandbox-warning.phtml' ?>
   <li class="centinel-logos">
-    <label class="ebanx-payment-method-desc">Pagar con Tarjeta de Débito.</label>
+    <label class="ebanx-payment-method-desc"><?= $text['method-desc'] ?></label>
     <?php if (!$showInlineIcon) : ?>
       <div class="input-box">
         <?= $icon; ?>
@@ -22,7 +25,7 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxT
   </li>
     <?php include 'fields.phtml' ?>
   <li>
-    <label for="<?php echo $_code ?>_dc_name" class="required"><em>*</em>Titular de la tarjeta</label>
+    <label for="<?php echo $_code ?>_dc_name" class="required"><em>*</em><?= $text['name'] ?></label>
     <div class="input-box">
         <input type="text" id="<?php echo $_code ?>_dc_name" name="payment[dc_name][newcard]"
                title="<?php echo Mage::helper('core')->jsQuoteEscape('Titular de la tarjeta') ?>"
@@ -30,7 +33,7 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxT
     </div>
   </li>
   <li>
-      <label for="<?php echo $_code ?>_dc_number" class="required"><em>*</em>Número de la tarjeta</label>
+      <label for="<?php echo $_code ?>_dc_number" class="required"><em>*</em><?= $text['card-number'] ?></label>
       <div class="input-box">
           <input type="text" id="<?php echo $_code ?>_dc_number"
                  title="<?php echo Mage::helper('core')->jsQuoteEscape('Número de la tarjeta') ?>"
@@ -38,7 +41,7 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxT
       </div>
   </li>
   <li id="<?php echo $_code ?>_dc_type_exp_div">
-      <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em>Fecha de expiración</label>
+      <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em><?= $text['duedate'] ?></label>
       <div class="input-box">
           <div class="v-fix">
               <select id="<?php echo $_code ?>_expiration" name="payment[dc_exp_month]"
@@ -69,7 +72,7 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxT
   </li>
     <?php echo $this->getChildHtml() ?>
   <li id="<?php echo $_code ?>_dc_type_cvv_div">
-      <label for="<?php echo $_code ?>_dc_cid" class="required"><em>*</em>Código de verificación</label>
+      <label for="<?php echo $_code ?>_dc_cid" class="required"><em>*</em><?= $text['cvv'] ?></label>
       <div class="input-box">
           <div class="v-fix">
               <input type="text" title="<?php echo Mage::helper('core')->jsQuoteEscape('Código de verificación') ?>"
@@ -80,25 +83,24 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxT
   </li>
   <li>
     <div class="total-to-pay">
-      <p>Total a pagar en Peso mexicano: <strong><?php echo $this->getLocalAmount('MXN') ?></strong></p>
+      <p><?= $text['local-amount'] ?><strong><?php echo $this->getLocalAmount($localCurrency) ?></strong></p>
     </div>
     <input type="hidden" name="payment[ebanx_mode]" id="<?php echo $_code ?>_mode"
             value="<?php echo Mage::helper('ebanx')->getMode() ?>"/>
-    <input id="card[newcard]" type="hidden" name="payment[selected_card]" value="newcard">
+    <input type="hidden" name="payment[selected_card]" id="card[newcard]" value="newcard">
     <input type="hidden" name="payment[ebanx_token][newcard]" id="<?php echo $_code ?>_token"/>
     <input type="hidden" name="payment[ebanx_brand][newcard]" id="<?php echo $_code ?>_brand"/>
     <input type="hidden" name="payment[ebanx_masked_card_number][newcard]" id="<?php echo $_code ?>_masked_card_number"/>
     <input type="hidden" name="payment[ebanx_device_fingerprint][newcard]" id="<?php echo $_code ?>_device_fingerprint"/>
-    <input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="mx"/>
 
     <input type="hidden" name="payment[ebanx_integration_key]" id="<?php echo $_code ?>_integration_key"
             value="<?php echo Mage::helper('ebanx')->getPublicIntegrationKey() ?>"/>
-    <input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="mx"/>
+    <input type="hidden" name="payment[ebanx_country]" id="<?php echo $_code ?>_country" value="<?= $lowerCountry ?>"/>
   </li>
 </ul>
 
 <script type="text/javascript">
-  handleEbanxForm('mx', 'dc', 'payment_form_<?= $_code ?>');
-  EBANXCreditCard.formatCardNumber(document.querySelector('input#ebanx_dc_mx_dc_number'));
-  EBANXCreditCard.formatCardCVC(document.querySelector('input#ebanx_dc_mx_dc_cid'));
+  handleEbanxForm('<?= $lowerCountry ?>', 'dc', 'payment_form_<?= $_code ?>');
+  EBANXCreditCard.formatCardNumber(document.querySelector('input#<?= $_code ?>_dc_number'));
+  EBANXCreditCard.formatCardCVC(document.querySelector('input#<?= $_code ?>_dc_cid'));
 </script>

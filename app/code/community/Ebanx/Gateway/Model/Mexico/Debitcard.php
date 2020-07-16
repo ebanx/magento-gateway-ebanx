@@ -6,7 +6,7 @@ class Ebanx_Gateway_Model_Mexico_Debitcard extends Ebanx_Gateway_Model_Payment_D
 {
     protected $_code = 'ebanx_dc_mx';
 
-    protected $_formBlockType = 'ebanx/form_debitcard';
+    protected $_formBlockType = 'ebanx/form_debitcard_mx';
     protected $_infoBlockType = 'ebanx/info_debitcard';
 
     /**
