@@ -162,6 +162,8 @@
                 <!-- Uruguay -->
                 <block type="ebanx/checkout_success_payment_creditcarduy" name="ebanx.success.payment.creditcarduy"
                        as="ebanx_cc_uy" template="ebanx/checkout/success/creditcarduy.phtml"/>
+                <block type="ebanx/checkout_success_payment_debitcarduy" name="ebanx.success.payment.debitcarduy"
+                       as="ebanx_dc_uy" template="ebanx/checkout/success/debitcard.phtml"/>
             </block>
         </reference>
     </ebanx_checkout_success_handle>
