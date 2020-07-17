@@ -67,5 +67,23 @@ describe('Shopping', () => {
         });
       });
     });
+
+    context('Debit Card', () => {
+      it('can buy `blue horizons bracelets`, using debit card', () => {
+        const mockData = {
+          paymentMethod: defaults.pay.api.DEFAULT_VALUES.paymentMethods.uy.debitcard.id,
+          card: {
+            name: Faker.name.findName(),
+            number: defaults._globals.cardsWhitelist.visa,
+            expiryYear: '2028',
+            expiryMonth: '12',
+            cvv: '123',
+          },
+        };
+
+        magento
+          .buyBlueHorizonsBraceletsWithDebitCardToPersonal(mock(mockData));
+      });
+    });
   });
 });

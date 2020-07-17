@@ -467,5 +467,24 @@ export const CHECKOUT_SCHEMA = {
         )
       ).without('schema', [...R.keys(this.compliance()), ...['card']]);
     },
+    debitcard() {
+      return Joi.object().keys(
+        Object.assign(
+          {},
+          this.compliance(),
+          {
+            schema: 'UruguayDebitCard',
+            card: Joi.object().keys({
+              save: Joi.boolean().optional(),
+              name: Joi.string().required(),
+              number: Joi.string().required(),
+              cvv: Joi.string().required(),
+              expiryMonth: Joi.string().min(2).max(2).required(),
+              expiryYear: Joi.string().min(4).max(4).required(),
+            }).required(),
+          }
+        )
+      ).without('schema', [...R.keys(this.compliance()), ...['card']]);
+    },
   },
 };

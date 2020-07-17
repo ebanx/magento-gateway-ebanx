@@ -119,6 +119,9 @@ export default {
             creditcard: {
               id: 'creditcard',
             },
+            debitcard: {
+              id: 'creditcard',
+            },
           },
         },
       },

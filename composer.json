@@ -8,7 +8,7 @@
   },
   "minimum-stability": "dev",
   "require": {
-    "ebanx/benjamin": "^1.23.0"
+    "ebanx/benjamin": "^1.24.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "*",

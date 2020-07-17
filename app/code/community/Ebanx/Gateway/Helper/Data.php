@@ -212,6 +212,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
                 return 'Documento';
 
             case 'ebanx_cc_uy':
+            case 'ebanx_dc_uy':
                 return $this->__('CI Document');
 
             default:
@@ -701,6 +702,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
             'ebanx_otroscupones',
             'ebanx_safetypay_ec',
             'ebanx_cc_uy',
+            'ebanx_dc_uy',
         );
         return in_array($code, $ebanxMethods);
     }
@@ -743,6 +745,7 @@ class Ebanx_Gateway_Helper_Data extends Mage_Core_Helper_Abstract
             'ebanx_safetypay_ec' => array(),
             // Uruguay
             'ebanx_cc_uy'        => array('ci_field'),
+            'ebanx_dc_uy'        => array('ci_field'),
         );
 
         return $methodsToFields[$methodCode];

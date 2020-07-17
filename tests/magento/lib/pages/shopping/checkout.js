@@ -468,6 +468,9 @@ export default class Checkout {
       this[fillBilling](data);
       this[clickElement](`#p_method_ebanx_dc_${lowerCountry}`);
 
+      this[selectField](data, 'documentType', 'documentTypeId', `#ebanx-document-type-ebanx_dc_${lowerCountry}`);
+      this[fillInputWithJquery](data, 'document', `#ebanx-document-ebanx_dc_${lowerCountry}`);
+
       this[fillDebitCardName](lowerCountry, data.card);
       this[fillDebitCardNumber](lowerCountry, data.card);
       this[fillDebitCardExpiryMonth](lowerCountry, data.card);

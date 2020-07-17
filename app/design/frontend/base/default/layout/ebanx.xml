@@ -145,7 +145,7 @@
                        template="ebanx/checkout/success/spei.phtml"/>
                 <block type="ebanx/checkout_success_payment_creditcardmx" name="ebanx.success.payment.creditcardmx"
                        as="ebanx_cc_mx" template="ebanx/checkout/success/creditcardmx.phtml"/>
-                <block type="ebanx/checkout_success_payment_debitcard" name="ebanx.success.payment.debitcard"
+                <block type="ebanx/checkout_success_payment_debitcardmx" name="ebanx.success.payment.debitcardmx"
                        as="ebanx_dc_mx" template="ebanx/checkout/success/debitcard.phtml"/>
                 <!-- Peru -->
                 <block type="ebanx/checkout_success_payment_pagoefectivo" name="ebanx.success.payment.pagoefectivo"
@@ -162,6 +162,8 @@
                 <!-- Uruguay -->
                 <block type="ebanx/checkout_success_payment_creditcarduy" name="ebanx.success.payment.creditcarduy"
                        as="ebanx_cc_uy" template="ebanx/checkout/success/creditcarduy.phtml"/>
+                <block type="ebanx/checkout_success_payment_debitcarduy" name="ebanx.success.payment.debitcarduy"
+                       as="ebanx_dc_uy" template="ebanx/checkout/success/debitcard.phtml"/>
             </block>
         </reference>
     </ebanx_checkout_success_handle>
