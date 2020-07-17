@@ -1,4 +1,7 @@
 # CHANGELOG
+##2.19.0
+* Feature - Add Uruguayan Debit Card support [#391](https://github.com/ebanx/magento-gateway-ebanx/pull/391)
+
 ##2.18.0
 * Feature - Add Uruguayan Credit Card support [#388](https://github.com/ebanx/magento-gateway-ebanx/pull/388)
 
@@ -46,11 +49,11 @@
 * Fix - Change IOF calculation on checkout review [#344](https://github.com/ebanx/magento-gateway-ebanx/pull/344)
 
 ## 2.12.1
-* Fix - Remove Echo usage from plugincheck page [#342](https://github.com/ebanx/magento-gateway-ebanx/pull/342) 
+* Fix - Remove Echo usage from plugincheck page [#342](https://github.com/ebanx/magento-gateway-ebanx/pull/342)
 
 ## 2.12.0
 * Feature - Add health check page [#337](https://github.com/ebanx/magento-gateway-ebanx/pull/337)
-* Feature - Add UserAgent version tracking [#336](https://github.com/ebanx/magento-gateway-ebanx/pull/336) 
+* Feature - Add UserAgent version tracking [#336](https://github.com/ebanx/magento-gateway-ebanx/pull/336)
 
 ## 2.11.0
 * Feature - Add Colombia Document Type [#328](https://github.com/ebanx/magento-gateway-ebanx/pull/328)
