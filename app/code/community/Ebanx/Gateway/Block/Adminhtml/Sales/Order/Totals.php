@@ -16,7 +16,7 @@ class Ebanx_Gateway_Block_Adminhtml_Sales_Order_Totals extends Mage_Adminhtml_Bl
             $this->addTotal(new Varien_Object(array(
                 'code'      => 'ebanx_interest',
                 'value'     => $amount,
-                'base_value'=> $amount,
+                'base_value'=> $amount / $this->getOrder()->getBaseToOrderRate(),
                 'label'     => $this->helper('ebanx')->__('Interest Amount'),
             ), array('tax')));
         }
