@@ -36,7 +36,7 @@ describe('Shopping', () => {
     api = new Api(cy);
     magento = new Magento(cy);
 
-    magento.setupPlugin();
+    magento.setupPlugin({ enableInstalments: true });
   });
 
   context('Uruguay', () => {
@@ -50,6 +50,7 @@ describe('Shopping', () => {
             expiryYear: '2028',
             expiryMonth: '12',
             cvv: '123',
+            maxInstalments: 6,
           },
         });
 

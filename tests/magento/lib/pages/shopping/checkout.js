@@ -16,6 +16,7 @@ const fillPhone = Symbol('fillPhone');
 const fillEmail = Symbol('fillEmail');
 const placeOrder = Symbol('placeOrder');
 const selectField = Symbol('selectField');
+const assertField = Symbol('assertField');
 const fillBilling = Symbol('fillBilling');
 const fillAddress = Symbol('fillAddress');
 const clickElement = Symbol('clickElement');
@@ -34,6 +35,7 @@ const fillCreditCardName = Symbol('fillCreditCardName');
 const fillCreditCardNumber = Symbol('fillCreditCardNumber');
 const fillCreditCardExpiryYear = Symbol('fillCreditCardExpiryYear');
 const fillCreditCardExpiryMonth = Symbol('fillCreditCardExpiryMonth');
+const assertCreditCardInstalmentsCount = Symbol('assertCreditCardInstalmentsCount');
 
 const fillDebitCardCvv = Symbol('fillDebitCardCvv');
 const fillDebitCardName = Symbol('fillDebitCardName');
@@ -125,6 +127,12 @@ export default class Checkout {
       },
       R.always(null)
     )(data);
+  }
+
+  [assertField] (field, assertionRule, dataExpected) {
+    this.cy
+      .get(field, { timeout: 30000 })
+      .should(assertionRule, dataExpected);
   }
 
   [selectCountry] (data) {
@@ -219,6 +227,10 @@ export default class Checkout {
 
   [fillCreditCardName] (country, data) {
     this[fillInput](data, 'name', `#ebanx_cc_${country}_cc_name`);
+  }
+
+  [assertCreditCardInstalmentsCount] (country, data) {
+    this[assertField](`#ebanx_cc_${country}_instalments option`, 'have.length.lte', data['maxInstalments']);
   }
 
   [fillDebitCardName] (country, data) {
@@ -444,6 +456,13 @@ export default class Checkout {
       this[fillCreditCardExpiryMonth](lowerCountry, data.card);
       this[fillCreditCardExpiryYear](lowerCountry, data.card);
       this[fillCreditCardCvv](lowerCountry, data.card);
+
+      R.ifElse(
+        R.propSatisfies((x) => (x !== undefined), 'maxInstalments'), () => {
+          this[assertCreditCardInstalmentsCount](lowerCountry, data.card);
+        },
+        R.always(null)
+      )(data.card);
 
       R.ifElse(
         R.propSatisfies((x) => (x !== undefined), 'save'), () => {
