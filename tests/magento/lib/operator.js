@@ -50,7 +50,7 @@ export default class Magento {
     return this;
   }
 
-  setupPlugin() {
+  setupPlugin(setupOptions = {}) {
     this.pages.admin.login
       .login();
 
@@ -61,7 +61,7 @@ export default class Magento {
       .goToPaymentMethods();
 
     this.pages.admin.paymentMethods
-      .setupEbanxPlugin();
+      .setupEbanxPlugin(setupOptions);
   }
 
   createAccount(data) {

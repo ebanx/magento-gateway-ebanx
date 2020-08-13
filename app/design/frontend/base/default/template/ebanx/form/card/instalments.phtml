@@ -1,6 +1,11 @@
 <?php
 $_instalmentOptions = $this->getInstalmentTerms();
 $_selected = $this->getInfoData('instalments');
+if ($lowerCountry == 'uy') {
+    $_instalmentOptions = array_filter($_instalmentOptions, function ($option) {
+        return $option->instalmentNumber <= 6;
+    });
+}
 ?>
 <?php if (count($_instalmentOptions) > 1) : ?>
   <li id="<?php echo $_code ?>-instalments-div">

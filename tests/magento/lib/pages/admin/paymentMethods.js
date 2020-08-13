@@ -5,7 +5,7 @@ export default class PaymentMethods {
     this.cy = cy;
   }
 
-  setupEbanxPlugin() {
+  setupEbanxPlugin(setupOptions = {}) {
     this.cy
       .get('body')
       .then(($body) => {
@@ -33,6 +33,12 @@ export default class PaymentMethods {
       .should('have.value', Cypress.env('DEMO_PUBLIC_INTEGRATION_KEY'))
       .get('#payment_ebanx_settings_one_click_payment')
       .select('Yes')
+      .then(() => setupOptions.enableInstalments &&
+        this.cy
+          .get('#payment_ebanx_settings_max_instalments')
+          .select('12')
+          .should('have.value', '12')
+      )
       .get('#content > div > div.content-header > table > tbody > tr > td.form-buttons .scalable.save')
       .should('be.visible')
       .click()
