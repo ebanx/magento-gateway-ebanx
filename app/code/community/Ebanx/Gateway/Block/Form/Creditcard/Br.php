@@ -34,6 +34,8 @@ class Ebanx_Gateway_Block_Form_Creditcard_Br extends Ebanx_Gateway_Block_Form_Cr
             'local-amount' => $this->getLocalAmountText(),
             'card-number' => 'Número do Cartão',
             'duedate' => 'Data de validade',
+            'duedate-month' => 'Mês',
+            'duedate-year' => 'Ano',
             'cvv' => 'Código de segurança',
             'save' => 'Salvar este cartão para compras futuras',
             'instalments' => 'Número de parcelas',

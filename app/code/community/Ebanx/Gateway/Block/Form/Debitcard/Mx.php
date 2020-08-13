@@ -16,6 +16,8 @@ class Ebanx_Gateway_Block_Form_Debitcard_Mx extends Ebanx_Gateway_Block_Form_Deb
             'local-amount' => 'Total a pagar en Peso Mexicano: ',
             'card-number' => 'Número de la tarjeta',
             'duedate' => 'Fecha de expiración',
+            'duedate-month' => 'Mes',
+            'duedate-year' => 'Año',
             'cvv' => 'Código de verificación',
             'name' => 'Titular de la tarjeta',
         );
