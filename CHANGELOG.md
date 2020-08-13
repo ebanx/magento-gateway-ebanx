@@ -1,4 +1,9 @@
 # CHANGELOG
+##2.19.1
+* Fix - Fix Baloto test for new voucher layout [#396](https://github.com/ebanx/magento-gateway-ebanx/pull/396)
+* Upkeep - Fix card duedate labels localization [#394](https://github.com/ebanx/magento-gateway-ebanx/pull/394)
+* Upkeep - Limit to 6 the number of instalments for Uruguay [#393](https://github.com/ebanx/magento-gateway-ebanx/pull/393)
+
 ##2.19.0
 * Feature - Add Uruguayan Debit Card support [#391](https://github.com/ebanx/magento-gateway-ebanx/pull/391)
 
