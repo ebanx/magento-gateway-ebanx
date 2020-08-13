@@ -31,7 +31,7 @@
           class="month validate-cc-exp required-entry-select">
             <?php
             $_ccMonths    = $this->getCcMonths();
-            $_ccMonths[0] = $this->__('Mês');
+            $_ccMonths[0] = $text['duedate-month'];
             ?>
             <?php foreach ($_ccMonths as $k => $v) : ?>
             <option value="<?php echo $k ? $k : '' ?>"><?php echo $v ?></option>
@@ -41,9 +41,9 @@
       <div class="v-fix">
         <?php
           $_ccExpYear = $this->getInfoData('cc_exp_year');
-          
+
           $_ccYears    = $this->getCcYears();
-          $_ccYears[0] = $this->__('Ano');
+          $_ccYears[0] = $text['duedate-year'];
         ?>
         <select id="<?php echo $_code ?>_expiration_yr" name="payment[cc_exp_year]" class="year required-entry-select">
             <?php foreach ($_ccYears as $k => $v) : ?>

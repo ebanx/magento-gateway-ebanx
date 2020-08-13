@@ -48,7 +48,7 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxT
                       class="month validate-dc-exp required-entry">
                     <?php
                     $_ccMonths = $this->getCcMonths();
-                    $_ccMonths[0] = $this->__('Mes');
+                    $_ccMonths[0] = $text['duedate-month'];
                     ?>
                     <?php foreach ($_ccMonths as $k => $v) : ?>
                       <option value="<?php echo $k ?>"><?php echo $v ?></option>
@@ -60,7 +60,7 @@ echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxT
                 $_ccExpYear = $this->getInfoData('cc_exp_year');
 
                 $_ccYears = $this->getCcYears();
-                $_ccYears[0] = $this->__('Año');
+                $_ccYears[0] = $text['duedate-year'];
                 ?>
               <select id="<?php echo $_code ?>_expiration_yr" name="payment[dc_exp_year]" class="year required-entry">
                     <?php foreach ($_ccYears as $k => $v) : ?>

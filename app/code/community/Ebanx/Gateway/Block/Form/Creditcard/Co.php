@@ -34,6 +34,8 @@ class Ebanx_Gateway_Block_Form_Creditcard_Co extends Ebanx_Gateway_Block_Form_Cr
             'local-amount' => 'Total a pagar en Peso colombiano: ',
             'card-number' => 'Número de la tarjeta',
             'duedate' => 'Fecha de expiración',
+            'duedate-month' => 'Mes',
+            'duedate-year' => 'Año',
             'cvv' => 'Código de verificación',
             'save' => 'Salvar este cartão para compras futuras',
             'instalments' => 'Número de parcelas',
