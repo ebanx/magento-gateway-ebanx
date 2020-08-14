@@ -81,7 +81,7 @@ export default class ThankYou {
     this.cy
       .get('#ebanx-baloto-frame')
       .then(($balotoIframe) => {
-        expect($balotoIframe.contents().find('.baloto-details__item .affiliation_code').length).to.equal(1);
+        expect($balotoIframe.contents().find('.payment-field').length).to.equal(4);
       });
 
     this[extractHash]((hash) => {
