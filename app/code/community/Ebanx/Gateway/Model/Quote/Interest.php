@@ -64,7 +64,9 @@ class Ebanx_Gateway_Model_Quote_Interest extends Mage_Sales_Model_Quote_Address_
         if ($interestAmount > 0) {
             $address->setEbanxInterestAmount($interestAmount);
             $address->setGrandTotal($address->getGrandTotal() + $interestAmount);
-            $address->setBaseGrandTotal($address->getBaseGrandTotal() + $interestAmount);
+            $address->setBaseGrandTotal(
+                $address->getBaseGrandTotal() + ($interestAmount / $quote->getBaseToQuoteRate())
+            );
         }
 
         return $this;
